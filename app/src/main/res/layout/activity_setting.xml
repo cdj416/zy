@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.person.viewmodel.SettingViewModel" />
+
+        <import type="android.view.View"/>
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/theme_FFFFFF">
+
+       <com.zhongyiguolian.zy.myview.StatusBarHeightView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/colorPrimary"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="@color/theme_FFFFFF"
+                android:textSize="@dimen/sp_16"
+                android:gravity="center"
+                android:text="我的设置"/>
+
+            <ImageView
+                android:id="@+id/comBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/white_black"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/theme_EEEEEE"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.lihang.ShadowLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hl_shadowLimit="16dp"
+                    app:hl_shadowColor="@color/colorPrimary"
+                    app:layout_srlBackgroundColor="#D0DBFE"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/transparent">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:background="@drawable/shape_radius10_ffffff">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="14dp"
+                            app:onClickCommand="@{viewModel.changePassword}">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_15"
+                                android:textColor="@color/theme_333333"
+                                android:layout_centerVertical="true"
+                                android:text="修改登录密码"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/right_huise_img"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="14dp"
+                            app:onClickCommand="@{viewModel.setPayPassword}">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_15"
+                                android:textColor="@color/theme_333333"
+                                android:layout_centerVertical="true"
+                                android:text="设置支付密码"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/right_huise_img"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/theme_EEEEEE"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="14dp"
+                            app:onClickCommand="@{viewModel.changePayPassword}">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_15"
+                                android:textColor="@color/theme_333333"
+                                android:layout_centerVertical="true"
+                                android:text="修改支付密码"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/right_huise_img"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/theme_EEEEEE"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="14dp"
+                            app:onClickCommand="@{viewModel.setFetchAddressPassword}">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_15"
+                                android:textColor="@color/theme_333333"
+                                android:layout_centerVertical="true"
+                                android:text="设置提取地址"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/right_huise_img"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/theme_EEEEEE"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="14dp"
+                            app:onClickCommand="@{viewModel.setEmbodimentAccount}">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_15"
+                                android:textColor="@color/theme_333333"
+                                android:layout_centerVertical="true"
+                                android:text="设置提现账户"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/right_huise_img"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/theme_EEEEEE"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="14dp"
+                            app:onClickCommand="@{viewModel.goFeedBack}">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_15"
+                                android:textColor="@color/theme_333333"
+                                android:layout_centerVertical="true"
+                                android:text="意见反馈"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/right_huise_img"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1px"
+                                android:background="@color/theme_EEEEEE"/>
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+                </com.lihang.ShadowLayout>
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="@color/theme_FFFFFF"
+                    android:textSize="@dimen/sp_15"
+                    android:background="@drawable/shape_radius5_5690ff"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="50dp"
+                    android:gravity="center"
+                    android:text="安全退出"
+                    app:onClickCommand="@{viewModel.returnLogin}"/>
+
+            </LinearLayout>
+        </FrameLayout>
+
+
+    </LinearLayout>
+</layout>

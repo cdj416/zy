@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3778FF</color>
+    <color name="colorPrimaryDark">#3778FF</color>
+    <color name="colorAccent">#3778FF</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="theme_F5F6FB">#F5F6FB</color>
+    <color name="theme_EEEEEE">#EEEEEE</color>
+    <color name="theme_FFFFFF">#FFFFFF</color>
+    <color name="theme_F3F4FA">#F3F4FA</color>
+    <color name="theme_EF5B48">#EF5B48</color>
+    <color name="theme_EF9448">#EE9448</color>
+    <color name="theme_CCCCCC">#CCCCCC</color>
+    <color name="theme_333333">#333333</color>
+    <color name="theme_999999">#999999</color>
+    <color name="theme_777777">#777777</color>
+    <color name="theme_FF9B80">#FF9B80</color>
+    <color name="theme_FFDDDDF3">#FFDDDDF3</color>
+    <color name="theme_DDDDDD">#DDDDDD</color>
+    <color name="theme_6ABE24">#6ABE24</color>
+    <color name="theme_FF23BB42">#FF23BB42</color>
+    <color name="theme_3DA1E7">#3DA1E7</color>
+    <color name="theme_50C9ED">#50C9ED</color>
+    <color name="theme_FF0EC05D">#FF0EC05D</color>
+    <color name="theme_1FD3B9">#1FD3B9</color>
+    <color name="theme_F2F2FA">#F2F2FA</color>
+    <color name="theme_248FF4">#248FF4</color>
+    <color name="theme_2F5EFB">#2F5EFB</color>
+    <color name="theme_4d6683">#4D6683</color>
+    <color name="theme_FF0000">#FF0000</color>
+    <color name="theme_62D4A5">#62D4A5</color>
+    <color name="theme_E1E1E1">#E1E1E1</color>
+    <color name="theme_E6EAFC">#E4E9FC</color>
+    <color name="theme_7EA8FF">#7EA8FF</color>
+    <color name="theme_DBDBDB">#DBDBDB</color>
+    <color name="theme_707070">#707070</color>
+    <color name="theme_DFDFDF">#DFDFDF</color>
+    <color name="theme_5690FF">#5690FF</color>
+    <color name="theme_666666">#666666</color>
+    <color name="theme_D7E4FF">#D7E4FF</color>
+
+
+</resources>

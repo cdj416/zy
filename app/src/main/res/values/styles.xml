@@ -1,0 +1,109 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--解决启动白屏问题-->
+    <style name="SplashStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--<item name="android:windowDisablePreview">true</item>-->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowBackground">@mipmap/qidongye_img</item>
+    </style>
+
+    <!-- 提示弹框动画 -->
+    <style name="main_menu_animStyle">
+        <item name="android:windowEnterAnimation">@anim/alpha_prompt_in</item>
+        <item name="android:windowExitAnimation">@anim/alpha_prompt_out</item>
+    </style>
+
+    <!-- 从底部弹出动画 -->
+    <style name="bottom_in_out">
+        <item name="android:windowEnterAnimation">@anim/dialog_in_anim</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out_anim</item>
+    </style>
+
+    <!--ios提示消息样式-->
+    <style name="MessageTheme" parent="@android:style/Theme.Dialog">
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 遮罩层 -->
+        <item name="android:backgroundDimAmount">0</item>
+    </style>
+
+    <!--弹框样式-->
+    <style name="DialogTheme" parent="@android:style/Theme.Dialog">
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 遮罩层 -->
+        <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+
+    <!--条形进度条的自定义属性-->
+    <declare-styleable name="BarPercentView">
+        <!--进度条高度-->
+        <attr name="barHeight" format="dimension" />
+        <!--圆角矩形半径-->
+        <attr name="barRadius" format="integer" />
+        <!--进度条背景色-->
+        <attr name="barBgColor" format="reference" />
+        <!--进度条颜色-->
+        <attr name="barProgressColor" format="reference|color" />
+        <!--渐变开始颜色-->
+        <attr name="barStartColor" format="reference" />
+        <!--渐变结束颜色-->
+        <attr name="barEndColor" format="reference" />
+        <!--是否渐变-->
+        <attr name="barIsGradient" format="boolean" />
+    </declare-styleable>
+
+    <style name="TabText" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="custom_dialog2" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog的windowFrame框为无 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否漂现在activity上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 是否半透明 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 去除黑色边框的关键设置项 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 屏幕背景是否变暗 -->
+        <item name="android:backgroundDimAmount">0.3</item>
+    </style>
+
+</resources>

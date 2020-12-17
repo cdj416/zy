@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.main.viewmodel.MainViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/theme_EEEEEE"
+                android:layout_gravity="bottom"/>
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/navigation"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:itemBackground="@color/theme_FFFFFF"
+                app:itemIconTint="@drawable/bottom_select"
+                app:itemTextColor="@drawable/bottom_select"
+                app:menu="@menu/bottom_navigation_main"/>
+        </LinearLayout>
+
+        <!--<com.hongyuan.sellcoach.myview.VersionChangeView
+            android:id="@+id/versionView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:setAppChangeDate="@{viewModel.entity}"/>-->
+    </FrameLayout>
+
+</layout>

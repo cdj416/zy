@@ -1,0 +1,6 @@
+include ':kchartlib'
+include ':ImagePreview'
+include ':mvvmhabitx'
+include ':ocr_ui'
+include ':app'
+rootProject.name = "zy"

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/selectImg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/theme_333333"
+            android:background="@drawable/shape_radius_top_10dp_ffffff"
+            android:text="从手机相册选择"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/theme_EEEEEE"/>
+        <TextView
+            android:id="@+id/saveHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/theme_333333"
+            android:background="@color/theme_FFFFFF"
+            android:text="保存图片"/>
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/theme_333333"
+            android:layout_marginTop="5dp"
+            android:background="@color/theme_FFFFFF"
+            android:text="取消"/>
+    </LinearLayout>
+</LinearLayout>

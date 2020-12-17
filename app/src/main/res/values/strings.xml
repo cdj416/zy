@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">zygl</string>
+
+    <string name="bottom_home">首页</string>
+    <string name="bottom_quotes">行情</string>
+    <string name="bottom_learn">学习</string>
+    <string name="bottom_advisory">咨询</string>
+    <string name="bottom_person">我的</string>
+
+    <string name="login_password">密码登录</string>
+    <string name="login_code">手机快捷登录</string>
+
+    <string name="camera_permission_required">本功能需要相机权限！</string>
+
+    <string name="nums150">150</string>
+</resources>
