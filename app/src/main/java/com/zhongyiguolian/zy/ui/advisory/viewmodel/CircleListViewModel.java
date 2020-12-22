@@ -8,7 +8,6 @@ import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.MyRepository;
-
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 /**

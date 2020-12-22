@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.home.viewmodel.TextContentViewModel" />
+
+        <import type="android.view.View"/>
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/theme_FFFFFF">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/book_detail_bg"
+            android:scaleType="fitXY"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.zhongyiguolian.zy.myview.StatusBarHeightView
+                android:id="@+id/barHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="@color/theme_FFFFFF"
+                    android:textSize="@dimen/sp_16"
+                    android:gravity="center"
+                    android:text="书籍"/>
+                <ImageView
+                    android:id="@+id/comBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/white_black"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"/>
+            </RelativeLayout>
+
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true" >
+                <com.zhongyiguolian.zy.myview.StickyScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingBottom="60dp">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/delelt_book_img"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:gravity="center_horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="《重塑经济与世界》"
+                                    android:textColor="#ffffffff"
+                                    android:textSize="16sp"/>
+                                <TextView
+                                    android:layout_width="180dp"
+                                    android:layout_height="51dp"
+                                    android:text="区块链是融合计算机学、密码学、经济学、政治学、博弈论等多学科理论的跨学科技术。"
+                                    android:textColor="#ffffffff"
+                                    android:textSize="12sp"
+                                    android:layout_marginTop="11dp"/>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="31dp"
+                                    android:gravity="center_vertical">
+                                    <TextView
+                                        android:layout_width="50dp"
+                                        android:layout_height="15dp"
+                                        android:text="中信出版社"
+                                        android:textColor="#ffffffff"
+                                        android:textSize="10sp"/>
+                                    <View
+                                        android:layout_width="1dp"
+                                        android:layout_height="10dp"
+                                        android:background="@color/theme_FFFFFF"
+                                        android:layout_marginEnd="11dp"
+                                        android:layout_marginStart="11dp"/>
+                                    <TextView
+                                        android:layout_width="47dp"
+                                        android:layout_height="15dp"
+                                        android:text="632人阅读"
+                                        android:textColor="#ffffffff"
+                                        android:textSize="10sp"/>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:background="@color/theme_FFFFFF"
+                            android:layout_marginTop="25dp">
+
+                            <TextView
+                                android:layout_width="64dp"
+                                android:layout_height="24dp"
+                                android:text="图书简介"
+                                android:textColor="#ff333333"
+                                android:textSize="16sp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_gravity="center_horizontal"/>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/mRec"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:itemBinding="@{viewModel.itemBinding}"
+                                app:items="@{viewModel.observableList}"
+                                app:layoutManager="@{LayoutManagers.linear(1,false)}"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.zhongyiguolian.zy.myview.StickyScrollView>
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:textSize="@dimen/sp_16"
+            android:textColor="@color/theme_FFFFFF"
+            android:gravity="center"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="bottom"
+            android:text="立即阅读"
+            app:onClickCommand="@{viewModel.goRead}"/>
+    </FrameLayout>
+
+</layout>

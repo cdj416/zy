@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.home.viewmodel.ComfirmOrderViewModel" />
+
+        <import type="android.view.View"/>
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#F2F3F3">
+
+        <com.zhongyiguolian.zy.myview.StatusBarHeightView
+            android:id="@+id/barHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimary">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="@color/theme_FFFFFF"
+                android:textSize="@dimen/sp_16"
+                android:gravity="center"
+                android:text="确认订单"/>
+            <ImageView
+                android:id="@+id/comBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/white_black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/setting_mark"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:layout_marginEnd="16dp"
+                app:onClickCommand="@{viewModel.goCart}"/>
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    app:itemBinding="@{viewModel.itemBinding}"
+                    app:items="@{viewModel.observableList}"
+                    app:layoutManager="@{LayoutManagers.linear(1,false)}"/>
+
+
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_999999"
+                android:textSize="@dimen/sp_12"
+                android:layout_gravity="center"
+                android:drawableTop="@mipmap/promt_empty_img"
+                android:gravity="center"
+                android:visibility="@{viewModel.observableList.size() == 0 ? View.VISIBLE : View.GONE}"
+                android:text="暂无数据"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="@color/theme_FFFFFF"
+                android:layout_gravity="bottom">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/theme_EEEEEE"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_333333"
+                        android:textSize="@dimen/sp_13"
+                        android:text="总计:"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_333333"
+                        android:textSize="@dimen/sp_16"
+                        android:text="¥ "/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_333333"
+                        android:textSize="@dimen/sp_16"
+                        android:text="0.00"/>
+
+                </LinearLayout>
+
+
+                <Button
+                    android:layout_width="65dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/shape_radius5_5690ff"
+                    android:gravity="center"
+                    android:textColor="@color/theme_FFFFFF"
+                    android:textSize="@dimen/sp_15"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text="付款"
+                    app:onClickCommand="@{viewModel.selectPayType}"/>
+            </RelativeLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+
+</layout>

@@ -15,6 +15,7 @@ import com.zhongyiguolian.zy.ui.home.activity.AboutUsActivity;
 import com.zhongyiguolian.zy.ui.home.activity.BlockchaninActivity;
 import com.zhongyiguolian.zy.ui.home.activity.BookListActivity;
 import com.zhongyiguolian.zy.ui.home.activity.EncyclopediaActivity;
+import com.zhongyiguolian.zy.ui.home.activity.SearchActivity;
 import com.zhongyiguolian.zy.ui.home.activity.ServiceActivity;
 
 import java.util.ArrayList;
@@ -48,21 +49,21 @@ public class HomeViewModel extends CustomViewModel<MyRepository> {
             startActivity(EncyclopediaActivity.class);
         }
     });
-    //区块链
+    //行业知识
     public BindingCommand goBlockchanin = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
             startActivity(BlockchaninActivity.class);
         }
     });
-    //区块链
+    //书籍
     public BindingCommand goBookList = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
             startActivity(BookListActivity.class);
         }
     });
-    //区块链
+    //关于我们
     public BindingCommand goAboutus = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
@@ -74,6 +75,13 @@ public class HomeViewModel extends CustomViewModel<MyRepository> {
         @Override
         public void call() {
             startActivity(ServiceActivity.class);
+        }
+    });
+    //去搜索页面
+    public BindingCommand goSearch = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            startActivity(SearchActivity.class);
         }
     });
 

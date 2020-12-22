@@ -1,16 +1,13 @@
 package com.zhongyiguolian.zy.ui.learn.viewmodel;
 
 import android.app.Application;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableList;
-
 import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.MyRepository;
-
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 /**
@@ -38,10 +35,13 @@ public class LearnViewModel extends CustomViewModel<MyRepository> {
 
     public void addTestData(){
 
-
-
         for(int i = 0 ; i < 6 ; i++){
-            LearnItemViewModel itemViewModel = new LearnItemViewModel(this,"");
+            LearnItemViewModel itemViewModel;
+            if(i%2 == 0){
+                itemViewModel = new LearnItemViewModel(this,"http://image.biaobaiju.com/uploads/20190508/17/1557306881-eMKPXBTwHt.jpg");
+            }else{
+                itemViewModel = new LearnItemViewModel(this,"http://image.biaobaiju.com/uploads/20190508/17/1557306881-pcSQFfumLh.jpeg");
+            }
             observableList.add(itemViewModel);
         }
     }

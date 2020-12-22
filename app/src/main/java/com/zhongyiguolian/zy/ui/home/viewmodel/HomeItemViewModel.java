@@ -8,6 +8,7 @@ import androidx.databinding.ObservableField;
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.zhongyiguolian.zy.base.ItemViewModel;
+import com.zhongyiguolian.zy.ui.home.activity.ServiceDetailActivity;
 
 /**
  * 首页itemviewmodel
@@ -30,6 +31,8 @@ public class HomeItemViewModel extends ItemViewModel<HomeViewModel> {
             //bundle.putString("user_id", String.valueOf(entity.get().getM_id()));
             //bundle.putString("userPhone",entity.get().getM_mobile());
             //viewModel.startActivity(UserInfoActivity.class,bundle);
+
+            viewModel.startActivity(ServiceDetailActivity.class);
         }
     });
 }

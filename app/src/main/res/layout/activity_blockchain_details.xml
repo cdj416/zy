@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.home.viewmodel.BlockchainDetailsViewModel" />
+
+        <import type="android.view.View"/>
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.zhongyiguolian.zy.myview.StatusBarHeightView
+            android:id="@+id/barHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimary">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="@color/theme_FFFFFF"
+                android:textSize="@dimen/sp_16"
+                android:gravity="center"
+                android:text="行业知识"/>
+            <ImageView
+                android:id="@+id/comBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/white_black"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"/>
+        </RelativeLayout>
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true" >
+
+            <com.zhongyiguolian.zy.myview.StickyScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        app:riv_corner_radius="6dp"
+                        android:layout_marginTop="16dp"
+                        android:src="@mipmap/delete_hyzs_img"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_333333"
+                        android:textSize="@dimen/sp_16"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:text="戴尔旗下VMware推出企业级区块链产品联系？"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_12"
+                            android:textColor="@color/theme_333333"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginBottom="20dp"
+                            android:text="区块链 ｜ 众亿国链"/>
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/mRec"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:itemBinding="@{viewModel.itemBinding}"
+                        app:items="@{viewModel.observableList}"
+                        app:layoutManager="@{LayoutManagers.linear(1,false)}"/>
+
+                </LinearLayout>
+
+            </com.zhongyiguolian.zy.myview.StickyScrollView>
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    </LinearLayout>
+
+</layout>

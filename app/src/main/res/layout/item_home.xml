@@ -26,7 +26,8 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             android:visibility="visible"
-            android:background="@drawable/shape_radius6_ffffff">
+            android:background="@drawable/shape_radius6_ffffff"
+            app:onClickCommand="@{viewModel.itemClick}">
             <com.makeramen.roundedimageview.RoundedImageView
                 android:layout_width="120dp"
                 android:layout_height="79dp"

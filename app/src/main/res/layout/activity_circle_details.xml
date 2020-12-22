@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.advisory.viewmodel.CircleDetailsViewModel" />
+
+        <import type="android.view.View"/>
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/theme_FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.zhongyiguolian.zy.myview.StatusBarHeightView
+                android:id="@+id/barHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/colorPrimary">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="@color/theme_FFFFFF"
+                    android:textSize="@dimen/sp_16"
+                    android:gravity="center"
+                    android:text="动态详情"/>
+                <ImageView
+                    android:id="@+id/comBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/white_black"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"/>
+            </RelativeLayout>
+
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true" >
+                <com.zhongyiguolian.zy.myview.StickyScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingBottom="60dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="22dp"
+                            android:layout_marginStart="16dp">
+
+                            <com.makeramen.roundedimageview.RoundedImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@mipmap/delelt_head_img"
+                                app:riv_corner_radius="20dp"
+                                android:scaleType="centerCrop"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10sp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/theme_333333"
+                                    android:textSize="@dimen/sp_15"
+                                    android:textStyle="bold"
+                                    android:text="王大锤"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_12"
+                                    android:textColor="@color/theme_999999"
+                                    android:layout_marginTop="3dp"
+                                    android:text="2020/12/01 15:00"/>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/theme_333333"
+                            android:textSize="@dimen/sp_13"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginTop="16dp"
+                            android:text="在真正读懂比特币白皮书的瞬间，我的感觉是无法用文字来形容的。充满了惊叹、兴奋与懊悔。惊叹于中本聪巧夺天工的设计，兴奋于比特币即将引发的社会巨变，懊悔于自己竟然没有在第一次听到这个词的时候就来读白皮书。"/>
+
+                        <com.zhongyiguolian.zy.myview.nine_gridimg.NineGridImageView
+                            android:id="@+id/nineGridImg"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            app:imgGap="5dp"
+                            app:showStyle="fill"
+                            app:setNGimgAdapter="@{viewModel.adapter}"
+                            app:setNGimgData="@{viewModel.sList}"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingStart="16dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_12"
+                                    android:textColor="@color/theme_999999"
+                                    android:text="转发 1"/>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="5dp"
+                                    android:background="@color/colorPrimary"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginStart="14dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_12"
+                                    android:textColor="@color/theme_999999"
+                                    android:text="评论 13"/>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_marginTop="5dp"
+                                    android:background="@color/colorPrimary"/>
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:itemBinding="@{viewModel.itemBinding}"
+                            app:items="@{viewModel.observableList}"
+                            app:layoutManager="@{LayoutManagers.linear(1,false)}"/>
+
+                    </LinearLayout>
+
+                </com.zhongyiguolian.zy.myview.StickyScrollView>
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        </LinearLayout>
+
+        <com.lihang.ShadowLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:hl_shadowLimit="6dp"
+            app:hl_shadowColor="@color/colorPrimary"
+            app:layout_srlBackgroundColor="#D0DBFE"
+            app:hl_shadowHiddenLeft="true"
+            app:hl_shadowHiddenRight="true"
+            app:hl_shadowHiddenBottom="true"
+            android:layout_gravity="bottom">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/share_mark"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_999999"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginStart="2dp"
+                        android:text="转发"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="17dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/theme_DFDFDF"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/comment_mark"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_999999"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginStart="2dp"
+                        android:text="评论"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="17dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/theme_DFDFDF"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/like_mark"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_999999"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginStart="2dp"
+                        android:text="点赞"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.lihang.ShadowLayout>
+    </FrameLayout>
+
+</layout>

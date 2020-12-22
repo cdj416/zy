@@ -12,7 +12,6 @@ import com.zhongyiguolian.zy.base.CustomFragment;
 import com.zhongyiguolian.zy.databinding.FragmentHomeBinding;
 import com.zhongyiguolian.zy.ui.home.viewmodel.HomeViewModel;
 import com.zhongyiguolian.zy.utils.StatusBarUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class MyPageTransformer implements ViewPager2.PageTransformer {
 
     private static final String TAG = "MyPageTransformer";
-    public static final float MAX_SCALE = 1.5f;
+    public static final float MAX_SCALE = 1.2f;
 
     //下标标识
     private int mPosition = 0;

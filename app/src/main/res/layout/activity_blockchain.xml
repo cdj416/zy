@@ -33,7 +33,7 @@
                 android:textColor="@color/theme_FFFFFF"
                 android:textSize="@dimen/sp_16"
                 android:gravity="center"
-                android:text="区块链知识"/>
+                android:text="行业知识"/>
             <ImageView
                 android:id="@+id/comBack"
                 android:layout_width="wrap_content"

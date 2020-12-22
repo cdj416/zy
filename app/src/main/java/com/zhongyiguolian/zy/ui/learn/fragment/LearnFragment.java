@@ -3,17 +3,14 @@ package com.zhongyiguolian.zy.ui.learn.fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomFragment;
 import com.zhongyiguolian.zy.databinding.FragmentLearnBinding;
 import com.zhongyiguolian.zy.ui.learn.viewmodel.LearnViewModel;
-import com.zhongyiguolian.zy.utils.StatusBarUtil;
 
 /**
  * 首页学习类容页面
@@ -45,8 +42,5 @@ public class LearnFragment extends CustomFragment<FragmentLearnBinding, LearnVie
         super.initView();
 
         setOnRefresh(binding.refresh,REFRESH_0X4);
-
-        //设置标题栏为白色
-        StatusBarUtil.setCommonUI(getActivity(),false);
     }
 }

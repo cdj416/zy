@@ -102,8 +102,18 @@
         <activity android:name=".ui.main.activity.MainActivity" android:launchMode="singleTask"/>
         <activity android:name=".ui.main.activity.RetrievePasswordActivity"/>
         <activity android:name=".ui.main.activity.CountrysActivity"/>
+        <activity android:name=".ui.main.activity.WebActivity"/>
         <activity android:name=".ui.home.activity.AboutUsActivity"/>
         <activity android:name=".ui.home.activity.ServiceActivity"/>
+        <activity android:name=".ui.home.activity.ServiceDetailActivity"/>
+        <activity android:name=".ui.home.activity.ConfirmOrderActivity"/>
+        <activity android:name=".ui.home.activity.ShoppingCartActivity"/>
+        <activity android:name=".ui.home.activity.SearchActivity"/>
+        <activity android:name=".ui.home.activity.BookDetailActivity"/>
+        <activity android:name=".ui.home.activity.BookReadActivity"/>
+        <activity android:name=".ui.home.activity.BlockchaninDetailActivity"/>
+        <activity android:name=".ui.advisory.activity.NewsActivity"/>
+        <activity android:name=".ui.advisory.activity.CircleDetailsActivity"/>
         <activity android:name=".ui.person.activity.WithdrawalActivity"/>
         <activity android:name=".ui.person.activity.SalesWthdrawalActivity"/>
         <activity android:name=".ui.person.activity.FilWthdrawalActivity"/>

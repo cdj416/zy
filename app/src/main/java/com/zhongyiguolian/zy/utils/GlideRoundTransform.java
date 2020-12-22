@@ -6,13 +6,10 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
-
 import androidx.annotation.NonNull;
-
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
-
 import java.security.MessageDigest;
 /**
  * 圆角工具类
@@ -60,8 +57,8 @@ public class GlideRoundTransform extends BitmapTransformation {
         RectF rectF = new RectF(0f, 0f, source.getWidth(), source.getHeight());
         canvas.drawRoundRect(rectF, radius, radius, paint);
         //左上角、右上角圆角
-//        RectF rectRound = new RectF(0f, 100f, source.getWidth(), source.getHeight());
-//        canvas.drawRect(rectRound, paint);
+        RectF rectRound = new RectF(0f, 100f, source.getWidth(), source.getHeight());
+        canvas.drawRect(rectRound, paint);
         return result;
     }
 }

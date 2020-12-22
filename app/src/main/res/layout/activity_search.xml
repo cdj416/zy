@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.home.viewmodel.SearchViewModel" />
+
+        <import type="android.view.View"/>
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/theme_F5F6FB">
+
+        <com.zhongyiguolian.zy.myview.StatusBarHeightView
+            android:id="@+id/barHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimary">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:orientation="horizontal"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="50dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/shape_radius24_adc7ff">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/search_blue_mark"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:background="@color/transparent"
+                    android:textColorHint="#0153EE"
+                    android:textColor="#0153EE"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/sp_11"
+                    android:layout_marginStart="6dp"
+                    android:hint="请输入您想要的"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_13"
+                android:textColor="@color/theme_FFFFFF"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="11dp"
+                android:padding="5dp"
+                android:text="取消"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/theme_333333"
+            android:textSize="@dimen/sp_13"
+            android:layout_margin="16dp"
+            android:text="话题榜"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:itemBinding="@{viewModel.itemBinding}"
+                    app:items="@{viewModel.observableList}"
+                    app:layoutManager="@{LayoutManagers.linear(1,false)}"/>
+
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_999999"
+                android:textSize="@dimen/sp_12"
+                android:layout_gravity="center"
+                android:drawableTop="@mipmap/promt_empty_img"
+                android:gravity="center"
+                android:visibility="@{viewModel.observableList.size() == 0 ? View.VISIBLE : View.GONE}"
+                android:text="暂无数据"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</layout>

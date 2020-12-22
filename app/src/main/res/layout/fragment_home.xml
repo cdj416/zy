@@ -46,20 +46,23 @@
                 android:background="@drawable/shape_radius24_000000_stroke_7ea8ff"
                 tools:ignore="RtlCompat"
                 android:focusable="true"
-                android:focusableInTouchMode="true">
+
+                android:focusableInTouchMode="true"
+                app:onClickCommand="@{viewModel.goSearch}">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/search_huise_mark"
                     android:layout_marginStart="10dp"
                     android:layout_centerVertical="true"/>
-                <EditText
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="text"
-                    android:background="@null"
+                    android:background="@color/transparent"
                     android:textColorHint="@color/theme_DBDBDB"
                     android:textColor="@color/theme_DBDBDB"
+                    android:gravity="center_vertical"
                     android:textSize="@dimen/sp_11"
                     android:layout_marginStart="40dp"
                     android:hint="请输入您想要的"/>
@@ -179,7 +182,7 @@
                                 android:textSize="@dimen/sp_12"
                                 android:textColor="@color/theme_333333"
                                 android:layout_marginTop="8dp"
-                                android:text="区块链"/>
+                                android:text="行业知识"/>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="0dp"

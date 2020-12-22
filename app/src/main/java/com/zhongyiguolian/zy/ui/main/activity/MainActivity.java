@@ -14,6 +14,7 @@ import com.zhongyiguolian.zy.databinding.ActivityMainBinding;
 import com.zhongyiguolian.zy.ui.advisory.fragment.AdvisoryFragment;
 import com.zhongyiguolian.zy.ui.home.fragment.HomeFragment;
 import com.zhongyiguolian.zy.ui.learn.fragment.LearnFragment;
+import com.zhongyiguolian.zy.ui.learn.fragment.VideoLearnFragment;
 import com.zhongyiguolian.zy.ui.main.viewmodel.MainViewModel;
 import com.zhongyiguolian.zy.ui.person.fragment.PersonFragment;
 import com.zhongyiguolian.zy.ui.quotes.fragment.QuotesFragment;
@@ -56,7 +57,7 @@ public class MainActivity extends CustomActivity<ActivityMainBinding, MainViewMo
         mFragments = new ArrayList<>();
         mFragments.add(new HomeFragment());
         mFragments.add(new QuotesFragment());
-        mFragments.add(new LearnFragment());
+        mFragments.add(new VideoLearnFragment());
         mFragments.add(new AdvisoryFragment());
         mFragments.add(new PersonFragment());
         commitAllowingStateLoss(0);

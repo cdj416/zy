@@ -8,6 +8,7 @@ import androidx.databinding.ObservableField;
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.zhongyiguolian.zy.base.ItemViewModel;
+import com.zhongyiguolian.zy.ui.advisory.activity.NewsActivity;
 import com.zhongyiguolian.zy.ui.quotes.viewmodel.QuotesListViewModel;
 
 /**
@@ -32,10 +33,10 @@ public class HotspotListItemViewModel extends ItemViewModel<HotspotListViewModel
     public BindingCommand itemClick = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            Bundle bundle = new Bundle();
+            //Bundle bundle = new Bundle();
             //bundle.putString("user_id", String.valueOf(entity.get().getM_id()));
             //bundle.putString("userPhone",entity.get().getM_mobile());
-            //viewModel.startActivity(UserInfoActivity.class,bundle);
+            viewModel.startActivity(NewsActivity.class);
         }
     });
 }

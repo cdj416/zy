@@ -12,8 +12,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.R;
+import com.zhongyiguolian.zy.ui.home.adapter.CoinTypeAdapter;
+import com.zhongyiguolian.zy.ui.home.beans.DeleteCoinType;
 
 import java.util.List;
 
@@ -358,6 +364,64 @@ public class CustomDialog {
         });
         view.findViewById(R.id.cancel).setOnClickListener(v -> {
             dialog.dismiss();
+        });
+    }
+
+    /*
+     * 选择支付方式
+     * */
+    public static void changePay(Context mContext, DialogClick dialogClick ){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        View view = View.inflate(mContext, R.layout.dialog_type_pay,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        view.findViewById(R.id.closeImg).setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+    }
+
+    /*
+     * 选择币类型方式
+     * */
+    public static void selectCoin(Context mContext,List<DeleteCoinType> mList, DialogClick dialogClick ){
+        final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
+        View view = View.inflate(mContext, R.layout.dialog_coin_type,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.bottom_in_out);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.show();
+
+        RecyclerView mRec = view.findViewById(R.id.mRec);
+
+        LinearLayoutManager tabManager = new LinearLayoutManager(mContext);
+        tabManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRec.setLayoutManager(tabManager);
+        CoinTypeAdapter adapter = new CoinTypeAdapter();
+        mRec.setAdapter(adapter);
+        adapter.setNewData(mList);
+        adapter.setOnItemChildClickListener((adapter1, view1, position) -> {
+            for(DeleteCoinType typeBean : mList){
+                typeBean.setSelect(false);
+            }
+
+            mList.get(position).setSelect(true);
+            adapter1.setNewData(mList);
+            dialog.dismiss();
+
+            dialogClick.dialogClick(view);
+        });
+
+
+        view.findViewById(R.id.closeImg).setOnClickListener(v -> {
+            dialog.dismiss();
+            dialogClick.dialogClick(v);
         });
     }
 

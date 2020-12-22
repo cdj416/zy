@@ -17,7 +17,8 @@
         android:layout_centerVertical="true"
         android:orientation="vertical"
         android:background="@color/theme_FFFFFF"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="5dp"
+        app:onClickCommand="@{viewModel.itemClick}">
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"
@@ -107,13 +108,14 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/right_huise_img"/>
+                    android:src="@mipmap/share_mark"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/theme_999999"
                     android:textSize="@dimen/sp_12"
+                    android:layout_marginStart="2dp"
                     android:text="转发"/>
             </LinearLayout>
             <View
@@ -131,13 +133,14 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/right_huise_img"/>
+                    android:src="@mipmap/comment_mark"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/theme_999999"
                     android:textSize="@dimen/sp_12"
+                    android:layout_marginStart="2dp"
                     android:text="评论"/>
             </LinearLayout>
             <View
@@ -155,13 +158,14 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/right_huise_img"/>
+                    android:src="@mipmap/like_mark"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/theme_999999"
                     android:textSize="@dimen/sp_12"
+                    android:layout_marginStart="2dp"
                     android:text="点赞"/>
             </LinearLayout>
 

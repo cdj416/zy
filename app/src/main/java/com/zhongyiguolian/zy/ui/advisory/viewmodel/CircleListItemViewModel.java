@@ -5,10 +5,8 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
@@ -18,6 +16,7 @@ import com.previewlibrary.enitity.UserViewInfo;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.ItemViewModel;
 import com.zhongyiguolian.zy.myview.nine_gridimg.NineGridImageViewAdapter;
+import com.zhongyiguolian.zy.ui.advisory.activity.CircleDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,6 @@ import java.util.List;
  * @author cdj
  * @date 2020/12/10
  */
-
 public class CircleListItemViewModel extends ItemViewModel<CircleListViewModel> {
 
     public ObservableField<String> entity = new ObservableField<>();
@@ -48,14 +46,12 @@ public class CircleListItemViewModel extends ItemViewModel<CircleListViewModel> 
     }
 
     //条目的点击事件
-    public BindingCommand itemClick = new BindingCommand(new BindingAction() {
-        @Override
-        public void call() {
-            Bundle bundle = new Bundle();
-            //bundle.putString("user_id", String.valueOf(entity.get().getM_id()));
-            //bundle.putString("userPhone",entity.get().getM_mobile());
-            //viewModel.startActivity(UserInfoActivity.class,bundle);
-        }
+    public BindingCommand itemClick = new BindingCommand(() -> {
+        //Bundle bundle = new Bundle();
+        //bundle.putString("user_id", String.valueOf(entity.get().getM_id()));
+        //bundle.putString("userPhone",entity.get().getM_mobile());
+        //viewModel.startActivity(UserInfoActivity.class,bundle);
+        viewModel.startActivity(CircleDetailsActivity.class);
     });
 
     public NineGridImageViewAdapter adapter =  new NineGridImageViewAdapter<String>() {

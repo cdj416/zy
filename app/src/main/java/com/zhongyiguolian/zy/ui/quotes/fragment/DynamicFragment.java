@@ -4,8 +4,10 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import com.github.tifezh.kchartlib.chart.BaseKChartView;
 import com.github.tifezh.kchartlib.chart.formatter.DateFormatter;
@@ -14,10 +16,14 @@ import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomFragment;
 import com.zhongyiguolian.zy.databinding.FragmentDynamicBinding;
+import com.zhongyiguolian.zy.ui.home.beans.DeleteCoinType;
 import com.zhongyiguolian.zy.ui.quotes.adpter.KChartAdapter;
 import com.zhongyiguolian.zy.ui.quotes.beans.KLineEntity;
 import com.zhongyiguolian.zy.ui.quotes.kline.DataRequest;
 import com.zhongyiguolian.zy.ui.quotes.viewmodel.DynamicViewModel;
+import com.zhongyiguolian.zy.utils.CustomDialog;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +34,7 @@ import java.util.List;
 public class DynamicFragment extends CustomFragment<FragmentDynamicBinding, DynamicViewModel> {
 
     private KChartAdapter mAdapter;
+    private List<DeleteCoinType> mList;
 
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,6 +73,15 @@ public class DynamicFragment extends CustomFragment<FragmentDynamicBinding, Dyna
                 Log.i("onSelectedChanged", "index:" + index + " closePrice:" + data.getClosePrice());
             }
         });
+
+        mList = new ArrayList<>();
+        mList.add(new DeleteCoinType(true,"比特币","BTC/USDT"));
+        mList.add(new DeleteCoinType(false,"以太坊","ETH/USDT"));
+        mList.add(new DeleteCoinType(false,"莱特币","LTC/USDT"));
+        mList.add(new DeleteCoinType(false,"柚子","EOS/USDT"));
+        mList.add(new DeleteCoinType(false,"瑞波币","XRP/USDT"));
+        mList.add(new DeleteCoinType(false,"比特现金","BTH/USDT"));
+        mList.add(new DeleteCoinType(false,"以太经典","ETC/USDT"));
     }
 
     @Override
@@ -100,5 +116,16 @@ public class DynamicFragment extends CustomFragment<FragmentDynamicBinding, Dyna
             binding.kLines.setGridRows(4);
             binding.kLines.setGridColumns(4);
         }
+    }
+
+    @Override
+    public void initViewObservable() {
+        super.initViewObservable();
+
+        viewModel.uc.showType.observe(this, aVoid -> {
+            binding.markImg.setImageResource(R.mipmap.coin_type_down);
+
+            CustomDialog.selectCoin(getContext(), mList, v -> binding.markImg.setImageResource(R.mipmap.coin_type_up));
+        });
     }
 }

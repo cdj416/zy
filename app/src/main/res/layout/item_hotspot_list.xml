@@ -17,7 +17,8 @@
         android:layout_centerVertical="true"
         android:orientation="vertical"
         android:paddingBottom="15dp"
-        android:background="@color/theme_FFFFFF">
+        android:background="@color/theme_FFFFFF"
+        app:onClickCommand="@{viewModel.itemClick}">
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"
