@@ -16,22 +16,35 @@ import me.tatarka.bindingcollectionadapter2.BR;
  */
 public class BookReadActivity extends CustomActivity<ActivityBookReadBinding, BookReadViewModel> {
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_book_read;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public BookReadViewModel initViewModel() {
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
         return ViewModelProviders.of(this, factory).get(BookReadViewModel.class);
     }
 
+    /**
+     * ui变动
+     */
     @Override
     public void initView() {
         super.initView();
@@ -43,6 +56,9 @@ public class BookReadActivity extends CustomActivity<ActivityBookReadBinding, Bo
         binding.comBack.setOnClickListener(view -> finish());
     }
 
+    /**
+     * 数据
+     */
     @Override
     public void initData() {
         super.initData();

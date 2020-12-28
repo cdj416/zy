@@ -14,15 +14,23 @@ import com.zhongyiguolian.zy.base.MultiItemViewModel;
  */
 public class ComfirmOrderBottomMultiViewModel extends MultiItemViewModel {
 
-    //已输入字数
+
+    /**
+     * 已输入字数
+     */
     public ObservableField<String> etNums = new ObservableField<>("0");
 
+    /**
+     * @param viewModel
+     */
     public ComfirmOrderBottomMultiViewModel(@NonNull CustomViewModel viewModel) {
         super(viewModel);
     }
 
 
-    //条目的点击事件
+    /**
+     * 条目的点击事件
+     */
     public BindingCommand itemClick = new BindingCommand(new BindingAction() {
         @Override
         public void call() {

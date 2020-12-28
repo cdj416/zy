@@ -35,7 +35,7 @@
                 android:src="@mipmap/delelt_head_img"
                 app:defaultImg="@{@drawable/default_head_img}"
                 android:layout_marginStart="16dp"
-                tools:ignore="RtlCompat" />
+                tools:ignore="RtlCompat"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -45,16 +45,14 @@
                 android:layout_centerVertical="true"
                 android:background="@drawable/shape_radius24_000000_stroke_7ea8ff"
                 tools:ignore="RtlCompat"
-                android:focusable="true"
-
-                android:focusableInTouchMode="true"
                 app:onClickCommand="@{viewModel.goSearch}">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/search_huise_mark"
                     android:layout_marginStart="10dp"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    app:onClickCommand="@{viewModel.goSearch}"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -65,7 +63,8 @@
                     android:gravity="center_vertical"
                     android:textSize="@dimen/sp_11"
                     android:layout_marginStart="40dp"
-                    android:hint="请输入您想要的"/>
+                    android:hint="请输入您想要的"
+                    app:onClickCommand="@{viewModel.goSearch}"/>
             </RelativeLayout>
 
             <TextView
@@ -121,7 +120,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:background="@color/theme_FFFFFF">
+                    android:background="@color/theme_FFFFFF"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"

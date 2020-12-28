@@ -19,16 +19,26 @@ import me.tatarka.bindingcollectionadapter2.BR;
  */
 public class LoginActivity extends CustomActivity<ActivityLoginBinding, CustomViewModel> {
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_login;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * 初始化数据
+     */
     @Override
     public void initData() {
         super.initData();
@@ -53,7 +63,12 @@ public class LoginActivity extends CustomActivity<ActivityLoginBinding, CustomVi
         });
     }
 
-    //安卓重写返回键事件
+    /**
+     * 安卓重写返回键事件
+     * @param keyCode
+     * @param event
+     * @return
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode== KeyEvent.KEYCODE_BACK){

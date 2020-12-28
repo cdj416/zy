@@ -27,6 +27,7 @@ import com.zhongyiguolian.zy.data.userbean.FileBean;
 import com.zhongyiguolian.zy.data.userbean.MemberLoginBean;
 import com.zhongyiguolian.zy.data.userbean.TokenBean;
 import com.zhongyiguolian.zy.data.userbean.TokenSingleBean;
+import com.zhongyiguolian.zy.utils.GsonUtil;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
@@ -52,10 +53,19 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
     *
     * */
     protected M model;
+    /**
+     *
+     */
     private UIChangeLiveData uc;
-    //弱引用持有
+
+    /**
+     * 弱引用持有
+     */
     private WeakReference<LifecycleProvider> lifecycle;
-    //管理RxJava，主要针对RxJava异步操作造成的内存泄漏
+
+    /**
+     * 管理RxJava，主要针对RxJava异步操作造成的内存泄漏
+     */
     private CompositeDisposable mCompositeDisposable;
 
     /**
@@ -63,13 +73,6 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
      */
     public CustomViewModel(@NonNull Application application) {
         this(application, null);
-
-        //获取用户信息
-        userToken = TokenSingleBean.getInstance();
-
-        if(userToken == null || userToken.getToken() == null){
-            getToken();
-        }
     }
 
     /**
@@ -80,12 +83,6 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
         super(application);
         this.model = model;
         mCompositeDisposable = new CompositeDisposable();
-
-        //获取用户信息
-        userToken = TokenSingleBean.getInstance();
-        if(userToken == null || userToken.getToken() == null){
-            getToken();
-        }
     }
 
     /**
@@ -381,33 +378,12 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
     private Map<String, String> params;
     //文件请求参数
     private Map<String,RequestBody> fileParams;
-    //用户信息
-    public TokenSingleBean userToken;
     //分页需要的数据
     public int curPage = 1;//当前页数
     private int pageSize = 10;//一页条目数
     public boolean isLoadMore = false;//是否开启了分页功能
     public final int FIRST_PAGE = 1;//表示第一页
     public boolean noShowLoading = false;
-    //是否已登录
-    public boolean isLogin = false;
-
-    /**********************************处理登录未及时获知，用户信息被清楚情况****************************/
-
-    /*
-    * 当token为null时，请求登录信息
-    * */
-    private void getToken(){
-        //关闭加载框的显示
-        noShowLoading = true;
-
-        //请求token信息
-        clearParams().setParams("client","Android").setParams("at_name","fit").setParams("at_pwd", EncryptionUtil.md5DecodeTwo("123456"));
-        //requestData(Constants.GET_TOKEN);
-    }
-
-    /**********************************处理登录未及时获知，用户信息被清楚情况****************************/
-
 
     /*
     * 清空fileParams
@@ -462,17 +438,12 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
      * 获取上传文件的参数集合
      * */
     public Map<String, RequestBody> getFileParams(){
-        Map<String, String> baseParams = getBaseParams();
 
         Map<String,RequestBody> baseFileParams = new HashMap<>();
 
-        if(baseParams != null){
-            if(params == null){
-                params = new HashMap<>();
-            }
-            params.putAll(baseParams);
+        if(params == null){
+            params = new HashMap<>();
         }
-
         Set<String> set = params.keySet();
         for (String s : set) {
             String key = s;
@@ -485,15 +456,6 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
         }
 
         fileParams.putAll(baseFileParams);
-
-
-
-        /*Set<String> aaa = fileParams.keySet();
-        for (String s : aaa) {
-            String key = s;
-            RequestBody value = fileParams.get(s);
-            Log.e("cnn","============key========"+key+"==============value==========="+value);
-        }*/
 
         return fileParams;
     }
@@ -524,60 +486,10 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
      * 获取参数集合
      * */
     public Map<String, String> getParams(){
-        Map<String, String> baseParams = getBaseParams();
-        if(baseParams != null){
-            if(params == null){
-                params = new HashMap<>();
-            }
-            params.putAll(baseParams);
+        if(params == null){
+            params = new HashMap<>();
         }
         return this.params;
-    }
-
-    /*
-     * 组装基础请求参数
-     * */
-    private Map<String, String> getBaseParams(){
-        if(userToken != null && userToken.getToken() != null){
-            //int randomNum = (int)(Math.random()*100);
-            int randomNum = 50;
-            long timeSpan = System.currentTimeMillis();
-            //int randomNum = 100;
-            //long timeSpan = 1561619095;
-
-            StringBuilder ntoken = new StringBuilder();
-            ntoken.append(EncryptionUtil.md5Decode(userToken.getToken()));
-            ntoken.append(EncryptionUtil.md5DecodeTwo(String.valueOf(randomNum)));
-            ntoken.append(EncryptionUtil.md5DecodeTwo(String.valueOf(timeSpan)));
-
-            Map<String, String> baseParams = new HashMap<>();
-            baseParams.put("client","android");
-            baseParams.put("token",userToken.getToken());
-            baseParams.put("at_id", String.valueOf(userToken.getAt_id()));
-            baseParams.put("randomnum", String.valueOf(randomNum));
-            baseParams.put("timespan", String.valueOf(timeSpan));
-            baseParams.put("ntoken",ntoken.toString());
-
-            //是否开启分页
-            if(isLoadMore){
-                baseParams.put("curpage", String.valueOf(curPage));
-                baseParams.put("page", String.valueOf(pageSize));
-
-                //如果当前为第一页
-                if(curPage == FIRST_PAGE){
-                    //放开加载更多
-                    uc.getOpenLoadMore().call();
-                }
-            }
-
-            if(userToken.getM_id() != null){
-                baseParams.put("m_id",userToken.getM_id());
-                baseParams.put("m_mobile",userToken.getM_mobile());
-            }
-
-            return baseParams;
-        }
-        return null;
     }
 
     /*
@@ -619,20 +531,23 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
     public <T> void requestData(int code){
         try {
             //Log.e("cnn","========接口======="+Constants.getInstance().getPath(code));
-            Class clazz = Class.forName("com.hongyuan.sellcoach.data.MyRepository");
+            Class clazz = Class.forName("com.zhongyiguolian.zy.data.MyRepository");
             MyRepository repository = MyRepository.getInstance(null,null);
-            Method m = clazz.getMethod(Constants.getInstance().getPath(code), Map.class);
+            Method m = clazz.getMethod(Constants.getInstance().getPath(code), RequestBody.class);
+
+            RequestBody body = RequestBody.create(MediaType.parse("application/json"), GsonUtil.getGson().toJson(getParams()));
 
             Observable ob;
             if(code == Constants.UPFILE_OSS || code == Constants.UPFILE_OSS_MORE){
                 ob = (Observable) m.invoke(repository,getFileParams());
             }else{
-                ob = (Observable) m.invoke(repository,getParams());
+                //ob = (Observable) m.invoke(repository,getParams());
+                ob = (Observable) m.invoke(repository,body);
             }
 
             ob.compose(RxUtils.schedulersTransformer()) //线程调度
                     .compose(RxUtils.exceptionTransformer()) // 网络错误的异常转换, 这里可以换成自己的ExceptionHandle
-                    .doOnSubscribe(this)//请求与ViewModel周期同步
+                    .doOnSubscribe(this)//请求与ViewModel周期同步-
                     .doOnSubscribe(disposable -> {
                         if(!noShowLoading){
                             showDialog("正在请求...");
@@ -640,10 +555,10 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
                     })
                     .subscribe((Consumer<MyBaseResponse<T>>) response -> {
                         //请求成功
-                        if("1".equals(response.getStatus().getSucceed())){
+                        if("0".equals(response.getStatus().getCode())){
                             returnData(code,response.getData());
                         }else{
-                            ToastUtils.showShort(response.getStatus().getError_desc());
+                            ToastUtils.showShort(response.getStatus().getMsg());
                         }
                     }, new Consumer<Throwable>() {
                         @Override
@@ -678,34 +593,7 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
      * @param dataBean
      */
     protected void returnData(int code, Object dataBean){
-        if(code == Constants.GET_TOKEN){
-            TokenBean bean = (TokenBean) dataBean;
 
-            if(model instanceof MyRepository){
-                //保存用户token信息
-                ((MyRepository)model).saveToken(bean);
-                //是否登录过
-                MemberLoginBean loginBean = ((MyRepository)model).getUser();
-                //去设置应用需要使用的token信息
-                if(userToken == null){
-                    userToken = TokenSingleBean.getInstance();
-                }
-                userToken.setAt_id(bean.getAt_id());
-                userToken.setAt_name(bean.getAt_name());
-                userToken.setAt_pwd(bean.getAt_pwd());
-                userToken.setToken(bean.getToken());
-
-
-
-                if(loginBean != null && loginBean.getM_mobile() != null){
-                    userToken.setM_id(loginBean.getM_id());
-                    userToken.setM_mobile(loginBean.getM_mobile());
-                    userToken.setRole_id(String.valueOf(loginBean.getRole_id()));
-                    //设置已登录过
-                    isLogin = true;
-                }
-            }
-        }
     }
 
     /**

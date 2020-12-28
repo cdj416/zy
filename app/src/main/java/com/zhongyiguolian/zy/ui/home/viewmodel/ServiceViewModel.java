@@ -4,15 +4,11 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
-import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.MyRepository;
-import java.util.ArrayList;
-import java.util.List;
-
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 /**
@@ -22,24 +18,38 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
  */
 public class ServiceViewModel extends CustomViewModel<MyRepository> {
 
-    public ObservableField<List<String>> banners = new ObservableField<>(new ArrayList<>());
-
-    public ServiceViewModel(@NonNull Application application, MyRepository model) {
+    /**
+     * @param application
+     * @param model
+     */
+   public ServiceViewModel(@NonNull Application application, MyRepository model) {
         super(application, model);
     }
 
-    //给RecyclerView添加ObservableList
+
+    /**
+     * 给RecyclerView添加ObservableList
+     */
     public ObservableList<ServiceItemViewModel> observableList = new ObservableArrayList<>();
 
-    //给RecyclerView添加ItemBinding
+
+    /**
+     * 给RecyclerView添加ItemBinding
+     */
     public ItemBinding<ServiceItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.item_service);
 
+    /**
+     * 数据
+     */
     @Override
     public void onCreate() {
         super.onCreate();
         addTestData();
     }
 
+    /**
+     * 数据
+     */
     public void addTestData(){
 
 
@@ -53,10 +63,13 @@ public class ServiceViewModel extends CustomViewModel<MyRepository> {
             }
 
             observableList.add(itemViewModel);
-            banners.get().add("");
         }
     }
 
+    /**
+     * @param code
+     * @param dataBean
+     */
     @Override
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);

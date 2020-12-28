@@ -1,14 +1,12 @@
 package com.zhongyiguolian.zy.ui.learn.viewmodel;
 
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
-
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.zhongyiguolian.zy.base.ItemViewModel;
-import com.zhongyiguolian.zy.ui.home.viewmodel.HomeViewModel;
+import com.zhongyiguolian.zy.myview.video.MyPlayActivity;
 
 /**
  * 学习itemmodel
@@ -29,9 +27,9 @@ public class LearnItemViewModel extends ItemViewModel<LearnViewModel> {
         @Override
         public void call() {
             Bundle bundle = new Bundle();
-            //bundle.putString("user_id", String.valueOf(entity.get().getM_id()));
-            //bundle.putString("userPhone",entity.get().getM_mobile());
-            //viewModel.startActivity(UserInfoActivity.class,bundle);
+            bundle.putString("videoPath", "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319212559089721.mp4");
+            bundle.putString("videoImgPath",entity.get());
+            viewModel.startActivity(MyPlayActivity.class,bundle);
         }
     });
 }

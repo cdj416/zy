@@ -18,17 +18,27 @@ import me.tatarka.bindingcollectionadapter2.BR;
  */
 public class VerifiedSuccessActivity extends CustomActivity<ActivityVerifiedSuccessBinding, CustomViewModel> {
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_verified_success;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
 
+    /**
+     * ui初始化
+     */
     @Override
     public void initView() {
         super.initView();
@@ -39,6 +49,11 @@ public class VerifiedSuccessActivity extends CustomActivity<ActivityVerifiedSucc
         binding.goMain.setOnClickListener(v -> {
             startActivity(MainActivity.class);
         });
+
+        binding.title.setText(getBundle().getString("mTitle"));
+        binding.proText.setText(getBundle().getString("mProText"));
+
+
     }
 
 }

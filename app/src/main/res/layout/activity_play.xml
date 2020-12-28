@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.learn.viewmodel.PlayViewModel" />
+
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+        <import type="android.view.View"/>
+
+    </data>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.zhongyiguolian.zy.myview.StatusBarHeightView
+                android:id="@+id/barHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/black"/>
+            <com.zhongyiguolian.zy.myview.video.SampleVideo
+                android:id="@+id/video_player"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@color/theme_FFFFFF"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="56dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="三分钟带你了解区块链 | 经济学讲堂"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="111dp"
+            android:layout_marginEnd="20dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                app:onClickCommand="@{viewModel.clickLike}">
+                <ImageView
+                    android:id="@+id/likeImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/vdeo_white_like"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/theme_FFFFFF"
+                    android:textSize="@dimen/sp_11"
+                    android:text="150"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="33dp"
+                android:gravity="center"
+                android:visibility="gone"
+                app:onClickCommand="@{viewModel.showComment}">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/vdeo_white_comment"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/theme_FFFFFF"
+                    android:textSize="@dimen/sp_11"
+                    android:text="12"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="33dp"
+                android:gravity="center"
+                app:onClickCommand="@{viewModel.showShare}">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/vdeo_white_share"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/theme_FFFFFF"
+                    android:textSize="@dimen/sp_11"
+                    android:text="95"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/commitBox"
+            android:layout_width="match_parent"
+            android:layout_height="477dp"
+            android:background="@drawable/shape_radius_top_10dp_ffffff"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="38dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_12"
+                    android:textColor="@color/theme_333333"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"
+                    android:text="说点什么吧..."/>
+
+                <ImageView
+                    android:id="@+id/closeImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/video_down_black_mark"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="11dp"
+                    android:padding="5dp"
+                    app:onClickCommand="@{viewModel.closeComment}"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/theme_EEEEEE"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                    android:id="@+id/refresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/mRec"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:itemBinding="@{viewModel.itemBinding}"
+                        app:items="@{viewModel.observableList}"
+                        app:layoutManager="@{LayoutManagers.linear(1,false)}"/>
+
+                </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/theme_999999"
+                    android:textSize="@dimen/sp_12"
+                    android:layout_gravity="center"
+                    android:drawableTop="@mipmap/promt_empty_img"
+                    android:gravity="center"
+                    android:visibility="@{viewModel.observableList.size() == 0 ? View.VISIBLE : View.GONE}"
+                    android:text="暂无数据"/>
+
+
+
+                <com.lihang.ShadowLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:hl_shadowLimit="6dp"
+                    app:hl_shadowColor="@color/colorPrimary"
+                    app:layout_srlBackgroundColor="#D0DBFE"
+                    app:hl_shadowHiddenLeft="true"
+                    app:hl_shadowHiddenRight="true"
+                    app:hl_shadowHiddenBottom="true"
+                    android:layout_gravity="bottom">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="27dp"
+                            android:textColor="@color/theme_333333"
+                            android:textSize="@dimen/sp_10"
+                            android:background="@drawable/shape_radius5_f5f5f5"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="16dp"
+                            android:paddingStart="10dp"
+                            android:hint="我来说两句..."/>
+
+                        <Button
+                            android:layout_width="60dp"
+                            android:layout_height="27dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/shape_radius3_568ffe"
+                            android:layout_marginStart="8dp"
+                            android:textSize="@dimen/sp_12"
+                            android:textColor="@color/theme_FFFFFF"
+                            android:layout_marginEnd="16dp"
+                            android:text="发送"/>
+                    </LinearLayout>
+                </com.lihang.ShadowLayout>
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/shareAllBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:onClickCommand="@{viewModel.closeShare}"/>
+
+            <LinearLayout
+                android:id="@+id/shareBox"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:orientation="horizontal"
+                android:layout_gravity="bottom"
+                android:visibility="gone"
+                android:background="@drawable/shape_radius_top_10dp_ffffff"
+                android:clickable="true">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    app:onClickCommand="@{viewModel.downloadFile}">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/down_video_img"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginTop="6dp"
+                        android:textColor="@color/theme_333333"
+                        android:text="下载视频"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/link_img"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_12"
+                        android:layout_marginTop="6dp"
+                        android:textColor="@color/theme_333333"
+                        android:text="复制链接"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+    </FrameLayout>
+
+</layout>

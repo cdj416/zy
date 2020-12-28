@@ -14,17 +14,27 @@ import me.tatarka.bindingcollectionadapter2.BR;
  */
 public class AboutUsActivity extends CustomActivity<ActivityAboutUsBinding, CustomViewModel> {
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_about_us;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
 
+    /**
+     * 初始化
+     */
     @Override
     public void initView() {
         super.initView();

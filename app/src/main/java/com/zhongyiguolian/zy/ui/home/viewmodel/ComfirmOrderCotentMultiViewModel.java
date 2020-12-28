@@ -13,15 +13,24 @@ import com.zhongyiguolian.zy.base.MultiItemViewModel;
  */
 public class ComfirmOrderCotentMultiViewModel extends MultiItemViewModel<ComfirmOrderViewModel> {
 
+    /**
+     * 数据
+     */
     public ObservableField<String> entity = new ObservableField<>();
 
+    /**
+     * @param viewModel
+     * @param bean
+     */
     public ComfirmOrderCotentMultiViewModel(@NonNull ComfirmOrderViewModel viewModel,String bean) {
         super(viewModel);
         entity.set(bean);
     }
 
 
-    //条目的点击事件
+    /**
+     * 条目的点击事件
+     */
     public BindingCommand itemClick = new BindingCommand(new BindingAction() {
         @Override
         public void call() {

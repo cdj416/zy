@@ -50,237 +50,282 @@
             </RelativeLayout>
 
 
-            <LinearLayout
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refresh"
                 android:layout_width="match_parent"
-                android:layout_height="88dp"
-                android:orientation="horizontal"
-                android:paddingStart="41dp"
-                android:paddingEnd="41dp"
-                android:layout_marginTop="50dp">
+                android:layout_height="match_parent">
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/shape_radius6_ffffff"
-                        android:alpha="0.5"/>
+                <com.zhongyiguolian.zy.myview.StickyScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="88dp"
                         android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:gravity="center">
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:layout_marginTop="50dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/shape_radius6_ffffff">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_13"
+                                android:textColor="#5690FF"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="18dp"
+                                android:text="累计收益(FIL)"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_13"
-                            android:textColor="@color/theme_333333"
-                            android:text="收益"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_13"
-                            android:textColor="@color/theme_333333"
-                            android:layout_marginTop="15dp"
-                            android:text="0.00"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/theme_333333"
+                                android:textSize="22sp"
+                                android:text="23.544"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="2dp"/>
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_13"
+                                        android:textColor="#5690FF"
+                                        android:text="12-22收益"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/theme_333333"
+                                        android:textSize="@dimen/sp_15"
+                                        android:text="0.381"/>
+
+                                </LinearLayout>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:background="@color/theme_EEEEEE"/>
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_13"
+                                        android:textColor="#5690FF"
+                                        android:text="12-22释放"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/theme_333333"
+                                        android:textSize="@dimen/sp_15"
+                                        android:text="0.381"/>
+
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:background="@color/theme_EEEEEE"/>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_13"
+                                        android:textColor="#5690FF"
+                                        android:text="可用余额(FIL)"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/theme_333333"
+                                        android:textSize="@dimen/sp_15"
+                                        android:text="0.381"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginTop="11dp"
+                            android:background="@drawable/shape_radius6_ffffff">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="49dp"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="15dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_14"
+                                    android:textColor="#5690FF"
+                                    android:layout_centerVertical="true"
+                                    android:text="出块效率"/>
+                                
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_14"
+                                    android:textColor="#5690FF"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:text="10T"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="49dp"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="15dp">
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/theme_EEEEEE"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_14"
+                                    android:textColor="#5690FF"
+                                    android:layout_centerVertical="true"
+                                    android:text="有效算力"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_14"
+                                    android:textColor="#5690FF"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:text="10T"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="49dp"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="15dp">
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/theme_EEEEEE"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_14"
+                                    android:textColor="#5690FF"
+                                    android:layout_centerVertical="true"
+                                    android:text="总释放FIL"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_14"
+                                    android:textColor="#5690FF"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:text="0 FIL"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="49dp"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="15dp">
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/theme_EEEEEE"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_14"
+                                    android:textColor="#5690FF"
+                                    android:layout_centerVertical="true"
+                                    android:text="总抵押FIL"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_14"
+                                    android:textColor="#5690FF"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:text="0 FIL"/>
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="49dp"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="15dp">
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/theme_EEEEEE"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_14"
+                                    android:textColor="#5690FF"
+                                    android:layout_centerVertical="true"
+                                    android:text="损坏FIL"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_14"
+                                    android:textColor="#5690FF"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:text="0 FIL"/>
+                            </RelativeLayout>
+
+                        </LinearLayout>
                     </LinearLayout>
-                </RelativeLayout>
 
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_weight="1">
+                </com.zhongyiguolian.zy.myview.StickyScrollView>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/shape_radius6_ffffff"
-                        android:alpha="0.5"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:gravity="center">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_13"
-                            android:textColor="@color/theme_333333"
-                            android:text="出块效率"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_13"
-                            android:textColor="@color/theme_333333"
-                            android:layout_marginTop="15dp"
-                            android:text="0.00"/>
-
-                    </LinearLayout>
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/shape_radius6_ffffff"
-                        android:alpha="0.5"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:gravity="center">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_13"
-                            android:textColor="@color/theme_333333"
-                            android:text="有效算力"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_13"
-                            android:textColor="@color/theme_333333"
-                            android:layout_marginTop="15dp"
-                            android:text="0.00"/>
-
-                    </LinearLayout>
-                </RelativeLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="88dp"
-                android:orientation="horizontal"
-                android:paddingStart="41dp"
-                android:paddingEnd="41dp"
-                android:layout_marginTop="16dp">
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/shape_radius6_ffffff"
-                        android:alpha="0.5"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:gravity="center">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_13"
-                            android:textColor="@color/theme_333333"
-                            android:text="释放FIL"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_13"
-                            android:textColor="@color/theme_333333"
-                            android:layout_marginTop="15dp"
-                            android:text="0.00"/>
-
-                    </LinearLayout>
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_weight="1">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/shape_radius6_ffffff"
-                        android:alpha="0.5"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:gravity="center">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_13"
-                            android:textColor="@color/theme_333333"
-                            android:text="抵押FIL"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_13"
-                            android:textColor="@color/theme_333333"
-                            android:layout_marginTop="15dp"
-                            android:text="0.00"/>
-
-                    </LinearLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/shape_radius6_ffffff"
-                        android:alpha="0.5"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:gravity="center">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_13"
-                            android:textColor="@color/theme_333333"
-                            android:text="损坏FIL"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_13"
-                            android:textColor="@color/theme_333333"
-                            android:layout_marginTop="15dp"
-                            android:text="0.00"/>
-
-                    </LinearLayout>
-                </RelativeLayout>
-
-
-            </LinearLayout>
-
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
         </LinearLayout>
     </FrameLayout>
 

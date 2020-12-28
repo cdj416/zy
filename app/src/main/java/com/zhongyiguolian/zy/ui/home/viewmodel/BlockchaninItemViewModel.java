@@ -8,20 +8,30 @@ import com.zhongyiguolian.zy.base.ItemViewModel;
 import com.zhongyiguolian.zy.ui.home.activity.BlockchaninDetailActivity;
 
 /**
- * 区块链itemModel
+ * 行业知识itemModel
  * @author cdj
  * @date 2020/12/10
  */
 public class BlockchaninItemViewModel extends ItemViewModel<BlockchaninViewModel> {
 
+    /**
+     * 数据
+     */
     public ObservableField<String> entity = new ObservableField<>();
 
+    /**
+     * @param viewModel
+     * @param bean
+     */
     public BlockchaninItemViewModel(@NonNull BlockchaninViewModel viewModel, String bean) {
         super(viewModel);
         entity.set(bean);
     }
 
-    //条目的点击事件
+
+    /**
+     * 条目的点击事件
+     */
     public BindingCommand itemClick = new BindingCommand(new BindingAction() {
         @Override
         public void call() {

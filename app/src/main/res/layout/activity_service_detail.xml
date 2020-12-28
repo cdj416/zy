@@ -37,13 +37,25 @@
                     android:textSize="@dimen/sp_16"
                     android:gravity="center"
                     android:text="购买商品"/>
+
                 <ImageView
                     android:id="@+id/comBack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/white_black"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="16dp"/>
+                    android:layout_marginStart="11dp"
+                    android:padding="5dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/white_cart_mark"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="11dp"
+                    android:padding="5dp"
+                    app:onClickCommand="@{viewModel.goCart}"/>
             </RelativeLayout>
 
             <com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -64,8 +76,7 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="180dp"
-                            android:src="@mipmap/long_default"
-                            android:layout_marginTop="10dp"
+                            android:src="@mipmap/delet_detail_top_img"
                             android:scaleType="fitXY"/>
 
                         <LinearLayout
@@ -123,6 +134,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/oldPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/theme_999999"
@@ -579,7 +591,8 @@
                                     android:textColor="@color/theme_333333"
                                     android:textSize="@dimen/sp_14"
                                     android:gravity="center"
-                                    android:text="-"/>
+                                    android:text="-"
+                                    app:onClickCommand="@{viewModel.subNum}"/>
                                 <TextView
                                     android:layout_width="25dp"
                                     android:layout_height="wrap_content"
@@ -587,14 +600,15 @@
                                     android:textSize="@dimen/sp_14"
                                     android:gravity="center"
                                     android:background="#F2F2F2"
-                                    android:text="4"/>
+                                    android:text="@{viewModel.nums}"/>
                                 <TextView
                                     android:layout_width="25dp"
                                     android:layout_height="wrap_content"
                                     android:textColor="@color/theme_333333"
                                     android:textSize="@dimen/sp_14"
                                     android:gravity="center"
-                                    android:text="+"/>
+                                    android:text="+"
+                                    app:onClickCommand="@{viewModel.addNum}"/>
                             </LinearLayout>
                         </RelativeLayout>
 
@@ -631,12 +645,16 @@
                 android:layout_centerVertical="true"
                 android:orientation="horizontal"
                 android:layout_marginStart="16dp"
-                android:gravity="center">
+                android:gravity="center"
+                app:onClickCommand="@{viewModel.agree}">
 
                 <ImageView
+                    android:id="@+id/checkImg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/check_mark"/>
+                    android:src="@mipmap/no_check_mark"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -659,7 +677,7 @@
                 android:orientation="horizontal"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp">
+                android:layout_marginEnd="12dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -669,8 +687,9 @@
                     android:paddingBottom="3dp"
                     android:paddingStart="12dp"
                     android:paddingEnd="6dp"
-                    android:background="@drawable/shape_radius_left_24dp_ffffff"
-                    android:text="加入购物车"/>
+                    android:background="@drawable/shape_radius4_left_fffff"
+                    android:text="加入购物车"
+                    app:onClickCommand="@{viewModel.addCart}"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -680,7 +699,7 @@
                     android:paddingBottom="3dp"
                     android:paddingStart="12dp"
                     android:paddingEnd="6dp"
-                    android:background="@drawable/shape_radius_right_24dp_418bff"
+                    android:background="@drawable/shape_radius4_right_418bff"
                     android:text="立即购买"
                     app:onClickCommand="@{viewModel.goConfirm}"/>
 

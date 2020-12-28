@@ -20,16 +20,28 @@ import com.zhongyiguolian.zy.utils.StatusBarUtil;
  */
 public class QuotesListFragment extends CustomFragment<FragmentQuotesListBinding, QuotesListViewModel> {
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return R.layout.fragment_quotes_list;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public QuotesListViewModel initViewModel() {
         //使用自定义的ViewModelFactory来创建ViewModel，如果不重写该方法，则默认会调用NetWorkViewModel(@NonNull Application application)构造方法
@@ -38,6 +50,9 @@ public class QuotesListFragment extends CustomFragment<FragmentQuotesListBinding
     }
 
 
+    /**
+     * ui变动
+     */
     @Override
     public void initView() {
         super.initView();

@@ -18,7 +18,8 @@
         app:hl_cornerRadius_leftTop="6dp"
         app:hl_cornerRadius_rightTop="6dp"
         app:hl_shadowColor="@color/colorPrimary"
-        app:layout_srlBackgroundColor="@color/transparent">
+        app:layout_srlBackgroundColor="@color/transparent"
+        app:onClickCommand="@{viewModel.itemClick}">
 
         <LinearLayout
             android:layout_width="match_parent"

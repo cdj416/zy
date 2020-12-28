@@ -25,18 +25,33 @@ import me.tatarka.bindingcollectionadapter2.BR;
  */
 public class QuotesFragment extends CustomFragment<FragmentQuotesBinding, CustomViewModel> {
 
+    /**
+     * 数据
+     */
     private List<CustomFragment> fragments;
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return R.layout.fragment_quotes;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * ui初始化
+     */
     @Override
     public void initView() {
         super.initView();
@@ -62,6 +77,7 @@ public class QuotesFragment extends CustomFragment<FragmentQuotesBinding, Custom
 
     /**
      * 将 Tab[index] 放大为初始的 scale 倍
+     * @param scale
      */
     private void setScale(float scale) {
         LinearLayout ll = (LinearLayout) binding.layoutMenu.getChildAt(0);

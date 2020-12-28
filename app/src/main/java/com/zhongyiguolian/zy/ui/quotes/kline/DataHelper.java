@@ -224,6 +224,9 @@ public class DataHelper {
         calculateVolumeMA(datas);
     }
 
+    /**
+     * @param entries
+     */
     private static void calculateVolumeMA(List<KLineEntity> entries) {
         float volumeMa5 = 0;
         float volumeMa10 = 0;

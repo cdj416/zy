@@ -13,28 +13,41 @@ import com.zhongyiguolian.zy.ui.home.viewmodel.TextContentViewModel;
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
- * 书籍列表页面
+ * 书籍详情页面
  * @author cdj
  * @date 2020/12/10
  */
 public class BookDetailActivity extends CustomActivity<ActivityBookDetailBinding, TextContentViewModel> {
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_book_detail;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public TextContentViewModel initViewModel() {
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
         return ViewModelProviders.of(this, factory).get(TextContentViewModel.class);
     }
 
+    /**
+     * 初始化
+     */
     @Override
     public void initView() {
         super.initView();
@@ -46,6 +59,9 @@ public class BookDetailActivity extends CustomActivity<ActivityBookDetailBinding
         binding.comBack.setOnClickListener(view -> finish());
     }
 
+    /**
+     * 数据
+     */
     @Override
     public void initData() {
         super.initData();

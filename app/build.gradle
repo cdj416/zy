@@ -44,6 +44,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation files('libs\\ocr-sdk.jar')
+    implementation project(path: ':library')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -96,4 +97,14 @@ dependencies {
     implementation 'com.just.agentweb:agentweb:4.1.2'
     implementation 'com.just.agentweb:filechooser:4.1.2'// (可选)
     implementation 'com.download.library:Downloader:4.1.2'// (可选)
+
+    //视频播放库
+    implementation 'com.shuyu:GSYVideoPlayer:7.0.1'
+    //超长大图显示
+    implementation 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
+    //版本更新使用的库
+    implementation 'com.azhon:appupdateX:2.3.0'
+    //视频下载库
+    implementation 'com.arialyy.aria:core:3.8.15'
+    annotationProcessor 'com.arialyy.aria:compiler:3.8.15'
 }

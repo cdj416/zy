@@ -13,22 +13,39 @@ import java.util.List;
  */
 public class KChartAdapter extends BaseKChartAdapter {
 
+    /**
+     * 数据
+     */
     private List<KLineEntity> datas = new ArrayList<>();
 
+    /**
+     * 构造函数
+     */
     public KChartAdapter() {
 
     }
 
+    /**
+     * @return
+     */
     @Override
     public int getCount() {
         return datas.size();
     }
 
+    /**
+     * @param position 对应的序号
+     * @return
+     */
     @Override
     public Object getItem(int position) {
         return datas.get(position);
     }
 
+    /**
+     * @param position
+     * @return
+     */
     @Override
     public Date getDate(int position) {
         try {
@@ -47,6 +64,7 @@ public class KChartAdapter extends BaseKChartAdapter {
 
     /**
      * 向头部添加数据
+     * @param data
      */
     public void addHeaderData(List<KLineEntity> data) {
         if (data != null && !data.isEmpty()) {
@@ -57,6 +75,7 @@ public class KChartAdapter extends BaseKChartAdapter {
 
     /**
      * 向尾部添加数据
+     * @param data
      */
     public void addFooterData(List<KLineEntity> data) {
         if (data != null && !data.isEmpty()) {
@@ -68,6 +87,7 @@ public class KChartAdapter extends BaseKChartAdapter {
     /**
      * 改变某个点的值
      * @param position 索引值
+     * @param data
      */
     public void changeItem(int position,KLineEntity data)
     {

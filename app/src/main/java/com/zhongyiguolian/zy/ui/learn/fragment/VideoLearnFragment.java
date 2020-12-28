@@ -26,18 +26,33 @@ import me.tatarka.bindingcollectionadapter2.BR;
 
 public class VideoLearnFragment extends CustomFragment<FragmentVideoLearnBinding, CustomViewModel> {
 
+    /**
+     * fragments
+     */
     private List<CustomFragment> fragments;
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return R.layout.fragment_video_learn;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * 数据
+     */
     @Override
     public void initView() {
         super.initView();

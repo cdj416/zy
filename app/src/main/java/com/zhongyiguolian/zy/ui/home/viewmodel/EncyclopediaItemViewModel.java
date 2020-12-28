@@ -13,16 +13,29 @@ import com.zhongyiguolian.zy.base.ItemViewModel;
  */
 public class EncyclopediaItemViewModel extends ItemViewModel<EncyclopediaViewModel> {
 
+    /**
+     * 数据
+     */
     public ObservableField<String> entity = new ObservableField<>();
 
+    /**
+     * 是否张开
+     */
     public ObservableField<Boolean> isOpen = new ObservableField<>(false);
 
+    /**
+     * @param viewModel
+     * @param bean
+     */
     public EncyclopediaItemViewModel(@NonNull EncyclopediaViewModel viewModel, String bean) {
         super(viewModel);
         entity.set(bean);
     }
 
-    //条目的点击事件
+
+    /**
+     * 点击
+     */
     public BindingCommand itemClick = new BindingCommand(new BindingAction() {
         @Override
         public void call() {

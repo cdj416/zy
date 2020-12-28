@@ -18,38 +18,45 @@ import java.util.List;
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 /**
- * 区块链viewmodel
+ * 行业知识viewmodel
  * @author cdj
  * @date 2020/12/10
  */
 public class BlockchaninViewModel extends CustomViewModel<MyRepository> {
 
-    public ObservableField<List<String>> banners = new ObservableField<>(new ArrayList<>());
-
+    /**
+     * @param application
+     * @param model
+     */
     public BlockchaninViewModel(@NonNull Application application, MyRepository model) {
         super(application, model);
     }
 
-    //给RecyclerView添加ObservableList
+
+    /**
+     * 给RecyclerView添加ObservableList
+     */
     public ObservableList<BlockchaninItemViewModel> observableList = new ObservableArrayList<>();
 
-    //给RecyclerView添加ItemBinding
+
+    /**
+     * 给RecyclerView添加ItemBinding
+     */
     public ItemBinding<BlockchaninItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.item_blockchain);
 
-    //百科
-    public BindingCommand goEncyclopedia = new BindingCommand(new BindingAction() {
-        @Override
-        public void call() {
-            startActivity(EncyclopediaActivity.class);
-        }
-    });
 
+    /**
+     * 数据
+     */
     @Override
     public void onCreate() {
         super.onCreate();
         addTestData();
     }
 
+    /**
+     * 数据
+     */
     public void addTestData(){
 
 
@@ -57,10 +64,13 @@ public class BlockchaninViewModel extends CustomViewModel<MyRepository> {
         for(int i = 0 ; i < 6 ; i++){
             BlockchaninItemViewModel itemViewModel = new BlockchaninItemViewModel(this,"");
             observableList.add(itemViewModel);
-            banners.get().add("");
         }
     }
 
+    /**
+     * @param code
+     * @param dataBean
+     */
     @Override
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);

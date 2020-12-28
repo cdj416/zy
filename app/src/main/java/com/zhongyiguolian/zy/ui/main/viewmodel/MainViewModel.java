@@ -16,13 +16,19 @@ import com.zhongyiguolian.zy.data.MyRepository;
  */
 public class MainViewModel extends CustomViewModel<MyRepository> {
 
-    //public ObservableField<CheckVersionBeans.InfoBean> entity = new ObservableField<>();
-
+    /**
+     * @param application
+     * @param model
+     */
     public MainViewModel(@NonNull Application application, MyRepository model) {
         super(application, model);
     }
 
 
+    /**
+     * @param code
+     * @param dataBean
+     */
     @Override
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);

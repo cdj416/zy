@@ -17,10 +17,8 @@ import com.zhongyiguolian.zy.ui.home.activity.BookListActivity;
 import com.zhongyiguolian.zy.ui.home.activity.EncyclopediaActivity;
 import com.zhongyiguolian.zy.ui.home.activity.SearchActivity;
 import com.zhongyiguolian.zy.ui.home.activity.ServiceActivity;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 /**
@@ -30,54 +28,85 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
  */
 public class HomeViewModel extends CustomViewModel<MyRepository> {
 
+    /**
+     * banners数据
+     */
     public ObservableField<List<String>> banners = new ObservableField<>(new ArrayList<>());
 
+    /**
+     * @param application
+     * @param model
+     */
     public HomeViewModel(@NonNull Application application, MyRepository model) {
         super(application, model);
     }
 
-    //给RecyclerView添加ObservableList
+
+    /**
+     * 给RecyclerView添加ObservableList
+     */
     public ObservableList<HomeItemViewModel> observableList = new ObservableArrayList<>();
 
-    //给RecyclerView添加ItemBinding
+
+    /**
+     * 给RecyclerView添加ItemBinding
+     */
     public ItemBinding<HomeItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.item_home);
 
-    //百科
+
+    /**
+     * 百科
+     */
     public BindingCommand goEncyclopedia = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
             startActivity(EncyclopediaActivity.class);
         }
     });
-    //行业知识
+
+    /**
+     * 行业知识
+     */
     public BindingCommand goBlockchanin = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
             startActivity(BlockchaninActivity.class);
         }
     });
-    //书籍
+
+    /**
+     * 书籍
+     */
     public BindingCommand goBookList = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
             startActivity(BookListActivity.class);
         }
     });
-    //关于我们
+
+    /**
+     * 关于我们
+     */
     public BindingCommand goAboutus = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
             startActivity(AboutUsActivity.class);
         }
     });
-    //更多服务器
+
+    /**
+     * 更多服务器
+     */
     public BindingCommand goServices = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
             startActivity(ServiceActivity.class);
         }
     });
-    //去搜索页面
+
+    /**
+     * 去搜索页面
+     */
     public BindingCommand goSearch = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
@@ -85,12 +114,18 @@ public class HomeViewModel extends CustomViewModel<MyRepository> {
         }
     });
 
+    /**
+     *
+     */
     @Override
     public void onCreate() {
         super.onCreate();
         addTestData();
     }
 
+    /**
+     * 添加假数据
+     */
     public void addTestData(){
 
 
@@ -102,6 +137,10 @@ public class HomeViewModel extends CustomViewModel<MyRepository> {
         }
     }
 
+    /**
+     * @param code
+     * @param dataBean
+     */
     @Override
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);

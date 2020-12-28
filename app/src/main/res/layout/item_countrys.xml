@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="43dp"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:paddingRight="16dp"
+        app:onClickCommand="@{viewModel.itemClick}">
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,7 +22,7 @@
             android:textColor="@color/theme_333333"
             android:textSize="@dimen/sp_14"
             android:layout_centerVertical="true"
-            android:text="中国"/>
+            android:text="@{viewModel.entity.countrysName}"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,7 +31,7 @@
             android:textSize="@dimen/sp_14"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:text="+86"/>
+            android:text="@{viewModel.entity.countrysId}"/>
 
         <View
             android:layout_width="match_parent"

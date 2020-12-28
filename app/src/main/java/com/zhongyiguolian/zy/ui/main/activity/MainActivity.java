@@ -13,7 +13,6 @@ import com.zhongyiguolian.zy.base.CustomActivity;
 import com.zhongyiguolian.zy.databinding.ActivityMainBinding;
 import com.zhongyiguolian.zy.ui.advisory.fragment.AdvisoryFragment;
 import com.zhongyiguolian.zy.ui.home.fragment.HomeFragment;
-import com.zhongyiguolian.zy.ui.learn.fragment.LearnFragment;
 import com.zhongyiguolian.zy.ui.learn.fragment.VideoLearnFragment;
 import com.zhongyiguolian.zy.ui.main.viewmodel.MainViewModel;
 import com.zhongyiguolian.zy.ui.person.fragment.PersonFragment;
@@ -31,25 +30,41 @@ import me.tatarka.bindingcollectionadapter2.BR;
  */
 public class MainActivity extends CustomActivity<ActivityMainBinding, MainViewModel> {
 
+    /**
+     * fragments集合
+     */
     private List<Fragment> mFragments;
     //private NavigationController navigationController;
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_main;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public MainViewModel initViewModel() {
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
         return ViewModelProviders.of(this, factory).get(MainViewModel.class);
     }
 
+    /**
+     * 添加fragment
+     */
     @Override
     public void initData() {
         super.initData();
@@ -129,7 +144,12 @@ public class MainActivity extends CustomActivity<ActivityMainBinding, MainViewMo
     }
 
 
-    //安卓重写返回键事件
+    /**
+     * 安卓重写返回键事件
+     * @param keyCode
+     * @param event
+     * @return
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode== KeyEvent.KEYCODE_BACK){

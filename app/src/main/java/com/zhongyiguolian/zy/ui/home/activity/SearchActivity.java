@@ -11,28 +11,41 @@ import com.zhongyiguolian.zy.ui.home.viewmodel.SearchViewModel;
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
- * 区块链页面
+ * 搜索页面
  * @author cdj
  * @date 2020/12/10
  */
 public class SearchActivity extends CustomActivity<ActivitySearchBinding, SearchViewModel> {
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_search;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public SearchViewModel initViewModel() {
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
         return ViewModelProviders.of(this, factory).get(SearchViewModel.class);
     }
 
+    /**
+     * 初始化ui变化
+     */
     @Override
     public void initView() {
         super.initView();
@@ -44,6 +57,9 @@ public class SearchActivity extends CustomActivity<ActivitySearchBinding, Search
         binding.cancel.setOnClickListener(view -> finish());
     }
 
+    /**
+     * 数据请求
+     */
     @Override
     public void initData() {
         super.initData();

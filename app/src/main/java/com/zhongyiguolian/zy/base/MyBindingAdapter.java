@@ -1,9 +1,10 @@
 package com.zhongyiguolian.zy.base;
 
+import android.app.Activity;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -12,15 +13,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.databinding.BindingAdapter;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
+import com.previewlibrary.GPreviewBuilder;
+import com.previewlibrary.enitity.UserViewInfo;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.zhongyiguolian.zy.R;
@@ -32,10 +32,9 @@ import com.zhongyiguolian.zy.ui.home.viewmodel.ComfirmOrderBottomMultiViewModel;
 import com.zhongyiguolian.zy.utils.DensityUtil;
 import com.zhongyiguolian.zy.utils.GlideRoundTransform;
 import com.zhongyiguolian.zy.utils.UseGlideImageLoader;
-
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author cdj
@@ -43,6 +42,11 @@ import java.util.Random;
  */
 public class MyBindingAdapter {
 
+    /**
+     * @param view
+     * @param imageUrl
+     * @param defaultImg
+     */
     @BindingAdapter(value = {"imageUrl", "defaultImg"}, requireAll = false)
     public static void bindImageUrl(ImageView view, Object imageUrl, Drawable defaultImg){
         if(BaseUtil.isValue(imageUrl)){
@@ -56,9 +60,21 @@ public class MyBindingAdapter {
         }
     }
 
+    /**
+     * @param banner
+     * @param mList
+     */
     @BindingAdapter("bannerList")
     public static void bindBanner(Banner banner, List<String> mList){
         if(mList == null || mList.size() <= 0)return;
+
+        List<UserViewInfo> imgList = new ArrayList<>();
+        for(int i = 0 ; i < mList.size() ; i++){
+            imgList.add(new UserViewInfo(mList.get(i)));
+            Rect bounds = new Rect();
+            banner.getGlobalVisibleRect(bounds);
+            imgList.get(i).setBounds(bounds);
+        }
 
         banner.setImages(mList)
                 .setImageLoader(new UseGlideImageLoader())
@@ -66,9 +82,21 @@ public class MyBindingAdapter {
                 .isAutoPlay(true)
                 .setBannerStyle(BannerConfig.CIRCLE_INDICATOR )
                 .setIndicatorGravity(BannerConfig.CENTER)
+                .setOnBannerListener(position -> {
+                    //点击查看大图功能
+                    GPreviewBuilder.from((Activity) banner.getContext())
+                            .setData(imgList)
+                            .setCurrentIndex(position)
+                            .setType(GPreviewBuilder.IndicatorType.Dot)
+                            .start();
+                })
                 .start();
     }
 
+    /**
+     * @param imgView
+     * @param imageUrl
+     */
     @BindingAdapter("changeHeightImg")
     public static void bindHeightImg(ImageView imgView,String imageUrl){
         if(!BaseUtil.isValue(imageUrl))return;
@@ -99,6 +127,10 @@ public class MyBindingAdapter {
         Glide.with(imgView.getContext()).load(imageUrl).transition(DrawableTransitionOptions.withCrossFade()).apply(options).into(imgView);
     }
 
+    /**
+     * @param view
+     * @param imageFile
+     */
     @BindingAdapter("imageFile")
     public static void bindImageUrl(ImageView view, File imageFile){
         if(!BaseUtil.isValue(imageFile))return;
@@ -107,6 +139,10 @@ public class MyBindingAdapter {
     }
 
 
+    /**
+     * @param img
+     * @param imgId
+     */
     @BindingAdapter("intImg")
     public static void bindIntImg(ImageView img, int imgId){
         if(imgId != 0){
@@ -118,22 +154,38 @@ public class MyBindingAdapter {
     }
 
 
+    /**
+     * @param textView
+     * @param nums
+     */
     @BindingAdapter("setIntText")
     public static void bindPraiseImg(TextView textView, int nums){
         textView.setText(String.valueOf(nums));
     }
 
 
+    /**
+     * @param view
+     * @param bgId
+     */
     @BindingAdapter("setIntBg")
     public static void bindViwBg(View view, int bgId){
         view.setBackgroundResource(bgId);
     }
 
+    /**
+     * @param view
+     * @param bgId
+     */
     @BindingAdapter("setMyTextColor")
     public static void bindTextColorBg(TextView view, int bgId){
         view.setTextColor(view.getResources().getColor(bgId));
     }
 
+    /**
+     * @param view
+     * @param checkId
+     */
     @BindingAdapter("setRadioGroupCheck")
     public static void bindRadioGroupCheck(RadioGroup view, int checkId){
         if(checkId == -1){
@@ -143,16 +195,28 @@ public class MyBindingAdapter {
         }
     }
 
+    /**
+     * @param view
+     * @param adapter
+     */
     @BindingAdapter("setNGimgAdapter")
     public static void bindNGAdapter(NineGridImageView view, NineGridImageViewAdapter adapter){
         view.setAdapter(adapter);
     }
 
+    /**
+     * @param view
+     * @param strs
+     */
     @BindingAdapter("setNGimgData")
     public static void bindNGData(NineGridImageView view, List<String> strs){
         view.setImagesData(strs);
     }
 
+    /**
+     * @param view
+     * @param flag
+     */
     @BindingAdapter("isOpenUME")
     public static void bindNGData(UMExpandLayout view, boolean flag){
         if(flag){
@@ -162,6 +226,10 @@ public class MyBindingAdapter {
         }
     }
 
+    /**
+     * @param view
+     * @param flag
+     */
     @BindingAdapter("isOpenAnim")
     public static void bindImgAnim(ImageView view, boolean flag){
 
@@ -179,9 +247,11 @@ public class MyBindingAdapter {
         view.startAnimation(animation);
     }
 
-    /*
-    * 字数与输入控件的绑定
-    * */
+    /**
+     * 字数与输入控件的绑定
+     * @param etText
+     * @param viewModel
+     */
     @BindingAdapter("setTextWatcher")
     public static void bindTextWatcher(EditText etText, ComfirmOrderBottomMultiViewModel viewModel){
         etText.addTextChangedListener(new TextWatcher() {

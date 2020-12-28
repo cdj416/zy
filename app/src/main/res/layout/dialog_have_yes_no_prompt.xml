@@ -30,6 +30,8 @@
                 android:textSize="13sp"
                 android:textColor="@color/theme_333333"
                 android:layout_marginTop="2dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 android:text="确定结束今天的运动吗"/>
         </LinearLayout>
         <View

@@ -4,10 +4,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import com.github.tifezh.kchartlib.chart.BaseKChartView;
 import com.github.tifezh.kchartlib.chart.formatter.DateFormatter;
@@ -22,7 +20,6 @@ import com.zhongyiguolian.zy.ui.quotes.beans.KLineEntity;
 import com.zhongyiguolian.zy.ui.quotes.kline.DataRequest;
 import com.zhongyiguolian.zy.ui.quotes.viewmodel.DynamicViewModel;
 import com.zhongyiguolian.zy.utils.CustomDialog;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,19 +30,37 @@ import java.util.List;
  */
 public class DynamicFragment extends CustomFragment<FragmentDynamicBinding, DynamicViewModel> {
 
+    /**
+     * 适配器
+     */
     private KChartAdapter mAdapter;
+    /**
+     * 数据集
+     */
     private List<DeleteCoinType> mList;
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return R.layout.fragment_dynamic;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public DynamicViewModel initViewModel() {
         //使用自定义的ViewModelFactory来创建ViewModel，如果不重写该方法，则默认会调用NetWorkViewModel(@NonNull Application application)构造方法
@@ -54,6 +69,9 @@ public class DynamicFragment extends CustomFragment<FragmentDynamicBinding, Dyna
     }
 
 
+    /**
+     * ui变动
+     */
     @Override
     public void initView() {
         super.initView();
@@ -84,6 +102,9 @@ public class DynamicFragment extends CustomFragment<FragmentDynamicBinding, Dyna
         mList.add(new DeleteCoinType(false,"以太经典","ETC/USDT"));
     }
 
+    /**
+     * 数据
+     */
     @Override
     public void initData() {
         super.initData();
@@ -106,6 +127,9 @@ public class DynamicFragment extends CustomFragment<FragmentDynamicBinding, Dyna
         }).start();
     }
 
+    /**
+     * @param newConfig
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -118,6 +142,9 @@ public class DynamicFragment extends CustomFragment<FragmentDynamicBinding, Dyna
         }
     }
 
+    /**
+     * ui变动
+     */
     @Override
     public void initViewObservable() {
         super.initViewObservable();

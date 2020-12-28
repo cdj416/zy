@@ -27,32 +27,39 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
  */
 public class BookListViewModel extends CustomViewModel<MyRepository> {
 
-    public ObservableField<List<String>> banners = new ObservableField<>(new ArrayList<>());
-
+    /**
+     * @param application
+     * @param model
+     */
     public BookListViewModel(@NonNull Application application, MyRepository model) {
         super(application, model);
     }
 
-    //给RecyclerView添加ObservableList
+
+    /**
+     * 给RecyclerView添加ObservableList
+     */
     public ObservableList<BookListItemViewModel> observableList = new ObservableArrayList<>();
 
-    //给RecyclerView添加ItemBinding
+
+    /**
+     * 给RecyclerView添加ItemBinding
+     */
     public ItemBinding<BookListItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.item_book);
 
-    //百科
-    public BindingCommand goEncyclopedia = new BindingCommand(new BindingAction() {
-        @Override
-        public void call() {
-            startActivity(EncyclopediaActivity.class);
-        }
-    });
 
+    /**
+     * 数据
+     */
     @Override
     public void onCreate() {
         super.onCreate();
         addTestData();
     }
 
+    /**
+     * 数据
+     */
     public void addTestData(){
 
 
@@ -60,10 +67,13 @@ public class BookListViewModel extends CustomViewModel<MyRepository> {
         for(int i = 0 ; i < 6 ; i++){
             BookListItemViewModel itemViewModel = new BookListItemViewModel(this,"");
             observableList.add(itemViewModel);
-            banners.get().add("");
         }
     }
 
+    /**
+     * @param code
+     * @param dataBean
+     */
     @Override
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);

@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +24,7 @@ import com.zhongyiguolian.zy.ui.home.adapter.CoinTypeAdapter;
 import com.zhongyiguolian.zy.ui.home.beans.DeleteCoinType;
 
 import java.util.List;
+import java.util.WeakHashMap;
 
 /**
  * dialog页面效果
@@ -158,7 +161,7 @@ public class CustomDialog {
     }
 
     /*
-     * 拨打电话弹框
+     * 输入密码弹框
      * */
     public static void enterPassword(Context mContext, DialogClick dialogClick ){
 
@@ -370,7 +373,7 @@ public class CustomDialog {
     /*
      * 选择支付方式
      * */
-    public static void changePay(Context mContext, DialogClick dialogClick ){
+    public static void changePay(Context mContext,String allPrice, DialogClick dialogClick ){
         final Dialog dialog = new Dialog(mContext, R.style.DialogTheme);
         View view = View.inflate(mContext, R.layout.dialog_type_pay,null);
         dialog.setContentView(view);
@@ -383,6 +386,55 @@ public class CustomDialog {
         view.findViewById(R.id.closeImg).setOnClickListener(v -> {
             dialog.dismiss();
         });
+
+
+
+        TextView allPriceTV = view.findViewById(R.id.allPriceTV);
+        allPriceTV.setText(allPrice);
+
+        ImageView alipayImg = view.findViewById(R.id.alipayImg);
+        ImageView wxCheckImg = view.findViewById(R.id.wxCheckImg);
+        ImageView blankImg = view.findViewById(R.id.blankImg);
+
+        RelativeLayout alipayBox = view.findViewById(R.id.alipayBox);
+        RelativeLayout wxBox = view.findViewById(R.id.wxBox);
+        RelativeLayout blankBox = view.findViewById(R.id.blankBox);
+
+        //当前选中的支付方式
+        final View[] mView = {alipayBox};
+
+        //支付宝支付
+        alipayBox.setOnClickListener(v -> {
+            alipayImg.setImageResource(R.mipmap.cart_check);
+            wxCheckImg.setImageResource(R.mipmap.cart_no_check);
+            blankImg.setImageResource(R.mipmap.cart_no_check);
+
+            mView[0] = alipayBox;
+        });
+
+        //微信支付
+        wxBox.setOnClickListener(v -> {
+            alipayImg.setImageResource(R.mipmap.cart_no_check);
+            wxCheckImg.setImageResource(R.mipmap.cart_check);
+            blankImg.setImageResource(R.mipmap.cart_no_check);
+
+            mView[0] = wxBox;
+        });
+
+        //银行卡支付
+        blankBox.setOnClickListener(v -> {
+            alipayImg.setImageResource(R.mipmap.cart_no_check);
+            wxCheckImg.setImageResource(R.mipmap.cart_no_check);
+            blankImg.setImageResource(R.mipmap.cart_check);
+
+            mView[0] = blankBox;
+        });
+
+        //确认支付回调
+        view.findViewById(R.id.submit).setOnClickListener(v -> {
+            dialogClick.dialogClick(mView[0]);
+        });
+
     }
 
     /*
@@ -396,6 +448,7 @@ public class CustomDialog {
         window.setGravity(Gravity.BOTTOM);
         window.setWindowAnimations(R.style.bottom_in_out);
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
         RecyclerView mRec = view.findViewById(R.id.mRec);

@@ -14,4 +14,8 @@
 
     <string name="nums150">150</string>
     <string name="two_hz">\u3000\u3000</string>
+    <string name="mange_text">管理</string>
+    <string name="settlement_text">结算</string>
+    <string name="delete_text">删除</string>
+
 </resources>

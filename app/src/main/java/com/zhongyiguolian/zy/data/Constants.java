@@ -30,9 +30,11 @@ public class Constants {
 
     private void addApis(){
         apis.put(GET_TOKEN, "api_token");
-        apis.put(MEMBERLOGIN, "memberlogin");
+        apis.put(BASE_LOGIN, "base_login");
         apis.put(UPFILE_OSS, "upfile_oss");
         apis.put(UPFILE_OSS_MORE, "upfile_oss_more");
+        apis.put(REGISTER, "register");
+        apis.put(SENDCODE, "sendCode");
     }
 
     /*
@@ -48,10 +50,16 @@ public class Constants {
     //token的获取
     public final static int  GET_TOKEN = 0x001;
     //登录接口
-    public final static int  MEMBERLOGIN = 0x002;
+    public final static int  BASE_LOGIN = 0x002;
     //单文件上传
     public final static int  UPFILE_OSS = 0x03;
     //多文件上传
     public final static int  UPFILE_OSS_MORE = 0x04;
+    //注册
+    public final static int  REGISTER = 0x05;
+    //发送验证码
+    public final static int  SENDCODE = 0x06;
+
+
 
 }

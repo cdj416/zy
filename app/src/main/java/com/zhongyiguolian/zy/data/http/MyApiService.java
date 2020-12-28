@@ -1,12 +1,14 @@
 package com.zhongyiguolian.zy.data.http;
 
+import com.zhongyiguolian.zy.data.userbean.MemberLoginBean;
+import com.zhongyiguolian.zy.data.userbean.NoDataBean;
 import com.zhongyiguolian.zy.data.userbean.TokenBean;
-
-import java.util.Map;
-
+import com.zhongyiguolian.zy.ui.main.beans.RegisteredBean;
 import io.reactivex.Observable;
-import retrofit2.http.FieldMap;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 
 /**
@@ -25,6 +27,17 @@ public interface MyApiService {
 
     @FormUrlEncoded
     @POST("/api/index/api_token")
-    Observable<MyBaseResponse<TokenBean>> api_token(@FieldMap Map<String, String> params);
+    Observable<MyBaseResponse<TokenBean>> api_token(@Body RequestBody params);
+
+    @FormUrlEncoded
+    @POST("/base_login")
+    Observable<MyBaseResponse<MemberLoginBean>> base_login(@Body RequestBody params);
+
+    @HTTP(method = "DELETE", path = "/base/register", hasBody = true)
+    Observable<MyBaseResponse<RegisteredBean>> register(@Body RequestBody params);
+
+
+    @HTTP(method = "DELETE", path = "/base/sendCode", hasBody = true)
+    Observable<MyBaseResponse<NoDataBean>> sendCode(@Body RequestBody params);
 
 }

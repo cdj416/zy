@@ -48,6 +48,16 @@
                 android:layout_centerVertical="true"
                 android:visibility="gone"
                 android:layout_marginRight="16dp"/>
+
+            <ImageView
+                android:id="@+id/addPost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/add_post_mark"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:layout_marginEnd="11dp"/>
         </RelativeLayout>
 
         <View

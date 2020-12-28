@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.advisory.viewmodel.ChooseItemViewModel" />
+
+        <import type="android.view.View"/>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="106dp"
+        android:layout_height="106dp"
+        android:layout_margin="6dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/add_baise_img"
+            android:visibility="@{viewModel.entity.isData ? View.GONE : View.VISIBLE}"
+            app:onClickCommand="@{viewModel.selectFile}"/>
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="6dp"
+            android:visibility="@{viewModel.entity.isData ? View.VISIBLE : View.GONE}"
+            android:src="@mipmap/long_default"
+            app:imageUrl="@{viewModel.entity.filePath }"/>
+        <ImageView
+            android:id="@+id/closeImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/red_close_mark"
+            android:visibility="@{viewModel.entity.isData ? View.VISIBLE : View.GONE}"
+            android:layout_alignParentEnd="true"
+            android:padding="5dp"
+            app:onClickCommand="@{viewModel.closeImg}"/>
+        <ImageView
+            android:id="@+id/playMark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/play_baise_img"
+            android:visibility="gone"/>
+    </RelativeLayout>
+</layout>

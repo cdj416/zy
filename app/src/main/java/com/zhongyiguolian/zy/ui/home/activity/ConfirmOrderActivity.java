@@ -1,5 +1,6 @@
 package com.zhongyiguolian.zy.ui.home.activity;
 
+
 import android.os.Bundle;
 import android.view.View;
 import androidx.lifecycle.ViewModelProviders;
@@ -8,8 +9,8 @@ import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
 import com.zhongyiguolian.zy.databinding.ActivityConfirmOrderBinding;
 import com.zhongyiguolian.zy.ui.home.viewmodel.ComfirmOrderViewModel;
+import com.zhongyiguolian.zy.ui.person.activity.VerifiedSuccessActivity;
 import com.zhongyiguolian.zy.utils.CustomDialog;
-
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
@@ -19,22 +20,35 @@ import me.tatarka.bindingcollectionadapter2.BR;
  */
 public class ConfirmOrderActivity extends CustomActivity<ActivityConfirmOrderBinding, ComfirmOrderViewModel> {
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_confirm_order;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public ComfirmOrderViewModel initViewModel() {
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
         return ViewModelProviders.of(this, factory).get(ComfirmOrderViewModel.class);
     }
 
+    /**
+     * ui初始化
+     */
     @Override
     public void initView() {
         super.initView();
@@ -46,6 +60,10 @@ public class ConfirmOrderActivity extends CustomActivity<ActivityConfirmOrderBin
         binding.comBack.setOnClickListener(view -> finish());
     }
 
+
+    /**
+     * 首次请求数据
+     */
     @Override
     public void initData() {
         super.initData();
@@ -58,10 +76,26 @@ public class ConfirmOrderActivity extends CustomActivity<ActivityConfirmOrderBin
         super.initViewObservable();
 
         viewModel.uc.showPayType.observe(this, aVoid -> {
-            CustomDialog.changePay(this, new CustomDialog.DialogClick() {
+            CustomDialog.changePay(this,viewModel.entity.get().getAllPrice(), new CustomDialog.DialogClick() {
                 @Override
                 public void dialogClick(View v) {
+                    if(v.getId() == R.id.alipayBox){//支付宝支付
+                        Bundle bundle = new Bundle();
+                        bundle.putString("mTitle","支付结果");
+                        bundle.putString("mProText","支付宝支付");
+                        startActivity(VerifiedSuccessActivity.class,bundle);
 
+                    }else if(v.getId() == R.id.wxBox){//微信支付
+                        Bundle bundle = new Bundle();
+                        bundle.putString("mTitle","支付结果");
+                        bundle.putString("mProText","微信支付");
+                        startActivity(VerifiedSuccessActivity.class,bundle);
+                    }else if(v.getId() == R.id.blankBox){//银行卡支付
+                        Bundle bundle = new Bundle();
+                        bundle.putString("mTitle","支付结果");
+                        bundle.putString("mProText","银行卡支付");
+                        startActivity(VerifiedSuccessActivity.class,bundle);
+                    }
                 }
             });
         });

@@ -22,16 +22,28 @@ import java.util.List;
  */
 public class HomeFragment extends CustomFragment<FragmentHomeBinding, HomeViewModel> {
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return R.layout.fragment_home;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public HomeViewModel initViewModel() {
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getActivity().getApplication());
@@ -39,6 +51,9 @@ public class HomeFragment extends CustomFragment<FragmentHomeBinding, HomeViewMo
     }
 
 
+    /**
+     * 初始化
+     */
     @Override
     public void initView() {
         super.initView();

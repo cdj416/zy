@@ -3,14 +3,11 @@ package com.zhongyiguolian.zy.ui.main.fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import androidx.annotation.Nullable;
-
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomFragment;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.databinding.FragmentTestBinding;
-
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
@@ -24,11 +21,17 @@ public class TestFragment extends CustomFragment<FragmentTestBinding, CustomView
         return R.layout.fragment_test;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     *
+     */
     @Override
     public void initView() {
         super.initView();

@@ -18,17 +18,31 @@ import com.zhongyiguolian.zy.ui.home.activity.ServiceDetailActivity;
  */
 public class ServiceDetailItemViewModel extends ItemViewModel<ServiceDetailViewModel> {
 
+    /**
+     * 数据
+     */
     public ObservableField<String> entity = new ObservableField<>();
 
+    /**
+     * 图片地址
+     */
     public String url;
 
+    /**
+     * @param viewModel
+     * @param bean
+     */
     public ServiceDetailItemViewModel(@NonNull ServiceDetailViewModel viewModel, String bean) {
         super(viewModel);
         entity.set(bean);
         this.url = bean;
         Log.e("cnn","=======================数据==========="+url);
     }
-    //条目的点击事件
+
+
+    /**
+     * 条目的点击事件
+     */
     public BindingCommand itemClick = new BindingCommand(new BindingAction() {
         @Override
         public void call() {

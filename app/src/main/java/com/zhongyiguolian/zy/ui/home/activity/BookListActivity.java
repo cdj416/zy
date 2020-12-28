@@ -17,22 +17,35 @@ import me.tatarka.bindingcollectionadapter2.BR;
  */
 public class BookListActivity extends CustomActivity<ActivityBookListBinding, BookListViewModel> {
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_book_list;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public BookListViewModel initViewModel() {
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
         return ViewModelProviders.of(this, factory).get(BookListViewModel.class);
     }
 
+    /**
+     * ui初始化
+     */
     @Override
     public void initView() {
         super.initView();
@@ -44,6 +57,9 @@ public class BookListActivity extends CustomActivity<ActivityBookListBinding, Bo
         binding.comBack.setOnClickListener(view -> finish());
     }
 
+    /**
+     * 数据
+     */
     @Override
     public void initData() {
         super.initData();

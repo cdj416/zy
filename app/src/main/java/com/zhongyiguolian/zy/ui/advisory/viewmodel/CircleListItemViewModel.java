@@ -17,6 +17,7 @@ import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.ItemViewModel;
 import com.zhongyiguolian.zy.myview.nine_gridimg.NineGridImageViewAdapter;
 import com.zhongyiguolian.zy.ui.advisory.activity.CircleDetailsActivity;
+import com.zhongyiguolian.zy.ui.advisory.activity.ForwardActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,15 @@ public class CircleListItemViewModel extends ItemViewModel<CircleListViewModel> 
         //bundle.putString("userPhone",entity.get().getM_mobile());
         //viewModel.startActivity(UserInfoActivity.class,bundle);
         viewModel.startActivity(CircleDetailsActivity.class);
+    });
+
+    //转发页面
+    public BindingCommand goForward = new BindingCommand(() -> {
+        //Bundle bundle = new Bundle();
+        //bundle.putString("user_id", String.valueOf(entity.get().getM_id()));
+        //bundle.putString("userPhone",entity.get().getM_mobile());
+        //viewModel.startActivity(UserInfoActivity.class,bundle);
+        viewModel.startActivity(ForwardActivity.class);
     });
 
     public NineGridImageViewAdapter adapter =  new NineGridImageViewAdapter<String>() {

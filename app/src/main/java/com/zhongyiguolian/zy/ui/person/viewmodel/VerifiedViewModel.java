@@ -9,9 +9,7 @@ import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.ui.person.activity.VerifiedSuccessActivity;
-
 import java.io.File;
-import java.util.List;
 
 /**
  * Fil体现

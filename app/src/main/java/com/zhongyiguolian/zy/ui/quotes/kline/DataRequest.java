@@ -22,9 +22,22 @@ import java.util.Random;
  * @date 2020/12/10
  */
 public class DataRequest {
+
+    /**
+     * 数据
+     */
     private static List<KLineEntity> datas = null;
+
+    /**
+     * 随机数
+     */
     private static Random random = new Random();
 
+    /**
+     * @param context
+     * @param fileName
+     * @return
+     */
     public static String getStringFromAssert(Context context, String fileName) {
         try {
             InputStream in = context.getResources().getAssets().open(fileName);
@@ -38,6 +51,10 @@ public class DataRequest {
         return "";
     }
 
+    /**
+     * @param context
+     * @return
+     */
     public static List<KLineEntity> getALL(Context context) {
         if (datas == null) {
             final List<KLineEntity> data = new Gson().fromJson(getStringFromAssert(context, "ibm.json"), new TypeToken<List<KLineEntity>>() {}.getType());
@@ -109,6 +126,9 @@ public class DataRequest {
         return list;
     }
 
+    /**
+     * @param list
+     */
     private static void randomVolume(List<MinuteLineEntity> list){
         for(MinuteLineEntity data:list){
             data.volume= (int) (Math.random()* Math.random()* Math.random()* Math.random()*10000000);

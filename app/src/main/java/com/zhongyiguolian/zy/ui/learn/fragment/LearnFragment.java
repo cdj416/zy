@@ -19,16 +19,28 @@ import com.zhongyiguolian.zy.ui.learn.viewmodel.LearnViewModel;
  */
 public class LearnFragment extends CustomFragment<FragmentLearnBinding, LearnViewModel> {
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return R.layout.fragment_learn;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public LearnViewModel initViewModel() {
         //使用自定义的ViewModelFactory来创建ViewModel，如果不重写该方法，则默认会调用NetWorkViewModel(@NonNull Application application)构造方法
@@ -37,6 +49,9 @@ public class LearnFragment extends CustomFragment<FragmentLearnBinding, LearnVie
     }
 
 
+    /**
+     * ui变动
+     */
     @Override
     public void initView() {
         super.initView();

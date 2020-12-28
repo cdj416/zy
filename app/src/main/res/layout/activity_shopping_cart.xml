@@ -52,7 +52,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="16dp"
                 android:padding="5dp"
-                android:text="管理"/>
+                android:text="@{viewModel.isManage}"
+                app:onClickCommand="@{viewModel.manage}"/>
 
         </RelativeLayout>
 
@@ -97,14 +98,40 @@
                 android:paddingEnd="16dp"
                 android:background="@color/theme_FFFFFF"
                 android:layout_gravity="bottom">
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
                     android:background="@color/theme_EEEEEE"/>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    app:onClickCommand="@{viewModel.selectAll}">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:intImg="@{viewModel.isAllCheckImgId}"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_333333"
+                        android:textSize="@dimen/sp_16"
+                        android:layout_marginStart="6dp"
+                        android:text="全部"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="@{viewModel.isManage.equals(@string/mange_text) ? View.VISIBLE : View.GONE}"
                     android:orientation="horizontal">
 
                     <TextView
@@ -124,7 +151,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/theme_333333"
                         android:textSize="@dimen/sp_16"
-                        android:text="0.00"/>
+                        android:text="@{viewModel.myAllPrice}"/>
 
                 </LinearLayout>
 
@@ -132,13 +159,14 @@
                 <Button
                     android:layout_width="65dp"
                     android:layout_height="36dp"
-                    android:background="@drawable/shape_radius5_5690ff"
+                    android:background="@{viewModel.isManage.equals(@string/mange_text) ? @drawable/shape_radius5_5690ff : @drawable/shape_radius6_000000_stroke_7ea8ff}"
                     android:gravity="center"
-                    android:textColor="@color/theme_FFFFFF"
-                    android:textSize="@dimen/sp_15"
+                    android:textColor="@{viewModel.isManage.equals(@string/mange_text) ? @color/theme_FFFFFF : @color/colorPrimary}"
+                    android:textSize="@dimen/sp_13"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:text="结算"/>
+                    android:text="@{viewModel.isManage.equals(@string/mange_text) ? @string/settlement_text : @string/delete_text}"
+                    app:onClickCommand="@{viewModel.operating}"/>
             </RelativeLayout>
         </FrameLayout>
 

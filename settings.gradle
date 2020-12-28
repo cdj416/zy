@@ -1,3 +1,4 @@
+include ':library'
 include ':kchartlib'
 include ':ImagePreview'
 include ':mvvmhabitx'

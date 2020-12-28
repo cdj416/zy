@@ -2,17 +2,16 @@ package com.zhongyiguolian.zy.data.http;
 
 /**
  * @author cdj
- * @date 2020/12/10
+ * @param <T>
  */
 public class MyBaseResponse<T> {
 
     /**
-     * data : {"at_id":1,"at_name":"fit","at_pwd":"14e1b600b1fd579f47433b88e8d85291","token":"8910349115cffa3c12d3d62.66901630"}
-     * status : {"succeed":"1"}
+     * data : {}
+     * status : {"code":0,"msg":"登录成功"}
      */
-
     private T data;
-    private StatusBean status;
+    private Status status;
 
     public T getData() {
         return data;
@@ -22,48 +21,37 @@ public class MyBaseResponse<T> {
         this.data = data;
     }
 
-    public StatusBean getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(StatusBean status) {
+    public void setStatus(Status status){
         this.status = status;
     }
 
-    public static class StatusBean {
-
+    public static class Status {
         /**
-         * succeed : 0
-         * error_code : 600
-         * error_desc : 手机或密码输入错误
+         * code : 0
+         * msg : 登录成功
          */
 
-        private String succeed;
-        private int error_code;
-        private String error_desc;
+        private int code;
+        private String msg;
 
-        public String getSucceed() {
-            return succeed;
+        public int getCode() {
+            return code;
         }
 
-        public void setSucceed(String succeed) {
-            this.succeed = succeed;
+        public void setCode(int code) {
+            this.code = code;
         }
 
-        public int getError_code() {
-            return error_code;
+        public String getMsg() {
+            return msg;
         }
 
-        public void setError_code(int error_code) {
-            this.error_code = error_code;
-        }
-
-        public String getError_desc() {
-            return error_desc;
-        }
-
-        public void setError_desc(String error_desc) {
-            this.error_desc = error_desc;
+        public void setMsg(String msg) {
+            this.msg = msg;
         }
     }
 }

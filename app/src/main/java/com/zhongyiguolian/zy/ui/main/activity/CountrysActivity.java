@@ -19,22 +19,35 @@ import me.tatarka.bindingcollectionadapter2.BR;
  */
 public class CountrysActivity extends CustomActivity<ActivityCountrysBinding, CountrysViewModel> {
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_countrys;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public CountrysViewModel initViewModel() {
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
         return ViewModelProviders.of(this, factory).get(CountrysViewModel.class);
     }
 
+    /**
+     * 初始化
+     */
     @Override
     public void initView() {
         super.initView();
@@ -46,6 +59,9 @@ public class CountrysActivity extends CustomActivity<ActivityCountrysBinding, Co
         binding.comBack.setOnClickListener(view -> finish());
     }
 
+    /**
+     * 数据请求
+     */
     @Override
     public void initData() {
         super.initData();

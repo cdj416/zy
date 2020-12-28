@@ -1,70 +1,154 @@
 package com.zhongyiguolian.zy.ui.main.viewmodel;
 
 import android.app.Application;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
-import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
-
-import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
-import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.MyRepository;
-import com.zhongyiguolian.zy.ui.home.activity.EncyclopediaActivity;
-import com.zhongyiguolian.zy.ui.home.viewmodel.BookListItemViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.zhongyiguolian.zy.ui.main.beans.CountrysBeans;
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 /**
- * viewmodel
+ * 选择国家区号viewmodel
  * @author cdj
  * @date 2020/12/10
  */
 public class CountrysViewModel extends CustomViewModel<MyRepository> {
 
-    public ObservableField<List<String>> banners = new ObservableField<>(new ArrayList<>());
-
     public CountrysViewModel(@NonNull Application application, MyRepository model) {
         super(application, model);
     }
 
-    //给RecyclerView添加ObservableList
+
+    /**
+     * 给RecyclerView添加ObservableList
+     */
     public ObservableList<CountrysItemViewModel> observableList = new ObservableArrayList<>();
 
-    //给RecyclerView添加ItemBinding
+
+    /**
+     * 给RecyclerView添加ItemBinding
+     */
     public ItemBinding<CountrysItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.item_countrys);
 
-    //百科
-    public BindingCommand goEncyclopedia = new BindingCommand(new BindingAction() {
-        @Override
-        public void call() {
-            startActivity(EncyclopediaActivity.class);
-        }
-    });
-
+    /**
+     *
+     */
     @Override
     public void onCreate() {
         super.onCreate();
         addTestData();
     }
 
+    /**
+     *
+     */
     public void addTestData(){
+        CountrysItemViewModel itemViewModel;
+        CountrysBeans beans;
+
+        beans = new CountrysBeans("中国","+86");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("中国香港","+852");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("中国澳门","+853");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("中国台湾","+886");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("美国","+1");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("日本","+81");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("韩国","+82");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("马来西亚","+60");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("新加坡","+65");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("越南","+84");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("澳大利亚","+61");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("加拿大","+1");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("英国","+44");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("俄罗斯","+33");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("德国","+7");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("泰国","+49");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("印度","+66");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("菲律宾","+91");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("巴西","+63");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("印度尼西亚","+55");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("意大利","+62");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("土耳其","+39");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
+
+        beans = new CountrysBeans("新西兰","+90");
+        itemViewModel = new CountrysItemViewModel(this,beans);
+        observableList.add(itemViewModel);
 
 
-
-        for(int i = 0 ; i < 6 ; i++){
-            CountrysItemViewModel itemViewModel = new CountrysItemViewModel(this,"");
-            observableList.add(itemViewModel);
-            banners.get().add("");
-        }
     }
 
+    /**
+     * @param code
+     * @param dataBean
+     */
     @Override
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);

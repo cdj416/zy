@@ -30,6 +30,7 @@
             android:background="@color/colorPrimary">
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:textColor="@color/theme_FFFFFF"
@@ -72,11 +73,13 @@
                         android:layout_gravity="center"
                         android:gravity="center">
                         <ImageView
+                            android:id="@+id/statusImg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@mipmap/succiess_img"/>
 
                         <TextView
+                            android:id="@+id/proText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/theme_333333"

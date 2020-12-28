@@ -13,8 +13,15 @@ import com.zhongyiguolian.zy.base.ItemViewModel;
  */
 public class TextContentItemViewModel extends ItemViewModel<CustomViewModel> {
 
+    /**
+     * 数据
+     */
     public ObservableField<String> entity = new ObservableField<>();
 
+    /**
+     * @param viewModel
+     * @param bean
+     */
     public TextContentItemViewModel(@NonNull CustomViewModel viewModel, String bean) {
         super(viewModel);
         entity.set(bean);

@@ -1,7 +1,6 @@
 package com.zhongyiguolian.zy.ui.home.viewmodel;
 
 import android.app.Application;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
@@ -14,12 +13,8 @@ import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.base.MultiItemViewModel;
 import com.zhongyiguolian.zy.data.MyRepository;
-import com.zhongyiguolian.zy.ui.home.activity.EncyclopediaActivity;
 import com.zhongyiguolian.zy.ui.home.activity.ShoppingCartActivity;
-import com.zhongyiguolian.zy.ui.person.viewmodel.AddBlankViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.zhongyiguolian.zy.ui.home.beans.ComfirmOrderBeans;
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 import me.tatarka.bindingcollectionadapter2.OnItemBind;
 
@@ -30,26 +25,52 @@ import me.tatarka.bindingcollectionadapter2.OnItemBind;
  */
 public class ComfirmOrderViewModel extends CustomViewModel<MyRepository> {
 
+    /**
+     * 内容item
+     */
     private static final String MultiRecycleType_Content = "content";
+    /**
+     * 顶部item
+     */
     private static final String MultiRecycleType_Bottom = "bottom";
 
-    public ObservableField<List<String>> banners = new ObservableField<>(new ArrayList<>());
+    /**
+     *数据
+     */
+    public ObservableField<ComfirmOrderBeans> entity = new ObservableField<>(new ComfirmOrderBeans("60.15"));
 
+    /**
+     * @param application
+     * @param model
+     */
     public ComfirmOrderViewModel(@NonNull Application application, MyRepository model) {
         super(application, model);
     }
 
-    //封装一个界面发生改变的观察者
+
+    /**
+     * 封装一个界面发生改变的观察者
+     */
     public UIChangeObservable uc = new UIChangeObservable();
+
+    /**
+     * ui变动
+     */
     public class UIChangeObservable {
         //显示支付类型
         public SingleLiveEvent<Void> showPayType = new SingleLiveEvent<>();
     }
 
-    //给RecyclerView添加ObservableList
+
+    /**
+     * 给RecyclerView添加ObservableList
+     */
     public ObservableList<MultiItemViewModel> observableList = new ObservableArrayList<>();
 
-    //给RecyclerView添加ItemBinding
+
+    /**
+     * 给RecyclerView添加ItemBinding
+     */
     public ItemBinding<MultiItemViewModel> itemBinding = ItemBinding.of(new OnItemBind<MultiItemViewModel>() {
         @Override
         public void onItemBind(ItemBinding itemBinding, int position, MultiItemViewModel item) {
@@ -65,7 +86,10 @@ public class ComfirmOrderViewModel extends CustomViewModel<MyRepository> {
         }
     });
 
-    //购物车
+
+    /**
+     * 购物车
+     */
     public BindingCommand goCart = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
@@ -84,12 +108,18 @@ public class ComfirmOrderViewModel extends CustomViewModel<MyRepository> {
         }
     });
 
+    /**
+     * 数据
+     */
     @Override
     public void onCreate() {
         super.onCreate();
         addTestData();
     }
 
+    /**
+     * 数据
+     */
     public void addTestData(){
         for(int i = 0 ; i < 6 ; i++){
             MultiItemViewModel itemViewModel;
@@ -102,10 +132,13 @@ public class ComfirmOrderViewModel extends CustomViewModel<MyRepository> {
                 itemViewModel.multiItemType(MultiRecycleType_Content);
             }
             observableList.add(itemViewModel);
-            banners.get().add("");
         }
     }
 
+    /**
+     * @param code
+     * @param dataBean
+     */
     @Override
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);

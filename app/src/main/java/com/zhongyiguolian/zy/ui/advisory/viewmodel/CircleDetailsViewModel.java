@@ -20,6 +20,7 @@ import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.myview.nine_gridimg.NineGridImageViewAdapter;
+import com.zhongyiguolian.zy.ui.advisory.activity.ForwardActivity;
 import com.zhongyiguolian.zy.ui.home.activity.BookReadActivity;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +56,13 @@ public class CircleDetailsViewModel extends CustomViewModel<MyRepository> {
     public BindingCommand goRead = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            startActivity(BookReadActivity.class);
+            //startActivity(BookReadActivity.class);
         }
+    });
+
+    //转发页面
+    public BindingCommand goForward = new BindingCommand(() -> {
+        startActivity(ForwardActivity.class);
     });
 
 

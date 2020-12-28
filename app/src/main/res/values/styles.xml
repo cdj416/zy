@@ -10,13 +10,13 @@
 
     <!--解决启动白屏问题-->
     <style name="SplashStyle" parent="Theme.AppCompat.Light.NoActionBar">
-        <!--<item name="android:windowDisablePreview">true</item>-->
+        <item name="android:windowDisablePreview">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:textAllCaps">false</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">false</item>
-        <item name="android:windowBackground">@mipmap/qidongye_img</item>
+        <item name="android:windowBackground">@mipmap/startup_page_img</item>
     </style>
 
     <!-- 提示弹框动画 -->
@@ -106,4 +106,8 @@
         <item name="android:backgroundDimAmount">0.3</item>
     </style>
 
+    <style name="dialog_style" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
 </resources>

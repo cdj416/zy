@@ -12,28 +12,41 @@ import com.zhongyiguolian.zy.ui.home.viewmodel.BlockchainDetailsViewModel;
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
- * 区块链页面
+ * 行业知识详情页面
  * @author cdj
  * @date 2020/12/10
  */
 public class BlockchaninDetailActivity extends CustomActivity<ActivityBlockchainDetailsBinding, BlockchainDetailsViewModel> {
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_blockchain_details;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public BlockchainDetailsViewModel initViewModel() {
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
         return ViewModelProviders.of(this, factory).get(BlockchainDetailsViewModel.class);
     }
 
+    /**
+     * 页面初始化
+     */
     @Override
     public void initView() {
         super.initView();
@@ -45,6 +58,9 @@ public class BlockchaninDetailActivity extends CustomActivity<ActivityBlockchain
         binding.comBack.setOnClickListener(view -> finish());
     }
 
+    /**
+     * 数据
+     */
     @Override
     public void initData() {
         super.initData();

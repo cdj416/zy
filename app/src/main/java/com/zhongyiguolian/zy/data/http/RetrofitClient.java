@@ -2,7 +2,6 @@ package com.zhongyiguolian.zy.data.http;
 
 import android.content.Context;
 import android.text.TextUtils;
-
 import com.hongyuan.mvvmhabitx.http.cookie.CookieJarImpl;
 import com.hongyuan.mvvmhabitx.http.cookie.store.PersistentCookieStore;
 import com.hongyuan.mvvmhabitx.http.interceptor.BaseInterceptor;
@@ -12,11 +11,9 @@ import com.hongyuan.mvvmhabitx.http.interceptor.logging.LoggingInterceptor;
 import com.hongyuan.mvvmhabitx.utils.KLog;
 import com.hongyuan.mvvmhabitx.utils.Utils;
 import com.zhongyiguolian.zy.BuildConfig;
-
 import java.io.File;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -39,7 +36,12 @@ public class RetrofitClient {
     //缓存时间
     private static final int CACHE_TIMEOUT = 10 * 1024 * 1024;
     //服务端根路径
-    public static String baseUrl = "http://app.glydsj.com";
+    //public static String baseUrl = "http://app.glydsj.com";
+
+    /*
+    * 本地根服务器地址
+    * */
+    public static String baseUrl = "http://192.168.2.13:8888";
 
     private static Context mContext = Utils.getContext();
 

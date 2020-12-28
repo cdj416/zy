@@ -17,20 +17,38 @@ import com.zhongyiguolian.zy.databinding.ActivityWebBinding;
 
 import me.tatarka.bindingcollectionadapter2.BR;
 
+/**
+ * web页面
+ * @author cdj
+ * @date 2020/12/10
+ */
 public class WebActivity extends CustomActivity<ActivityWebBinding, CustomViewModel> {
 
+    /**
+     * web加载控件
+     */
     public AgentWeb mAgentWeb;
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_web;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * 初始化
+     */
     @Override
     public void initView() {
         super.initView();
@@ -127,6 +145,9 @@ public class WebActivity extends CustomActivity<ActivityWebBinding, CustomViewMo
         });
     }
 
+    /**
+     * 坚挺
+     */
     private WebChromeClient mWebChromeClient=new WebChromeClient(){
 
         @Override
@@ -146,12 +167,18 @@ public class WebActivity extends CustomActivity<ActivityWebBinding, CustomViewMo
         }
     };
 
+    /**
+     * onResume
+     */
     @Override
     public void onResume() {
         mAgentWeb.getWebLifeCycle().onResume();//恢复
         super.onResume();
     }
 
+    /**
+     * onPause
+     */
     @Override
     public void onPause() {
         mAgentWeb.getWebLifeCycle().onPause(); //暂停应用内所有WebView ， 调用mWebView.resumeTimers();/mAgentWeb.getWebLifeCycle().onResume(); 恢复。
@@ -159,13 +186,21 @@ public class WebActivity extends CustomActivity<ActivityWebBinding, CustomViewMo
     }
 
 
+    /**
+     * onDestroy
+     */
     @Override
     protected void onDestroy() {
         mAgentWeb.getWebLifeCycle().onDestroy();
         super.onDestroy();
     }
 
-    //安卓重写返回键事件
+    /**
+     * 安卓重写返回键事件
+     * @param keyCode
+     * @param event
+     * @return
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && mAgentWeb.getWebCreator().getWebView().canGoBack()) {

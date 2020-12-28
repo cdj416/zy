@@ -59,7 +59,7 @@ public class ServerRevenueActivity extends CustomActivity<ActivityServerRevenueB
     public void initView() {
         super.initView();
         binding.comBack.setOnClickListener(view -> finish());
-        //setOnRefresh(binding.refresh,REFRESH_0X4);
+        setOnRefresh(binding.refresh,REFRESH_0X4);
     }
 
 }

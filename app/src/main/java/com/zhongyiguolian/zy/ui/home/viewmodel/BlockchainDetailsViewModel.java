@@ -24,24 +24,38 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
  */
 public class BlockchainDetailsViewModel extends CustomViewModel<MyRepository> {
 
-    public ObservableField<List<String>> banners = new ObservableField<>(new ArrayList<>());
-
-    public BlockchainDetailsViewModel(@NonNull Application application, MyRepository model) {
+    /**
+     * @param application
+     * @param model
+     */
+   public BlockchainDetailsViewModel(@NonNull Application application, MyRepository model) {
         super(application, model);
     }
 
-    //给RecyclerView添加ObservableList
+
+    /**
+     * 给RecyclerView添加ObservableList
+     */
     public ObservableList<TextContentItemViewModel> observableList = new ObservableArrayList<>();
 
-    //给RecyclerView添加ItemBinding
+
+    /**
+     * 给RecyclerView添加ItemBinding
+     */
     public ItemBinding<TextContentItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.item_text_content);
 
+    /**
+     * 数据
+     */
     @Override
     public void onCreate() {
         super.onCreate();
         addTestData();
     }
 
+    /**
+     * 数据
+     */
     public void addTestData(){
         TextContentItemViewModel itemViewModel;
 
@@ -64,6 +78,10 @@ public class BlockchainDetailsViewModel extends CustomViewModel<MyRepository> {
         observableList.add(itemViewModel);
     }
 
+    /**
+     * @param code
+     * @param dataBean
+     */
     @Override
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);

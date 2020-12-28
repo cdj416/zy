@@ -10,6 +10,9 @@ import com.zhongyiguolian.zy.base.MultiItemViewModel;
  */
 public class Bottom70HeightMultiViewModel extends MultiItemViewModel {
 
+    /**
+     * @param viewModel
+     */
     public Bottom70HeightMultiViewModel(@NonNull CustomViewModel viewModel) {
         super(viewModel);
     }

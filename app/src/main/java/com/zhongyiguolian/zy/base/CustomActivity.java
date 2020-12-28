@@ -7,7 +7,11 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -259,7 +263,7 @@ public abstract class CustomActivity<V extends ViewDataBinding, VM extends Custo
 
     public void showDialog() {
         if (dialog == null) {
-            /*dialog = new Dialog(this, R.style.MessageTheme);
+            dialog = new Dialog(this, R.style.MessageTheme);
             dialog.setCanceledOnTouchOutside(false);
             View view = View.inflate(this, R.layout.view_base_loading, null);
             dialog.setContentView(view);
@@ -268,7 +272,7 @@ public abstract class CustomActivity<V extends ViewDataBinding, VM extends Custo
             window.setWindowAnimations(R.style.main_menu_animStyle);
             window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             ImageView loadImg = view.findViewById(R.id.loadImg);
-            animationDrawable = (AnimationDrawable) loadImg.getBackground();*/
+            animationDrawable = (AnimationDrawable) loadImg.getBackground();
         }
         if (!noShowLoading) {
             dialog.show();

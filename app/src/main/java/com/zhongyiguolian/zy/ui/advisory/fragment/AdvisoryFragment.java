@@ -15,6 +15,8 @@ import com.zhongyiguolian.zy.myview.tablayout.MyPageTransformer;
 import com.zhongyiguolian.zy.myview.tablayout.MyTabLayoutMediator;
 import com.zhongyiguolian.zy.myview.tablayout.TabLayout;
 import com.zhongyiguolian.zy.ui.Page2Adapter;
+import com.zhongyiguolian.zy.ui.advisory.activity.EditPostActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 import me.tatarka.bindingcollectionadapter2.BR;
@@ -57,6 +59,10 @@ public class AdvisoryFragment extends CustomFragment<FragmentAdvisoryBinding, Cu
 
         binding.layoutMenu.post(() -> setScale(MyPageTransformer.MAX_SCALE));
         binding.viewPager.setPageTransformer(new MyPageTransformer(binding.layoutMenu));
+
+        binding.addPost.setOnClickListener(v -> {
+            startActivity(EditPostActivity.class);
+        });
 
     }
 

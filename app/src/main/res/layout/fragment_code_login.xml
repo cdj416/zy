@@ -20,7 +20,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="285dp"
+            android:layout_height="305dp"
             android:layout_marginLeft="@dimen/dp_16"
             android:layout_marginRight="16dp">
 
@@ -55,7 +55,7 @@
                         android:drawableRight="@mipmap/down_black_mark"
                         android:gravity="center_vertical"
                         android:drawablePadding="6dp"
-                        android:text="+86"
+                        android:text="@{viewModel.countrysId}"
                         app:onClickCommand="@{viewModel.goCountrys}"/>
                     <EditText
                         android:layout_width="match_parent"
@@ -65,7 +65,9 @@
                         android:textSize="@dimen/sp_12"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:hint="请输入登录账号"/>
+                        android:inputType="phone"
+                        android:hint="请输入登录账号"
+                        android:text="@={viewModel.phoneNum}"/>
 
                 </LinearLayout>
 
@@ -86,7 +88,9 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:visibility="@{viewModel.isPassword ? View.GONE : View.VISIBLE}"
-                        android:hint="输入短信验证码"/>
+                        android:inputType="number"
+                        android:hint="输入短信验证码"
+                        android:text="@={viewModel.messageCode}"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -99,7 +103,8 @@
                         android:textStyle="bold"
                         android:padding="5dp"
                         android:visibility="@{viewModel.isPassword ? View.GONE : View.VISIBLE}"
-                        android:text="发送"/>
+                        app:onClickCommand="@{viewModel.sendCode}"
+                        android:text="@{viewModel.sendString}"/>
 
                     <EditText
                         android:layout_width="match_parent"
@@ -110,7 +115,9 @@
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
                         android:visibility="@{viewModel.isPassword ? View.VISIBLE : View.GONE}"
-                        android:hint="请输入密码"/>
+                        android:inputType="textPassword"
+                        android:hint="请输入密码"
+                        android:text="@={viewModel.password}"/>
                 </RelativeLayout>
 
 
@@ -135,10 +142,41 @@
                         android:layout_alignParentRight="true"
                         android:padding="7dp"
                         android:text="忘记密码？"
+                        android:visibility="@{viewModel.isPassword.booleanValue() ? View.VISIBLE : View.GONE}"
                         app:onClickCommand="@{viewModel.goRetrievePassword}"/>
 
                 </RelativeLayout>
 
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/sp_14"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="@{viewModel.isPassword.booleanValue() ? View.VISIBLE : View.GONE}">
+
+                    <ImageView
+                        android:id="@+id/rememberPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/no_check_mark"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        app:onClickCommand="@{viewModel.rememberPassword}"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_12"
+                        android:textColor="@color/theme_5690FF"
+                        android:layout_marginLeft="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="记住密码"
+                        app:onClickCommand="@{viewModel.rememberPassword}"/>
+
+                </LinearLayout>
 
 
                 <TextView
@@ -166,7 +204,9 @@
                         android:id="@+id/checkImg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/check_mark"
+                        android:src="@mipmap/no_check_mark"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
                         app:onClickCommand="@{viewModel.checkXy}"/>
 
                     <TextView
@@ -175,6 +215,8 @@
                         android:textSize="@dimen/sp_10"
                         android:textColor="@color/theme_999999"
                         android:layout_marginLeft="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
                         android:text="同意众亿国链"
                         app:onClickCommand="@{viewModel.checkXy}"/>
 
@@ -183,7 +225,8 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_10"
                         android:textColor="@color/theme_5690FF"
-                        android:text="《用户协议》"/>
+                        android:text="《用户协议》"
+                        app:onClickCommand="@{viewModel.goUserAgreement}"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -197,7 +240,8 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_10"
                         android:textColor="@color/theme_5690FF"
-                        android:text="《隐私政策》"/>
+                        android:text="《隐私政策》"
+                        app:onClickCommand="@{viewModel.goPrivacyPolicy}"/>
 
                 </LinearLayout>
             </LinearLayout>

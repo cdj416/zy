@@ -1,12 +1,9 @@
 package com.zhongyiguolian.zy.ui.home.viewmodel;
 
 import android.app.Application;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
-import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
-
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.zhongyiguolian.zy.BR;
@@ -14,33 +11,39 @@ import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.ui.home.activity.BookReadActivity;
-import com.zhongyiguolian.zy.ui.home.activity.EncyclopediaActivity;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 /**
- * 区块链viewmodel
+ * 段落viewmodel
  * @author cdj
  * @date 2020/12/10
  */
 public class TextContentViewModel extends CustomViewModel<MyRepository> {
 
-    public ObservableField<List<String>> banners = new ObservableField<>(new ArrayList<>());
-
+    /**
+     * @param application
+     * @param model
+     */
     public TextContentViewModel(@NonNull Application application, MyRepository model) {
         super(application, model);
     }
 
-    //给RecyclerView添加ObservableList
+
+    /**
+     * 给RecyclerView添加ObservableList
+     */
     public ObservableList<TextContentItemViewModel> observableList = new ObservableArrayList<>();
 
-    //给RecyclerView添加ItemBinding
+
+    /**
+     * 给RecyclerView添加ItemBinding
+     */
     public ItemBinding<TextContentItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.item_text_content);
 
-    //阅读界面
+
+    /**
+     * 阅读界面
+     */
     public BindingCommand goRead = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
@@ -48,12 +51,18 @@ public class TextContentViewModel extends CustomViewModel<MyRepository> {
         }
     });
 
+    /**
+     * 数据
+     */
     @Override
     public void onCreate() {
         super.onCreate();
         addTestData();
     }
 
+    /**
+     * 数据
+     */
     public void addTestData(){
         TextContentItemViewModel itemViewModel;
 
@@ -64,6 +73,10 @@ public class TextContentViewModel extends CustomViewModel<MyRepository> {
         observableList.add(itemViewModel);
     }
 
+    /**
+     * @param code
+     * @param dataBean
+     */
     @Override
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);

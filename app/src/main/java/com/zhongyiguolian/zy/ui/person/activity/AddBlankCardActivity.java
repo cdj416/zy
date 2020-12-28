@@ -38,7 +38,13 @@ import me.tatarka.bindingcollectionadapter2.BR;
  */
 public class AddBlankCardActivity extends CustomActivity<ActivityAddBlankBinding, AddBlankViewModel> {
 
+    /**
+     * 返回code
+     */
     private static final int REQUEST_CODE_BANKCARD = 111;
+    /**
+     * token
+     */
     private boolean hasGotToken = false;
 
     @Override

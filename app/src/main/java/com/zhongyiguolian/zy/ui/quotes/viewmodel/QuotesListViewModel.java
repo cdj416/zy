@@ -19,22 +19,38 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
  */
 public class QuotesListViewModel extends CustomViewModel<MyRepository> {
 
+    /**
+     * @param application
+     * @param model
+     */
     public QuotesListViewModel(@NonNull Application application, MyRepository model) {
         super(application, model);
     }
 
-    //给RecyclerView添加ObservableList
+
+    /**
+     * 给RecyclerView添加ObservableList
+     */
     public ObservableList<QuotesListItemViewModel> observableList = new ObservableArrayList<>();
 
-    //给RecyclerView添加ItemBinding
+
+    /**
+     * 给RecyclerView添加ItemBinding
+     */
     public ItemBinding<QuotesListItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.item_quotes_list);
 
+    /**
+     * 数据
+     */
     @Override
     public void onCreate() {
         super.onCreate();
         addTestData();
     }
 
+    /**
+     * 数据
+     */
     public void addTestData(){
 
         for(int i = 0 ; i < 6 ; i++){
@@ -43,6 +59,10 @@ public class QuotesListViewModel extends CustomViewModel<MyRepository> {
         }
     }
 
+    /**
+     * @param code
+     * @param dataBean
+     */
     @Override
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);

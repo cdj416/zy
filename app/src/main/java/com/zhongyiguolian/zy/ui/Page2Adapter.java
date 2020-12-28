@@ -17,20 +17,34 @@ import java.util.List;
  */
 public class Page2Adapter extends FragmentStateAdapter {
 
+    /**
+     * fragments
+     */
     private List<CustomFragment> fragments;
 
+    /**
+     * @param fragmentActivity
+     * @param fragments
+     */
     public Page2Adapter(@NonNull FragmentActivity fragmentActivity, List<CustomFragment> fragments) {
         super(fragmentActivity);
 
         this.fragments = fragments;
     }
 
+    /**
+     * @param position
+     * @return
+     */
     @NonNull
     @Override
     public Fragment createFragment(int position) {
         return fragments.get(position);
     }
 
+    /**
+     * @return
+     */
     @Override
     public int getItemCount() {
         return fragments.size();
