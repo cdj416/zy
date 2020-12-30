@@ -21,16 +21,26 @@ import me.tatarka.bindingcollectionadapter2.BR;
  */
 public class FeedBackActivity extends CustomActivity<ActivityFeedbackBinding, FeedBackViewModel> {
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_feedback;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public FeedBackViewModel initViewModel() {
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
@@ -38,6 +48,9 @@ public class FeedBackActivity extends CustomActivity<ActivityFeedbackBinding, Fe
     }
 
 
+    /**
+     * ui设置
+     */
     @Override
     public void initView() {
         super.initView();
@@ -74,5 +87,4 @@ public class FeedBackActivity extends CustomActivity<ActivityFeedbackBinding, Fe
             }
         });
     }
-
 }

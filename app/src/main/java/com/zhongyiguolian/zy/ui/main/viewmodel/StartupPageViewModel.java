@@ -73,7 +73,7 @@ public class StartupPageViewModel extends CustomViewModel<MyRepository> implemen
             //停止计时
             hourMeterUtil.stopCount();
             //暂时调整到登录页面处理
-            if(model.getUser() != null && BaseUtil.isValue(model.getUser().getCustomer().getPassword())){
+            if(model.getUser() != null && BaseUtil.isValue(model.getUser().getCustomer().getMobile())){
                 startActivity(MainActivity.class);
             }else{
                 startActivity(LoginActivity.class);

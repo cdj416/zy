@@ -8,11 +8,14 @@ import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.RxBus;
 import com.hongyuan.mvvmhabitx.bus.RxSubscriptions;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
+import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.base.CustomViewModel;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.data.userbean.MemberLoginBean;
 import com.zhongyiguolian.zy.ui.main.activity.CountrysActivity;
+import com.zhongyiguolian.zy.ui.main.activity.MainActivity;
 import com.zhongyiguolian.zy.ui.main.activity.PrivacyPolicyActivity;
 import com.zhongyiguolian.zy.ui.main.activity.RetrievePasswordActivity;
 import com.zhongyiguolian.zy.ui.main.activity.UserAgreementActivity;
@@ -110,6 +113,8 @@ public class LoginCodeViewModel extends CustomViewModel<MyRepository> implements
         public SingleLiveEvent<Boolean> checkInput = new SingleLiveEvent<>();
         //更改是否记住密码显示状态
         public SingleLiveEvent<Boolean> changeRemember = new SingleLiveEvent<>();
+        //验证手机号是否合规
+        public SingleLiveEvent<Boolean> checkPhoneNum = new SingleLiveEvent<>();
     }
 
 
@@ -190,11 +195,20 @@ public class LoginCodeViewModel extends CustomViewModel<MyRepository> implements
     public BindingCommand sendCode = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            if(sendString.get().equals("发送")){
-                hourMeterUtil.reStartCount();
-            }
+            uc.checkPhoneNum.call();
         }
     });
+
+    /*
+    * 发送验证码
+    * */
+    public void sendPhneCode(){
+        //发送验证码
+        clearParams().setParams("mobile",phoneNum.get()).setParams("use_type","2");
+        requestData(Constants.SENDCODE);
+
+        hourMeterUtil.reStartCount();
+    }
 
     /**
      * 是否记住密码
@@ -226,24 +240,6 @@ public class LoginCodeViewModel extends CustomViewModel<MyRepository> implements
             uc.checkXy.setValue(isCheck.get());
         }
     });
-
-    /*
-    * 保存登录账号和秘密
-    * */
-    public void saveLogin(){
-        MemberLoginBean bean = new MemberLoginBean();
-        bean.getCustomer().setMobile(phoneNum.get());
-        bean.getCustomer().setPassword(password.get());
-
-        model.saveUser(bean);
-    }
-
-    /*
-     *清除账号秘密
-     * */
-    public void clearLogin(){
-        model.saveUser(null);
-    }
 
     /*
     * 回显账号和秘密
@@ -331,4 +327,29 @@ public class LoginCodeViewModel extends CustomViewModel<MyRepository> implements
         hourMeterUtil.onDestory();
     }
 
+    /**
+     * @param code
+     * @param dataBean
+     */
+    @Override
+    protected void returnData(int code, Object dataBean) {
+        super.returnData(code, dataBean);
+
+        if(code == Constants.LOGIN){
+            MemberLoginBean loginBean = (MemberLoginBean)dataBean;
+
+            //存入手机中，以此实现二次免登陆。
+            model.saveUser(loginBean);
+            /*if(isRememberPassword.get()){
+                //记住密码时，去存储到手机中
+                model.saveUser(loginBean);
+            }else{
+                //非记住密码时，去释放存储信息
+                model.saveUser(null);
+            }*/
+
+            //登录成功进入主界面
+            startActivity(MainActivity.class);
+        }
+    }
 }

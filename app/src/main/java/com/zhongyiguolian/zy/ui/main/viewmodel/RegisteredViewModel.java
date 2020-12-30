@@ -56,6 +56,8 @@ public class RegisteredViewModel extends CustomViewModel<MyRepository> implement
         public SingleLiveEvent<Boolean> check = new SingleLiveEvent<>();
         //注册成功弹框
         public SingleLiveEvent<Void> registerSuccess = new SingleLiveEvent<>();
+        //验证手机号是否合规
+        public SingleLiveEvent<Boolean> checkPhoneNum = new SingleLiveEvent<>();
     }
 
     /**
@@ -150,18 +152,7 @@ public class RegisteredViewModel extends CustomViewModel<MyRepository> implement
     public BindingCommand sendCode = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            if(sendString.get().equals("发送") && BaseUtil.isValue(phoneNum.get())){
-
-                //发送验证码
-                clearParams().setParams("mobile",phoneNum.get()).setParams("use_type","1");
-                requestData(Constants.SENDCODE);
-
-                hourMeterUtil.reStartCount();
-            }else{
-                if(!BaseUtil.isValue(phoneNum.get())){
-                    ToastUtils.showShort("请填写手机号");
-                }
-            }
+            uc.checkPhoneNum.call();
         }
     });
 
@@ -211,6 +202,17 @@ public class RegisteredViewModel extends CustomViewModel<MyRepository> implement
             uc.check.call();
         }
     });
+
+    /*
+     * 发送验证码
+     * */
+    public void sendPhneCode(){
+        //发送验证码
+        clearParams().setParams("mobile",phoneNum.get()).setParams("use_type","1");
+        requestData(Constants.SENDCODE);
+
+        hourMeterUtil.reStartCount();
+    }
 
     /**
      * 根据区号判断是否是正确的电话号码

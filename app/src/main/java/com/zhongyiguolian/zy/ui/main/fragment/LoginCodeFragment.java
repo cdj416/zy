@@ -10,13 +10,12 @@ import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomFragment;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.databinding.FragmentCodeLoginBinding;
 import com.zhongyiguolian.zy.myview.dynamicviewpage.CustomViewpager;
-import com.zhongyiguolian.zy.ui.main.activity.MainActivity;
 import com.zhongyiguolian.zy.ui.main.viewmodel.LoginCodeViewModel;
 import com.zhongyiguolian.zy.utils.CustomDialog;
-
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
 
 /**
@@ -131,13 +130,8 @@ public class LoginCodeFragment extends CustomFragment<FragmentCodeLoginBinding, 
                     return;
                 }
 
-                //保存登录秘密与账号
-                viewModel.saveLogin();
-
                 binding.rememberPassword.setImageResource(R.mipmap.check_mark);
             }else{
-                //清除存储的账号秘密
-                viewModel.clearLogin();
 
                 binding.rememberPassword.setImageResource(R.mipmap.no_check_mark);
             }
@@ -179,9 +173,41 @@ public class LoginCodeFragment extends CustomFragment<FragmentCodeLoginBinding, 
 
                 });
                 return;
+            }else{
+
+                if(viewModel.isPassword.get()){
+                    //密码登录参数组合
+                    viewModel.setParams("account",viewModel.phoneNum.get())
+                            .setParams("type","LOGIN")
+                            .setParams("password",viewModel.password.get());
+                }else{
+                    //验证码登录参数组合
+                    viewModel.setParams("mobile",viewModel.phoneNum.get())
+                            .setParams("login_type","2")
+                            .setParams("mobile_auth_code",viewModel.messageCode.get());
+                }
+
+                //请求登录
+                viewModel.requestData(Constants.LOGIN);
+            }
+        });
+
+        viewModel.uc.checkPhoneNum.observe(this,aBoolean -> {
+            //是否输入手机号
+            if(!BaseUtil.isValue(viewModel.phoneNum.get())){
+                ToastUtils.showShort("请输入手机号！");
+                return;
             }
 
-            startActivity(MainActivity.class);
+            //验证手机号是否合法
+            if(!viewModel.isPhoneNumberValid(numberUtil)){
+                ToastUtils.showShort("手机号不符合规范！");
+                return;
+            }
+
+            //发送验证码
+            viewModel.sendPhneCode();
         });
+
     }
 }

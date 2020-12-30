@@ -22,12 +22,9 @@ import com.trello.rxlifecycle2.LifecycleProvider;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.data.http.MyBaseResponse;
-import com.zhongyiguolian.zy.data.md5.EncryptionUtil;
+import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.data.userbean.FileBean;
 import com.zhongyiguolian.zy.data.userbean.MemberLoginBean;
-import com.zhongyiguolian.zy.data.userbean.TokenBean;
-import com.zhongyiguolian.zy.data.userbean.TokenSingleBean;
-import com.zhongyiguolian.zy.utils.GsonUtil;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
@@ -83,6 +80,18 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
         super(application);
         this.model = model;
         mCompositeDisposable = new CompositeDisposable();
+
+        if(model instanceof MyRepository){
+            loginBean = ((MyRepository)model).getUser();
+
+            //避免登录接口调取失败
+            if(loginBean == null || loginBean.getToken() == null){
+                loginBean = new MemberLoginBean();
+                loginBean.setToken("");
+            }
+        }
+
+
     }
 
     /**
@@ -385,6 +394,12 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
     public final int FIRST_PAGE = 1;//表示第一页
     public boolean noShowLoading = false;
 
+
+    /**
+     * 用户登录数据源
+     */
+    public MemberLoginBean loginBean;
+
     /*
     * 清空fileParams
     * */
@@ -489,6 +504,11 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
         if(params == null){
             params = new HashMap<>();
         }
+
+        /*if(loginBean != null && BaseUtil.isValue(loginBean.getToken())){
+            params.put("x-token",loginBean.getToken());
+        }*/
+
         return this.params;
     }
 
@@ -533,16 +553,16 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
             //Log.e("cnn","========接口======="+Constants.getInstance().getPath(code));
             Class clazz = Class.forName("com.zhongyiguolian.zy.data.MyRepository");
             MyRepository repository = MyRepository.getInstance(null,null);
-            Method m = clazz.getMethod(Constants.getInstance().getPath(code), RequestBody.class);
-
-            RequestBody body = RequestBody.create(MediaType.parse("application/json"), GsonUtil.getGson().toJson(getParams()));
+            Method m = clazz.getMethod(Constants.getInstance().getPath(code), Map.class);
+            //Method m = clazz.getMethod(Constants.getInstance().getPath(code), String.class,Map.class);
+            //RequestBody body = RequestBody.create(MediaType.parse("application/json"), GsonUtil.getGson().toJson(getParams()));
 
             Observable ob;
             if(code == Constants.UPFILE_OSS || code == Constants.UPFILE_OSS_MORE){
+                //Method m = clazz.getMethod(Constants.getInstance().getPath(code), Map.class);
                 ob = (Observable) m.invoke(repository,getFileParams());
             }else{
-                //ob = (Observable) m.invoke(repository,getParams());
-                ob = (Observable) m.invoke(repository,body);
+                ob = (Observable) m.invoke(repository,getParams());
             }
 
             ob.compose(RxUtils.schedulersTransformer()) //线程调度
@@ -555,10 +575,10 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
                     })
                     .subscribe((Consumer<MyBaseResponse<T>>) response -> {
                         //请求成功
-                        if("0".equals(response.getStatus().getCode())){
+                        if(response.getState()== 0){//0表示成功
                             returnData(code,response.getData());
                         }else{
-                            ToastUtils.showShort(response.getStatus().getMsg());
+                            ToastUtils.showShort(response.getMessage());
                         }
                     }, new Consumer<Throwable>() {
                         @Override

@@ -62,7 +62,8 @@
             android:background="@drawable/shape_radius6_000000_stroke_7ea8ff"
             android:paddingStart="10dp"
             android:layout_marginTop="6dp"
-            android:hint="请输入原登录密码"/>
+            android:hint="请输入标题"
+            android:text="@={viewModel.titleText}"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,7 +91,8 @@
                 android:background="@drawable/shape_radius6_000000_stroke_7ea8ff"
                 android:padding="10dp"
                 android:gravity="top"
-                android:hint="请输入您的详情问题"/>
+                android:hint="请输入您的详情问题"
+                android:text="@={viewModel.contentText}"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -131,7 +133,8 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/shape_radius5_5690ff"
             android:layout_marginTop="50dp"
-            android:text="提交"/>
+            android:text="提交"
+            app:onClickCommand="@{viewModel.submit}"/>
     </LinearLayout>
 
 </layout>

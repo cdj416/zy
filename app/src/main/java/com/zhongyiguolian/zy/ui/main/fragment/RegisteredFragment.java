@@ -184,6 +184,23 @@ public class RegisteredFragment extends CustomFragment<FragmentRegisteredBinding
 
         });
 
+        viewModel.uc.checkPhoneNum.observe(this,aBoolean -> {
+            //是否输入手机号
+            if(!BaseUtil.isValue(viewModel.phoneNum.get())){
+                ToastUtils.showShort("请输入手机号！");
+                return;
+            }
+
+            //验证手机号是否合法
+            if(!viewModel.isPhoneNumberValid(numberUtil)){
+                ToastUtils.showShort("手机号不符合规范！");
+                return;
+            }
+
+            //发送验证码
+            viewModel.sendPhneCode();
+        });
+
         viewModel.uc.registerSuccess.observe(this,aVoid -> {
             //请求注册接口数据
             CustomDialog.promptDialog(getContext(),"注册成功，前往登录！","确定",false, v -> {

@@ -88,8 +88,7 @@
 
 
         <activity android:name=".ui.main.activity.StartupPageActivity"
-            android:theme="@style/SplashStyle"
-            android:windowSoftInputMode="adjustPan">
+            android:theme="@style/SplashStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -106,7 +105,7 @@
         <activity android:name=".ui.main.activity.WebActivity"/>
         <activity android:name=".ui.main.activity.UserAgreementActivity"/>
         <activity android:name=".ui.main.activity.PrivacyPolicyActivity"/>
-        <activity android:name=".ui.main.activity.LoginActivity"/>
+        <activity android:name=".ui.main.activity.LoginActivity" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".ui.home.activity.AboutUsActivity"/>
         <activity android:name=".ui.home.activity.ServiceActivity"/>
         <activity android:name=".ui.home.activity.ServiceDetailActivity"/>

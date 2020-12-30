@@ -41,7 +41,7 @@ public class RetrofitClient {
     /*
     * 本地根服务器地址
     * */
-    public static String baseUrl = "http://192.168.2.13:8888";
+    public static String baseUrl = "http://47.114.63.144:18088";
 
     private static Context mContext = Utils.getContext();
 

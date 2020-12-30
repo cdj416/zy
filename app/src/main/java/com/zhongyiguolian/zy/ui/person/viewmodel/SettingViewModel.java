@@ -1,7 +1,6 @@
 package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
@@ -18,26 +17,44 @@ import com.zhongyiguolian.zy.ui.person.activity.SetFetchAddressActivity;
 import com.zhongyiguolian.zy.ui.person.activity.SetPayPasswordActivity;
 
 /**
- * Fil体现
+ * 设置viewmodel
  * @author cdj
  * @date 2020/12/10
  */
 public class SettingViewModel extends CustomViewModel<MyRepository> {
 
-    //姓名
+
+    /**
+     * 姓名
+     */
     public ObservableField<String> idCardName = new ObservableField<>();
+
+    /**
+     * @param application
+     * @param model
+     */
     public SettingViewModel(@NonNull Application application, MyRepository model) {
         super(application, model);
     }
 
-    //封装一个界面发生改变的观察者
+
+    /**
+     * 封装一个界面发生改变的观察者
+     */
     public UIChangeObservable uc = new UIChangeObservable();
+
+    /**
+     * ui变动
+     */
     public class UIChangeObservable {
         //显示弹框
         public SingleLiveEvent<Void> showDialog = new SingleLiveEvent<>();
     }
 
-    //修改登录密码
+
+    /**
+     * 修改登录密码
+     */
     public BindingCommand changePassword = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
@@ -45,7 +62,10 @@ public class SettingViewModel extends CustomViewModel<MyRepository> {
         }
     });
 
-    //设置支付密码
+
+    /**
+     * 设置支付密码
+     */
     public BindingCommand setPayPassword = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
@@ -53,7 +73,10 @@ public class SettingViewModel extends CustomViewModel<MyRepository> {
         }
     });
 
-    //修改支付密码
+
+    /**
+     * 修改支付密码
+     */
     public BindingCommand changePayPassword = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
@@ -61,7 +84,10 @@ public class SettingViewModel extends CustomViewModel<MyRepository> {
         }
     });
 
-    //设置提取地址
+
+    /**
+     * 设置提取地址
+     */
     public BindingCommand setFetchAddressPassword = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
@@ -69,7 +95,10 @@ public class SettingViewModel extends CustomViewModel<MyRepository> {
         }
     });
 
-    //设置提取账户页面
+
+    /**
+     * 设置提取账户页面
+     */
     public BindingCommand setEmbodimentAccount = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
@@ -77,7 +106,10 @@ public class SettingViewModel extends CustomViewModel<MyRepository> {
         }
     });
 
-    //设置意见反馈
+
+    /**
+     * 设置意见反馈
+     */
     public BindingCommand goFeedBack = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
@@ -85,10 +117,15 @@ public class SettingViewModel extends CustomViewModel<MyRepository> {
         }
     });
 
-    //退出登录
+
+    /**
+     * 退出登录
+     */
     public BindingCommand returnLogin = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
+            model.saveUser(null);
+
             startActivity(LoginActivity.class);
         }
     });

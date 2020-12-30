@@ -10,6 +10,7 @@ import com.zhongyiguolian.zy.data.userbean.MemberLoginBean;
 import com.zhongyiguolian.zy.data.userbean.NoDataBean;
 import com.zhongyiguolian.zy.data.userbean.TokenBean;
 import com.zhongyiguolian.zy.ui.main.beans.RegisteredBean;
+import com.zhongyiguolian.zy.ui.person.beans.InviteBeans;
 
 import java.util.Map;
 
@@ -53,23 +54,43 @@ public class MyRepository extends BaseModel implements HttpDataSource, LocalData
     /************************************接口请求操作***********************************************/
 
     @Override
-    public Observable<MyBaseResponse<TokenBean>> api_token(RequestBody params) {
-        return mHttpDataSource.api_token(params);
+    public Observable<MyBaseResponse<TokenBean>> api_token(String token,Map<String,String> params) {
+        return mHttpDataSource.api_token(token,params);
     }
 
     @Override
-    public Observable<MyBaseResponse<MemberLoginBean>> base_login(RequestBody params) {
-        return mHttpDataSource.base_login(params);
+    public Observable<MyBaseResponse<MemberLoginBean>> login(Map<String,String> params) {
+        return mHttpDataSource.login(params);
     }
 
     @Override
-    public Observable<MyBaseResponse<RegisteredBean>> register(RequestBody params) {
-        return mHttpDataSource.register(params);
+    public Observable<MyBaseResponse<RegisteredBean>> register(String token,Map<String,String> params) {
+        return mHttpDataSource.register(token,params);
     }
 
     @Override
-    public Observable<MyBaseResponse<NoDataBean>> sendCode(RequestBody params) {
-        return mHttpDataSource.sendCode(params);
+    public Observable<MyBaseResponse<NoDataBean>> sendCode(String token,Map<String,String> params) {
+        return mHttpDataSource.sendCode(token,params);
+    }
+
+    @Override
+    public Observable<MyBaseResponse<NoDataBean>> card_list(String token,Map<String, String> params) {
+        return mHttpDataSource.card_list(token,params);
+    }
+
+    @Override
+    public Observable<MyBaseResponse<NoDataBean>> card_save(String token, Map<String, String> params) {
+        return mHttpDataSource.card_save(token,params);
+    }
+
+    @Override
+    public Observable<MyBaseResponse<InviteBeans>> invite_info(String token, Map<String, String> params) {
+        return mHttpDataSource.invite_info(token,params);
+    }
+
+    @Override
+    public Observable<MyBaseResponse<NoDataBean>> save(String token, Map<String, String> params) {
+        return mHttpDataSource.save(token,params);
     }
 
 

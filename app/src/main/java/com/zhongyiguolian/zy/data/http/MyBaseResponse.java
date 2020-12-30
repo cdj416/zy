@@ -11,7 +11,6 @@ public class MyBaseResponse<T> {
      * status : {"code":0,"msg":"登录成功"}
      */
     private T data;
-    private Status status;
 
     public T getData() {
         return data;
@@ -21,37 +20,31 @@ public class MyBaseResponse<T> {
         this.data = data;
     }
 
-    public Status getStatus() {
-        return status;
+    private int state;
+    private String message;
+    private int precision;
+
+    public int getState() {
+        return state;
     }
 
-    public void setStatus(Status status){
-        this.status = status;
+    public void setState(int state) {
+        this.state = state;
     }
 
-    public static class Status {
-        /**
-         * code : 0
-         * msg : 登录成功
-         */
+    public String getMessage() {
+        return message;
+    }
 
-        private int code;
-        private String msg;
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-        public int getCode() {
-            return code;
-        }
+    public int getPrecision() {
+        return precision;
+    }
 
-        public void setCode(int code) {
-            this.code = code;
-        }
-
-        public String getMsg() {
-            return msg;
-        }
-
-        public void setMsg(String msg) {
-            this.msg = msg;
-        }
+    public void setPrecision(int precision) {
+        this.precision = precision;
     }
 }

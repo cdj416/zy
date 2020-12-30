@@ -18,16 +18,21 @@ import com.baidu.ocr.sdk.model.BankCardResult;
 import com.baidu.ocr.ui.camera.CameraActivity;
 import com.baidu.ocr.ui.camera.CameraNativeHelper;
 import com.baidu.ocr.ui.camera.CameraView;
+import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
+import com.zhongyiguolian.zy.data.Constants;
+import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.databinding.ActivityAddBlankBinding;
 import com.zhongyiguolian.zy.ui.person.viewmodel.AddBlankViewModel;
+import com.zhongyiguolian.zy.utils.BankCardNumUtils;
 import com.zhongyiguolian.zy.utils.FileUtil;
 import com.zhongyiguolian.zy.utils.RecognizeService;
 
 import java.io.File;
 
+import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
@@ -42,21 +47,37 @@ public class AddBlankCardActivity extends CustomActivity<ActivityAddBlankBinding
      * 返回code
      */
     private static final int REQUEST_CODE_BANKCARD = 111;
+
     /**
-     * token
+     * orc token
      */
     private boolean hasGotToken = false;
 
+    /**
+     * 手机号验证工具类
+     */
+    private PhoneNumberUtil numberUtil;
+
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_add_blank;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public AddBlankViewModel initViewModel() {
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
@@ -64,6 +85,9 @@ public class AddBlankCardActivity extends CustomActivity<ActivityAddBlankBinding
     }
 
 
+    /**
+     * 初始化Ui
+     */
     @Override
     public void initView() {
         super.initView();
@@ -72,8 +96,14 @@ public class AddBlankCardActivity extends CustomActivity<ActivityAddBlankBinding
 
         //开启摄像头权限
         openPermission(Manifest.permission.CAMERA);
+
+        //初始化手机号验证工具对象
+        numberUtil = PhoneNumberUtil.createInstance(this);
     }
 
+    /**
+     * 权限申请返回结果
+     */
     @Override
     public void openPermissionSuccess() {
         super.openPermissionSuccess();
@@ -128,6 +158,9 @@ public class AddBlankCardActivity extends CustomActivity<ActivityAddBlankBinding
                 });
     }
 
+    /**
+     * @return orc token检验
+     */
     private boolean checkTokenStatus() {
         if (!hasGotToken) {
             Toast.makeText(getApplicationContext(), "token还未成功获取", Toast.LENGTH_LONG).show();
@@ -135,6 +168,9 @@ public class AddBlankCardActivity extends CustomActivity<ActivityAddBlankBinding
         return hasGotToken;
     }
 
+    /**
+     * ui变动
+     */
     @Override
     public void initViewObservable() {
         super.initViewObservable();
@@ -152,6 +188,11 @@ public class AddBlankCardActivity extends CustomActivity<ActivityAddBlankBinding
         });
     }
 
+    /**
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -178,5 +219,60 @@ public class AddBlankCardActivity extends CustomActivity<ActivityAddBlankBinding
                 }
             });
         }
+
+        //校验及提交银行卡信息
+        viewModel.uc.checkPhoneNum.observe(this,aBoolean -> {
+
+            //验证是否输入银行卡号
+            if(!BaseUtil.isValue(viewModel.blankCardNum.get())){
+                ToastUtils.showShort("请输入银行卡号，或拍照识别！");
+                return;
+            }
+
+            //验证是否输入银行卡号
+            if(!BankCardNumUtils.checkBankCard(viewModel.blankCardNum.get().replace(" ",""))){
+                ToastUtils.showShort("银行卡号不符规则！");
+                return;
+            }
+
+            //检验是否输入了银行卡名
+            if(!BaseUtil.isValue(viewModel.blankName.get())){
+                ToastUtils.showShort("请输入所属银行！");
+                return;
+            }
+
+            //检验是否输入持卡人姓名
+            if(!BaseUtil.isValue(viewModel.userName.get())){
+                ToastUtils.showShort("请输入持卡人姓名！");
+                return;
+            }
+
+            //检验开户行
+            if(!BaseUtil.isValue(viewModel.accountBank.get())){
+                ToastUtils.showShort("请输入开户行！");
+                return;
+            }
+
+            //是否输入手机号
+            if(!BaseUtil.isValue(viewModel.phoneNum.get())){
+                ToastUtils.showShort("请输入手机号！");
+                return;
+            }
+
+            //验证手机号是否合法
+            if(!viewModel.isPhoneNumberValid(numberUtil)){
+                ToastUtils.showShort("手机号不符合规范！");
+                return;
+            }
+
+            viewModel.clearParams()
+                    .setParams("bank_name",viewModel.blankName.get())
+                    .setParams("card_number",viewModel.blankCardNum.get())
+                    .setParams("card_owner",viewModel.userName.get())
+                    .setParams("sub_bank_name",viewModel.accountBank.get());
+            viewModel.requestData(Constants.CARD_SAVE);
+        });
     }
+
+
 }

@@ -43,15 +43,18 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"/>
 
-            <ImageView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/add_bank_mark"
-                android:layout_centerVertical="true"
+                android:textColor="@color/theme_FFFFFF"
+                android:textSize="@dimen/sp_14"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="10dp"
-                android:padding="6dp"
-                app:onClickCommand="@{viewModel.goAddBank}"/>
+                android:layout_centerVertical="true"
+                android:padding="5dp"
+                android:layout_marginEnd="11dp"
+                android:text="编辑"
+                app:onClickCommand="@{viewModel.editCards}"/>
+
         </RelativeLayout>
 
         <FrameLayout
@@ -82,6 +85,20 @@
                 android:gravity="center"
                 android:visibility="@{viewModel.observableList.size() == 0 ? View.VISIBLE : View.GONE}"
                 android:text="暂无数据"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textSize="@dimen/sp_15"
+                android:textColor="@color/theme_FFFFFF"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/sp_15"
+                android:layout_marginEnd="@dimen/sp_15"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="22dp"
+                android:background="@drawable/shape_radius5_5690ff"
+                android:text="添加银行卡"
+                app:onClickCommand="@{viewModel.goAddBank}"/>
 
         </FrameLayout>
 

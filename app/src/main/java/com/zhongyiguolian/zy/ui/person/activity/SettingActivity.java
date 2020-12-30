@@ -17,16 +17,26 @@ import me.tatarka.bindingcollectionadapter2.BR;
  */
 public class SettingActivity extends CustomActivity<ActivitySettingBinding, SettingViewModel> {
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_setting;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public SettingViewModel initViewModel() {
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
@@ -34,6 +44,9 @@ public class SettingActivity extends CustomActivity<ActivitySettingBinding, Sett
     }
 
 
+    /**
+     *
+     */
     @Override
     public void initView() {
         super.initView();

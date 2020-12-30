@@ -6,11 +6,10 @@ package com.zhongyiguolian.zy.data.userbean;
  */
 public class MemberLoginBean {
 
-
     /**
-     * customer : {"ID":1,"CreatedAt":"2020-12-21T17:03:02+08:00","UpdatedAt":"2020-12-22T13:13:24+08:00","mobile":"17768020926","username":"string","head_portrait":"","authority_id":"","kpi_level":0,"level":0,"node_id":0,"relation":"","reg_type":"MOBILE","auth_id":0,"mobile_auth":0,"invite_code":"1B6keMdR","invite_link":"https://www.zygl.com/ac/los/index.html?code=1B6keMdR","email":"","email_auth":0,"inviter_id":199,"last_login_time":"2020-12-21T17:02:45+08:00","uuid":"15837894-88e0-48f4-9063-857cca4caac2"}
-     * token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiMTU4Mzc4OTQtODhlMC00OGY0LTkwNjMtODU3Y2NhNGNhYWMyIiwiSUQiOjEsIlVzZXJuYW1lIjoic3RyaW5nIiwiTW9iaWxlIjoiMTc3NjgwMjA5MjYiLCJBdXRob3JpdHlJZCI6IiIsIkJ1ZmZlclRpbWUiOjg2NDAwLCJleHAiOjE2MDk3MzkwOTAsImlzcyI6Inp5Z2wiLCJuYmYiOjE2MDkxMzMyOTB9.C6tqGd8UyndtmlCwbYacTDx5KVbXZBtM094NtO4THJ4
-     * expiresAt : 1609739090000
+     * customer : {"ID":2,"CreatedAt":"2020-12-29T10:13:50+08:00","UpdatedAt":"2020-12-29T10:13:50+08:00","mobile":"18183185173","password":"76d80224611fc919a5d54f0ff9fba446","username":"18183185173","head_portrait":"","authority_id":"","kpi_level":0,"level":0,"node_id":0,"relation":"","reg_type":"MOBILE","auth_id":0,"mobile_auth":0,"invite_code":"WDpkFOx2","invite_link":"https://www.zygl.com/ac/los/index.html?code=WDpkFOx2","email":"","email_auth":0,"inviter_id":1,"last_login_time":"2020-12-29T10:13:50+08:00","uuid":"5b0ea759-4ea8-46a0-af7d-022dc5f1332f"}
+     * token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiNWIwZWE3NTktNGVhOC00NmEwLWFmN2QtMDIyZGM1ZjEzMzJmIiwiSUQiOjIsIlVzZXJuYW1lIjoiMTgxODMxODUxNzMiLCJNb2JpbGUiOiIxODE4MzE4NTE3MyIsIkF1dGhvcml0eUlkIjoiIiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTYwOTgxNTQyMCwiaXNzIjoienlnbCIsIm5iZiI6MTYwOTIwOTYyMH0.28KcEwh0eeylOwRjIeTncc3FFPeGqtFlB2UFTokApTs
+     * expiresAt : 1609815420000
      */
 
     private CustomerDTO customer;
@@ -43,11 +42,12 @@ public class MemberLoginBean {
 
     public static class CustomerDTO {
         /**
-         * ID : 1
-         * CreatedAt : 2020-12-21T17:03:02+08:00
-         * UpdatedAt : 2020-12-22T13:13:24+08:00
-         * mobile : 17768020926
-         * username : string
+         * ID : 2
+         * CreatedAt : 2020-12-29T10:13:50+08:00
+         * UpdatedAt : 2020-12-29T10:13:50+08:00
+         * mobile : 18183185173
+         * password : 76d80224611fc919a5d54f0ff9fba446
+         * username : 18183185173
          * head_portrait :
          * authority_id :
          * kpi_level : 0
@@ -57,19 +57,20 @@ public class MemberLoginBean {
          * reg_type : MOBILE
          * auth_id : 0
          * mobile_auth : 0
-         * invite_code : 1B6keMdR
-         * invite_link : https://www.zygl.com/ac/los/index.html?code=1B6keMdR
+         * invite_code : WDpkFOx2
+         * invite_link : https://www.zygl.com/ac/los/index.html?code=WDpkFOx2
          * email :
          * email_auth : 0
-         * inviter_id : 199
-         * last_login_time : 2020-12-21T17:02:45+08:00
-         * uuid : 15837894-88e0-48f4-9063-857cca4caac2
+         * inviter_id : 1
+         * last_login_time : 2020-12-29T10:13:50+08:00
+         * uuid : 5b0ea759-4ea8-46a0-af7d-022dc5f1332f
          */
 
         private int ID;
         private String CreatedAt;
         private String UpdatedAt;
         private String mobile;
+        private String password;
         private String username;
         private String head_portrait;
         private String authority_id;
@@ -87,16 +88,6 @@ public class MemberLoginBean {
         private int inviter_id;
         private String last_login_time;
         private String uuid;
-
-        private String password;
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
 
         public int getID() {
             return ID;
@@ -128,6 +119,14 @@ public class MemberLoginBean {
 
         public void setMobile(String mobile) {
             this.mobile = mobile;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
         }
 
         public String getUsername() {
