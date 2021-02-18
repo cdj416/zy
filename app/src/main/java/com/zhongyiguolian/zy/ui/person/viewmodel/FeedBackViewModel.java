@@ -6,9 +6,12 @@ import androidx.databinding.ObservableField;
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
+import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
+import com.zhongyiguolian.zy.data.md5.BaseUtil;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 
 /**
  * 意见反馈
@@ -40,30 +43,25 @@ public class FeedBackViewModel extends CustomViewModel<MyRepository> {
         super(application, model);
     }
 
-
-    /**
-     * 封装一个界面发生改变的观察者
-     */
-    public UIChangeObservable uc = new UIChangeObservable();
-
-    /**
-     * ui变动
-     */
-    public class UIChangeObservable {
-        //拍照获取银行卡号
-        public SingleLiveEvent<Void> getBlankNums = new SingleLiveEvent<>();
-    }
-
     /**
      * 提交意见内容
      */
     public BindingCommand submit = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            clearParams().setParams("content",contentText.get())
-                    .setParams("title",titleText.get());
+            if(!BaseUtil.isValue(titleText.get())){
+                ToastUtils.showShort("请输入标题！");
+                return;
+            }
 
-            requestData(Constants.SAVE);
+            if(!BaseUtil.isValue(contentText.get())){
+                ToastUtils.showShort("请输入内容！");
+                return;
+            }
+
+            clearParams().setParams("title", AndroidDes3Util.encode(titleText.get()))
+                    .setParams("content",AndroidDes3Util.encode(contentText.get()))
+                    .requestData(Constants.FEEDBACKADD);
         }
     });
 
@@ -71,7 +69,8 @@ public class FeedBackViewModel extends CustomViewModel<MyRepository> {
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);
 
-        if(code == Constants.SAVE){
+        if(code == Constants.FEEDBACKADD){
+            ToastUtils.showShort("提交成功");
             finish();
         }
     }

@@ -5,10 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
-
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
 import com.baidu.ocr.sdk.exception.OCRError;
@@ -26,12 +23,10 @@ import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.databinding.ActivityAddBlankBinding;
 import com.zhongyiguolian.zy.ui.person.viewmodel.AddBlankViewModel;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.BankCardNumUtils;
 import com.zhongyiguolian.zy.utils.FileUtil;
-import com.zhongyiguolian.zy.utils.RecognizeService;
-
 import java.io.File;
-
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
 import me.tatarka.bindingcollectionadapter2.BR;
 
@@ -209,7 +204,7 @@ public class AddBlankCardActivity extends CustomActivity<ActivityAddBlankBinding
                             result.getBankCardType().name(),
                             result.getBankName());
 
-                    viewModel.blankCardNum.set(result.getBankCardNumber());
+                    viewModel.blankCardNum.set(result.getBankCardNumber().replace(" ",""));
                     viewModel.blankName.set(result.getBankName());
                 }
 
@@ -254,25 +249,39 @@ public class AddBlankCardActivity extends CustomActivity<ActivityAddBlankBinding
             }
 
             //是否输入手机号
-            if(!BaseUtil.isValue(viewModel.phoneNum.get())){
+            /*if(!BaseUtil.isValue(viewModel.phoneNum.get())){
                 ToastUtils.showShort("请输入手机号！");
                 return;
-            }
+            }*/
 
             //验证手机号是否合法
-            if(!viewModel.isPhoneNumberValid(numberUtil)){
+            /*if(!viewModel.isPhoneNumberValid(numberUtil)){
                 ToastUtils.showShort("手机号不符合规范！");
                 return;
-            }
+            }*/
 
             viewModel.clearParams()
-                    .setParams("bank_name",viewModel.blankName.get())
-                    .setParams("card_number",viewModel.blankCardNum.get())
-                    .setParams("card_owner",viewModel.userName.get())
-                    .setParams("sub_bank_name",viewModel.accountBank.get());
-            viewModel.requestData(Constants.CARD_SAVE);
+                    .setParams("name", AndroidDes3Util.encode(viewModel.userName.get()))
+                    .setParams("bankName",AndroidDes3Util.encode(viewModel.blankName.get()))
+                    .setParams("subBankName",AndroidDes3Util.encode(viewModel.accountBank.get()))
+                    .setParams("cardNumber",AndroidDes3Util.encode(viewModel.blankCardNum.get()));
+
+            if("添加".equals(viewModel.butText.get())){
+                viewModel.requestData(Constants.ADDBANKCARD);
+            }else{
+                viewModel.requestData(Constants.UPDATEBANKCARD);
+            }
         });
     }
 
 
+    /**
+     * 获取支付数据接口
+     */
+    @Override
+    public void initData() {
+        super.initData();
+
+        viewModel.requestData(Constants.GETPAYCODE);
+    }
 }

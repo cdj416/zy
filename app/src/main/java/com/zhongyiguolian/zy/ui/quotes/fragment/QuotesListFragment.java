@@ -9,9 +9,9 @@ import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomFragment;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.databinding.FragmentQuotesListBinding;
 import com.zhongyiguolian.zy.ui.quotes.viewmodel.QuotesListViewModel;
-import com.zhongyiguolian.zy.utils.StatusBarUtil;
 
 /**
  * 行情列表页面
@@ -58,8 +58,13 @@ public class QuotesListFragment extends CustomFragment<FragmentQuotesListBinding
         super.initView();
 
         setOnRefresh(binding.refresh,REFRESH_0X4);
+    }
 
-        //设置标题栏为白色
-        StatusBarUtil.setCommonUI(getActivity(),false);
+    @Override
+    public void initData() {
+        super.initData();
+
+        //请求一次
+        viewModel.requestData(Constants.HOMEMARKETS);
     }
 }

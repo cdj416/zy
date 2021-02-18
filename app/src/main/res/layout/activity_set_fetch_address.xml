@@ -31,9 +31,10 @@
                 android:textColor="@color/theme_FFFFFF"
                 android:textSize="@dimen/sp_16"
                 android:gravity="center"
-                android:text="设置提取地址"/>
+                android:text="添加提取地址"/>
             <ImageView
                 android:id="@+id/comBack"
+android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/white_black"
@@ -41,14 +42,20 @@
                 android:layout_marginStart="16dp"/>
         </RelativeLayout>
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/theme_333333"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:text="地址备注"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="30dp">
+            android:layout_marginRight="16dp">
 
             <EditText
                 android:layout_width="match_parent"
@@ -56,13 +63,65 @@
                 android:textSize="@dimen/sp_12"
                 android:textColor="@color/theme_333333"
                 android:background="@null"
-                android:hint="请输入或长按粘贴USDT地址"/>
+                android:hint="请填写备注"
+                android:text="@={viewModel.marks}"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/theme_EEEEEE"
                 android:layout_alignParentBottom="true"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/close_white_mark"
+                android:layout_alignParentEnd="true"
+                android:padding="5dp"
+                android:layout_centerVertical="true"
+                app:onClickCommand="@{viewModel.clearMarks}"/>
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/theme_333333"
+            android:textSize="@dimen/sp_16"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="FIL地址"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/theme_333333"
+                android:background="@null"
+                android:hint="请输入或长按粘贴FIL地址"
+                android:text="@={viewModel.newAddress}"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/theme_EEEEEE"
+                android:layout_alignParentBottom="true"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/close_white_mark"
+                android:layout_alignParentEnd="true"
+                android:padding="5dp"
+                android:layout_centerVertical="true"
+                app:onClickCommand="@{viewModel.clearAddress}"/>
 
         </RelativeLayout>
 
@@ -77,7 +136,8 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/shape_radius5_5690ff"
             android:layout_marginTop="50dp"
-            android:text="完成"/>
+            android:text="完成"
+            app:onClickCommand="@{viewModel.subMit}"/>
     </LinearLayout>
 
 </layout>

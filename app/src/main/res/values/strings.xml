@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">zygl</string>
+    <string name="app_name">众亿国链</string>
 
     <string name="bottom_home">首页</string>
     <string name="bottom_quotes">行情</string>
@@ -15,7 +15,36 @@
     <string name="nums150">150</string>
     <string name="two_hz">\u3000\u3000</string>
     <string name="mange_text">管理</string>
+    <string name="wancheng_text">完成</string>
     <string name="settlement_text">结算</string>
     <string name="delete_text">删除</string>
+    <string name="delete_percent_sign">%</string>
+    <string name="rmb">¥</string>
+    <string name="usdt_text">USDT</string>
+    <string name="yd_text">≈</string>
+    <string name="sqsjcczlsy_text">收取数据存储增量收益</string>
+    <string name="kjsl_text">云存储服务器</string>
+    <string name="t_text">T</string>
+    <string name="ex_order_status_in">EX_ORDER_STATUS_IN</string>
+    <string name="x_text">x</string>
+    <string name="yqysl_text">已启用算力:</string>
+    <string name="wqysl_text">未启用算力:</string>
+    <string name="gmsj_text">购买时间:</string>
+    <string name="dqsj_text">到期时间:</string>
+    <string name="ljlc_text">累计产量:</string>
+    <string name="sbbh_text">设备编号:</string>
+    <string name="uuid_text_left">(id:</string>
+    <string name="kh_text_left">(</string>
+    <string name="uuid_text_right">)</string>
+    <string name="update_text">修改</string>
+    <string name="add_text">添加</string>
+    <string name="static_text">Static</string>
+    <string name="fil_text">FIL</string>
+    <string name="cqsb_text">产权设备</string>
+    <string name="yslzp_text">云算力租凭</string>
+    <string name="wlkj_text">物理空间(T)</string>
+    <string name="slkj_text">算力空间(T)</string>
+    <string name="tgf_text">托管费：</string>
+    <string name="sltgf_text">免托管费、免质押、免质押</string>
 
 </resources>

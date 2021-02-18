@@ -1,3 +1,4 @@
+include ':magicindicator'
 include ':library'
 include ':kchartlib'
 include ':ImagePreview'

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomFragment;
 import com.zhongyiguolian.zy.base.CustomViewModel;
@@ -63,7 +65,6 @@ public class AdvisoryFragment extends CustomFragment<FragmentAdvisoryBinding, Cu
         binding.addPost.setOnClickListener(v -> {
             startActivity(EditPostActivity.class);
         });
-
     }
 
     /**

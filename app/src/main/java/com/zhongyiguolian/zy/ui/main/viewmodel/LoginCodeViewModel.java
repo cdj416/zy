@@ -1,14 +1,15 @@
 package com.zhongyiguolian.zy.ui.main.viewmodel;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.RxBus;
 import com.hongyuan.mvvmhabitx.bus.RxSubscriptions;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
-import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
@@ -20,7 +21,9 @@ import com.zhongyiguolian.zy.ui.main.activity.PrivacyPolicyActivity;
 import com.zhongyiguolian.zy.ui.main.activity.RetrievePasswordActivity;
 import com.zhongyiguolian.zy.ui.main.activity.UserAgreementActivity;
 import com.zhongyiguolian.zy.ui.main.beans.CountrysBeans;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.HourMeterUtil;
+
 import io.michaelrocks.libphonenumber.android.NumberParseException;
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
 import io.michaelrocks.libphonenumber.android.Phonenumber;
@@ -63,12 +66,12 @@ public class LoginCodeViewModel extends CustomViewModel<MyRepository> implements
     /**
      * 是否密码登录
      */
-    public ObservableField<Boolean> isPassword = new ObservableField<>(false);
+    public ObservableField<Boolean> isPassword = new ObservableField<>(true);
 
     /**
      * 输入的秘密
      */
-    public ObservableField<String> password = new ObservableField<>();
+    public ObservableField<String> password = new ObservableField<>("");
 
     /**
      * 是否记住密码
@@ -204,8 +207,13 @@ public class LoginCodeViewModel extends CustomViewModel<MyRepository> implements
     * */
     public void sendPhneCode(){
         //发送验证码
-        clearParams().setParams("mobile",phoneNum.get()).setParams("use_type","2");
-        requestData(Constants.SENDCODE);
+        clearParams().setParams("account", AndroidDes3Util.encode(phoneNum.get()))
+                .setParams("type", AndroidDes3Util.encode("3"))
+                .setParams("imgCode", AndroidDes3Util.encode("123456"))//暂时写的死的
+                .setParams("voice", AndroidDes3Util.encode("0"))//暂时写的死的
+                .setParams("oTime","1");//暂时写的死的
+
+        requestData(Constants.SENDSMSCODE);
 
         hourMeterUtil.reStartCount();
     }
@@ -247,12 +255,16 @@ public class LoginCodeViewModel extends CustomViewModel<MyRepository> implements
     public void inputUser(){
         MemberLoginBean bean = model.getUser();
 
-        if(bean != null && BaseUtil.isValue(bean.getCustomer().getPassword())){
-            phoneNum.set(bean.getCustomer().getMobile());
-            password.set(bean.getCustomer().getPassword());
+        if(bean != null && BaseUtil.isValue(bean.getToken())){
+            phoneNum.set(bean.getUserName());
+            password.set(bean.getPassword());
 
-            isRememberPassword.set(true);
+            //勾选协议
+            uc.checkXy.setValue(true);
+            isCheck.set(true);
+
             uc.changeRemember.setValue(true);
+            isRememberPassword.set(true);
         }else{
             phoneNum.set("");
             password.set("");
@@ -337,6 +349,9 @@ public class LoginCodeViewModel extends CustomViewModel<MyRepository> implements
 
         if(code == Constants.LOGIN){
             MemberLoginBean loginBean = (MemberLoginBean)dataBean;
+            loginBean.setUserName(phoneNum.get());
+            loginBean.setPassword(password.get());
+            loginBean.setAgrees(true);
 
             //存入手机中，以此实现二次免登陆。
             model.saveUser(loginBean);

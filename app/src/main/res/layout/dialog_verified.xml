@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="57dp"
+        android:layout_marginRight="57dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@mipmap/dialog_verified_img"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="188dp"
+                android:background="@drawable/shape_radius_bottom_15dp_0080ff">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_FFFFFF"
+                        android:textSize="22sp"
+                        android:text="实名认证"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_FFFFFF"
+                        android:textSize="9sp"
+                        android:text="为确保账户安,请先完成实名认证"
+                        android:layout_marginTop="23dp"
+                        android:layout_marginBottom="32dp"/>
+
+                    <TextView
+                        android:id="@+id/goVerified"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_333333"
+                        android:textSize="@dimen/sp_15"
+                        android:background="@drawable/shape_radius6_ffffff"
+                        android:paddingEnd="16dp"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="立即认证"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/closeImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/close_gray_x"
+            android:layout_alignParentEnd="true"
+            android:padding="5dp"
+            android:layout_marginEnd="11dp"
+            android:layout_marginTop="11dp"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -186,7 +186,7 @@
                     android:drawableTop="@mipmap/promt_empty_img"
                     android:gravity="center"
                     android:visibility="@{viewModel.observableList.size() == 0 ? View.VISIBLE : View.GONE}"
-                    android:text="暂无数据"/>
+                    />
 
 
 

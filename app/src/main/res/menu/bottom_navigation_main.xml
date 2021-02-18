@@ -14,12 +14,12 @@
         android:icon="@drawable/bottom_quotes_select"
         android:title="@string/bottom_quotes"
         app:showAsAction="ifRoom" />
-    <item
+   <!-- <item
         android:id="@+id/action_learn"
         android:enabled="true"
         android:icon="@drawable/bottom_learn_select"
         android:title="@string/bottom_learn"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" />-->
     <item
         android:id="@+id/action_advisory"
         android:enabled="true"

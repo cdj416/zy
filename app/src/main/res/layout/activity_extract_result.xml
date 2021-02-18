@@ -39,6 +39,7 @@
 
             <ImageView
                 android:id="@+id/comBack"
+android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/white_black"
@@ -83,6 +84,7 @@
 
         
         <Button
+            android:id="@+id/goMain"
             android:layout_width="150dp"
             android:layout_height="43dp"
             android:textSize="@dimen/sp_16"

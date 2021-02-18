@@ -2,25 +2,36 @@ package com.zhongyiguolian.zy.ui.main.activity;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.hongyuan.mvvmhabitx.base.AppManager;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.databinding.ActivityMainBinding;
-import com.zhongyiguolian.zy.ui.advisory.fragment.AdvisoryFragment;
+import com.zhongyiguolian.zy.ui.advisory.fragment.FindsFragment;
 import com.zhongyiguolian.zy.ui.home.fragment.HomeFragment;
+import com.zhongyiguolian.zy.ui.home.fragment.HomeNewFragment;
 import com.zhongyiguolian.zy.ui.learn.fragment.VideoLearnFragment;
 import com.zhongyiguolian.zy.ui.main.viewmodel.MainViewModel;
+import com.zhongyiguolian.zy.ui.person.activity.VerifiedActivity;
 import com.zhongyiguolian.zy.ui.person.fragment.PersonFragment;
-import com.zhongyiguolian.zy.ui.quotes.fragment.QuotesFragment;
+import com.zhongyiguolian.zy.ui.quotes.fragment.QuotesListFragment;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.CustomDialog;
 import com.zhongyiguolian.zy.utils.PackageUtils;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import me.majiajie.pagerbottomtabstrip.NavigationController;
+import me.majiajie.pagerbottomtabstrip.listener.OnTabItemSelectedListener;
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
@@ -34,7 +45,11 @@ public class MainActivity extends CustomActivity<ActivityMainBinding, MainViewMo
      * fragments集合
      */
     private List<Fragment> mFragments;
-    //private NavigationController navigationController;
+
+    /**
+     * 底部菜单栏
+     */
+    private NavigationController navigationController;
 
     /**
      * @param savedInstanceState
@@ -70,20 +85,50 @@ public class MainActivity extends CustomActivity<ActivityMainBinding, MainViewMo
         super.initData();
 
         mFragments = new ArrayList<>();
-        mFragments.add(new HomeFragment());
-        mFragments.add(new QuotesFragment());
-        mFragments.add(new VideoLearnFragment());
-        mFragments.add(new AdvisoryFragment());
+        //mFragments.add(new HomeFragment());
+        mFragments.add(new HomeNewFragment());
+        //mFragments.add(new QuotesFragment());
+        mFragments.add(new QuotesListFragment());
+        //mFragments.add(new VideoLearnFragment());
+        //mFragments.add(new AdvisoryFragment());
+        mFragments.add(new FindsFragment());
         mFragments.add(new PersonFragment());
         commitAllowingStateLoss(0);
 
-        binding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        initBottomTab();
+
+        //binding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         //检查是否需要更新
-        viewModel.clearParams().setParams("app_version", PackageUtils.getVersionName(this))
-                .setParams("app_type","1")
-                .setParams("app_name","jl");
-        //viewModel.requestData(Constants.CHECK_APP_VERSION);
+        viewModel.clearParams().setParams("versionInfo", AndroidDes3Util.encode(String.valueOf(PackageUtils.getVersionCode(this))))
+                .requestData(Constants.ANDROIDVERSION);
+
+    }
+
+    /*
+     * 初始化底部tab
+     * */
+    private void initBottomTab(){
+        navigationController = binding.tab.material()
+                .addItem(R.mipmap.home_select,R.mipmap.home_select,"首页")
+                .addItem(R.mipmap.quotes_select,R.mipmap.quotes_select,"行情")
+                .addItem(R.mipmap.advisory_select,R.mipmap.advisory_select,"快讯")
+                .addItem(R.mipmap.person_select,R.mipmap.person_select,"我的")
+                .setDefaultColor(getResources().getColor(R.color.theme_CCCCCC))
+                .build();
+
+        //底部按钮监听事件
+        navigationController.addTabItemSelectedListener(new OnTabItemSelectedListener() {
+            @Override
+            public void onSelected(int index, int old) {
+                commitAllowingStateLoss(index);
+            }
+
+            @Override
+            public void onRepeat(int index) {
+
+            }
+        });
     }
 
     /*
@@ -98,14 +143,14 @@ public class MainActivity extends CustomActivity<ActivityMainBinding, MainViewMo
                     case R.id.action_quotes:
                         commitAllowingStateLoss(1);
                         return true;
-                    case R.id.action_learn:
+                   /* case R.id.action_learn:
+                        commitAllowingStateLoss(2);
+                        return true;*/
+                    case R.id.action_advisory:
                         commitAllowingStateLoss(2);
                         return true;
-                    case R.id.action_advisory:
-                        commitAllowingStateLoss(3);
-                        return true;
                     case R.id.action_person:
-                        commitAllowingStateLoss(4);
+                        commitAllowingStateLoss(3);
                         return true;
                 }
                 return false;
@@ -142,7 +187,6 @@ public class MainActivity extends CustomActivity<ActivityMainBinding, MainViewMo
         }
         transaction.commitAllowingStateLoss();
     }
-
 
     /**
      * 安卓重写返回键事件

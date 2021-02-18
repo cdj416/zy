@@ -1,7 +1,7 @@
 package com.zhongyiguolian.zy.utils;
 
 import android.annotation.SuppressLint;
-
+import android.util.Log;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -108,7 +108,6 @@ public class TimeUtil {
         if (timeStamp == 0) {
             return "";
         }
-        timeStamp = timeStamp * 1000;
         SimpleDateFormat format = new SimpleDateFormat(dataFormat);
         return format.format(new Date(timeStamp));
     }
@@ -124,7 +123,7 @@ public class TimeUtil {
         if (timeStamp == 0) {
             return "";
         }
-        SimpleDateFormat format = new SimpleDateFormat(dataFormat);
+        SimpleDateFormat format = new SimpleDateFormat(dataFormat,Locale.getDefault());
         return format.format(new Date(timeStamp));
     }
 

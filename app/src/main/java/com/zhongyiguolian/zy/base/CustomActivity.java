@@ -73,7 +73,7 @@ public abstract class CustomActivity<V extends ViewDataBinding, VM extends Custo
             //当FitsSystemWindows设置 true 时，会在屏幕最上方预留出状态栏高度的 padding
             StatusBarUtil.setRootViewFitsSystemWindows(this,false);
             StatusBarUtil.setTranslucentStatus(this);
-            StatusBarUtil.setCommonUI(this,true);
+            StatusBarUtil.setCommonUI(this,false);
         }else{
             StatusBarUtil.setStatusBarColor(this,getResources().getColor(R.color.theme_FFFFFF));
             StatusBarUtil.setCommonUI(this,true);

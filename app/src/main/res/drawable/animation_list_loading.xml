@@ -13,18 +13,4 @@
     <item android:drawable="@drawable/loading_img8" android:duration="100"/>
     <item android:drawable="@drawable/loading_img9" android:duration="100"/>
     <item android:drawable="@drawable/loading_img10" android:duration="100"/>
-    <item android:drawable="@drawable/loading_img11" android:duration="100"/>
-    <item android:drawable="@drawable/loading_img12" android:duration="100"/>
-    <item android:drawable="@drawable/loading_img13" android:duration="100"/>
-    <item android:drawable="@drawable/loading_img14" android:duration="100"/>
-    <item android:drawable="@drawable/loading_img15" android:duration="100"/>
-    <item android:drawable="@drawable/loading_img16" android:duration="100"/>
-    <item android:drawable="@drawable/loading_img17" android:duration="100"/>
-    <item android:drawable="@drawable/loading_img18" android:duration="100"/>
-    <item android:drawable="@drawable/loading_img19" android:duration="100"/>
-    <item android:drawable="@drawable/loading_img20" android:duration="100"/>
-    <item android:drawable="@drawable/loading_img21" android:duration="100"/>
-    <item android:drawable="@drawable/loading_img22" android:duration="100"/>
-    <item android:drawable="@drawable/loading_img23" android:duration="100"/>
-    <item android:drawable="@drawable/loading_img25" android:duration="100"/>
 </animation-list>

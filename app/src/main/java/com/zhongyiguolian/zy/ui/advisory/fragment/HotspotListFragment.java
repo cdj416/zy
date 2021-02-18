@@ -44,8 +44,5 @@ public class HotspotListFragment extends CustomFragment<FragmentHotspotListBindi
         super.initView();
 
         setOnRefresh(binding.refresh,REFRESH_0X4);
-
-        //设置标题栏为白色
-        StatusBarUtil.setCommonUI(getActivity(),false);
     }
 }

@@ -16,6 +16,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.ExifInterface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -81,6 +82,7 @@ public class CropView extends View {
 
             options.inJustDecodeBounds = false;
             this.bitmap = BitmapFactory.decodeFile(path, options);
+            Log.e("cnn","================写入============");
         } catch (IOException e) {
             e.printStackTrace();
             this.bitmap = original;

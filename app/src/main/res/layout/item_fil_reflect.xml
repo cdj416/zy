@@ -7,6 +7,9 @@
         <variable
             name="viewModel"
             type="com.zhongyiguolian.zy.ui.person.viewmodel.FilReflectItemViewModel" />
+        <import type="com.zhongyiguolian.zy.data.md5.BaseUtil"/>
+        <import type="com.zhongyiguolian.zy.utils.TimeUtil"/>
+        <import type="com.zhongyiguolian.zy.utils.BigDecimalUtils"/>
     </data>
 
     <LinearLayout
@@ -28,7 +31,7 @@
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:background="#FAFAFA"
-                android:text="类型"/>
+                android:text="@{viewModel.entity.profitTypeString}"/>
             <View
                 android:layout_width="2dp"
                 android:layout_height="match_parent"/>
@@ -40,7 +43,7 @@
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:background="#FAFAFA"
-                android:text="收益时间"/>
+                android:text="@{TimeUtil.formatData(TimeUtil.dateFormatDotYMD,viewModel.entity.createTime)}"/>
             <View
                 android:layout_width="2dp"
                 android:layout_height="match_parent"/>
@@ -52,7 +55,7 @@
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:background="#FAFAFA"
-                android:text="收益数量"/>
+                android:text="@{BigDecimalUtils.round(BaseUtil.getString(viewModel.entity.profitCount),4)}"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"

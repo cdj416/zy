@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/shape_radius_top_10dp_ffffff">
+        <TextView
+            android:id="@+id/num1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/theme_333333"
+            android:textStyle="bold"
+            android:text="等级1 测试账号"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/theme_EEEEEE"/>
+
+        <TextView
+            android:id="@+id/num2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/theme_333333"
+            android:textStyle="bold"
+            android:text="等级2 测试账号"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/theme_EEEEEE"/>
+
+        <TextView
+            android:id="@+id/num3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/theme_333333"
+            android:textStyle="bold"
+            android:text="等级3 测试账号"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/theme_EEEEEE"/>
+
+        <TextView
+            android:id="@+id/useMe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/theme_999999"
+            android:textStyle="bold"
+            android:text="使用自己账号"/>
+
+    </LinearLayout>
+</LinearLayout>

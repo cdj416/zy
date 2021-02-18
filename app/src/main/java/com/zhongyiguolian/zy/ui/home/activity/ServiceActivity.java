@@ -1,11 +1,11 @@
 package com.zhongyiguolian.zy.ui.home.activity;
 
 import android.os.Bundle;
-
 import androidx.lifecycle.ViewModelProviders;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.databinding.ActivityServiceBinding;
 import com.zhongyiguolian.zy.ui.home.viewmodel.ServiceViewModel;
 import me.tatarka.bindingcollectionadapter2.BR;
@@ -49,10 +49,10 @@ public class ServiceActivity extends CustomActivity<ActivityServiceBinding, Serv
     @Override
     public void initView() {
         super.initView();
-        setOnRefresh(binding.refresh,REFRESH_0X4);
 
-        //setEnableLoadMore(Constants.GET_CIRCLE_CATEGORY_LIST);
-        //setEnableRefresh(Constants.GET_CIRCLE_CATEGORY_LIST);
+        setOnRefresh(binding.refresh,REFRESH_0X3);
+        setEnableLoadMore(Constants.PRODUCT_LIST);
+        setEnableRefresh(Constants.PRODUCT_LIST);
 
         binding.comBack.setOnClickListener(view -> finish());
     }
@@ -63,8 +63,12 @@ public class ServiceActivity extends CustomActivity<ActivityServiceBinding, Serv
     @Override
     public void initData() {
         super.initData();
+        //加载参数数据
+        viewModel.setRefParams("orderStatus","EX_ORDER_STATUS_UPPER_SHELF");
 
         //请求左边数据，只请求一次
+        viewModel.setParams("orderStatus","EX_ORDER_STATUS_UPPER_SHELF")
+                .requestNoData(Constants.PRODUCT_LIST);
     }
 
 }

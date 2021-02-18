@@ -2,6 +2,8 @@ package com.zhongyiguolian.zy.ui.main.activity;
 
 import android.os.Bundle;
 import androidx.lifecycle.ViewModelProviders;
+
+import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
@@ -64,6 +66,7 @@ public class PrivacyPolicyActivity extends CustomActivity<ActivityPrivacyPolicyB
         super.initData();
 
         //请求左边数据，只请求一次
+        binding.contra.setImage(ImageSource.resource(R.mipmap.privacy_policy));
     }
 
 }

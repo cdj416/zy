@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.person.viewmodel.RevenueViewModel" />
+
+        <import type="android.view.View"/>
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/shape_gradient_5690ff_ffffff">
+
+        <com.zhongyiguolian.zy.myview.StatusBarHeightView
+            android:id="@+id/barHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="@color/theme_FFFFFF"
+                android:textSize="@dimen/sp_16"
+                android:gravity="center"
+                android:text="存储收益"/>
+            <ImageView
+                android:id="@+id/comBack"
+android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/white_black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"/>
+        </RelativeLayout>
+
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.zhongyiguolian.zy.myview.StickyScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.lihang.ShadowLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hl_shadowLimit="10dp"
+                        app:hl_cornerRadius="16dp"
+                        app:hl_shadowColor="@color/theme_003AA8"
+                        android:layout_margin="6dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingBottom="15dp"
+                            android:background="@drawable/shape_radius16_ffffff">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_12"
+                                    android:textColor="@color/theme_1A66B2"
+                                    android:layout_marginTop="16dp"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="30dp"
+                                    android:text="收益明细"/>
+
+                                <com.lihang.ShadowLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="16dp"
+                                    android:layout_marginEnd="10dp"
+                                    app:hl_shadowLimit="6dp"
+                                    app:hl_cornerRadius_leftTop="5dp"
+                                    app:hl_cornerRadius_rightTop="5dp"
+                                    app:hl_cornerRadius_rightBottom="5dp"
+                                    app:hl_shadowColor="@color/theme_003AA8"
+                                    android:layout_margin="6dp"
+                                    android:visibility="@{viewModel.rType.equals(@string/static_text) ? View.VISIBLE : View.GONE}">
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:padding="5dp">
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:gravity="center_vertical">
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:src="@mipmap/revenue_mark"/>
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:textColor="@color/theme_1A66B2"
+                                                android:textSize="@dimen/sp_12"
+                                                android:layout_marginStart="5dp"
+                                                android:text="总收益"/>
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:layout_marginTop="5dp"
+                                            android:gravity="center_vertical">
+
+                                            <ImageView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:src="@mipmap/revenue_mark_next"/>
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:textColor="@color/theme_24DBC2"
+                                                android:textSize="@dimen/sp_12"
+                                                android:layout_marginStart="5dp"
+                                                android:text="实际收益(80%)"/>
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                </com.lihang.ShadowLayout>
+                            </LinearLayout>
+
+
+
+                            <com.github.mikephil.charting.charts.LineChart
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                app:setLineChart="@{viewModel.allList}"
+                                app:isLineTwo="@{viewModel.rType.equals(@string/static_text)}"/>
+
+
+                        </LinearLayout>
+
+                    </com.lihang.ShadowLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/theme_FFFFFF"
+                            android:textSize="@dimen/sp_15"
+                            android:text="历史收益明细"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/theme_FFFFFF"
+                            android:textSize="@dimen/sp_15"
+                            android:visibility="@{viewModel.rType.equals(@string/static_text) ? View.VISIBLE : View.GONE}"
+                            android:text=" (未扣除20%)"/>
+                    </LinearLayout>
+
+                    <com.lihang.ShadowLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:hl_shadowLimit="10dp"
+                        app:hl_cornerRadius="15dp"
+                        app:hl_shadowColor="@color/theme_003AA8"
+                        app:hl_layoutBackground="@color/transparent"
+                        android:layout_margin="6dp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/shape_radius10_ffffff">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <com.lihang.ShadowLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:hl_shadowLimit="3dp"
+                                    app:hl_cornerRadius="16dp"
+                                    app:hl_shadowColor="@color/theme_66003AA8"
+                                    app:hl_shadowHiddenLeft="true"
+                                    app:hl_shadowHiddenRight="true"
+                                    app:hl_shadowHiddenTop="true">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="53dp"
+                                        android:orientation="horizontal"
+                                        android:background="@drawable/shape_radius10_f5f9ff">
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_weight="1"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:textColor="@color/theme_333333"
+                                            android:textSize="@dimen/sp_13"
+                                            android:text="日期"/>
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_weight="1"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:textColor="@color/theme_333333"
+                                            android:textSize="@dimen/sp_13"
+                                            android:text="FIL历史收益"/>
+
+                                    </LinearLayout>
+
+                                </com.lihang.ShadowLayout>
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/mRec"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:itemBinding="@{viewModel.itemBinding}"
+                                    app:items="@{viewModel.observableList}"
+                                    app:layoutManager="@{LayoutManagers.linear(1,false)}"/>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/theme_999999"
+                                android:textSize="@dimen/sp_12"
+                                android:layout_gravity="center"
+                                android:drawableTop="@mipmap/promt_empty_img"
+                                android:layout_marginTop="20dp"
+                                android:gravity="center"
+                                android:visibility="@{viewModel.observableList.size() == 0 ? View.VISIBLE : View.GONE}"
+                                />
+
+                        </FrameLayout>
+
+                    </com.lihang.ShadowLayout>
+                </LinearLayout>
+
+        </com.zhongyiguolian.zy.myview.StickyScrollView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </LinearLayout>
+
+</layout>

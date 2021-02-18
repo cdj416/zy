@@ -41,4 +41,11 @@ public class BaseUtil {
         }
         return s;
     }
+
+    /*
+    * 转换成字符串处理
+    * */
+    public static String getString(Object number){
+        return String.valueOf(number);
+    }
 }

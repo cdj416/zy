@@ -5,6 +5,7 @@ import androidx.databinding.ObservableField;
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.zhongyiguolian.zy.base.ItemViewModel;
+import com.zhongyiguolian.zy.ui.home.beans.EncyclopediaBeans;
 
 /**
  * 百科itemviewmodel
@@ -16,7 +17,7 @@ public class EncyclopediaItemViewModel extends ItemViewModel<EncyclopediaViewMod
     /**
      * 数据
      */
-    public ObservableField<String> entity = new ObservableField<>();
+    public ObservableField<EncyclopediaBeans> entity = new ObservableField<>();
 
     /**
      * 是否张开
@@ -27,7 +28,7 @@ public class EncyclopediaItemViewModel extends ItemViewModel<EncyclopediaViewMod
      * @param viewModel
      * @param bean
      */
-    public EncyclopediaItemViewModel(@NonNull EncyclopediaViewModel viewModel, String bean) {
+    public EncyclopediaItemViewModel(@NonNull EncyclopediaViewModel viewModel, EncyclopediaBeans bean) {
         super(viewModel);
         entity.set(bean);
     }

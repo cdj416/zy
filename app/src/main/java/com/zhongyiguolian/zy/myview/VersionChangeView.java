@@ -3,9 +3,11 @@ package com.zhongyiguolian.zy.myview;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -16,6 +18,7 @@ import com.hongyuan.mvvmhabitx.base.AppManager;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.myview.my_progress.CheckVersionBeans;
 import com.zhongyiguolian.zy.myview.my_progress.WaveProgress;
+import com.zhongyiguolian.zy.ui.main.beans.VersionBeans;
 import com.zhongyiguolian.zy.utils.CacheUtil;
 import com.zhongyiguolian.zy.utils.CustomDialog;
 import com.zhongyiguolian.zy.utils.HourMeterUtil;
@@ -32,7 +35,7 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
     private final int START_DOWN = 0x1;
     //下载停止
     private final int DOWN_STOP = 0x2;
-    //下载停止
+    //下载成功
     private final int DOWN_SUCCESS = 0x3;
     //下载的最大值
     private int maxValue = 0;
@@ -42,7 +45,7 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
     private HourMeterUtil hourUtil;
 
     //更新数据
-    private CheckVersionBeans.InfoBean versionBeans;
+    private VersionBeans versionBeans;
 
     //判断常亮(需要更新)
     private final int NEED_CHANGE = 1;
@@ -71,19 +74,16 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
 
     }
 
-    public void startChange(CheckVersionBeans.InfoBean versionBeans){
+    public void startChange(VersionBeans versionBeans){
         //设置初始数据
         this.versionBeans = versionBeans;
-        if(versionBeans.getIs_new() == NEED_CHANGE){
-            //在下载前，清楚下缓存，避免因下载中被杀死进程而导致一直无法更新
-            CacheUtil.clearAllCache(getContext());
-            //初始化计时回调
-            hourUtil = new HourMeterUtil();
-            hourUtil.setTimeCallBack(this);
-            //显示对话框
-            startUpdate(versionBeans.getUpdatetype() == NEED_FORCE);
-
-        }
+        //在下载前，清楚下缓存，避免因下载中被杀死进程而导致一直无法更新
+        CacheUtil.clearAllCache(getContext());
+        //初始化计时回调
+        hourUtil = new HourMeterUtil();
+        hourUtil.setTimeCallBack(this);
+        //显示对话框
+        startUpdate(Integer.parseInt(versionBeans.getType()) == NEED_FORCE);
     }
 
     /*
@@ -125,11 +125,9 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
                 .setOnDownloadListener(new OnDownloadListener() {
                     @Override
                     public void start() {
-                        if(force){
-                            Message msg = new Message();
-                            msg.what = START_DOWN;
-                            handler.sendMessage(msg);
-                        }
+                        Message msg = new Message();
+                        msg.what = START_DOWN;
+                        handler.sendMessage(msg);
                     }
 
                     @Override
@@ -140,41 +138,35 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
 
                     @Override
                     public void done(File apk) {
-                        if(force){
-                            Message msg = new Message();
-                            msg.what = DOWN_SUCCESS;
-                            handler.sendMessage(msg);
-                        }
+                        Message msg = new Message();
+                        msg.what = DOWN_SUCCESS;
+                        handler.sendMessage(msg);
                     }
 
                     @Override
                     public void cancel() {
-                        if(force){
-                            Message msg = new Message();
-                            msg.what = DOWN_STOP;
-                            handler.sendMessage(msg);
-                        }
+                        Message msg = new Message();
+                        msg.what = DOWN_STOP;
+                        handler.sendMessage(msg);
                     }
 
                     @Override
                     public void error(Exception e) {
-                        if(force){
-                            Message msg = new Message();
-                            msg.what = DOWN_STOP;
-                            handler.sendMessage(msg);
-                        }
+                        Message msg = new Message();
+                        msg.what = DOWN_STOP;
+                        handler.sendMessage(msg);
                         e.printStackTrace();
                     }
                 });
 
-        manager.setApkName("suiDong.apk")
-                .setApkUrl(versionBeans.getDownloadurl())
+        manager.setApkName("zygl.apk")
+                .setApkUrl(versionBeans.getPath())
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setShowNewerToast(true)
                 .setConfiguration(configuration)
 //                .setDownloadPath(Environment.getExternalStorageDirectory() + "/AppUpdate")
                 .setApkVersionCode(code)
-                .setApkVersionName(versionBeans.getApp_version())
+                .setApkVersionName(versionBeans.getVersion())
                 .setApkSize("")
                 .setApkDescription("升级进度在后台查看！")
                 .download();
@@ -194,12 +186,14 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
                     break;
                 case DOWN_STOP:
                     //bgBox.setVisibility(GONE);
-                    CustomDialog.promptDialog(getContext(),"下载出错，请从新进入app！", "确定",false, v -> {
-                        AppManager.getAppManager().finishAllActivity();
+                    CustomDialog.promptDialog(getContext(),"下载错误，请联系客服！", "确定",false, v -> {
+                        //AppManager.getAppManager().finishAllActivity();
                     });
                     break;
 
                 case DOWN_SUCCESS:
+                    wavePro.setValue(maxValue);
+
                     bgBox.setVisibility(GONE);
                     break;
             }
@@ -213,11 +207,6 @@ public class VersionChangeView extends FrameLayout implements HourMeterUtil.Time
         }
         wavePro.setValue(mValue);
     }
-
-    /*
-    * 当在更新时，屏蔽返回键
-    * */
-
 
 
 }

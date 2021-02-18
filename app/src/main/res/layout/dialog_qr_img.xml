@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="264dp"
+        android:layout_height="370dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/qr_img_bg"/>
+
+        <RelativeLayout
+            android:layout_width="104dp"
+            android:layout_height="104dp"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/qr_img_bga"/>
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_margin="6dp"
+                app:riv_corner_radius="12dp"
+                android:src="@mipmap/jietu_img"/>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/saveImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_1D39EB"
+                android:textSize="@dimen/sp_12"
+                android:background="@drawable/shape_radius5_000000_stroke_1d39eb"
+                android:paddingTop="3dp"
+                android:paddingBottom="5dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="保存二维码"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_13"
+                    android:textColor="@color/theme_333333"
+                    android:text="咨询热线："/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_18"
+                    android:textColor="@color/theme_333333"
+                    android:text="13952404134"/>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_1D39EB"
+                android:textSize="@dimen/sp_12"
+                android:background="@drawable/shape_radius5_000000_stroke_1d39eb"
+                android:paddingTop="3dp"
+                android:paddingBottom="5dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="拨号咨询"/>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/closeImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:padding="5dp"
+            android:src="@mipmap/white_close_x"/>
+    </RelativeLayout>
+
+</LinearLayout>

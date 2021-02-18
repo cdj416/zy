@@ -15,17 +15,67 @@
         android:layout_height="match_parent"
         android:background="@color/theme_7EA8FF">
 
+        <FrameLayout
+            android:id="@+id/shareView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/poster_bg"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="100dp"
+                android:orientation="vertical"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/zygl_text_bg"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/az_text_bg"
+                    android:layout_marginTop="20dp"/>
+
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/hbQrImg"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="12dp"
+                    app:riv_corner_radius="3dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/theme_FFFFFF"
+                    android:textSize="@dimen/sp_11"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:text="二维码注册下载"/>
+            </LinearLayout>
+        </FrameLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@mipmap/invite_logo"
-            android:scaleType="fitXY"
-            android:visibility="gone"/>
+            android:src="@mipmap/my_frends"
+            android:scaleType="centerCrop"
+            android:visibility="visible"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="visible">
 
             <com.zhongyiguolian.zy.myview.StatusBarHeightView
                 android:layout_width="match_parent"
@@ -42,6 +92,7 @@
                     android:text="邀请好友"/>
                 <ImageView
                     android:id="@+id/comBack"
+                    android:padding="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/white_black"
@@ -91,8 +142,8 @@
                         android:textColor="@color/theme_FFFFFF"
                         android:textSize="20sp"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="20dp"
-                        android:text="未来已来，你来不来"/>
+                        android:layout_marginTop="16dp"
+                        android:text="数字房产，未来已来"/>
 
 
                     <LinearLayout
@@ -100,7 +151,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:gravity="center_vertical"
-                        android:layout_marginTop="11dp"
+                        android:layout_marginTop="32dp"
                         android:orientation="horizontal">
 
                         <View
@@ -126,8 +177,8 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="33dp"
-                        android:layout_marginTop="25dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="32dp"
                         android:layout_marginEnd="51dp"
                         android:layout_marginStart="51dp">
 
@@ -157,7 +208,7 @@
                                 android:ellipsize="end"
                                 android:maxLines="1"
                                 android:layout_marginEnd="80dp"
-                                android:text="@{viewModel.entity.invite_code}"/>
+                                android:text="@{viewModel.entity.inviteCode}"/>
 
                         </LinearLayout>
 
@@ -169,14 +220,15 @@
                             android:layout_centerVertical="true"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="8dp"
-                            android:text="复制邀请码"/>
+                            android:text="复制邀请码"
+                            app:onClickCommand="@{viewModel.copyCode}"/>
 
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="33dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="32dp"
                         android:layout_marginEnd="51dp"
                         android:layout_marginStart="51dp">
 
@@ -195,7 +247,7 @@
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:layout_marginEnd="80dp"
-                            android:text="@{viewModel.entity.invite_link}"/>
+                            android:text="@{viewModel.entity.inviteLink}"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -205,17 +257,19 @@
                             android:layout_centerVertical="true"
                             android:layout_alignParentEnd="true"
                             android:layout_marginEnd="8dp"
-                            android:text="复制链接"/>
+                            android:text="复制链接"
+                            app:onClickCommand="@{viewModel.copyLink}"/>
 
                     </RelativeLayout>
 
-                    <ImageView
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/qrImg"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:scaleType="fitXY"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="14dp"
-                        android:src="@mipmap/delet_qr_img"/>
+                        android:layout_marginTop="32dp"
+                        app:riv_corner_radius="3dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -223,7 +277,7 @@
                         android:textColor="@color/theme_FFFFFF"
                         android:textSize="@dimen/sp_11"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="12dp"
                         android:text="二维码注册下载"/>
 
                 </LinearLayout>
@@ -237,7 +291,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="40dp"
             android:orientation="horizontal">
 
             <Button
@@ -271,7 +325,8 @@
                     android:textSize="@dimen/sp_15"
                     android:gravity="center"
                     android:background="@null"
-                    android:text="保存海报"/>
+                    android:text="保存海报"
+                    app:onClickCommand="@{viewModel.saveImg}"/>
             </RelativeLayout>
 
 

@@ -26,6 +26,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Surface;
 import android.view.View;
 import android.widget.ImageView;
@@ -296,6 +297,7 @@ public class CameraActivity extends Activity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                     Intent intent = new Intent();
                     intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, contentType);
 
@@ -313,6 +315,7 @@ public class CameraActivity extends Activity {
                 @Override
                 public void run() {
                     takePictureContainer.setVisibility(View.INVISIBLE);
+
                     if (cropMaskView.getMaskType() == MaskView.MASK_TYPE_NONE) {
                         cropView.setFilePath(outputFile.getAbsolutePath());
                         showCrop();

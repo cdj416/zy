@@ -1,5 +1,7 @@
 package com.zhongyiguolian.zy.utils;
 
+import com.zhongyiguolian.zy.data.md5.BaseUtil;
+
 import java.math.BigDecimal;
 
 /**
@@ -102,8 +104,31 @@ public class BigDecimalUtils {
         if (scale < 0) {
             throw new IllegalArgumentException("保留的小数位数必须大于零");
         }
+        if(!BaseUtil.isValue(v)){
+            v = "0.00";
+        }
+
         BigDecimal b = new BigDecimal(v);
         return b.setScale(scale, BigDecimal.ROUND_HALF_UP).toString();
+    }
+
+    /**
+     * 提供精确的小数位舍弃小数位
+     *
+     * @param v 需要四舍五入的数字
+     * @param scale 小数点后保留几位
+     * @return 四舍五入后的结果
+     */
+    public static String roundDown(String v, int scale) {
+        if (scale < 0) {
+            throw new IllegalArgumentException("保留的小数位数必须大于零");
+        }
+        if(!BaseUtil.isValue(v)){
+            v = "0.00";
+        }
+
+        BigDecimal b = new BigDecimal(v);
+        return b.setScale(scale, BigDecimal.ROUND_HALF_DOWN).toString();
     }
 
     /**

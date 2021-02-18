@@ -44,7 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp">
+            android:paddingEnd="16dp"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -78,14 +79,16 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/theme_EEEEEE"/>
+            android:background="@color/theme_EEEEEE"
+            android:visibility="gone"/>
 
         <RelativeLayout
             android:id="@+id/wxBox"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:paddingStart="16dp"
-            android:paddingEnd="16dp">
+            android:paddingEnd="16dp"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -119,6 +122,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:visibility="gone"
             android:background="@color/theme_EEEEEE"/>
 
         <RelativeLayout
@@ -138,22 +142,29 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/delelt_bank_icon"/>
+                    android:src="@mipmap/yinlian_pay_mark"/>
                 <TextView
+                    android:id="@+id/cardName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/theme_333333"
                     android:textSize="@dimen/sp_10"
                     android:text="中国建设银行储蓄卡（0416）"
                     android:layout_marginStart="4dp"/>
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/theme_999999"
+                    android:textSize="@dimen/sp_8"
+                    android:text="此账户为商家账户"
+                    android:layout_marginStart="2dp"/>
             </LinearLayout>
 
             <ImageView
                 android:id="@+id/blankImg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/cart_no_check"
+                android:src="@mipmap/cart_check"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
@@ -174,6 +185,6 @@
             android:layout_marginEnd="16dp"
             android:layout_marginTop="100dp"
             android:layout_marginBottom="18dp"
-            android:text="立即付款"/>
+            android:text="输入交易密码"/>
     </LinearLayout>
 </LinearLayout>

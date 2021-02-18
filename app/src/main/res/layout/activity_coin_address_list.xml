@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.person.viewmodel.CoinAddressViewModel" />
+
+        <import type="android.view.View"/>
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/theme_F5F6FB">
+
+        <com.zhongyiguolian.zy.myview.StatusBarHeightView
+            android:id="@+id/barHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimary">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="@color/theme_FFFFFF"
+                android:textSize="@dimen/sp_16"
+                android:gravity="center"
+                android:text="选择提币地址"/>
+            <ImageView
+                android:id="@+id/comBack"
+android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/white_black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_FFFFFF"
+                android:textSize="@dimen/sp_12"
+                android:gravity="center"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="11dp"
+                android:padding="5dp"
+                android:text="@{viewModel.isMange ? @string/wancheng_text : @string/mange_text}"
+                app:onClickCommand="@{viewModel.mangeAddress}"/>
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:itemBinding="@{viewModel.itemBinding}"
+                    app:items="@{viewModel.observableList}"
+                    app:layoutManager="@{LayoutManagers.linear(1,false)}"/>
+
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_999999"
+                android:textSize="@dimen/sp_12"
+                android:layout_gravity="center"
+                android:drawableTop="@mipmap/promt_empty_img"
+                android:gravity="center"
+                android:visibility="@{viewModel.observableList.size() == 0 ? View.VISIBLE : View.GONE}"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:textSize="@dimen/sp_13"
+                android:textColor="@color/theme_FFFFFF"
+                android:background="@drawable/shape_radius5_5690ff"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="添加地址"
+                android:visibility="@{viewModel.isMange ? View.GONE : View.VISIBLE}"
+                app:onClickCommand="@{viewModel.addCoinAddress}"/>
+        </FrameLayout>
+
+    </LinearLayout>
+
+</layout>

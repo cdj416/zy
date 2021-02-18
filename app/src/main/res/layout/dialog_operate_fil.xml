@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/shape_radius20_top_eef4ff">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_18"
+                android:textColor="@color/theme_1D39EB"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="26dp"
+                android:text="收益计划"/>
+
+            <ImageView
+                android:id="@+id/closeImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/close_gray_x"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:padding="6dp"
+                android:layout_marginEnd="20dp"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginStart="26dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/charge_mark_h"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_333333"
+                android:textSize="@dimen/sp_15"
+                android:layout_marginStart="7dp"
+                android:text="借满3期，应赚取总额 1090.00FIL"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_marginStart="26dp"
+            android:layout_marginEnd="26dp"
+            android:background="@drawable/shape_radius10_d4e2ff"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="54dp"
+            android:paddingStart="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_396087"
+                android:textSize="@dimen/sp_13"
+                android:text="充FIL本金   1000.00FIL"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_396087"
+                android:textSize="@dimen/sp_13"
+                android:layout_marginTop="5dp"
+                android:text="收益  90.00FIL"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

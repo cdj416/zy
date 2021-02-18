@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="com.zhongyiguolian.zy.ui.home.viewmodel.ComfirmOrderCotentMultiViewModel" />
+
+        <import type="com.zhongyiguolian.zy.data.md5.BaseUtil"/>
+        <import type="com.zhongyiguolian.zy.utils.BigDecimalUtils"/>
+        <import type="android.view.View"/>
     </data>
 
 
@@ -36,7 +40,7 @@
                     app:riv_corner_radius="8dp"
                     android:src="@mipmap/delelet_home_item_img"
                     android:scaleType="centerCrop"
-                    app:changeHeightImg="@{viewModel.entity}"/>
+                    app:imageUrl="@{viewModel.entity.getProOImg}"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -48,14 +52,15 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/theme_333333"
                         android:textSize="@dimen/sp_14"
-                        android:text="国链云·太湖1号云存储服务器"/>
+                        android:text="@{viewModel.entity.name}"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/sp_12"
                         android:textColor="@color/theme_999999"
                         android:layout_marginTop="8dp"
-                        android:text="算力  80T"/>
+                        android:visibility="@{viewModel.entity.machineType == 0 ? View.VISIBLE : View.GONE}"
+                        android:text="@{@string/kjsl_text + BaseUtil.getNoZoon(viewModel.entity.calculationPower) + @string/t_text}"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -66,6 +71,7 @@
                         android:paddingBottom="3dp"
                         android:paddingStart="6dp"
                         android:paddingEnd="6dp"
+                        android:visibility="gone"
                         android:layout_marginTop="8dp"
                         android:text="库存999台"/>
 
@@ -79,25 +85,20 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/sp_10"
-                                android:textColor="@color/theme_333333"
-                                android:text="￥"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_10"
                                 android:textColor="@color/theme_333333"
-                                android:text="141319~21604.1154USDT"/>
+                                android:text="@{@string/rmb+viewModel.entity.discountPriceCNY}"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_10"
                                 android:textColor="@color/theme_333333"
+                                android:visibility="gone"
                                 android:text="USDT"/>
 
                         </LinearLayout>
@@ -110,7 +111,7 @@
                             android:textColor="@color/theme_333333"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            android:text="x1"/>
+                            android:text="@{@string/x_text + viewModel.entity.buyNum}"/>
 
                     </RelativeLayout>
                 </LinearLayout>
@@ -129,7 +130,7 @@
                     android:layout_centerVertical="true"
                     android:textColor="@color/theme_333333"
                     android:textStyle="bold"
-                    android:text="算力(T)"/>
+                    android:text="@{viewModel.entity.machineType == 0 ? @string/wlkj_text : @string/slkj_text}"/>
 
 
                 <TextView
@@ -139,7 +140,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:textColor="@color/theme_999999"
-                    android:text="80"/>
+                    android:text="@{BaseUtil.getNoZoon(viewModel.entity.calculationPower)}"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -153,7 +154,7 @@
                     android:textSize="@dimen/sp_10"
                     android:layout_centerVertical="true"
                     android:textColor="@color/theme_333333"
-                    android:text="托管费"/>
+                    android:text="@{viewModel.entity.machineType == 0 ? @string/tgf_text : @string/sltgf_text}"/>
 
 
                 <TextView
@@ -163,6 +164,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:textColor="@color/theme_999999"
+                    android:visibility="@{viewModel.entity.machineType == 0 ? View.VISIBLE : View.GONE}"
                     android:text="免一年"/>
             </RelativeLayout>
 
@@ -187,13 +189,14 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:textColor="@color/theme_999999"
-                    android:text="产权设备"/>
+                    android:text="@{viewModel.entity.machineType == 0 ? @string/cqsb_text : @string/yslzp_text}"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="12dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -211,7 +214,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:textColor="@color/theme_999999"
-                    android:text="FILECOIN"/>
+                    android:text="@{viewModel.entity.symbol}"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -227,21 +230,37 @@
                     android:textColor="@color/theme_333333"
                     android:text="技术服务费"/>
 
-
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/sp_10"
+                    android:orientation="horizontal"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/theme_999999"
-                    android:text="收取数据存储增量收益20%"/>
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_10"
+                        android:textColor="@color/theme_999999"
+                        android:visibility="@{viewModel.entity.machineType == 0 ? View.VISIBLE : View.GONE}"
+                        android:text="@{@string/sqsjcczlsy_text}"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_10"
+                        android:textColor="@color/theme_999999"
+                        android:text="@{BaseUtil.getNoZoon(viewModel.entity.serviceFeePercent) + @string/delete_percent_sign}"/>
+
+                </LinearLayout>
+
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="12dp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -274,7 +293,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:textColor="@color/theme_999999"
-                    android:text="100%"/>
+                    android:text="@{viewModel.entity.usdtCostPriceDiscount+@string/delete_percent_sign}"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -298,7 +317,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:textColor="#2680EB"
-                    android:text="$20583.654"/>
+                    android:text="@{@string/rmb + BigDecimalUtils.mul(String.valueOf(viewModel.entity.discountPriceCNY),viewModel.entity.buyNum,2)}"/>
             </RelativeLayout>
 
 

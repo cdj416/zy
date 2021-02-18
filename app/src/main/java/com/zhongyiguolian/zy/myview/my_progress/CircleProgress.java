@@ -256,7 +256,8 @@ public class CircleProgress extends View {
         // 计算文字宽度，由于Paint已设置为居中绘制，故此处不需要重新计算
         // float textWidth = mValuePaint.measureText(mValue.toString());
         // float x = mCenterPoint.x - textWidth / 2;
-        canvas.drawText(String.format(mPrecisionFormat, mValue), mCenterPoint.x, mValueOffset, mValuePaint);
+        canvas.drawText(String.format(mPrecisionFormat, mValue) + "%", mCenterPoint.x, mValueOffset, mValuePaint);
+        //canvas.drawText(String.format(mPrecisionFormat, mValue) , mCenterPoint.x, mValueOffset, mValuePaint);
 
         if (mHint != null) {
             canvas.drawText(mHint.toString(), mCenterPoint.x, mHintOffset, mHintPaint);

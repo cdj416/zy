@@ -1,11 +1,15 @@
 package com.zhongyiguolian.zy.ui.home.viewmodel;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.zhongyiguolian.zy.base.ItemViewModel;
 import com.zhongyiguolian.zy.ui.home.activity.ServiceDetailActivity;
+import com.zhongyiguolian.zy.ui.home.beans.HomeProductBeans;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 
 /**
  * 服务器itemviewmodel
@@ -17,7 +21,7 @@ public class ServiceItemViewModel extends ItemViewModel<ServiceViewModel> {
     /**
      * 数据
      */
-    public ObservableField<String> entity = new ObservableField<>();
+    public ObservableField<HomeProductBeans.RowsDTO> entity = new ObservableField<>();
 
     /**
      * 是否第一个
@@ -29,7 +33,7 @@ public class ServiceItemViewModel extends ItemViewModel<ServiceViewModel> {
      * @param bean
      * @param isFirst
      */
-    public ServiceItemViewModel(@NonNull ServiceViewModel viewModel, String bean,boolean isFirst) {
+    public ServiceItemViewModel(@NonNull ServiceViewModel viewModel, HomeProductBeans.RowsDTO bean,boolean isFirst) {
         super(viewModel);
         entity.set(bean);
         this.isFirst = isFirst;
@@ -42,11 +46,11 @@ public class ServiceItemViewModel extends ItemViewModel<ServiceViewModel> {
     public BindingCommand itemClick = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            //Bundle bundle = new Bundle();
-            //bundle.putString("user_id", String.valueOf(entity.get().getM_id()));
-            //bundle.putString("userPhone",entity.get().getM_mobile());
-            //viewModel.startActivity(UserInfoActivity.class,bundle);
-            viewModel.startActivity(ServiceDetailActivity.class);
+            if(entity.get() != null){
+                Bundle bundle = new Bundle();
+                bundle.putString("productId", AndroidDes3Util.encode(String.valueOf(entity.get().getId())));
+                viewModel.startActivity(ServiceDetailActivity.class,bundle);
+            }
         }
     });
 }

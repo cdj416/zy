@@ -2,16 +2,16 @@ package com.zhongyiguolian.zy.ui.main.activity;
 
 import android.os.Bundle;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.databinding.ActivityRetrievePasswordBinding;
 import com.zhongyiguolian.zy.ui.main.viewmodel.RetrievePasswordViewModel;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.CustomDialog;
-
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
 import me.tatarka.bindingcollectionadapter2.BR;
 
@@ -124,11 +124,47 @@ public class RetrievePasswordActivity extends CustomActivity<ActivityRetrievePas
                 return;
             }
 
+            viewModel.clearParams().setParams("account", AndroidDes3Util.encode(viewModel.phoneNum.get()))
+                    .setParams("password",AndroidDes3Util.encode(viewModel.password.get()))
+                    .setParams("password2",AndroidDes3Util.encode(viewModel.confirmSecret.get()))
+                    .setParams("code",AndroidDes3Util.encode(viewModel.messageCode.get()))
+                    .requestData(Constants.SETPASSWORD);
 
-            //请求注册接口数据
-            CustomDialog.promptDialog(this,"更改成功！","确定",false, v -> {
-                finish();
-            });
         });
+
+        //检验并发送验证码
+        viewModel.uc.checkPhoneNum.observe(this,aBoolean -> {
+            //是否输入手机号
+            if(!BaseUtil.isValue(viewModel.phoneNum.get())){
+                ToastUtils.showShort("请输入手机号！");
+                return;
+            }
+
+            //验证手机号是否合法
+            if(!viewModel.isPhoneNumberValid(numberUtil)){
+                ToastUtils.showShort("手机号不符合规范！");
+                return;
+            }
+
+            //验证手机号是否合法
+            if(!viewModel.vCode.get().equals(viewModel.inputVcode.get())){
+                ToastUtils.showShort("图形验证码错误！");
+                return;
+            }
+
+            //使其不可再次点击
+            binding.sendCode.setEnabled(false);
+
+            //发送验证码
+            viewModel.sendPhneCode();
+        });
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+
+        //首次获取图形验证码
+        viewModel.clearParams().setParams("oTime","1").requestData(Constants.GETIMGCODE);
     }
 }

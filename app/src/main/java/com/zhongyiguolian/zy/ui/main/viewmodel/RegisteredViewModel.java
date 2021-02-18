@@ -1,6 +1,7 @@
 package com.zhongyiguolian.zy.ui.main.viewmodel;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
@@ -9,15 +10,15 @@ import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.RxBus;
 import com.hongyuan.mvvmhabitx.bus.RxSubscriptions;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
-import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
-import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.ui.main.activity.CountrysActivity;
 import com.zhongyiguolian.zy.ui.main.activity.PrivacyPolicyActivity;
 import com.zhongyiguolian.zy.ui.main.activity.UserAgreementActivity;
 import com.zhongyiguolian.zy.ui.main.beans.CountrysBeans;
+import com.zhongyiguolian.zy.ui.main.beans.ImgCodeBeans;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.HourMeterUtil;
 
 import io.michaelrocks.libphonenumber.android.NumberParseException;
@@ -58,6 +59,8 @@ public class RegisteredViewModel extends CustomViewModel<MyRepository> implement
         public SingleLiveEvent<Void> registerSuccess = new SingleLiveEvent<>();
         //验证手机号是否合规
         public SingleLiveEvent<Boolean> checkPhoneNum = new SingleLiveEvent<>();
+        //可再次点击发送验证码
+        public SingleLiveEvent<Boolean> canSendCode = new SingleLiveEvent<>();
     }
 
     /**
@@ -94,7 +97,7 @@ public class RegisteredViewModel extends CustomViewModel<MyRepository> implement
     /**
      * 图形验证码
      */
-    public ObservableField<String> vCode = new ObservableField<>("9823");
+    public ObservableField<String> vCode = new ObservableField<>("");
 
     /**
      * 短信验证码
@@ -142,7 +145,8 @@ public class RegisteredViewModel extends CustomViewModel<MyRepository> implement
     public BindingCommand changeVcode = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            vCode.set(String.valueOf((int) ((Math.random() * 9 + 1) * 1000)));
+            //从新获取图形验证码
+            clearParams().setParams("oTime","1").requestData(Constants.GETIMGCODE);
         }
     });
 
@@ -208,8 +212,12 @@ public class RegisteredViewModel extends CustomViewModel<MyRepository> implement
      * */
     public void sendPhneCode(){
         //发送验证码
-        clearParams().setParams("mobile",phoneNum.get()).setParams("use_type","1");
-        requestData(Constants.SENDCODE);
+        clearParams().setParams("account", AndroidDes3Util.encode(phoneNum.get()))
+                .setParams("type", AndroidDes3Util.encode("0"))
+                .setParams("imgCode", AndroidDes3Util.encode(inputVcode.get()))
+                .setParams("voice", AndroidDes3Util.encode("0"))
+                .setParams("oTime","1");
+        requestData(Constants.SENDSMSCODE);
 
         hourMeterUtil.reStartCount();
     }
@@ -253,6 +261,8 @@ public class RegisteredViewModel extends CustomViewModel<MyRepository> implement
         }else{
             sendString.set("发送");
             hourMeterUtil.pauseCount();
+            //通知可再次允许点击
+            uc.canSendCode.call();
         }
     }
 
@@ -294,12 +304,18 @@ public class RegisteredViewModel extends CustomViewModel<MyRepository> implement
         hourMeterUtil.onDestory();
     }
 
+    /**
+     * @param code
+     * @param dataBean
+     */
     @Override
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);
 
-        if(code == Constants.SENDCODE){
-
+        //获取图像验证码
+        if(code == Constants.GETIMGCODE){
+            ImgCodeBeans codeBeans = (ImgCodeBeans)dataBean;
+            vCode.set(codeBeans.getImgCode());
         }
 
         if(code == Constants.REGISTER){

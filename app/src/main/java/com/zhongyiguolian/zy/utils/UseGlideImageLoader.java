@@ -16,8 +16,18 @@ import com.zhongyiguolian.zy.R;
 public class UseGlideImageLoader extends ImageLoader {
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
+
         //Glide 加载图片简单用法
         RequestOptions options = new RequestOptions().placeholder(R.mipmap.delelet_home_item_img).error(R.mipmap.delelet_home_item_img).centerCrop();
-        Glide.with(context).load(path).apply(options).transform(new GlideRoundTransform()).into(imageView);
+
+        String imgPath = "";
+
+        if(!path.toString().contains("R_")){
+            imgPath = path.toString();
+            Glide.with(context).load(imgPath).apply(options).transform(new GlideRoundTransform()).into(imageView);
+        }else{
+            Glide.with(context).load(Integer.valueOf(path.toString().substring(2))).apply(options).transform(new GlideRoundTransform()).into(imageView);
+        }
+
     }
 }

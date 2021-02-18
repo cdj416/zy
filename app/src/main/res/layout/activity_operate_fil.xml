@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.base.CustomViewModel" />
+
+        <import type="android.view.View"/>
+        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/shape_gradient_5690ff_ffffff">
+
+        <com.zhongyiguolian.zy.myview.StatusBarHeightView
+            android:id="@+id/barHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="@color/theme_FFFFFF"
+                android:textSize="@dimen/sp_16"
+                android:gravity="center"
+                android:text="充FIL"/>
+            <ImageView
+                android:id="@+id/comBack"
+android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/white_black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"/>
+        </RelativeLayout>
+
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.zhongyiguolian.zy.myview.StickyScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="25dp"
+                        android:layout_marginTop="10dp">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="26dp"
+                            android:layout_marginStart="10dp"
+                            android:alpha="0.75"
+                            android:background="@drawable/shape_radius5_c7f8ff"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="26dp"
+                            android:textColor="@color/theme_25B5B1"
+                            android:textSize="@dimen/sp_12"
+                            android:gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            android:paddingStart="23dp"
+                            android:text="请勿向任何陌生人转账汇款"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/charge_mark_a"/>
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="185dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_marginTop="10dp">
+                        <ImageView android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/charge_mark_d"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_centerInParent="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_14"
+                                android:textColor="@color/theme_333333"
+                                android:text="可用额度(FIL)"/>
+
+                            <EditText
+                                android:layout_width="200dp"
+                                android:layout_height="50dp"
+                                android:textSize="35sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/theme_0B124B"
+                                android:background="@null"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="12dp"
+                                android:hint="0.00"
+                                android:gravity="center"
+                                android:text="1000"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_14"
+                                android:textColor="@color/theme_333333"
+                                android:text="(1000FIL 月赚30FIL)"/>
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                    <com.lihang.ShadowLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        app:hl_shadowLimit="6dp"
+                        app:hl_cornerRadius="10dp"
+                        app:hl_shadowColor="@color/theme_30003AA8"
+                        app:hl_layoutBackground="@color/transparent"
+                        app:hl_shadowHiddenTop="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="53dp"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:background="@drawable/shape_radius10_eef4ff">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/charge_mark_g"
+                                android:layout_marginStart="12dp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/theme_333333"
+                                android:textSize="@dimen/sp_11"
+                                android:layout_marginStart="6dp"
+                                android:text="年利率60%,额度不限(赚利息）"/>
+
+                        </LinearLayout>
+
+                    </com.lihang.ShadowLayout>
+
+                    <com.lihang.ShadowLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        app:hl_shadowLimit="6dp"
+                        app:hl_cornerRadius="10dp"
+                        app:hl_shadowColor="@color/theme_30003AA8"
+                        app:hl_layoutBackground="@color/transparent"
+                        app:hl_shadowHiddenTop="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:background="@drawable/shape_radius10_eef4ff">
+
+                            <com.lihang.ShadowLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:hl_shadowLimit="6dp"
+                                app:hl_cornerRadius="10dp"
+                                app:hl_shadowColor="@color/theme_30003AA8"
+                                app:hl_layoutBackground="@color/transparent"
+                                app:hl_shadowHiddenTop="true"
+                                app:hl_shadowHiddenLeft="true"
+                                app:hl_shadowHiddenRight="true">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:background="@drawable/shape_radius10_eef4ff">
+                                    <RelativeLayout
+                                        android:id="@+id/clickView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="53dp">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_13"
+                                            android:textColor="@color/theme_333333"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginStart="15dp"
+                                            android:text="充多久"/>
+
+                                        <TextView
+                                            android:id="@+id/showText"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:textSize="@dimen/sp_12"
+                                            android:background="@drawable/shape_radius24_5690ff"
+                                            android:paddingStart="8dp"
+                                            android:paddingEnd="8dp"
+                                            android:gravity="center"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginEnd="26dp"
+                                            android:text="3个月"/>
+
+                                        <ImageView
+                                            android:id="@+id/dwonImg"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@mipmap/charge_mark_right"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginEnd="16dp"/>
+                                    </RelativeLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/hidView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="31dp"
+                                        android:orientation="horizontal"
+                                        android:paddingStart="16dp"
+                                        android:paddingEnd="16dp"
+                                        android:visibility="visible">
+
+                                        <TextView
+                                            android:id="@+id/moText1"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:textSize="@dimen/sp_12"
+                                            android:background="@drawable/shape_radius24_5690ff"
+                                            android:paddingStart="8dp"
+                                            android:paddingEnd="8dp"
+                                            android:gravity="center"
+                                            android:layout_marginEnd="16dp"
+                                            android:text="3个月"/>
+
+                                        <TextView
+                                            android:id="@+id/moText2"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:textSize="@dimen/sp_12"
+                                            android:background="@drawable/shape_radius24_adc7ff"
+                                            android:paddingStart="8dp"
+                                            android:paddingEnd="8dp"
+                                            android:gravity="center"
+                                            android:layout_marginEnd="16dp"
+                                            android:text="6个月"/>
+
+                                        <TextView
+                                            android:id="@+id/moText3"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:textSize="@dimen/sp_12"
+                                            android:background="@drawable/shape_radius24_adc7ff"
+                                            android:paddingStart="8dp"
+                                            android:paddingEnd="8dp"
+                                            android:gravity="center"
+                                            android:layout_marginEnd="16dp"
+                                            android:text="12个月"/>
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+                            </com.lihang.ShadowLayout>
+
+                            <com.lihang.ShadowLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:hl_shadowLimit="6dp"
+                                app:hl_cornerRadius="10dp"
+                                app:hl_shadowColor="@color/theme_30003AA8"
+                                app:hl_layoutBackground="@color/transparent"
+                                app:hl_shadowHiddenTop="true"
+                                app:hl_shadowHiddenLeft="true"
+                                app:hl_shadowHiddenRight="true">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="53dp"
+                                    android:background="@drawable/shape_radius10_eef4ff">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_13"
+                                        android:textColor="@color/theme_333333"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginStart="15dp"
+                                        android:text="怎么赚"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/theme_333333"
+                                        android:textSize="@dimen/sp_12"
+                                        android:gravity="center"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginEnd="16dp"
+                                        android:text="月数*3%"/>
+                                </RelativeLayout>
+
+
+                            </com.lihang.ShadowLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/openDialog"
+                                android:layout_width="match_parent"
+                                android:layout_height="53dp"
+                                android:background="@drawable/shape_radius10_eef4ff">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_13"
+                                    android:textColor="@color/theme_333333"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="15dp"
+                                    android:text="收益计划"/>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginEnd="26dp"
+                                    android:orientation="vertical"
+                                    android:gravity="right">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_13"
+                                        android:textColor="@color/theme_333333"
+                                        android:text="04月15日总收益1090FIL"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_13"
+                                        android:textColor="@color/theme_999999"
+                                        android:text="赚取90FIL"/>
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@mipmap/charge_mark_right"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginEnd="16dp"/>
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                    </com.lihang.ShadowLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="20dp">
+
+                        <View
+                            android:layout_width="4dp"
+                            android:layout_height="4dp"
+                            android:background="@drawable/shape_radius15_3b7cf8"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_11"
+                            android:textColor="@color/theme_707070"
+                            android:text="点击下一步表示已同意 "/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_11"
+                            android:textColor="@color/theme_1D39EB"
+                            android:text="充FIL等相关协议 "/>
+                    </LinearLayout>
+
+                    <com.lihang.ShadowLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="57dp"
+                        android:layout_marginEnd="57dp"
+                        app:hl_shadowLimit="6dp"
+                        app:hl_cornerRadius="7dp"
+                        app:hl_shadowColor="@color/theme_405690FF"
+                        app:hl_layoutBackground="@color/transparent"
+                        app:hl_shadowHiddenTop="true"
+                        android:layout_marginTop="40dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="36dp"
+                            android:textColor="@color/theme_FFFFFF"
+                            android:textSize="@dimen/sp_15"
+                            android:gravity="center"
+                            android:background="@drawable/shape_radius24_5690ff"
+                            android:text="下一步"/>
+                    </com.lihang.ShadowLayout>
+                </LinearLayout>
+
+        </com.zhongyiguolian.zy.myview.StickyScrollView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </LinearLayout>
+
+</layout>

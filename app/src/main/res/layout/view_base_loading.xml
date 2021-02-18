@@ -5,24 +5,25 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <RelativeLayout
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:orientation="vertical"
-        android:background="@color/transparent"
         android:gravity="center">
+
+        <View
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:background="@drawable/shape_radius6_f1f1f8"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:alpha="0.5"/>
+
         <ImageView
             android:id="@+id/loadImg"
-            android:layout_width="24dp"
-            android:layout_height="32dp"
-            android:background="@drawable/animation_list_loading"/>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/theme_333333"
-            android:textSize="12sp"
-            android:layout_marginTop="10dp"
-            android:text="加载中..."/>
-    </LinearLayout>
+            android:background="@drawable/animation_list_loading"/>
+    </RelativeLayout>
 
 </LinearLayout>

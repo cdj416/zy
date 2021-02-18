@@ -2,10 +2,12 @@ package com.zhongyiguolian.zy.ui.home.viewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.base.MultiItemViewModel;
+import com.zhongyiguolian.zy.ui.home.beans.ServiceDetailBeans;
 
 /**
  * Create Author：goldze
@@ -16,13 +18,13 @@ public class ComfirmOrderCotentMultiViewModel extends MultiItemViewModel<Comfirm
     /**
      * 数据
      */
-    public ObservableField<String> entity = new ObservableField<>();
+    public ObservableField<ServiceDetailBeans.ResultMapDTO.VoDTO> entity = new ObservableField<>();
 
     /**
      * @param viewModel
      * @param bean
      */
-    public ComfirmOrderCotentMultiViewModel(@NonNull ComfirmOrderViewModel viewModel,String bean) {
+    public ComfirmOrderCotentMultiViewModel(@NonNull ComfirmOrderViewModel viewModel, ServiceDetailBeans.ResultMapDTO.VoDTO bean) {
         super(viewModel);
         entity.set(bean);
     }

@@ -29,21 +29,29 @@
                 android:layout_height="1px"
                 android:background="@color/theme_EEEEEE"
                 android:layout_gravity="bottom"/>
-            <com.google.android.material.bottomnavigation.BottomNavigationView
+            <!--<com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/navigation"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 app:itemBackground="@color/theme_FFFFFF"
                 app:itemIconTint="@drawable/bottom_select"
                 app:itemTextColor="@drawable/bottom_select"
-                app:menu="@menu/bottom_navigation_main"/>
+                app:menu="@menu/bottom_navigation_main"/>-->
+
+            <me.majiajie.pagerbottomtabstrip.PageNavigationView
+                android:id="@+id/tab"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_gravity="bottom"
+                android:background="@color/theme_FFFFFF"
+                app:layout_behavior=".my_view.BottomViewBehavior"/>
         </LinearLayout>
 
-        <!--<com.hongyuan.sellcoach.myview.VersionChangeView
+        <com.zhongyiguolian.zy.myview.VersionChangeView
             android:id="@+id/versionView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:setAppChangeDate="@{viewModel.entity}"/>-->
+            app:setAppChangeDate="@{viewModel.entity}"/>
     </FrameLayout>
 
 </layout>

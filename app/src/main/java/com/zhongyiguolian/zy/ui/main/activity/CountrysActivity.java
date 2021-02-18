@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.databinding.ActivityCountrysBinding;
 import com.zhongyiguolian.zy.ui.main.viewmodel.CountrysViewModel;
 
@@ -66,7 +67,8 @@ public class CountrysActivity extends CustomActivity<ActivityCountrysBinding, Co
     public void initData() {
         super.initData();
 
-        //请求左边数据，只请求一次
+        //请求国籍列表
+        viewModel.clearParams().setParams("oTime","1").requestData(Constants.GETALLNATIONAL);
     }
 
 }

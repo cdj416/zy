@@ -34,6 +34,7 @@
                 android:text="添加银行卡"/>
             <ImageView
                 android:id="@+id/comBack"
+android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/white_black"
@@ -107,7 +108,7 @@
                     android:textSize="@dimen/sp_15"
                     android:textColor="@color/theme_333333"
                     android:layout_gravity="center_vertical"
-                    android:text="银行卡"/>
+                    android:text="所属银行"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -145,7 +146,7 @@
                     android:textSize="@dimen/sp_15"
                     android:textColor="@color/theme_333333"
                     android:layout_gravity="center_vertical"
-                    android:text="开户行"/>
+                    android:text="开户行名"/>
 
                 <EditText
                     android:layout_width="match_parent"
@@ -208,7 +209,8 @@
             android:layout_height="55dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:visibility="gone">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -265,7 +267,7 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/shape_radius5_5690ff"
             android:layout_marginTop="50dp"
-            android:text="同意协议并验证"
+            android:text="@{viewModel.butText}"
             app:onClickCommand="@{viewModel.goSendCode}"/>
     </LinearLayout>
 

@@ -1,7 +1,6 @@
 package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
@@ -11,9 +10,13 @@ import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomViewModel;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.ui.person.activity.FilWthdrawalActivity;
-import java.util.ArrayList;
+import com.zhongyiguolian.zy.ui.person.beans.FilIncomeBean;
+import com.zhongyiguolian.zy.ui.person.beans.MyAssets;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
+
 import java.util.List;
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
@@ -24,19 +27,35 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
  */
 public class FilReflectViewModel extends CustomViewModel<MyRepository> {
 
-    public ObservableField<List<String>> banners = new ObservableField<>(new ArrayList<>());
+    /**
+     * 数据
+     */
+    public ObservableField<MyAssets.AssetsListDTO> entity = new ObservableField<>();
 
+    /**
+     * @param application
+     * @param model
+     */
     public FilReflectViewModel(@NonNull Application application, MyRepository model) {
         super(application, model);
     }
 
-    //给RecyclerView添加ObservableList
+
+    /**
+     * 给RecyclerView添加ObservableList
+     */
     public ObservableList<FilReflectItemViewModel> observableList = new ObservableArrayList<>();
 
-    //给RecyclerView添加ItemBinding
+
+    /**
+     * 给RecyclerView添加ItemBinding
+     */
     public ItemBinding<FilReflectItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.item_fil_reflect);
 
-    //体现详情页
+
+    /**
+     * 体现详情页
+     */
     public BindingCommand goFilReflect = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
@@ -44,38 +63,25 @@ public class FilReflectViewModel extends CustomViewModel<MyRepository> {
         }
     });
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        addTestData();
-    }
-
-    public void addTestData(){
-
-
-
-        for(int i = 0 ; i < 6 ; i++){
-            FilReflectItemViewModel itemViewModel = new FilReflectItemViewModel(this,"");
-
-            observableList.add(itemViewModel);
-            banners.get().add("");
-        }
-    }
-
+    /**
+     * @param code
+     * @param dataBean
+     */
     @Override
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);
 
-        /*if(code == Constants.GET_FRIEND_MSG_LIST){
-            List<MessageFansBean.ListBean> mList = ((MessageFansBean) dataBean).getList();
+        if(code == Constants.GETMYINCOME1){
+            List<FilIncomeBean.MyIncomeDTO> mList = ((FilIncomeBean)dataBean).getMyIncome();
+
             //清除旧数据
             if(curPage == FIRST_PAGE){
                 observableList.clear();
             }
 
             if(mList != null && mList.size() > 0){
-                for(MessageFansBean.ListBean bean : mList){
-                    MessageFansItemViewModel itemViewModel = new MessageFansItemViewModel(this,bean);
+                for(FilIncomeBean.MyIncomeDTO bean : mList){
+                    FilReflectItemViewModel itemViewModel = new FilReflectItemViewModel(this,bean);
                     observableList.add(itemViewModel);
                 }
             }
@@ -87,6 +93,17 @@ public class FilReflectViewModel extends CustomViewModel<MyRepository> {
             }else{
 
             }
-        }*/
+        }
+
+        if(code == Constants.GETALLASSETS){
+            MyAssets assets = (MyAssets)dataBean;
+
+            for(MyAssets.AssetsListDTO bean : assets.getAssetsList()){
+                if("FIL".equals(bean.getSymbol())){
+                    entity.set(bean);
+                }
+            }
+
+        }
     }
 }

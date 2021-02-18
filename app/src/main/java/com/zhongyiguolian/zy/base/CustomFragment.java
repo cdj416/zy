@@ -478,6 +478,7 @@ public abstract class CustomFragment<V extends ViewDataBinding, VM extends Custo
             refresh.setEnableLoadMore(true);
             refresh.setEnableRefresh(true);
 
+            //开启分页效果
             viewModel.isLoadMore = true;
         }else if(type == REFRESH_0X4){
             refresh.setEnableLoadMore(false);

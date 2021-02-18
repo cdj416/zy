@@ -39,6 +39,7 @@
 
             <ImageView
                 android:id="@+id/comBack"
+android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/white_black"
@@ -77,7 +78,9 @@
                             android:layout_height="85dp"
                             app:riv_corner_radius="100dp"
                             android:scaleType="centerCrop"
-                            android:src="@mipmap/default_head_img"/>
+                            android:src="@mipmap/default_head_img"
+                            app:imageUrl="@{viewModel.entity.headPortrait}"
+                            app:defaultImg="@{@drawable/default_head_img}"/>
 
                         <Button
                             android:id="@+id/goMain"

@@ -39,6 +39,7 @@
 
             <ImageView
                 android:id="@+id/comBack"
+android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/white_black"
@@ -113,7 +114,7 @@
                                 android:textSize="@dimen/sp_15"
                                 android:textColor="@color/theme_333333"
                                 android:layout_centerVertical="true"
-                                android:text="设置支付密码"/>
+                                android:text="设置交易密码"/>
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -141,7 +142,7 @@
                                 android:textSize="@dimen/sp_15"
                                 android:textColor="@color/theme_333333"
                                 android:layout_centerVertical="true"
-                                android:text="修改支付密码"/>
+                                android:text="修改交易密码"/>
 
                             <ImageView
                                 android:layout_width="wrap_content"
@@ -217,6 +218,7 @@
                             android:layout_height="45dp"
                             android:paddingStart="14dp"
                             android:paddingEnd="14dp"
+                            android:visibility="gone"
                             app:onClickCommand="@{viewModel.goFeedBack}">
 
                             <TextView

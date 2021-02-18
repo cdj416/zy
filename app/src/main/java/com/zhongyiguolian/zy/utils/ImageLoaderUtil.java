@@ -27,6 +27,14 @@ public class ImageLoaderUtil implements IZoomMediaLoader {
 
     @Override
     public void displayImage(@NonNull Fragment context, @NonNull String path, ImageView imageView, @NonNull final MySimpleTarget simpleTarget) {
+
+        if(path.contains("R_")){
+            simpleTarget.onResourceReady();
+
+            Glide.with(context).load(Integer.valueOf(path.substring(2))).into(imageView);
+            return;
+        }
+
         RequestOptions options = new RequestOptions().error(R.mipmap.fang_default);
         Glide.with(context).load(path).apply(options).listener(new RequestListener<Drawable>() {
             @Override
@@ -45,6 +53,7 @@ public class ImageLoaderUtil implements IZoomMediaLoader {
 
     @Override
     public void displayGifImage(@NonNull Fragment context, @NonNull String path, ImageView imageView, @NonNull final MySimpleTarget simpleTarget) {
+
         RequestOptions options = new RequestOptions().dontAnimate().error(R.mipmap.fang_default);
         Glide.with(context).load(path).apply(options).listener(new RequestListener<Drawable>() {
             @Override

@@ -37,11 +37,62 @@
     <color name="theme_707070">#707070</color>
     <color name="theme_DFDFDF">#DFDFDF</color>
     <color name="theme_5690FF">#5690FF</color>
+    <color name="theme_335690FF">#335690FF</color>
+    <color name="theme_405690FF">#405690FF</color>
     <color name="theme_666666">#666666</color>
     <color name="theme_D7E4FF">#D7E4FF</color>
+    <color name="theme_0058FF">#0058FF</color>
+    <color name="theme_1D39EB">#1D39EB</color>
+    <color name="theme_0023FF">#0023FF</color>
+    <color name="theme_EFF4FF">#EFF4FF</color>
+    <color name="theme_1A66B2">#1A66B2</color>
+    <color name="theme_51A8FF">#51A8FF</color>
+    <color name="theme_2B95FF">#2B95FF</color>
+    <color name="theme_A2CEFC">#A2CEFC</color>
+    <color name="theme_003AA8">#003AA8</color>
+    <color name="theme_30003AA8">#30003AA8</color>
+    <color name="theme_66003AA8">#66003AA8</color>
+    <color name="theme_13AC97">#13AC97</color>
+    <color name="theme_F7F9FF">#F7F9FF</color>
+    <color name="theme_EEF4FF">#EEF4FF</color>
+    <color name="theme_F5F9FF">#F5F9FF</color>
+    <color name="theme_F5F8FF">#F5F8FF</color>
+    <color name="theme_D8E6FF">#D8E6FF</color>
+    <color name="theme_91b7ff">#91B7FF</color>
+    <color name="theme_154297">#154297</color>
+    <color name="theme_DDE9FF">#DDE9FF</color>
+    <color name="theme_3B7CF8">#3B7CF8</color>
+    <color name="theme_7EAAFF">#7EAAFF</color>
+    <color name="theme_DBFBFF">#DBFBFF</color>
+    <color name="theme_84EEFF">#84EEFF</color>
+    <color name="theme_50EEFF">#5084EEFF</color>
+    <color name="theme_61C5FF">#61C5FF</color>
+    <color name="theme_5061C5FF">#5061C5FF</color>
+    <color name="theme_ACD8FF">#ACD8FF</color>
+    <color name="theme_50ACD8FF">#50ACD8FF</color>
+    <color name="theme_5983FC">#5983FC</color>
+    <color name="theme_505983FC">#505983FC</color>
+    <color name="theme_F2F6FF">#F2F6FF</color>
+    <color name="theme_C7F8FF">#C7F8FF</color>
+    <color name="theme_25B5B1">#25B5B1</color>
+    <color name="theme_E0EAFF">#E0EAFF</color>
+    <color name="theme_0B124B">#0B124B</color>
+    <color name="theme_D4E2FF">#D4E2FF</color>
+    <color name="theme_396087">#396087</color>
+    <color name="theme_24DBC2">#24DBC2</color>
+    <color name="theme_3EA4F9">#3EA4F9</color>
+    <color name="theme_FFB54B">#FFB54B</color>
+    <color name="theme_9D63FD">#9D63FD</color>
+    <color name="theme_F81F76">#F81F76</color>
+    <color name="theme_FCFDFFFF">#FCFDFFFF</color>
 
     <color name="dark">#803cbcb7</color>
     <color name="light">#800de6e8</color>
+
+    <integer-array name="gradient_arc_color">
+        <item>@color/theme_FFFFFF</item>
+        <item>@color/theme_FFFFFF</item>
+    </integer-array>
 
 
 </resources>

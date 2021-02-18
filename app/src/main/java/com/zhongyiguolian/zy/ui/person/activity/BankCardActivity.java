@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
-import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.databinding.ActivityBankCardBinding;
 import com.zhongyiguolian.zy.ui.person.viewmodel.BankCardViewModel;
 import me.tatarka.bindingcollectionadapter2.BR;
@@ -63,6 +62,6 @@ public class BankCardActivity extends CustomActivity<ActivityBankCardBinding, Ba
         super.initData();
 
         //查询银行卡列表
-        viewModel.requestData(Constants.CARD_LIST);
+        //viewModel.requestData(Constants.CARD_LIST);
     }
 }

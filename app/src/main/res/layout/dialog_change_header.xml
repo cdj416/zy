@@ -29,7 +29,7 @@
             android:textSize="@dimen/sp_15"
             android:textColor="@color/theme_333333"
             android:background="@color/theme_FFFFFF"
-            android:text="保存图片"/>
+            android:text="拍照"/>
 
         <TextView
             android:id="@+id/cancel"

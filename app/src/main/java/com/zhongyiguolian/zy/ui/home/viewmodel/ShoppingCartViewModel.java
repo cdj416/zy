@@ -146,8 +146,10 @@ public class ShoppingCartViewModel extends CustomViewModel<MyRepository> {
                     //未选中商品
                     ToastUtils.showShort("请选择商品！");
                 }else{
+                    ToastUtils.showShort("该功能暂未开通！");
+
                     //去确认订单页面
-                    startActivity(ConfirmOrderActivity.class);
+                    //startActivity(ConfirmOrderActivity.class);
                 }
             }else{
                 //查询是否有选中商品

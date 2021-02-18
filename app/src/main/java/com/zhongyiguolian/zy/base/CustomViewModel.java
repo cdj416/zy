@@ -4,13 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
-
 import com.hongyuan.mvvmhabitx.base.BaseModel;
 import com.hongyuan.mvvmhabitx.base.IBaseViewModel;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
@@ -22,9 +20,10 @@ import com.trello.rxlifecycle2.LifecycleProvider;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.data.http.MyBaseResponse;
-import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.data.userbean.FileBean;
 import com.zhongyiguolian.zy.data.userbean.MemberLoginBean;
+import com.zhongyiguolian.zy.ui.main.activity.LoginActivity;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
@@ -32,7 +31,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -385,6 +383,8 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
     /***********************************************************************************************/
     //普通请求参数
     private Map<String, String> params;
+    //需要刷新的请求参数
+    private Map<String, String> refParams;
     //文件请求参数
     private Map<String,RequestBody> fileParams;
     //分页需要的数据
@@ -488,6 +488,40 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
     }
 
     /*
+    * 组装需要刷新的接口参数
+    * */
+    public CustomViewModel setRefParams(String key, String value){
+        if(refParams == null){
+            refParams = new HashMap<>();
+        }
+        refParams.put(key, value);
+
+        return this;
+    }
+
+    /*
+     * 获取参数集合
+     * */
+    public Map<String, String> getRefParams(){
+        if(refParams == null){
+            refParams = new HashMap<>();
+        }
+
+        //开启了分页效果
+        if(isLoadMore){
+            refParams.put("pageNum", AndroidDes3Util.encode(String.valueOf(curPage)));
+            refParams.put("pageIndex", AndroidDes3Util.encode(String.valueOf(curPage)));
+            refParams.put("pageSize", AndroidDes3Util.encode(String.valueOf(pageSize)));
+        }
+
+        /*if(loginBean != null && BaseUtil.isValue(loginBean.getToken())){
+            params.put("x-token",loginBean.getToken());
+        }*/
+
+        return this.refParams;
+    }
+
+    /*
      * 清空参数集
      * */
     public CustomViewModel clearParams(){
@@ -505,6 +539,13 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
             params = new HashMap<>();
         }
 
+        //开启了分页效果
+        if(isLoadMore){
+            params.put("pageNum", AndroidDes3Util.encode(String.valueOf(curPage)));
+            params.put("pageIndex", AndroidDes3Util.encode(String.valueOf(curPage)));
+            params.put("pageSize", AndroidDes3Util.encode(String.valueOf(pageSize)));
+        }
+
         /*if(loginBean != null && BaseUtil.isValue(loginBean.getToken())){
             params.put("x-token",loginBean.getToken());
         }*/
@@ -519,7 +560,15 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
         return refreshLayout -> {
             //刷新，初始化页数为1
             curPage = FIRST_PAGE;
-            requestData(code);
+
+            //初始化刷新使用的参数
+            clearParams().getParams().putAll(getRefParams());
+
+            if(code == Constants.PRODUCT_LIST){
+                requestNoData(code);
+            }else{
+                requestData(code);
+            }
 
             if(aloneRefreshCode() != 0){
                 requestData(aloneRefreshCode());
@@ -540,12 +589,20 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
     public OnLoadMoreListener onLoadMore(int code){
         return refreshLayout -> {
             curPage++;
-            requestData(code);
+
+            //初始化刷新使用的参数
+            clearParams().getParams().putAll(getRefParams());
+
+            if(code == Constants.PRODUCT_LIST){
+                requestNoData(code);
+            }else{
+                requestData(code);
+            }
         };
     }
 
     /*
-    * 数据请求
+    * 数据请求(具有模板的请求)
     * */
     @SuppressLint("CheckResult")
     public <T> void requestData(int code){
@@ -553,16 +610,16 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
             //Log.e("cnn","========接口======="+Constants.getInstance().getPath(code));
             Class clazz = Class.forName("com.zhongyiguolian.zy.data.MyRepository");
             MyRepository repository = MyRepository.getInstance(null,null);
-            Method m = clazz.getMethod(Constants.getInstance().getPath(code), Map.class);
+            Method m = clazz.getMethod(Constants.getInstance().getPath(code),String.class, Map.class);
             //Method m = clazz.getMethod(Constants.getInstance().getPath(code), String.class,Map.class);
             //RequestBody body = RequestBody.create(MediaType.parse("application/json"), GsonUtil.getGson().toJson(getParams()));
 
             Observable ob;
-            if(code == Constants.UPFILE_OSS || code == Constants.UPFILE_OSS_MORE){
+            if(code == Constants.CONFIRM || code == Constants.REALNAMEEXAMINE || code == Constants.EDITHEADPORTRAIT){
                 //Method m = clazz.getMethod(Constants.getInstance().getPath(code), Map.class);
-                ob = (Observable) m.invoke(repository,getFileParams());
+                ob = (Observable) m.invoke(repository,loginBean.getToken(),getFileParams());
             }else{
-                ob = (Observable) m.invoke(repository,getParams());
+                ob = (Observable) m.invoke(repository,loginBean.getToken(),getParams());
             }
 
             ob.compose(RxUtils.schedulersTransformer()) //线程调度
@@ -575,16 +632,78 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
                     })
                     .subscribe((Consumer<MyBaseResponse<T>>) response -> {
                         //请求成功
-                        if(response.getState()== 0){//0表示成功
+                        if(response.getState()== 0 ){//0表示成功
                             returnData(code,response.getData());
                         }else{
                             ToastUtils.showShort(response.getMessage());
+
+                            if(response.getState() == -1){//需要登录
+                                startActivity(LoginActivity.class);
+                            }
                         }
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) {
+                            Log.e("cnn","================ ==============="+throwable.getLocalizedMessage());
+                            //ToastUtils.showShort("请检查网络是否连接！");
+                            //关闭对话框
+                            dismissDialog();
+                        }
+                    }, new Action() {
+                        @Override
+                        public void run() throws Exception {
+                            //关闭对话框
+                            dismissDialog();
+
+                            if(isLoadMore){
+                                //关闭刷新加载动画
+                                uc.closeRefresh.call();
+                            }
+                        }
+                    });
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.e("cnn","===============反射方法失败！==============");
+        }
+    }
+
+    /*
+     * 数据请求(不具有模板的请求)
+     * */
+    @SuppressLint("CheckResult")
+    public <T> void requestNoData(int code){
+        try {
+            //Log.e("cnn","========接口======="+Constants.getInstance().getPath(code));
+            Class clazz = Class.forName("com.zhongyiguolian.zy.data.MyRepository");
+            MyRepository repository = MyRepository.getInstance(null,null);
+            Method m = clazz.getMethod(Constants.getInstance().getPath(code),String.class, Map.class);
+            //Method m = clazz.getMethod(Constants.getInstance().getPath(code), String.class,Map.class);
+            //RequestBody body = RequestBody.create(MediaType.parse("application/json"), GsonUtil.getGson().toJson(getParams()));
+
+            Observable ob;
+            if(code == Constants.CONFIRM){
+                //Method m = clazz.getMethod(Constants.getInstance().getPath(code), Map.class);
+                ob = (Observable) m.invoke(repository,loginBean.getToken(),getFileParams());
+            }else{
+                ob = (Observable) m.invoke(repository,loginBean.getToken(),getParams());
+            }
+
+            ob.compose(RxUtils.schedulersTransformer()) //线程调度
+                    .compose(RxUtils.exceptionTransformer()) // 网络错误的异常转换, 这里可以换成自己的ExceptionHandle
+                    .doOnSubscribe(this)//请求与ViewModel周期同步-
+                    .doOnSubscribe(disposable -> {
+                        if(!noShowLoading){
+                            showDialog("正在请求...");
+                        }
+                    })
+                    .subscribe((Consumer<T>) response -> {
+                        //请求成功
+                        returnData(code,response);
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) {
                             Log.e("cnn","================出错了==============="+throwable.getLocalizedMessage());
-                            ToastUtils.showShort("请检查网络是否连接！");
+                            //ToastUtils.showShort("请检查网络是否连接！");
                             //关闭对话框
                             dismissDialog();
                         }

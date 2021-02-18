@@ -9,11 +9,11 @@ import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomFragment;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.databinding.FragmentHomeBinding;
 import com.zhongyiguolian.zy.ui.home.viewmodel.HomeViewModel;
-import com.zhongyiguolian.zy.utils.StatusBarUtil;
-import java.util.ArrayList;
-import java.util.List;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
+import com.zhongyiguolian.zy.utils.CustomDialog;
 
 /**
  * 首页页面
@@ -59,22 +59,36 @@ public class HomeFragment extends CustomFragment<FragmentHomeBinding, HomeViewMo
         super.initView();
 
         setOnRefresh(binding.refresh,REFRESH_0X4);
+    }
 
-        //设置标题栏为白色
-        StatusBarUtil.setCommonUI(getActivity(),false);
+    /**
+     * 数据
+     */
+    @Override
+    public void initData() {
+        super.initData();
 
-        List<String> info = new ArrayList<>();
-        info.add("11111111111111");
-        info.add("22222222222222");
-        info.add("33333333333333");
-        info.add("44444444444444");
-        info.add("55555555555555");
-        info.add("66666666666666");
-        binding.marqueeView.startWithList(info);
+        //获取首页数据
+        viewModel.requestNoData(Constants.HOME);
+        //获取首页服务器产品
+        viewModel.clearParams().setParams("pageNum", AndroidDes3Util.encode("1"))
+                .setParams("pageSize",AndroidDes3Util.encode("10"))
+                .setParams("orderStatus","EX_ORDER_STATUS_UPPER_SHELF");
+        viewModel.requestNoData(Constants.PRODUCT_LIST);
+    }
 
-        // 在代码里设置自己的动画
-        binding.marqueeView.startWithList(info, R.anim.anim_bottom_in, R.anim.anim_top_out);
+    /**
+     * ui更改
+     */
+    @Override
+    public void initViewObservable() {
+        super.initViewObservable();
 
+        viewModel.uc.showQrImg.observe(this, aBoolean -> {
+            CustomDialog.showQrImg(getContext(), v -> {
+
+            });
+        });
     }
 
 }

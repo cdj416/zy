@@ -10,13 +10,16 @@ import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.RxBus;
 import com.hongyuan.mvvmhabitx.bus.RxSubscriptions;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
+import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
+import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.ui.main.activity.CountrysActivity;
 import com.zhongyiguolian.zy.ui.main.beans.CountrysBeans;
 import com.zhongyiguolian.zy.ui.person.activity.SendCodeActivity;
 import com.zhongyiguolian.zy.ui.person.activity.VerifiedSuccessActivity;
+import com.zhongyiguolian.zy.ui.person.beans.PayCodeBeans;
 
 import io.michaelrocks.libphonenumber.android.NumberParseException;
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
@@ -67,6 +70,11 @@ public class AddBlankViewModel extends CustomViewModel<MyRepository> {
     public ObservableField<String> countrysId = new ObservableField<>("+86");
 
     /**
+     * 按钮显示的文字
+     */
+    public ObservableField<String> butText = new ObservableField<>("添加");
+
+    /**
      * @param application
      * @param model
      */
@@ -103,7 +111,7 @@ public class AddBlankViewModel extends CustomViewModel<MyRepository> {
 
 
     /**
-     * 验证手机号并提交服务端
+     * 提交验证
      */
     public BindingCommand goSendCode = new BindingCommand(new BindingAction() {
         @Override
@@ -176,11 +184,36 @@ public class AddBlankViewModel extends CustomViewModel<MyRepository> {
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);
 
-        if(code == Constants.CARD_SAVE){
+        if(code == Constants.ADDBANKCARD){
             Bundle bundle = new Bundle();
             bundle.putString("mTitle","银行卡绑定结果");
             bundle.putString("mProText","绑定成功");
             startActivity(VerifiedSuccessActivity.class,bundle);
+        }
+
+        if(code == Constants.GETPAYCODE){
+            PayCodeBeans beans = (PayCodeBeans)dataBean;
+
+            if(beans != null && beans.getBankcard() != null && BaseUtil.isValue(beans.getBankcard().getCardNumber())){
+                blankCardNum.set(beans.getBankcard().getCardNumber());
+                blankName.set(beans.getBankcard().getBankName());
+                accountBank.set(beans.getBankcard().getSubBankName());
+                userName.set(beans.getBankcard().getCardOwner());
+
+                butText.set("修改");
+            }else{
+                butText.set("添加");
+            }
+        }
+
+        if(code == Constants.UPDATEBANKCARD){
+            ToastUtils.showShort("修改成功！");
+            finish();
+        }
+
+        if(code == Constants.ADDBANKCARD){
+            ToastUtils.showShort("添加成功！");
+            finish();
         }
     }
 }

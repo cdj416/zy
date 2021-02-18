@@ -37,6 +37,7 @@
                 android:text="购物车"/>
             <ImageView
                 android:id="@+id/comBack"
+android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/white_black"
@@ -89,7 +90,7 @@
                 android:drawableTop="@mipmap/promt_empty_img"
                 android:gravity="center"
                 android:visibility="@{viewModel.observableList.size() == 0 ? View.VISIBLE : View.GONE}"
-                android:text="暂无数据"/>
+                />
 
             <RelativeLayout
                 android:layout_width="match_parent"

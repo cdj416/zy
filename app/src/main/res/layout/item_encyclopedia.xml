@@ -26,7 +26,7 @@
                 android:textColor="@color/theme_333333"
                 android:textSize="@dimen/sp_14"
                 android:layout_centerVertical="true"
-                android:text="什么是Flash?"/>
+                android:text="@{viewModel.entity.title}"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_11"
                 android:textColor="@color/theme_333333"
-                android:text="丹佛三佛三都发恼骚女富婆三佛皮诺萨东坡那是大佛拿骚的念佛三大佛三豆腐脑骚年能收到返送佛三都发恼骚烦恼啊烦哦闹翻送佛爱上你放你妈送佛阿森纳佛啊按佛按佛啊闹翻你"/>
+                android:text="@{viewModel.entity.content}"/>
         </com.zhongyiguolian.zy.myview.UMExpandLayout>
 
     </LinearLayout>

@@ -1,12 +1,16 @@
 package com.zhongyiguolian.zy.ui.main.viewmodel;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
+
 import com.zhongyiguolian.zy.base.CustomViewModel;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.ui.main.activity.LoginActivity;
 import com.zhongyiguolian.zy.ui.main.activity.MainActivity;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.HourMeterUtil;
 
 /**
@@ -21,6 +25,11 @@ public class StartupPageViewModel extends CustomViewModel<MyRepository> implemen
      * 计时3秒进入主界面
      */
     private HourMeterUtil hourMeterUtil;
+
+    /*
+    * 是否已自动登录
+    * */
+    public boolean isLogin = false;
 
     /**
      * @param application
@@ -73,13 +82,22 @@ public class StartupPageViewModel extends CustomViewModel<MyRepository> implemen
             //停止计时
             hourMeterUtil.stopCount();
             //暂时调整到登录页面处理
-            if(model.getUser() != null && BaseUtil.isValue(model.getUser().getCustomer().getMobile())){
+            if(model.getUser() != null && BaseUtil.isValue(model.getUser().getUserName())){
                 startActivity(MainActivity.class);
             }else{
                 startActivity(LoginActivity.class);
             }
             //关闭页面
             finish();
+        }
+    }
+
+    @Override
+    protected void returnData(int code, Object dataBean) {
+        super.returnData(code, dataBean);
+
+        if(code == Constants.LOGIN){
+            isLogin = true;
         }
     }
 }

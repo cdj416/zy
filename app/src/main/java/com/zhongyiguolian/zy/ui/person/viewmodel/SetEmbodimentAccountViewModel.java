@@ -66,8 +66,8 @@ public class SetEmbodimentAccountViewModel extends CustomViewModel<MyRepository>
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);
 
-        if(code == Constants.CARD_LIST){
+        /*if(code == Constants.CARD_LIST){
 
-        }
+        }*/
     }
 }

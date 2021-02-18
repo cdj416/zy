@@ -36,11 +36,23 @@
                 android:text="服务器"/>
             <ImageView
                 android:id="@+id/comBack"
+android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/white_black"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/order_record_mark"
+                android:layout_centerVertical="true"
+                android:visibility="visible"
+                android:layout_marginEnd="11dp"
+                android:padding="5dp"
+                android:layout_alignParentEnd="true"
+                app:onClickCommand="@{viewModel.goPurchaseHistory}"/>
         </RelativeLayout>
 
         <FrameLayout
@@ -71,7 +83,7 @@
                 android:drawableTop="@mipmap/promt_empty_img"
                 android:gravity="center"
                 android:visibility="@{viewModel.observableList.size() == 0 ? View.VISIBLE : View.GONE}"
-                android:text="暂无数据"/>
+                />
 
         </FrameLayout>
 

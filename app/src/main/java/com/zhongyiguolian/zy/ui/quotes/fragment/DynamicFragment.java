@@ -152,7 +152,7 @@ public class DynamicFragment extends CustomFragment<FragmentDynamicBinding, Dyna
         viewModel.uc.showType.observe(this, aVoid -> {
             binding.markImg.setImageResource(R.mipmap.coin_type_down);
 
-            CustomDialog.selectCoin(getContext(), mList, v -> binding.markImg.setImageResource(R.mipmap.coin_type_up));
+            //CustomDialog.selectCoin(getContext(), mList, v -> binding.markImg.setImageResource(R.mipmap.coin_type_up));
         });
     }
 }

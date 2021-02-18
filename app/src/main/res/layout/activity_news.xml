@@ -41,6 +41,7 @@
                     android:text="快讯"/>
                 <ImageView
                     android:id="@+id/comBack"
+android:padding="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/white_black"
@@ -103,7 +104,7 @@
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/theme_333333"
                                 android:textSize="@dimen/sp_12"
-                                android:text="Filecoin自10月份上线以来，已成为去中心数据存储项目最火之一。由于经济模式的限制，FIL代币解锁/释放主要来自投资者、官方、矿工。解锁/释放的FIL，不一定会立即进入二级市场流通，可能会被长期持有、用于循环质押挖矿，因此挖矿质押机制会影响到FIL币的流通。目前市场上流通的FIL，有少部分是挖出来的，有协议实验室的，有ICO的，有私募的。"
+                                android:text="Filecoin自10月份上线以来，已成为去中心数据存储项目最火之一。由于经济模式的限制，FIL代币解锁/释放主要来自投资者、官方、存储资源贡献者。解锁/释放的FIL，不一定会立即进入二级市场流通，可能会被长期持有、用于循环质押数据存储增量收益，因此数据存储增量收益质押机制会影响到FIL币的流通。目前市场上流通的FIL，有少部分是挖出来的，有协议实验室的，有ICO的，有私募的。"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginEnd="16dp"
                                 android:layout_marginTop="16dp"/>

@@ -9,6 +9,9 @@
             type="com.zhongyiguolian.zy.ui.person.viewmodel.MyServicelItemViewModel" />
 
         <import type="android.view.View"/>
+        <import type="com.zhongyiguolian.zy.data.md5.BaseUtil"/>
+        <import type="com.zhongyiguolian.zy.utils.BigDecimalUtils"/>
+        <import type="com.zhongyiguolian.zy.utils.TimeUtil"/>
     </data>
 
     <LinearLayout
@@ -44,7 +47,7 @@
                     android:layout_marginLeft="8dp"
                     android:src="@mipmap/delelet_home_item_img"
                     android:scaleType="fitXY"
-                    android:layout_gravity="center_vertical" />
+                    android:layout_gravity="center_vertical"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -59,7 +62,7 @@
                         android:textSize="@dimen/sp_13"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:text="国链云·太湖l号云存储服务器"/>
+                        android:text="@{viewModel.entity.productName}"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -68,8 +71,8 @@
                         android:textSize="@dimen/sp_10"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:layout_marginTop="5dp"
-                        android:text="购买时间:2020-10-31 12:58:31"/>
+                        android:layout_marginTop="7dp"
+                        android:text="@{@string/gmsj_text+TimeUtil.formatData(TimeUtil.dateFormatYMDHMS,viewModel.entity.createTime)}"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -78,13 +81,14 @@
                         android:textSize="@dimen/sp_10"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:layout_marginTop="5dp"
-                        android:text="到期时间:2021-11-03 00:00:00"/>
+                        android:layout_marginTop="7dp"
+                        android:text="@{@string/dqsj_text + TimeUtil.formatData(TimeUtil.dateFormatYMDHMS,viewModel.entity.expireDate)}"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
+                        android:visibility="gone"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="0dp"
@@ -94,16 +98,17 @@
                             android:textSize="@dimen/sp_10"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:text="累计产量:0.670157"/>
+                            android:text="@{@string/ljlc_text + BaseUtil.getNoZoon(viewModel.entity.totalCount)}"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:textColor="#FF0606"
+                            android:textColor="@color/theme_1A66B2"
                             android:textSize="@dimen/sp_10"
                             android:ellipsize="end"
                             android:maxLines="1"
+                            android:visibility="gone"
                             android:text="托管费续费"/>
 
                     </LinearLayout>
@@ -115,8 +120,8 @@
                         android:textSize="@dimen/sp_10"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:layout_marginTop="5dp"
-                        android:text="设备编号:12832008131459585930"/>
+                        android:layout_marginTop="7dp"
+                        android:text="@{@string/sbbh_text + viewModel.entity.orderNumber}"/>
                 </LinearLayout>
             </LinearLayout>
 

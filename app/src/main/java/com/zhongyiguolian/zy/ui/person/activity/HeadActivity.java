@@ -25,28 +25,41 @@ import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
  *
- * 体现状态页面
+ * 修改头像
  * @author cdj
  * @date 2020/12/10
  */
 public class HeadActivity extends CustomActivity<ActivityHeadBinding, HeadViewModel> {
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_head;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public HeadViewModel initViewModel() {
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
         return ViewModelProviders.of(this, factory).get(HeadViewModel.class);
     }
 
+    /**
+     * ui初始化
+     */
     @Override
     public void initView() {
         super.initView();
@@ -54,13 +67,16 @@ public class HeadActivity extends CustomActivity<ActivityHeadBinding, HeadViewMo
         binding.comBack.setOnClickListener(view -> finish());
     }
 
+    /**
+     * 更改ui
+     */
     @Override
     public void initViewObservable() {
         super.initViewObservable();
 
         viewModel.uc.showDialog.observe(this, aVoid -> {
             CustomDialog.changeHeader(this, v -> {
-                if(v.getId() == R.id.selectImg){
+                if(v.getId() == R.id.selectImg || v.getId() == R.id.saveHeader){
                     PictureSelector.create(this)
                             .openGallery(PictureMimeType.ofImage())
                             .loadImageEngine(GlideEngine.createGlideEngine())// 外部传入图片加载引擎，必传项
@@ -70,13 +86,16 @@ public class HeadActivity extends CustomActivity<ActivityHeadBinding, HeadViewMo
                             .freeStyleCropEnabled(true)// 裁剪框是否可拖拽
                             .isZoomAnim(true)//图片列表点击 缩放效果 默认true
                             .forResult(PictureConfig.CHOOSE_REQUEST);
-                }else if(v.getId() == R.id.saveHeader){
-
                 }
             });
         });
     }
 
+    /**
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -96,13 +115,13 @@ public class HeadActivity extends CustomActivity<ActivityHeadBinding, HeadViewMo
                     //上传单个文件
                     if(selectList.get(0).getCompressPath() != null){
                         FileBean fileBean = new FileBean();
-                        fileBean.setFileKey("oss_file");
+                        fileBean.setFileKey("pic1");
                         fileBean.setFilePath(selectList.get(0).getCompressPath());
                         fileBean.setFileType(selectList.get(0).getMimeType());
                         fileBean.setFileUri(Uri.parse(selectList.get(0).getCompressPath()));
                         fileBean.setmFile(new File(selectList.get(0).getCompressPath()));
 
-                        //viewModel.updateFile(fileBean);
+                        viewModel.upDataHead(fileBean);
                     }
                     break;
             }

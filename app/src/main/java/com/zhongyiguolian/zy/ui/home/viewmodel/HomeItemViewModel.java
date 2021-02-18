@@ -8,7 +8,10 @@ import androidx.databinding.ObservableField;
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.zhongyiguolian.zy.base.ItemViewModel;
+import com.zhongyiguolian.zy.ui.home.activity.ConfirmOrderActivity;
 import com.zhongyiguolian.zy.ui.home.activity.ServiceDetailActivity;
+import com.zhongyiguolian.zy.ui.home.beans.HomeProductBeans;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 
 /**
  * 首页itemviewmodel
@@ -20,13 +23,13 @@ public class HomeItemViewModel extends ItemViewModel<HomeViewModel> {
     /**
      * 数据
      */
-    public ObservableField<String> entity = new ObservableField<>();
+    public ObservableField<HomeProductBeans.RowsDTO> entity = new ObservableField<>();
 
     /**
      * @param viewModel
      * @param bean
      */
-    public HomeItemViewModel(@NonNull HomeViewModel viewModel, String bean) {
+    public HomeItemViewModel(@NonNull HomeViewModel viewModel, HomeProductBeans.RowsDTO bean) {
         super(viewModel);
         entity.set(bean);
     }
@@ -38,11 +41,21 @@ public class HomeItemViewModel extends ItemViewModel<HomeViewModel> {
         @Override
         public void call() {
             Bundle bundle = new Bundle();
-            //bundle.putString("user_id", String.valueOf(entity.get().getM_id()));
-            //bundle.putString("userPhone",entity.get().getM_mobile());
-            //viewModel.startActivity(UserInfoActivity.class,bundle);
+            bundle.putString("productId", AndroidDes3Util.encode(String.valueOf(entity.get().getId())));
+            viewModel.startActivity(ServiceDetailActivity.class,bundle);
+        }
+    });
 
-            viewModel.startActivity(ServiceDetailActivity.class);
+    /*
+    * 确认订单页面
+    * */
+    public BindingCommand goSubmit = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            Bundle bundle = new Bundle();
+            bundle.putString("productId", AndroidDes3Util.encode(String.valueOf(entity.get().getId())));
+            bundle.putString("productNums", "1");
+            viewModel.startActivity(ConfirmOrderActivity.class,bundle);
         }
     });
 }

@@ -3,18 +3,20 @@ package com.zhongyiguolian.zy.ui.main.viewmodel;
 import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
-
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.RxBus;
 import com.hongyuan.mvvmhabitx.bus.RxSubscriptions;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
+import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.base.CustomViewModel;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.ui.main.activity.CountrysActivity;
 import com.zhongyiguolian.zy.ui.main.beans.CountrysBeans;
+import com.zhongyiguolian.zy.ui.main.beans.ImgCodeBeans;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.HourMeterUtil;
-
 import io.michaelrocks.libphonenumber.android.NumberParseException;
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
 import io.michaelrocks.libphonenumber.android.Phonenumber;
@@ -47,6 +49,10 @@ public class RetrievePasswordViewModel extends CustomViewModel<MyRepository> imp
     public class UIChangeObservable {
         //验证输入内容是否符合规范
         public SingleLiveEvent<Boolean> check = new SingleLiveEvent<>();
+        //验证手机号是否合规
+        public SingleLiveEvent<Boolean> checkPhoneNum = new SingleLiveEvent<>();
+        //可再次点击发送验证码
+        public SingleLiveEvent<Boolean> canSendCode = new SingleLiveEvent<>();
     }
 
     /**
@@ -78,7 +84,7 @@ public class RetrievePasswordViewModel extends CustomViewModel<MyRepository> imp
     /**
      * 图形验证码
      */
-    public ObservableField<String> vCode = new ObservableField<>("9823");
+    public ObservableField<String> vCode = new ObservableField<>("");
 
     /**
      * 验证码发送时文字显示
@@ -121,7 +127,8 @@ public class RetrievePasswordViewModel extends CustomViewModel<MyRepository> imp
     public BindingCommand changeVcode = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            vCode.set(String.valueOf((int) ((Math.random() * 9 + 1) * 1000)));
+            //从新获取图形验证码
+            clearParams().setParams("oTime","1").requestData(Constants.GETIMGCODE);
         }
     });
 
@@ -131,11 +138,24 @@ public class RetrievePasswordViewModel extends CustomViewModel<MyRepository> imp
     public BindingCommand sendCode = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            if(sendString.get().equals("发送")){
-                hourMeterUtil.reStartCount();
-            }
+            uc.checkPhoneNum.call();
         }
     });
+
+    /*
+     * 发送验证码
+     * */
+    public void sendPhneCode(){
+        //发送验证码
+        clearParams().setParams("account", AndroidDes3Util.encode(phoneNum.get()))
+                .setParams("type", AndroidDes3Util.encode("1"))//表示找回密码
+                .setParams("imgCode", AndroidDes3Util.encode(inputVcode.get()))
+                .setParams("voice", AndroidDes3Util.encode("0"))
+                .setParams("oTime","1");
+        requestData(Constants.SENDSMSCODE);
+
+        hourMeterUtil.reStartCount();
+    }
 
 
     /**
@@ -236,6 +256,25 @@ public class RetrievePasswordViewModel extends CustomViewModel<MyRepository> imp
         }else{
             sendString.set("发送");
             hourMeterUtil.pauseCount();
+            //通知可再次允许点击
+            uc.canSendCode.call();
+        }
+    }
+
+    @Override
+    protected void returnData(int code, Object dataBean) {
+        super.returnData(code, dataBean);
+
+        //获取图像验证码
+        if(code == Constants.GETIMGCODE){
+            ImgCodeBeans codeBeans = (ImgCodeBeans)dataBean;
+            vCode.set(codeBeans.getImgCode());
+        }
+
+        //修改密码
+        if(code == Constants.SETPASSWORD){
+            ToastUtils.showShort("找回成功！");
+            finish();
         }
     }
 }

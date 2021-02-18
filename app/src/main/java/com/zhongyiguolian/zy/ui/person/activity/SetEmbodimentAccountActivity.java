@@ -63,6 +63,6 @@ public class SetEmbodimentAccountActivity extends CustomActivity<ActivitySetEmbo
         super.initData();
 
 
-        viewModel.requestData(Constants.CARD_LIST);
+        //viewModel.requestData(Constants.CARD_LIST);
     }
 }

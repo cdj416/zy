@@ -8,6 +8,7 @@ import androidx.databinding.ObservableField;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
+import com.zhongyiguolian.zy.ui.main.beans.VersionBeans;
 
 /**
  * 主页viwmodel
@@ -17,6 +18,11 @@ import com.zhongyiguolian.zy.data.MyRepository;
 public class MainViewModel extends CustomViewModel<MyRepository> {
 
     /**
+     * 版本更新数据
+     */
+    public ObservableField<VersionBeans> entity = new ObservableField<>();
+
+    /**
      * @param application
      * @param model
      */
@@ -24,18 +30,13 @@ public class MainViewModel extends CustomViewModel<MyRepository> {
         super(application, model);
     }
 
-
-    /**
-     * @param code
-     * @param dataBean
-     */
     @Override
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);
 
-        /*if(code == Constants.CHECK_APP_VERSION){
-            CheckVersionBeans.InfoBean bean = ((CheckVersionBeans)dataBean).getInfo();
-            entity.set(bean);
-        }*/
+        if(code == Constants.ANDROIDVERSION){
+            VersionBeans beans = (VersionBeans)dataBean;
+            entity.set(beans);
+        }
     }
 }

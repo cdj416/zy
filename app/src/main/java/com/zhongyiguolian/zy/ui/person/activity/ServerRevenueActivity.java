@@ -1,53 +1,48 @@
 package com.zhongyiguolian.zy.ui.person.activity;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
-
+import android.view.LayoutInflater;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-
-import com.baidu.ocr.sdk.OCR;
-import com.baidu.ocr.sdk.OnResultListener;
-import com.baidu.ocr.sdk.exception.OCRError;
-import com.baidu.ocr.sdk.model.AccessToken;
-import com.baidu.ocr.sdk.model.BankCardParams;
-import com.baidu.ocr.sdk.model.BankCardResult;
-import com.baidu.ocr.ui.camera.CameraActivity;
-import com.baidu.ocr.ui.camera.CameraNativeHelper;
-import com.baidu.ocr.ui.camera.CameraView;
+import com.xujiaji.happybubble.BubbleDialog;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
-import com.zhongyiguolian.zy.databinding.ActivityAddBlankBinding;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.databinding.ActivityServerRevenueBinding;
-import com.zhongyiguolian.zy.ui.person.viewmodel.AddBlankViewModel;
 import com.zhongyiguolian.zy.ui.person.viewmodel.ServerRevenueViewModel;
-import com.zhongyiguolian.zy.utils.FileUtil;
-
-import java.io.File;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
  *
- * 设置页面
+ * 收益页面
  * @author cdj
  * @date 2020/12/10
  */
 public class ServerRevenueActivity extends CustomActivity<ActivityServerRevenueBinding, ServerRevenueViewModel> {
 
+    /**
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public int initContentView(Bundle savedInstanceState) {
         return R.layout.activity_server_revenue;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int initVariableId() {
         return BR.viewModel;
     }
 
+    /**
+     * @return
+     */
     @Override
     public ServerRevenueViewModel initViewModel() {
         AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
@@ -55,6 +50,9 @@ public class ServerRevenueActivity extends CustomActivity<ActivityServerRevenueB
     }
 
 
+    /**
+     * ui初始化
+     */
     @Override
     public void initView() {
         super.initView();
@@ -62,4 +60,51 @@ public class ServerRevenueActivity extends CustomActivity<ActivityServerRevenueB
         setOnRefresh(binding.refresh,REFRESH_0X4);
     }
 
+    @Override
+    public void initViewObservable() {
+        super.initViewObservable();
+
+        viewModel.uc.showBubble.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                new BubbleDialog(ServerRevenueActivity.this)
+                        .addContentView(LayoutInflater.from(ServerRevenueActivity.this).inflate(R.layout.buble_text, null))
+                        .setClickedView(binding.bg3)
+                        .setPosition(BubbleDialog.Position.TOP)
+                        .setOffsetY(8)
+                        .calBar(true)
+                        .setTransParentBackground()
+                        .show();
+            }
+        });
+
+        viewModel.uc.showBubble1.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                new BubbleDialog(ServerRevenueActivity.this)
+                        .addContentView(LayoutInflater.from(ServerRevenueActivity.this).inflate(R.layout.buble_text, null))
+                        .setClickedView(binding.bg4)
+                        .setPosition(BubbleDialog.Position.TOP)
+                        .setOffsetY(8)
+                        .calBar(true)
+                        .setTransParentBackground()
+                        .show();
+            }
+        });
+    }
+
+    /**
+     * 数据
+     */
+    @Override
+    public void initData() {
+        super.initData();
+
+        //获取用户个人数据
+        viewModel.setParams("token", AndroidDes3Util.encode(viewModel.loginBean.getToken()))
+                .requestData(Constants.GETUSER);
+
+        viewModel.setParams("accountType",AndroidDes3Util.encode("base"))
+                .requestData(Constants.GETALLASSETS);
+    }
 }

@@ -7,11 +7,14 @@
         <variable
             name="viewModel"
             type="com.zhongyiguolian.zy.ui.quotes.viewmodel.QuotesListItemViewModel" />
+
+        <import type="com.zhongyiguolian.zy.data.md5.BaseUtil"/>
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="49dp">
+        android:layout_height="54dp"
+        android:background="@color/theme_FFFFFF">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -24,7 +27,8 @@
             <ImageView
                 android:layout_width="26dp"
                 android:layout_height="26dp"
-                android:src="@mipmap/delect_hq_img"/>
+                android:src="@mipmap/delect_hq_img"
+                app:imageUrl="@{viewModel.entity.logoIconUrl}"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,7 +36,7 @@
                 android:textColor="@color/theme_333333"
                 android:textSize="@dimen/sp_12"
                 android:layout_marginLeft="8dp"
-                android:text="FULL"/>
+                android:text="@{viewModel.entity.coinCode}"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -60,30 +64,59 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_13"
-                android:textColor="@color/theme_333333"
-                android:text="19389.17"/>
+                android:textColor="@{viewModel.entity.up ? @color/theme_62D4A5 : @color/theme_FF0000}"
+                android:text="@{BaseUtil.getNoZoon(viewModel.entity.priceUsd)}"/>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_11"
-                android:textColor="@color/theme_999999"
-                android:layout_marginTop="2dp"
-                android:text="¥198.75"/>
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_11"
+                    android:textColor="@color/theme_333333"
+                    android:layout_marginTop="2dp"
+                    android:text="¥"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_11"
+                    android:textColor="@color/theme_333333"
+                    android:layout_marginTop="2dp"
+                    android:text="@{BaseUtil.getNoZoon(viewModel.entity.priceCNY)}"/>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="57dp"
-            android:layout_height="23dp"
-            android:textColor="@color/theme_FFFFFF"
-            android:textSize="@dimen/sp_11"
-            android:gravity="center"
-            android:background="@drawable/shape_radius4_ff0000"
-            android:layout_alignParentRight="true"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
-            android:text="-0.98%"/>
+            android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:intImg="@{viewModel.entity.upOrDown()}"/>
+
+            <TextView
+                android:layout_width="57dp"
+                android:layout_height="23dp"
+                android:textColor="@color/theme_FFFFFF"
+                android:textSize="@dimen/sp_11"
+                android:gravity="center"
+                android:layout_marginStart="5dp"
+                android:background="@{viewModel.entity.up ? @drawable/shape_radius4_62d4a5 : @drawable/shape_radius4_ff0000}"
+                android:text="@{viewModel.entity.change + @string/delete_percent_sign}"/>
+
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"

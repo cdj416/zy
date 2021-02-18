@@ -8,19 +8,23 @@
             name="viewModel"
             type="com.zhongyiguolian.zy.ui.person.viewmodel.ServerRevenueViewModel" />
 
+        <import type="com.zhongyiguolian.zy.data.md5.BaseUtil"/>
+        <import type="com.zhongyiguolian.zy.utils.BigDecimalUtils"/>
+        <import type="com.zhongyiguolian.zy.utils.TimeUtil"/>
+
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/theme_7EA8FF">
+        android:background="#EFF4FF">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@mipmap/invite_logo"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/revenue_bg"
             android:scaleType="fitXY"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,22 +37,38 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:textColor="@color/theme_FFFFFF"
-                    android:textSize="@dimen/sp_16"
-                    android:gravity="center"
-                    android:text="服务器收益"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_FFFFFF"
+                        android:textSize="@dimen/sp_14"
+                        android:gravity="center"
+                        android:text="总收益"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_FFFFFF"
+                        android:textSize="@dimen/sp_12"
+                        android:gravity="center"
+                        android:text="@{@string/uuid_text_left + viewModel.userBean.id + @string/uuid_text_right}"/>
+                </LinearLayout>
+
                 <ImageView
                     android:id="@+id/comBack"
+                    android:padding="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/white_black"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"/>
             </RelativeLayout>
-
 
 
             <com.scwang.smartrefresh.layout.SmartRefreshLayout
@@ -61,263 +81,546 @@
                     android:layout_height="wrap_content">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="88dp"
-                        android:orientation="vertical"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp"
-                        android:layout_marginTop="50dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="150dp"
-                            android:orientation="vertical"
-                            android:background="@drawable/shape_radius6_ffffff">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/sp_13"
-                                android:textColor="#5690FF"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="18dp"
-                                android:text="累计收益(FIL)"/>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                            <TextView
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <RelativeLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/theme_333333"
-                                android:textSize="22sp"
-                                android:text="23.544"
-                                android:layout_gravity="center_horizontal"
-                                android:layout_marginTop="2dp"/>
+                                android:layout_marginTop="16dp"
+                                android:layout_gravity="center_horizontal">
+
+                                <View
+                                    android:layout_width="152dp"
+                                    android:layout_height="109dp"
+                                    android:background="@drawable/shape_radius16_ffffff"
+                                    android:alpha="0.55"/>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_centerVertical="true"
+                                    android:gravity="center">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="@color/theme_333333"
+                                        android:textSize="@dimen/sp_11"
+                                        android:text="累计收益(FIL)"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="23sp"
+                                        android:textColor="@color/theme_0058FF"
+                                        android:textStyle="bold"
+                                        android:text="@{BigDecimalUtils.mul(BaseUtil.getString(viewModel.dtoBean.lejiAmount),BaseUtil.getString(1),4)}"/>
+
+                                    <TextView
+                                        android:layout_width="71dp"
+                                        android:layout_height="21dp"
+                                        android:textSize="@dimen/sp_11"
+                                        android:textColor="@color/theme_0058FF"
+                                        android:layout_marginTop="3dp"
+                                        android:gravity="center"
+                                        android:background="@drawable/shape_radius6_000000_stroke_0058ff"
+                                        android:text="实际收益?"
+                                        android:visibility="gone"
+                                        app:onClickCommand="@{viewModel.goTotalIncomeActivity}"/>
+
+                                </LinearLayout>
+                            </RelativeLayout>
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="240dp">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:src="@mipmap/xianxing_bg"
+                                    android:scaleType="fitXY"
+                                    android:layout_alignParentBottom="true"/>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="80dp"
+                                    android:orientation="horizontal"
+                                    android:layout_marginStart="12dp"
+                                    android:layout_marginEnd="12dp"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_marginBottom="14dp">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/theme_1D39EB"
+                                            android:textSize="@dimen/sp_15"
+                                            android:textStyle="bold"
+                                            android:text="@{BigDecimalUtils.mul(BaseUtil.getString(viewModel.dtoBean.profitAmount),BaseUtil.getString(1),4)}"/>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:textColor="#232C64"
+                                                android:textSize="@dimen/sp_11"
+                                                android:text="@{TimeUtil.formatData(TimeUtil.dateFormatMD , System.currentTimeMillis())}"/>
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:textColor="#232C64"
+                                                android:textSize="@dimen/sp_11"
+                                                android:text=" 25%释放"/>
+
+                                        </LinearLayout>
+
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="#232C64"
+                                            android:textSize="@dimen/sp_11"
+                                            android:text="(FIL)"/>
+
+                                    </LinearLayout>
+
+                                    <View
+                                        android:layout_width="1dp"
+                                        android:layout_height="30dp"
+                                        android:background="@drawable/shape_gradient_line_ser"
+                                        android:layout_gravity="center_vertical"/>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/theme_1D39EB"
+                                            android:textSize="@dimen/sp_15"
+                                            android:textStyle="bold"
+                                            android:text="@{BigDecimalUtils.mul(BaseUtil.getString(viewModel.dtoBean.dayPendAmount),BaseUtil.getString(1),4)}"/>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:textColor="#232C64"
+                                                android:textSize="@dimen/sp_11"
+                                                android:text="@{TimeUtil.formatData(TimeUtil.dateFormatMD , System.currentTimeMillis())}"/>
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:textColor="#232C64"
+                                                android:textSize="@dimen/sp_11"
+                                                android:text=" 75%180天"/>
+
+                                        </LinearLayout>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="#232C64"
+                                            android:textSize="@dimen/sp_11"
+                                            android:text="线性释放(FIL)"/>
+
+                                    </LinearLayout>
+
+                                    <View
+                                        android:layout_width="1dp"
+                                        android:layout_height="30dp"
+                                        android:background="@drawable/shape_gradient_line_ser"
+                                        android:layout_gravity="center_vertical"/>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:layout_weight="1"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/theme_1D39EB"
+                                            android:textSize="@dimen/sp_15"
+                                            android:textStyle="bold"
+                                            android:text="@{BigDecimalUtils.mul(BaseUtil.getString(viewModel.dtoBean.availableAmount),BaseUtil.getString(1),4)}"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="#232C64"
+                                            android:textSize="@dimen/sp_11"
+                                            android:text="可提余额(FIL)"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="#232C64"
+                                            android:textSize="@dimen/sp_11"
+                                            android:visibility="invisible"
+                                            android:text="(FIL)"/>
+
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </RelativeLayout>
+                        </FrameLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:scaleType="fitXY"
+                                android:src="@mipmap/wlsl_bg"/>
+
 
                             <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="25dp"
+                                android:layout_marginTop="18dp"
                                 android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@mipmap/sjk_mark"/>
+
                                 <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:layout_weight="1"
-                                    android:orientation="vertical">
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_marginStart="6dp">
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textSize="@dimen/sp_13"
-                                        android:textColor="#5690FF"
-                                        android:text="12-22收益"/>
+                                        android:textColor="#232C64"
+                                        android:text="产品规格（T）"/>
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textColor="@color/theme_333333"
-                                        android:textSize="@dimen/sp_15"
-                                        android:text="0.381"/>
-
-                                </LinearLayout>
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="30dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:background="@color/theme_EEEEEE"/>
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:layout_weight="1"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="@dimen/sp_13"
-                                        android:textColor="#5690FF"
-                                        android:text="12-22释放"/>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textColor="@color/theme_333333"
-                                        android:textSize="@dimen/sp_15"
-                                        android:text="0.381"/>
-
-                                </LinearLayout>
-
-                                <View
-                                    android:layout_width="1dp"
-                                    android:layout_height="30dp"
-                                    android:layout_gravity="center_vertical"
-                                    android:background="@color/theme_EEEEEE"/>
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:layout_weight="1"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="@dimen/sp_13"
-                                        android:textColor="#5690FF"
-                                        android:text="可用余额(FIL)"/>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textColor="@color/theme_333333"
-                                        android:textSize="@dimen/sp_15"
-                                        android:text="0.381"/>
+                                        android:textSize="@dimen/sp_9"
+                                        android:textColor="#232C64"
+                                        android:text="(已开启的产品)"/>
 
                                 </LinearLayout>
 
                             </LinearLayout>
 
-                        </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginEnd="22dp"
+                                android:orientation="horizontal">
 
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold"
+                                    android:textSize="@dimen/sp_18"
+                                    android:textColor="@color/theme_1D39EB"
+                                    android:text="@{BaseUtil.getNoZoon(viewModel.dtoBean.tradeCalculationPowerCount)}"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textStyle="bold"
+                                    android:textSize="@dimen/sp_18"
+                                    android:textColor="@color/theme_1D39EB"
+                                    android:text="T"/>
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_15"
+                            android:textColor="@color/theme_333333"
+                            android:layout_marginStart="16dp"
+                            android:text="我的收益（FIL）"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginTop="11dp"
-                            android:background="@drawable/shape_radius6_ffffff">
+                            android:layout_marginTop="6dp"
+                            android:orientation="horizontal">
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="49dp"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="15dp">
-                                <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                app:onClickCommand="@{viewModel.goRevenueDetailActivity}">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:scaleType="centerCrop"
+                                    android:src="@mipmap/asr_content_one_bg" />
+
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="@dimen/sp_14"
-                                    android:textColor="#5690FF"
-                                    android:layout_centerVertical="true"
-                                    android:text="出块效率"/>
-                                
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/sp_14"
-                                    android:textColor="#5690FF"
-                                    android:layout_centerVertical="true"
-                                    android:layout_alignParentEnd="true"
-                                    android:text="10T"/>
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:layout_centerInParent="true">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_18"
+                                        android:textColor="@color/theme_0023FF"
+                                        android:textStyle="bold"
+                                        android:text="@{BigDecimalUtils.mul(BaseUtil.getString(viewModel.dtoBean.myAvailAmount),BaseUtil.getString(1),4)}"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_12"
+                                        android:textColor="#232C64"
+                                        android:layout_marginTop="11dp"
+                                        android:text="个人存储收益"/>
+
+                                </LinearLayout>
+
                             </RelativeLayout>
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="49dp"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="15dp">
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                app:onClickCommand="@{viewModel.goComputingPower}">
 
-                                <View
+                                <ImageView
                                     android:layout_width="match_parent"
-                                    android:layout_height="1dp"
-                                    android:background="@color/theme_EEEEEE"/>
+                                    android:layout_height="wrap_content"
+                                    android:scaleType="centerCrop"
+                                    android:src="@mipmap/asr_content_two_bg" />
 
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="@dimen/sp_14"
-                                    android:textColor="#5690FF"
-                                    android:layout_centerVertical="true"
-                                    android:text="有效算力"/>
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:layout_centerInParent="true">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/sp_14"
-                                    android:textColor="#5690FF"
-                                    android:layout_centerVertical="true"
-                                    android:layout_alignParentEnd="true"
-                                    android:text="10T"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_18"
+                                        android:textColor="@color/theme_0023FF"
+                                        android:textStyle="bold"
+                                        android:text="@{BigDecimalUtils.mul(BaseUtil.getString(viewModel.dtoBean.mySuanLiAmount),BaseUtil.getString(1),4)}"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_12"
+                                        android:textColor="#232C64"
+                                        android:layout_marginTop="11dp"
+                                        android:text="服务费收益"/>
+
+                                </LinearLayout>
                             </RelativeLayout>
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="49dp"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="15dp">
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                app:onClickCommand="@{viewModel.goCumulativeRelease}">
 
-                                <View
+                                <ImageView
+                                    android:id="@+id/bg3"
                                     android:layout_width="match_parent"
-                                    android:layout_height="1dp"
-                                    android:background="@color/theme_EEEEEE"/>
+                                    android:layout_height="wrap_content"
+                                    android:scaleType="centerCrop"
+                                    android:src="@mipmap/asr_content_third_bg" />
 
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="@dimen/sp_14"
-                                    android:textColor="#5690FF"
-                                    android:layout_centerVertical="true"
-                                    android:text="总释放FIL"/>
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:layout_centerInParent="true">
 
-                                <TextView
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_18"
+                                        android:textColor="@color/theme_0023FF"
+                                        android:textStyle="bold"
+                                        android:text="@{BigDecimalUtils.mul(BaseUtil.getString(viewModel.dtoBean.pendAmount),BaseUtil.getString(1),4)}"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_12"
+                                        android:textColor="#232C64"
+                                        android:layout_marginTop="11dp"
+                                        android:text="180天累计释放"/>
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                app:onClickCommand="@{viewModel.goToBeReleased}">
+
+                                <ImageView
+                                    android:id="@+id/bg4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:scaleType="centerCrop"
+                                    android:src="@mipmap/asr_content_fourth_bg" />
+
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="@dimen/sp_14"
-                                    android:textColor="#5690FF"
-                                    android:layout_centerVertical="true"
-                                    android:layout_alignParentEnd="true"
-                                    android:text="0 FIL"/>
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:layout_centerInParent="true">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_18"
+                                        android:textColor="@color/theme_0023FF"
+                                        android:textStyle="bold"
+                                        android:text="@{BigDecimalUtils.mul(BaseUtil.getString(viewModel.dtoBean.pendingrelease),BaseUtil.getString(1),4)}"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_12"
+                                        android:textColor="#232C64"
+                                        android:layout_marginTop="11dp"
+                                        android:text="75%180天待释放"/>
+
+                                </LinearLayout>
                             </RelativeLayout>
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="49dp"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="15dp">
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                app:onClickCommand="@{viewModel.goPledged}">
 
-                                <View
+                                <ImageView
                                     android:layout_width="match_parent"
-                                    android:layout_height="1dp"
-                                    android:background="@color/theme_EEEEEE"/>
+                                    android:layout_height="wrap_content"
+                                    android:scaleType="centerCrop"
+                                    android:src="@mipmap/asr_content_five_bg" />
 
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="@dimen/sp_14"
-                                    android:textColor="#5690FF"
-                                    android:layout_centerVertical="true"
-                                    android:text="总抵押FIL"/>
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:layout_centerInParent="true">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/sp_14"
-                                    android:textColor="#5690FF"
-                                    android:layout_centerVertical="true"
-                                    android:layout_alignParentEnd="true"
-                                    android:text="0 FIL"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_18"
+                                        android:textColor="@color/theme_0023FF"
+                                        android:textStyle="bold"
+                                        android:text="@{BigDecimalUtils.mul(BaseUtil.getString(viewModel.dtoBean.bofuAmount),BaseUtil.getString(1),4)}"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_12"
+                                        android:textColor="#232C64"
+                                        android:layout_marginTop="11dp"
+                                        android:text="已质押"/>
+
+                                </LinearLayout>
                             </RelativeLayout>
 
                             <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="49dp"
-                                android:paddingStart="15dp"
-                                android:paddingEnd="15dp">
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                app:onClickCommand="@{viewModel.goBePledged}">
 
-                                <View
+                                <ImageView
                                     android:layout_width="match_parent"
-                                    android:layout_height="1dp"
-                                    android:background="@color/theme_EEEEEE"/>
+                                    android:layout_height="wrap_content"
+                                    android:scaleType="centerCrop"
+                                    android:src="@mipmap/asr_content_fix_bg" />
 
-                                <TextView
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textSize="@dimen/sp_14"
-                                    android:textColor="#5690FF"
-                                    android:layout_centerVertical="true"
-                                    android:text="损坏FIL"/>
+                                    android:orientation="vertical"
+                                    android:gravity="center"
+                                    android:layout_centerInParent="true">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="@dimen/sp_14"
-                                    android:textColor="#5690FF"
-                                    android:layout_centerVertical="true"
-                                    android:layout_alignParentEnd="true"
-                                    android:text="0 FIL"/>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_18"
+                                        android:textColor="@color/theme_0023FF"
+                                        android:textStyle="bold"
+                                        android:text="@{BigDecimalUtils.mul(BaseUtil.getString(viewModel.dtoBean.totalpledge),BaseUtil.getString(1),4)}"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_12"
+                                        android:textColor="#232C64"
+                                        android:layout_marginTop="11dp"
+                                        android:text="应质押"/>
+
+                                </LinearLayout>
                             </RelativeLayout>
 
                         </LinearLayout>

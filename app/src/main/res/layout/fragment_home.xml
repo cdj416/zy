@@ -27,7 +27,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimary"
+            android:visibility="gone">
             <com.makeramen.roundedimageview.RoundedImageView
                 android:layout_width="22dp"
                 android:layout_height="22dp"
@@ -80,32 +81,72 @@
                 android:text="客服"/>
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="5dp"
-            android:background="@mipmap/home_top_sroll_bg">
+            android:layout_height="44dp"
+            android:background="@color/colorPrimary">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="@color/theme_FFFFFF"
+                android:textSize="@dimen/sp_16"
+                android:gravity="center"
+                android:text="首页"/>
 
             <ImageView
+                android:id="@+id/comBack"
+android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/speaker_mark"
-                android:layout_marginRight="4dp"/>
+                android:src="@mipmap/white_black"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:layout_marginLeft="16dp"/>
+        </RelativeLayout>
 
-            <com.sunfusheng.marqueeview.MarqueeView
-                android:id="@+id/marqueeView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:mvAnimDuration="1000"
-                app:mvDirection="bottom_to_top"
-                app:mvInterval="3000"
-                app:mvTextColor="@color/theme_333333"
-                app:mvTextSize="9sp"
-                app:mvSingleLine="true"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:background="@mipmap/home_top_sroll_bg"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/speaker_mark"
+                    android:layout_marginRight="4dp"/>
+
+                <com.sunfusheng.marqueeview.MarqueeView
+                    android:id="@+id/marqueeView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    app:mvAnimDuration="1000"
+                    app:mvDirection="bottom_to_top"
+                    app:mvInterval="3000"
+                    app:mvTextColor="@color/theme_333333"
+                    app:mvTextSize="12sp"
+                    app:mvSingleLine="true"
+                    android:layout_marginEnd="30dp"
+                    app:setMarqueeViewData="@{viewModel.homeBeans.notices}"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:onClickCommand="@{viewModel.goNotice}"/>
+        </FrameLayout>
+
 
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/refresh"
@@ -127,25 +168,26 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
+                        android:layout_marginTop="12dp"
                         app:cardCornerRadius="6dp"
                         app:cardElevation="0dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp">
 
-                    <com.youth.banner.Banner
-                        android:id="@+id/banner"
-                        android:layout_width="match_parent"
-                        android:layout_height="134dp"
-                        app:bannerList="@{viewModel.banners}"
-                        app:indicator_drawable_selected="@drawable/shape_select_dot" />
+                        <com.youth.banner.Banner
+                            android:id="@+id/banner"
+                            android:layout_width="match_parent"
+                            android:layout_height="134dp"
+                            app:bannerList="@{viewModel.banners}"
+                            app:indicator_drawable_selected="@drawable/shape_select_dot" />
 
                     </androidx.cardview.widget.CardView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="88dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -222,6 +264,91 @@
                                 android:textColor="@color/theme_333333"
                                 android:layout_marginTop="8dp"
                                 android:text="关于我们"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="88dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:onClickCommand="@{viewModel.goAboutus}">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/about_us_mark"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_12"
+                                android:textColor="@color/theme_333333"
+                                android:layout_marginTop="8dp"
+                                android:text="关于我们"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:onClickCommand="@{viewModel.goEncyclopedia}">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/encyclopedia_mark"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_12"
+                                android:textColor="@color/theme_333333"
+                                android:layout_marginTop="8dp"
+                                android:text="国链百科"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:onClickCommand="@{viewModel.goTransfer}">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/transfer_mark"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_12"
+                                android:textColor="@color/theme_333333"
+                                android:layout_marginTop="8dp"
+                                android:text="转账"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:onClickCommand="@{viewModel.showQrImg}">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/customer_service_mark"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_12"
+                                android:textColor="@color/theme_333333"
+                                android:layout_marginTop="5dp"
+                                android:text="客服"/>
                         </LinearLayout>
 
                     </LinearLayout>

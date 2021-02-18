@@ -39,6 +39,7 @@
 
             <ImageView
                 android:id="@+id/comBack"
+android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/white_black"
@@ -85,14 +86,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:layout_marginLeft="16dp"
-                            android:gravity="center_vertical">
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_horizontal">
                             <ImageView
                                 android:id="@+id/frontImg"
                                 android:layout_width="142dp"
                                 android:layout_height="86dp"
                                 android:src="@mipmap/id_card_front"
-                                app:imageFile="@{viewModel.idCardFront}"
+                                app:imageFile="@{viewModel.idCardFrontFile}"
                                 app:onClickCommand="@{viewModel.goFrontCard}"/>
 
                             <ImageView
@@ -100,10 +101,20 @@
                                 android:layout_height="86dp"
                                 android:layout_marginLeft="24dp"
                                 android:src="@mipmap/id_card_back"
-                                app:imageFile="@{viewModel.idCardBack}"
+                                app:imageFile="@{viewModel.idCardBackFile}"
                                 app:onClickCommand="@{viewModel.goBackCard}"/>
 
                         </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/holdIdImg"
+                            android:layout_width="110dp"
+                            android:layout_height="130dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@mipmap/holding_id_card"
+                            android:layout_marginTop="15dp"
+                            app:imageFile="@{viewModel.holdIdFileFile}"
+                            app:onClickCommand="@{viewModel.goHoldId}"/>
                     </LinearLayout>
 
                     <TextView

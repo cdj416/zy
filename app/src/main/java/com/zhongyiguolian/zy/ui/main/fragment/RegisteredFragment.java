@@ -3,8 +3,10 @@ package com.zhongyiguolian.zy.ui.main.fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
@@ -15,6 +17,7 @@ import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.databinding.FragmentRegisteredBinding;
 import com.zhongyiguolian.zy.myview.dynamicviewpage.CustomViewpager;
 import com.zhongyiguolian.zy.ui.main.viewmodel.RegisteredViewModel;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.CustomDialog;
 
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
@@ -154,6 +157,12 @@ public class RegisteredFragment extends CustomFragment<FragmentRegisteredBinding
                 return;
             }
 
+            //位数不够
+            if(viewModel.password.get().length() < 6 || viewModel.confirmSecret.get().length() < 6){
+                ToastUtils.showShort("字符数不足六位！");
+                return;
+            }
+
             //验证两次秘密是否输入一致
             if(!viewModel.isCheckPassword()){
                 ToastUtils.showShort("两次秘密不一致！");
@@ -175,15 +184,15 @@ public class RegisteredFragment extends CustomFragment<FragmentRegisteredBinding
             }
 
             //注册
-            viewModel.setParams("inviter_code",viewModel.invitationCode.get())
-                    .setParams("mobile",viewModel.phoneNum.get())
-                    .setParams("mobile_auth_code",viewModel.messageCode.get())
-                    .setParams("password",viewModel.password.get())
-                    .setParams("register_type","1");//register_type：1 注册，2 登录，3，充值密码。
+            viewModel.setParams("account", AndroidDes3Util.encode(viewModel.phoneNum.get()))
+                    .setParams("password", AndroidDes3Util.encode(viewModel.password.get()))
+                    .setParams("code", AndroidDes3Util.encode(viewModel.messageCode.get()))
+                    .setParams("inviteCode", AndroidDes3Util.encode(viewModel.invitationCode.get()));
             viewModel.requestData(Constants.REGISTER);
 
         });
 
+        //检验并发送验证码
         viewModel.uc.checkPhoneNum.observe(this,aBoolean -> {
             //是否输入手机号
             if(!BaseUtil.isValue(viewModel.phoneNum.get())){
@@ -197,6 +206,15 @@ public class RegisteredFragment extends CustomFragment<FragmentRegisteredBinding
                 return;
             }
 
+            //验证手机号是否合法
+            if(!viewModel.vCode.get().equals(viewModel.inputVcode.get())){
+                ToastUtils.showShort("图形验证码错误！");
+                return;
+            }
+
+            //使其不可再次点击
+            binding.sendCode.setEnabled(false);
+
             //发送验证码
             viewModel.sendPhneCode();
         });
@@ -207,5 +225,22 @@ public class RegisteredFragment extends CustomFragment<FragmentRegisteredBinding
                 customViewpager.setCurrentItem(0);
             });
         });
+
+        //可以再次点击发送验证码
+        viewModel.uc.canSendCode.observe(this,aBoolean -> {
+            binding.sendCode.setEnabled(true);
+        });
+    }
+
+    /**
+     * 获取数据
+     */
+    @Override
+    public void initData() {
+        super.initData();
+
+        //首次获取图形验证码
+        viewModel.clearParams().setParams("oTime","1").requestData(Constants.GETIMGCODE);
+
     }
 }

@@ -3,11 +3,13 @@ package com.zhongyiguolian.zy.ui.home.activity;
 import android.os.Bundle;
 
 import androidx.lifecycle.ViewModelProviders;
+
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
 import com.zhongyiguolian.zy.databinding.ActivityEncyclopediaBinding;
 import com.zhongyiguolian.zy.ui.home.viewmodel.EncyclopediaViewModel;
+
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
@@ -49,7 +51,7 @@ public class EncyclopediaActivity extends CustomActivity<ActivityEncyclopediaBin
     @Override
     public void initView() {
         super.initView();
-        setOnRefresh(binding.refresh,REFRESH_0X3);
+        setOnRefresh(binding.refresh,REFRESH_0X4);
 
         //setEnableLoadMore(Constants.GET_CIRCLE_CATEGORY_LIST);
         //setEnableRefresh(Constants.GET_CIRCLE_CATEGORY_LIST);

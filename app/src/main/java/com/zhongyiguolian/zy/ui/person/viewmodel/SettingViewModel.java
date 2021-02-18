@@ -9,8 +9,10 @@ import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.ui.main.activity.LoginActivity;
+import com.zhongyiguolian.zy.ui.person.activity.AddBlankCardActivity;
 import com.zhongyiguolian.zy.ui.person.activity.ChangePasswordActivity;
 import com.zhongyiguolian.zy.ui.person.activity.ChangePayPasswordActivity;
+import com.zhongyiguolian.zy.ui.person.activity.CoinAddressActivity;
 import com.zhongyiguolian.zy.ui.person.activity.FeedBackActivity;
 import com.zhongyiguolian.zy.ui.person.activity.SetEmbodimentAccountActivity;
 import com.zhongyiguolian.zy.ui.person.activity.SetFetchAddressActivity;
@@ -64,7 +66,7 @@ public class SettingViewModel extends CustomViewModel<MyRepository> {
 
 
     /**
-     * 设置支付密码
+     * 设置交易密码
      */
     public BindingCommand setPayPassword = new BindingCommand(new BindingAction() {
         @Override
@@ -75,7 +77,7 @@ public class SettingViewModel extends CustomViewModel<MyRepository> {
 
 
     /**
-     * 修改支付密码
+     * 修改交易密码
      */
     public BindingCommand changePayPassword = new BindingCommand(new BindingAction() {
         @Override
@@ -91,7 +93,7 @@ public class SettingViewModel extends CustomViewModel<MyRepository> {
     public BindingCommand setFetchAddressPassword = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            startActivity(SetFetchAddressActivity.class);
+            startActivity(CoinAddressActivity.class);
         }
     });
 
@@ -102,7 +104,8 @@ public class SettingViewModel extends CustomViewModel<MyRepository> {
     public BindingCommand setEmbodimentAccount = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            startActivity(SetEmbodimentAccountActivity.class);
+            //startActivity(SetEmbodimentAccountActivity.class);
+            startActivity(AddBlankCardActivity.class);
         }
     });
 

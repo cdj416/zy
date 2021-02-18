@@ -9,7 +9,7 @@
             type="com.zhongyiguolian.zy.ui.person.viewmodel.SalesWithdrawalDetailsViewModel" />
 
         <import type="android.view.View"/>
-        <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
+        <import type="com.zhongyiguolian.zy.data.md5.BaseUtil"/>
     </data>
 
     <LinearLayout
@@ -36,6 +36,7 @@
                 android:text="销售提现"/>
             <ImageView
                 android:id="@+id/comBack"
+android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/white_black"
@@ -72,7 +73,8 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@mipmap/delect_hq_img"/>
+                    android:visibility="@{BaseUtil.isValue(viewModel.cardNumbers) ? View.VISIBLE : View.GONE}"
+                    android:src="@mipmap/yinlian_pay_mark"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -80,7 +82,8 @@
                     android:textSize="@dimen/sp_12"
                     android:textColor="#14429F"
                     android:layout_marginLeft="6dp"
-                    android:text="中国建设银行（0416）"/>
+                    android:visibility="@{BaseUtil.isValue(viewModel.cardNumbers) ? View.VISIBLE : View.GONE}"
+                    android:text="@{viewModel.cardNumbers.bankName + @string/kh_text_left + viewModel.cardNumbers.cardNumber.substring(viewModel.cardNumbers.cardNumber.length() - 4) + @string/uuid_text_right}"/>
 
             </LinearLayout>
 
@@ -94,7 +97,8 @@
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical"
                 android:drawableRight="@mipmap/right_huise_img"
-                android:text="选择"/>
+                android:text="@{BaseUtil.isValue(viewModel.cardNumbers) ? @string/update_text : @string/add_text}"
+                app:onClickCommand="@{viewModel.goCardBanks}"/>
 
         </RelativeLayout>
 
@@ -120,19 +124,23 @@
                 android:textSize="@dimen/sp_12"
                 android:textColor="@color/theme_333333"
                 android:background="@null"
-                android:hint="0.00"/>
+                android:hint="0.00"
+                android:text="@={viewModel.nums}"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/right_huise_img"/>
+                android:src="@mipmap/close_white_mark"
+                android:padding="5dp"
+                android:visibility="visible"
+                app:onClickCommand="@{viewModel.clearNums}"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/theme_666666"
+                android:background="@color/theme_EEEEEE"
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>
         <LinearLayout
@@ -144,30 +152,66 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
+                android:textSize="@dimen/sp_10"
                 android:textColor="@color/theme_666666"
                 android:layout_marginLeft="16dp"
-                android:text="当前额度"/>
+                android:text="可提现额度"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/theme_666666"
-                android:layout_marginLeft="16dp"
-                android:text="0.000000"/>
+                android:textColor="@color/chart_red"
+                android:text="@{BaseUtil.getNoZoon(viewModel.entity.usedAssets)}"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
+                android:textSize="@dimen/sp_10"
                 android:textColor="@color/theme_666666"
                 android:text=","/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_10"
+                android:textColor="@color/theme_666666"
+                android:text="最低提现额度"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/chart_red"
+                android:text="@{BaseUtil.getNoZoon(viewModel.goWithdrawal.theMin)}"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_10"
+                android:textColor="@color/theme_666666"
+                android:text=","/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_10"
+                android:textColor="@color/theme_666666"
+                android:text="提现手续费"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/chart_red"
+                android:text="@{BaseUtil.getNoZoon(viewModel.goWithdrawal.poundage)}"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sp_12"
+                android:textColor="@color/chart_red"
+                android:text="%"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
                 android:textColor="#0153EE"
                 android:padding="5dp"
-                android:text="全部提现"/>
+                android:text="全部提现"
+                app:onClickCommand="@{viewModel.setAllNums}"/>
         </LinearLayout>
 
         <Button

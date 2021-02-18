@@ -10,8 +10,8 @@ android {
         applicationId "com.zhongyiguolian.zy"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 12
+        versionName "3.0.9"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -23,6 +23,21 @@ android {
         dataBinding = true
         // for view binding :
         // viewBinding = true
+    }
+
+    signingConfigs {
+        debug{
+            keyAlias 'zygl'
+            keyPassword '123456'
+            storeFile file('C:/Users/admin/Desktop/androidWork/computerFile/zygl.jks')
+            storePassword '123456'
+        }
+        release {
+            keyAlias 'zygl'
+            keyPassword '123456'
+            storeFile file('C:/Users/admin/Desktop/androidWork/computerFile/zygl.jks')
+            storePassword '123456'
+        }
     }
 
     compileOptions {
@@ -54,6 +69,10 @@ dependencies {
     implementation project(path: ':mvvmhabitx')
     implementation project(path: ':ImagePreview')
     implementation project(path: ':kchartlib')
+    implementation project(path: ':magicindicator')
+
+    //百分比布局
+    implementation 'com.zhy:percent-support-extends:1.1.1'
 
     //viewpager2废弃预加载以实现懒加载
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
@@ -103,8 +122,18 @@ dependencies {
     //超长大图显示
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
     //版本更新使用的库
-    implementation 'com.azhon:appupdateX:2.3.0'
+    implementation 'com.azhon:appupdateX:3.0.3'
     //视频下载库
     implementation 'com.arialyy.aria:core:3.8.15'
     annotationProcessor 'com.arialyy.aria:compiler:3.8.15'
+    //网络爬虫技术sdk(用于适配h5标签)
+    implementation 'org.jsoup:jsoup:1.12.1'
+    //二维码生成库
+    implementation 'com.google.zxing:core:3.3.0'
+    //底部tabBar
+    implementation 'me.majiajie:pager-bottom-tab-strip:2.3.0X'
+    //图形库
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    //气泡弹框
+    implementation 'com.github.xujiaji:happy-bubble:1.0.3'
 }

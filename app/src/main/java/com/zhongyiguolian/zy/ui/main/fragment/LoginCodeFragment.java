@@ -2,6 +2,7 @@ package com.zhongyiguolian.zy.ui.main.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
@@ -15,7 +16,9 @@ import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.databinding.FragmentCodeLoginBinding;
 import com.zhongyiguolian.zy.myview.dynamicviewpage.CustomViewpager;
 import com.zhongyiguolian.zy.ui.main.viewmodel.LoginCodeViewModel;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.CustomDialog;
+
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
 
 /**
@@ -137,6 +140,62 @@ public class LoginCodeFragment extends CustomFragment<FragmentCodeLoginBinding, 
             }
         });
 
+        //测试登录逻辑
+        /*viewModel.uc.checkInput.observe(this,aBoolean -> {
+            CustomDialog.showTest(getContext(), new CustomDialog.DialogClickMessage() {
+                @Override
+                public void dialogClick(View v, String message) {
+                    if(message.equals("1")){
+                        //密码登录参数组合
+                        viewModel.setParams("account", AndroidDes3Util.encode("15722836012"))
+                                .setParams("type", AndroidDes3Util.encode("LOGIN"))
+                                .setParams("password", AndroidDes3Util.encode("123456"));
+
+                        //请求登录
+                        viewModel.requestData(Constants.LOGIN);
+                    }
+
+                    if(message.equals("2")){
+                        //密码登录参数组合
+                        viewModel.setParams("account", AndroidDes3Util.encode("13775995468"))
+                                .setParams("type", AndroidDes3Util.encode("LOGIN"))
+                                .setParams("password", AndroidDes3Util.encode("123456"));
+
+                        //请求登录
+                        viewModel.requestData(Constants.LOGIN);
+                    }
+
+                    if(message.equals("3")){
+                        //密码登录参数组合
+                        viewModel.setParams("account", AndroidDes3Util.encode("13615130823"))
+                                .setParams("type", AndroidDes3Util.encode("LOGIN"))
+                                .setParams("password", AndroidDes3Util.encode("123456"));
+
+                        //请求登录
+                        viewModel.requestData(Constants.LOGIN);
+                    }
+
+                    if(message.equals("0")){
+                        if(viewModel.isPassword.get()){
+                            //密码登录参数组合
+                            viewModel.setParams("account", AndroidDes3Util.encode(viewModel.phoneNum.get()))
+                                    .setParams("type", AndroidDes3Util.encode("LOGIN"))
+                                    .setParams("password", AndroidDes3Util.encode(viewModel.password.get()));
+                        }else{
+                            //验证码登录参数组合
+                            viewModel.setParams("account", AndroidDes3Util.encode(viewModel.phoneNum.get()))
+                                    .setParams("type", AndroidDes3Util.encode("SMSLOGIN"))
+                                    .setParams("password", AndroidDes3Util.encode(viewModel.messageCode.get()));
+                        }
+
+                        //请求登录
+                        viewModel.requestData(Constants.LOGIN);
+                    }
+                }
+            });
+        });*/
+
+
         //登录前端验证
         viewModel.uc.checkInput.observe(this,aBoolean -> {
 
@@ -177,14 +236,14 @@ public class LoginCodeFragment extends CustomFragment<FragmentCodeLoginBinding, 
 
                 if(viewModel.isPassword.get()){
                     //密码登录参数组合
-                    viewModel.setParams("account",viewModel.phoneNum.get())
-                            .setParams("type","LOGIN")
-                            .setParams("password",viewModel.password.get());
+                    viewModel.setParams("account", AndroidDes3Util.encode(viewModel.phoneNum.get()))
+                            .setParams("type", AndroidDes3Util.encode("LOGIN"))
+                            .setParams("password", AndroidDes3Util.encode(viewModel.password.get()));
                 }else{
                     //验证码登录参数组合
-                    viewModel.setParams("mobile",viewModel.phoneNum.get())
-                            .setParams("login_type","2")
-                            .setParams("mobile_auth_code",viewModel.messageCode.get());
+                    viewModel.setParams("account", AndroidDes3Util.encode(viewModel.phoneNum.get()))
+                            .setParams("type", AndroidDes3Util.encode("SMSLOGIN"))
+                            .setParams("password", AndroidDes3Util.encode(viewModel.messageCode.get()));
                 }
 
                 //请求登录

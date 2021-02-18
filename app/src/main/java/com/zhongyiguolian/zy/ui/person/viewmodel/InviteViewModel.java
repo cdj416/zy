@@ -9,7 +9,7 @@ import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
-import com.zhongyiguolian.zy.ui.person.beans.InviteBeans;
+import com.zhongyiguolian.zy.ui.person.beans.PersonInfoBeans;
 
 /**
  * 添加银行卡
@@ -22,7 +22,7 @@ public class InviteViewModel extends CustomViewModel<MyRepository> {
     /**
      * 数据实体类
      */
-    public ObservableField<InviteBeans> entity = new ObservableField<>();
+    public ObservableField<PersonInfoBeans.CustomerVoDTO> entity = new ObservableField<>();
 
     /**
      * @param application
@@ -44,6 +44,12 @@ public class InviteViewModel extends CustomViewModel<MyRepository> {
     public class UIChangeObservable {
         //打开分享面板
         public SingleLiveEvent<Void> openShare = new SingleLiveEvent<>();
+        //显示二维码图片
+        public SingleLiveEvent<String> showQrImg = new SingleLiveEvent<>();
+        //保存海报到本地
+        public SingleLiveEvent<Void> saveImg = new SingleLiveEvent<>();
+        //复制文本到剪切板
+        public SingleLiveEvent<String> copyText = new SingleLiveEvent<>();
     }
 
 
@@ -58,6 +64,36 @@ public class InviteViewModel extends CustomViewModel<MyRepository> {
     });
 
     /**
+     * 保存海报
+     */
+    public BindingCommand saveImg = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            uc.saveImg.call();
+        }
+    });
+
+    /**
+     * 复制分享码
+     */
+    public BindingCommand copyCode = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            uc.copyText.setValue(entity.get().getInviteCode());
+        }
+    });
+
+    /**
+     * 复制分享链接
+     */
+    public BindingCommand copyLink = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            uc.copyText.setValue(entity.get().getInviteLink());
+        }
+    });
+
+    /**
      * @param code
      * @param dataBean
      */
@@ -65,9 +101,11 @@ public class InviteViewModel extends CustomViewModel<MyRepository> {
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);
 
-        if(code == Constants.INVITE_INFO){
-            InviteBeans beans = (InviteBeans)dataBean;
-            entity.set(beans);
+        if(code == Constants.GETUSER){
+            PersonInfoBeans beans = (PersonInfoBeans)dataBean;
+            entity.set(beans.getCustomerVo());
+
+            uc.showQrImg.setValue("http://app.glydsj.com/register/register.html?message="+beans.getCustomerVo().getInviteCode());
         }
     }
 }

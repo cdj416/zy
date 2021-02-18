@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.zhy.android.percent.support.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="90%h">
+
+        <com.lihang.ShadowLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:hl_shadowLimit="6dp"
+            app:hl_cornerRadius="18dp"
+            app:hl_shadowColor="@color/theme_335690FF"
+            app:hl_layoutBackground="@color/transparent"
+            app:hl_shadowHiddenTop="true"
+            app:layout_widthPercent="100%w"
+            app:layout_heightPercent="100%h"
+            app:layout_marginBottomPercent="6%w">
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_radius18_5690ff">
+
+                <TextView
+                    android:id="@+id/productTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/theme_FFFFFF"
+                    android:textSize="@dimen/sp_14"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="23dp"
+                    android:gravity="center"
+                    android:text="国链云·太湖Ⅱ号云存储服务器"
+                    app:layout_textSizePercent="5%w"/>
+
+                <ImageView
+                    android:id="@+id/productImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/new_home_img_a"
+                    android:layout_marginTop="12dp"
+                    app:layout_heightPercent="56%w"
+                    app:layout_widthPercent="76%w"/>
+
+                <com.zhy.android.percent.support.PercentLinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <com.zhy.android.percent.support.PercentLinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/title1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_11"
+                            android:textColor="@color/theme_FFFFFF"
+                            android:text="收益类型"
+                            app:layout_textSizePercent="13%w"/>
+
+                        <TextView
+                            android:id="@+id/content1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_13"
+                            android:textColor="@color/theme_FFFFFF"
+                            android:layout_marginTop="5dp"
+                            android:text="FILECOIN"
+                            app:layout_textSizePercent="15%w"/>
+
+                    </com.zhy.android.percent.support.PercentLinearLayout>
+
+                    <com.zhy.android.percent.support.PercentLinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/title2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_11"
+                            android:textColor="@color/theme_FFFFFF"
+                            android:text="收益类型"
+                            android:layout_gravity="center_horizontal"
+                            app:layout_textSizePercent="13%w"/>
+
+                        <TextView
+                            android:id="@+id/content2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/theme_FFFFFF"
+                            android:layout_marginTop="5dp"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:text="FILECOIN"
+                            app:layout_textSizePercent="15%w"/>
+
+                    </com.zhy.android.percent.support.PercentLinearLayout>
+
+                    <com.zhy.android.percent.support.PercentLinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <com.lihang.ShadowLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:hl_shadowLimit="3dp"
+                            app:hl_shadowColor="@color/theme_405690FF"
+                            app:hl_layoutBackground="@color/transparent"
+                            app:hl_shadowHiddenTop="true"
+                            app:layout_heightPercent="40%w"
+                            app:layout_widthPercent="85%w">
+
+                            <com.zhy.android.percent.support.PercentLinearLayout
+                                android:id="@+id/goBuy"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:gravity="center"
+                                android:background="@drawable/shape_radius6_ffffff">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/theme_5690FF"
+                                    android:gravity="center_vertical"
+                                    android:text="去购买"
+                                    app:layout_textSizePercent="19%w"/>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@mipmap/blue_right_mark"
+                                    app:layout_marginLeftPercent="5%w"
+                                    app:layout_heightPercent="20%w"
+                                    app:layout_widthPercent="20%w"/>
+
+                            </com.zhy.android.percent.support.PercentLinearLayout>
+
+
+                        </com.lihang.ShadowLayout>
+                    </com.zhy.android.percent.support.PercentLinearLayout>
+
+                </com.zhy.android.percent.support.PercentLinearLayout>
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+        </com.lihang.ShadowLayout>
+
+        <ImageView
+            android:id="@+id/goCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/home_cart_mark"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="fitXY"
+            app:layout_heightPercent="18%w"
+            app:layout_widthPercent="18%w"
+            android:layout_marginEnd="16dp"/>
+
+    </com.zhy.android.percent.support.PercentRelativeLayout>
+
+</com.zhy.android.percent.support.PercentFrameLayout>
