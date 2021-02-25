@@ -180,6 +180,20 @@ public class AppManager {
         return null;
     }
 
+    /*
+    * 若存在，跳转到指定的activity，结束其之上的activity
+    * */
+    public void goActivity(Class<?> cls){
+        if(getActivity(cls) != null){
+            for(int i = activityStack.size() - 1 ; i > 0 ; i--){
+                if(activityStack.get(i).getClass().equals(cls)){
+                    return;
+                }else{
+                    finishActivity(activityStack.get(i));
+                }
+            }
+        }
+    }
 
     /**
      * 退出应用程序

@@ -21,6 +21,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.hongyuan.mvvmhabitx.base.AppManager;
 import com.hongyuan.mvvmhabitx.base.ContainerActivity;
 import com.hongyuan.mvvmhabitx.base.IBaseView;
 import com.hongyuan.mvvmhabitx.base.RxAppCompatActivity;
@@ -68,6 +69,9 @@ public abstract class CustomActivity<V extends ViewDataBinding, VM extends Custo
         super.onCreate(savedInstanceState);
 
         setRequestedOrientation(SCREEN_ORIENTATION_PORTRAIT);//竖屏
+
+        //加入管理暂中
+        AppManager.getAppManager().addActivity(this);
 
         if(isFullScreen()){
             //当FitsSystemWindows设置 true 时，会在屏幕最上方预留出状态栏高度的 padding

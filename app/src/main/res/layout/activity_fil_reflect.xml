@@ -99,7 +99,7 @@ android:padding="5dp"
                             android:background="@null"
                             android:textSize="20sp"
                             android:textColor="@color/theme_333333"
-                            android:text="@{BigDecimalUtils.round(BaseUtil.getString(viewModel.entity.usedAssets),4)}"/>
+                            android:text="@{BigDecimalUtils.roundDown(BaseUtil.getString(viewModel.entity.usedAssets),4)}"/>
                     </LinearLayout>
 
                     <Button

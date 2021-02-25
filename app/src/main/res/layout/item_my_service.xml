@@ -67,6 +67,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/theme_666666"
+                        android:textSize="@dimen/sp_10"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:layout_marginTop="7dp"
+                        android:text="@{viewModel.entity.machineType == 0 ? @string/wlkj_no_t_text + String.valueOf(viewModel.entity.calculationPower) + @string/t_text : @string/slkj_no_t_text + String.valueOf(viewModel.entity.calculationPower) + @string/t_text}"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/theme_333333"
                         android:textSize="@dimen/sp_10"
                         android:ellipsize="end"
@@ -82,7 +92,7 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:layout_marginTop="7dp"
-                        android:text="@{@string/dqsj_text + TimeUtil.formatData(TimeUtil.dateFormatYMDHMS,viewModel.entity.expireDate)}"/>
+                        android:text="@{@string/dqsj_text + (viewModel.entity.productStatus.equals(@string/product_not_open) ? @string/product_not_open_text : TimeUtil.formatData(TimeUtil.dateFormatYMDHMS,viewModel.entity.expireDate))}"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"

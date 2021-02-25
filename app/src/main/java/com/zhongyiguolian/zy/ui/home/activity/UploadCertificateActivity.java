@@ -133,9 +133,6 @@ public class UploadCertificateActivity extends CustomActivity<ActivityUploadCert
             });
         });
 
-        viewModel.uc.showVerified.observe(this, aBoolean -> {
-            CustomDialog.showVerified(this, v -> startActivity(VerifiedActivity.class));
-        });
     }
 
     /**

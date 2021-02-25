@@ -157,6 +157,10 @@ public class VerifiedViewModel extends CustomViewModel<MyRepository> {
         }
     });
 
+    /**
+     * @param code
+     * @param dataBean
+     */
     @Override
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);
@@ -165,6 +169,7 @@ public class VerifiedViewModel extends CustomViewModel<MyRepository> {
             Bundle bundle = new Bundle();
             bundle.putString("mTitle","实名认证");
             bundle.putString("mProText","实名认证成功");
+            bundle.putInt("type",VerifiedSuccessActivity.VERIFIED);
             startActivity(VerifiedSuccessActivity.class,bundle);
         }
     }

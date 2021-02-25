@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.lifecycle.ViewModelProviders;
 import com.baidu.ocr.sdk.OCR;
@@ -181,42 +182,9 @@ public class AddBlankCardActivity extends CustomActivity<ActivityAddBlankBinding
                     CameraActivity.CONTENT_TYPE_BANK_CARD);
             startActivityForResult(intent, REQUEST_CODE_BANKCARD);
         });
-    }
-
-    /**
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // 识别成功回调，银行卡识别
-        if (requestCode == REQUEST_CODE_BANKCARD && resultCode == Activity.RESULT_OK) {
-            BankCardParams param = new BankCardParams();
-            param.setImageFile(new File(FileUtil.getBlankSaveFile(getApplicationContext()).getAbsolutePath()));
-            OCR.getInstance(this).recognizeBankCard(param, new OnResultListener<BankCardResult>() {
-                @Override
-                public void onResult(BankCardResult result) {
-                    String res = String.format("卡号：%s\n类型：%s\n发卡行：%s",
-                            result.getBankCardNumber(),
-                            result.getBankCardType().name(),
-                            result.getBankName());
-
-                    viewModel.blankCardNum.set(result.getBankCardNumber().replace(" ",""));
-                    viewModel.blankName.set(result.getBankName());
-                }
-
-                @Override
-                public void onError(OCRError error) {
-                    error.getMessage();
-                }
-            });
-        }
 
         //校验及提交银行卡信息
-        viewModel.uc.checkPhoneNum.observe(this,aBoolean -> {
+        viewModel.uc.checkPhoneNum.observe(this,aVoid -> {
 
             //验证是否输入银行卡号
             if(!BaseUtil.isValue(viewModel.blankCardNum.get())){
@@ -272,6 +240,39 @@ public class AddBlankCardActivity extends CustomActivity<ActivityAddBlankBinding
                 viewModel.requestData(Constants.UPDATEBANKCARD);
             }
         });
+    }
+
+    /**
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // 识别成功回调，银行卡识别
+        if (requestCode == REQUEST_CODE_BANKCARD && resultCode == Activity.RESULT_OK) {
+            BankCardParams param = new BankCardParams();
+            param.setImageFile(new File(FileUtil.getBlankSaveFile(getApplicationContext()).getAbsolutePath()));
+            OCR.getInstance(this).recognizeBankCard(param, new OnResultListener<BankCardResult>() {
+                @Override
+                public void onResult(BankCardResult result) {
+                    String res = String.format("卡号：%s\n类型：%s\n发卡行：%s",
+                            result.getBankCardNumber(),
+                            result.getBankCardType().name(),
+                            result.getBankName());
+
+                    viewModel.blankCardNum.set(result.getBankCardNumber().replace(" ",""));
+                    viewModel.blankName.set(result.getBankName());
+                }
+
+                @Override
+                public void onError(OCRError error) {
+                    error.getMessage();
+                }
+            });
+        }
     }
 
 

@@ -110,6 +110,11 @@ public class ServiceDetailNewViewModel extends CustomViewModel<MyRepository> {
      */
     public ObservableField<Boolean> isCheck = new ObservableField<>(false);
 
+    /**
+     * 状态显示
+     */
+    public ObservableField<String> statusText = new ObservableField<>("立即购买");
+
 
     /**
      * 去记录里面
@@ -131,10 +136,14 @@ public class ServiceDetailNewViewModel extends CustomViewModel<MyRepository> {
                 ToastUtils.showShort("请同意协议！");
                 return;
             }else{
-                Bundle bundle = new Bundle();
-                bundle.putString("productId", productId.get());
-                bundle.putString("productNums", nums.get());
-                startActivity(ConfirmOrderActivity.class,bundle);
+                if("EX_ORDER_STATUS_UPPER_SHELF".equals(entity.get().getProductStatus())) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("productId", productId.get());
+                    bundle.putString("productNums", nums.get());
+                    startActivity(ConfirmOrderActivity.class, bundle);
+                }else{
+                    ToastUtils.showShort("不可购买！");
+                }
             }
         }
     });
@@ -265,6 +274,16 @@ public class ServiceDetailNewViewModel extends CustomViewModel<MyRepository> {
 
         if(code == Constants.GETPRODUCTINFO){
             ServiceDetailBeans detailBeans = (ServiceDetailBeans)dataBean;
+
+            if("EX_ORDER_STATUS_SOLD_OUT".equals(detailBeans.getResultMap().getVo().getProductStatus())){
+                statusText.set("已售罄");
+            }else if("EX_ORDER_STATUS_LOWER_SHELF".equals(detailBeans.getResultMap().getVo().getProductStatus())){
+                statusText.set("已下架");
+            }else if("EX_ORDER_STATUS_UPPER_SHELF".equals(detailBeans.getResultMap().getVo().getProductStatus())){
+                statusText.set("立即购买");
+            }else{
+                statusText.set("未知状态");
+            }
 
             if(detailBeans.getState() == -1){//当状态为-1时需要登录
                 ToastUtils.showShort(detailBeans.getMessage());

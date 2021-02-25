@@ -578,7 +578,7 @@
                             android:textColor="@color/theme_FFFFFF"
                             android:gravity="center"
                             android:background="@drawable/shape_radius10_333333"
-                            android:text="立即购买"
+                            android:text="@{viewModel.statusText}"
                             app:onClickCommand="@{viewModel.goConfirm}"/>
 
                     </LinearLayout>

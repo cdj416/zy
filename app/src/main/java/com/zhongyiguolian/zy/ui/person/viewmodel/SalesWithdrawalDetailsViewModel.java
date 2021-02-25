@@ -1,6 +1,7 @@
 package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;

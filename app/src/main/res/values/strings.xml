@@ -26,11 +26,13 @@
     <string name="kjsl_text">云存储服务器</string>
     <string name="t_text">T</string>
     <string name="ex_order_status_in">EX_ORDER_STATUS_IN</string>
+    <string name="product_not_open">PRODUCT_NOT_OPEN</string>
+    <string name="product_not_open_text">未开启</string>
     <string name="x_text">x</string>
     <string name="yqysl_text">已启用算力:</string>
     <string name="wqysl_text">未启用算力:</string>
     <string name="gmsj_text">购买时间:</string>
-    <string name="dqsj_text">到期时间:</string>
+    <string name="dqsj_text">托管费到期时间:</string>
     <string name="ljlc_text">累计产量:</string>
     <string name="sbbh_text">设备编号:</string>
     <string name="uuid_text_left">(id:</string>
@@ -46,5 +48,8 @@
     <string name="slkj_text">算力空间(T)</string>
     <string name="tgf_text">托管费：</string>
     <string name="sltgf_text">免托管费、免质押、免质押</string>
+    <string name="mh_text">:</string>
+    <string name="wlkj_no_t_text">物理空间:</string>
+    <string name="slkj_no_t_text">算力空间:</string>
 
 </resources>

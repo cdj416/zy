@@ -51,8 +51,6 @@ public class UploadCertificateViewModel extends CustomViewModel<MyRepository> {
         public SingleLiveEvent<String> copyText = new SingleLiveEvent<>();
         //弹出密码输入框
         public SingleLiveEvent<Void> goUpdate = new SingleLiveEvent<>();
-        //显示认证弹框
-        public SingleLiveEvent<Boolean> showVerified = new SingleLiveEvent<>();
     }
 
     /**
@@ -192,7 +190,7 @@ public class UploadCertificateViewModel extends CustomViewModel<MyRepository> {
     public BindingCommand bankName = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            uc.copyText.setValue(bankData.get().getSubBankName());
+            uc.copyText.setValue(bankData.get().getBankName()+bankData.get().getSubBankName());
         }
     });
 
@@ -202,7 +200,7 @@ public class UploadCertificateViewModel extends CustomViewModel<MyRepository> {
     public BindingCommand accountNum = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            uc.copyText.setValue(bankData.get().getSubBankName());
+            uc.copyText.setValue(bankData.get().getCardNumber());
         }
     });
 
@@ -275,13 +273,12 @@ public class UploadCertificateViewModel extends CustomViewModel<MyRepository> {
             ConfirmBeans beans = (ConfirmBeans)dataBean;
 
             if(beans.getCode() == 1){
-                ToastUtils.showShort("提交成功！");
-                //检查是否需要实名认证
-                //获取用户个人数据
-                clearParams().setParams("token", AndroidDes3Util.encode(loginBean.getToken()))
-                        .requestData(Constants.GETUSER);
 
-                //startActivity(MainActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("mTitle","上传结果");
+                bundle.putString("mProText","已上传，请耐心等待审核！");
+                bundle.putInt("type",VerifiedSuccessActivity.UPLOAD_CERTIFICATE);
+                startActivity(VerifiedSuccessActivity.class,bundle);
             }else{
                 ToastUtils.showShort(beans.getMessage());
             }
@@ -293,20 +290,6 @@ public class UploadCertificateViewModel extends CustomViewModel<MyRepository> {
             HomeBankBeans bankBeans = (HomeBankBeans)dataBean;
 
             bankData.set(bankBeans.getPUBLIC_BANKCARD());
-        }
-
-        if(code == Constants.GETUSER){
-            PersonInfoBeans beans = (PersonInfoBeans)dataBean;
-
-            if("UNSUBMIT".equals(beans.getCustomerVo().getIdInfoStatus())){
-                //弹框需要客户实名认证
-                uc.showVerified.call();
-            }else{
-                Bundle bundle = new Bundle();
-                bundle.putString("mTitle","上传结果");
-                bundle.putString("mProText","已上传，请耐心等待审核！");
-                startActivity(VerifiedSuccessActivity.class,bundle);
-            }
         }
     }
 }

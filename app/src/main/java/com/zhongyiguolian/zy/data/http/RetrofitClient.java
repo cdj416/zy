@@ -39,8 +39,6 @@ public class RetrofitClient {
     //public static String baseUrl = "http://app.glydsj.com";
     //预发环境
     public static String baseUrl = "http://61.155.145.137:18088";
-    //胖胖环境
-    //public static String baseUrl = "http://192.168.0.114:18088";
 
     private static Context mContext = Utils.getContext();
 

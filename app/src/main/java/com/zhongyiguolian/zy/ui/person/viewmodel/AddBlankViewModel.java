@@ -2,6 +2,7 @@ package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
@@ -95,7 +96,7 @@ public class AddBlankViewModel extends CustomViewModel<MyRepository> {
         //拍照获取银行卡号
         public SingleLiveEvent<Void> getBlankNums = new SingleLiveEvent<>();
         //验证手机号是否合规
-        public SingleLiveEvent<Boolean> checkPhoneNum = new SingleLiveEvent<>();
+        public SingleLiveEvent<Void> checkPhoneNum = new SingleLiveEvent<>();
     }
 
 
@@ -188,6 +189,7 @@ public class AddBlankViewModel extends CustomViewModel<MyRepository> {
             Bundle bundle = new Bundle();
             bundle.putString("mTitle","银行卡绑定结果");
             bundle.putString("mProText","绑定成功");
+            bundle.putInt("type",VerifiedSuccessActivity.ADDCARD);
             startActivity(VerifiedSuccessActivity.class,bundle);
         }
 

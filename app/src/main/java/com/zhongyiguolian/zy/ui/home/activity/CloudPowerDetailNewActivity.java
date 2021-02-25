@@ -137,7 +137,6 @@ public class CloudPowerDetailNewActivity extends CustomActivity<ActivityCloudpow
         //获取首页服务器产品
         viewModel.clearParams().setParams("pageNum", AndroidDes3Util.encode("1"))
                 .setParams("pageSize",AndroidDes3Util.encode("10"))
-                .setParams("orderStatus","EX_ORDER_STATUS_UPPER_SHELF")
                 .setParams("machineType",AndroidDes3Util.encode("1"));
         viewModel.requestNoData(Constants.PRODUCT_LIST);
     }

@@ -1,5 +1,7 @@
 package com.zhongyiguolian.zy.utils;
 
+import android.util.Log;
+
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
 
 import java.math.BigDecimal;
@@ -128,7 +130,8 @@ public class BigDecimalUtils {
         }
 
         BigDecimal b = new BigDecimal(v);
-        return b.setScale(scale, BigDecimal.ROUND_HALF_DOWN).toString();
+        Log.e("cnn","==================查看是否正常=========="+v);
+        return b.setScale(scale, BigDecimal.ROUND_DOWN).toString();
     }
 
     /**

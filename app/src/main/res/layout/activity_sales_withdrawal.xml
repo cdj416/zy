@@ -10,6 +10,7 @@
 
         <import type="android.view.View"/>
         <import type="com.zhongyiguolian.zy.data.md5.BaseUtil"/>
+        <import type="com.zhongyiguolian.zy.utils.BigDecimalUtils"/>
     </data>
 
     <LinearLayout
@@ -36,7 +37,7 @@
                 android:text="销售提现"/>
             <ImageView
                 android:id="@+id/comBack"
-android:padding="5dp"
+                android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/white_black"
@@ -161,7 +162,7 @@ android:padding="5dp"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
                 android:textColor="@color/chart_red"
-                android:text="@{BaseUtil.getNoZoon(viewModel.entity.usedAssets)}"/>
+                android:text="@{viewModel.entity.usedAssets}"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

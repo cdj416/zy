@@ -561,6 +561,15 @@ public class PurchaseHistoryBeans {
         private int serviceFeePercent;
         private long expireDate;
         private long createTime;
+        private int machineType;
+
+        public int getMachineType() {
+            return machineType;
+        }
+
+        public void setMachineType(int machineType) {
+            this.machineType = machineType;
+        }
 
         public int getId() {
             return id;

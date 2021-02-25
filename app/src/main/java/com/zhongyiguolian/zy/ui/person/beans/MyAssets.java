@@ -1,5 +1,8 @@
 package com.zhongyiguolian.zy.ui.person.beans;
 
+import android.util.Log;
+
+import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.utils.BigDecimalUtils;
 
 import java.util.List;
@@ -242,7 +245,7 @@ public class MyAssets {
         }
 
         public String getUsedAssets() {
-            return BigDecimalUtils.roundDown(usedAssets,4);
+            return BaseUtil.getNoZoon(BigDecimalUtils.roundDown(usedAssets,4));
         }
 
         public void setUsedAssets(String usedAssets) {
