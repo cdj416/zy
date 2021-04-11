@@ -1,16 +1,8 @@
 <resources>
     <string name="app_name">众亿国链</string>
 
-    <string name="bottom_home">首页</string>
-    <string name="bottom_quotes">行情</string>
-    <string name="bottom_learn">学习</string>
-    <string name="bottom_advisory">咨询</string>
-    <string name="bottom_person">我的</string>
-
     <string name="login_password">密码登录</string>
     <string name="login_code">手机快捷登录</string>
-
-    <string name="camera_permission_required">本功能需要相机权限！</string>
 
     <string name="nums150">150</string>
     <string name="two_hz">\u3000\u3000</string>
@@ -28,11 +20,10 @@
     <string name="ex_order_status_in">EX_ORDER_STATUS_IN</string>
     <string name="product_not_open">PRODUCT_NOT_OPEN</string>
     <string name="product_not_open_text">未开启</string>
+    <string name="product_open_text">已开启</string>
     <string name="x_text">x</string>
-    <string name="yqysl_text">已启用算力:</string>
-    <string name="wqysl_text">未启用算力:</string>
-    <string name="gmsj_text">购买时间:</string>
     <string name="dqsj_text">托管费到期时间:</string>
+    <string name="kqzt_text">开启状态:</string>
     <string name="ljlc_text">累计产量:</string>
     <string name="sbbh_text">设备编号:</string>
     <string name="uuid_text_left">(id:</string>
@@ -42,14 +33,11 @@
     <string name="add_text">添加</string>
     <string name="static_text">Static</string>
     <string name="fil_text">FIL</string>
-    <string name="cqsb_text">产权设备</string>
-    <string name="yslzp_text">云算力租凭</string>
-    <string name="wlkj_text">物理空间(T)</string>
-    <string name="slkj_text">算力空间(T)</string>
-    <string name="tgf_text">托管费：</string>
-    <string name="sltgf_text">免托管费、免质押、免质押</string>
-    <string name="mh_text">:</string>
+    <string name="xg_text">/</string>
     <string name="wlkj_no_t_text">物理空间:</string>
     <string name="slkj_no_t_text">算力空间:</string>
+
+    <string name="bank_text">银行卡</string>
+    <string name="gmsj_text">购买时间:</string>
 
 </resources>

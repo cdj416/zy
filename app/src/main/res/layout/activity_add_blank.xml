@@ -13,31 +13,30 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#EFF4FF">
 
         <com.zhongyiguolian.zy.myview.StatusBarHeightView
             android:id="@+id/barHeight"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"/>
+            android:layout_height="wrap_content"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/colorPrimary">
+            android:layout_height="40dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:textColor="@color/theme_FFFFFF"
+                android:textColor="@color/theme_333333"
                 android:textSize="@dimen/sp_16"
                 android:gravity="center"
-                android:text="添加银行卡"/>
+                android:text="@{viewModel.butText+@string/bank_text}"/>
             <ImageView
                 android:id="@+id/comBack"
-android:padding="5dp"
+                android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/white_black"
+                android:src="@mipmap/black_back_mark"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"/>
         </RelativeLayout>
@@ -87,7 +86,7 @@ android:padding="5dp"
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/theme_EEEEEE"
+                android:background="@color/theme_D9E6FF"
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>
 
@@ -124,7 +123,7 @@ android:padding="5dp"
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/theme_EEEEEE"
+                android:background="@color/theme_D9E6FF"
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>
 
@@ -162,7 +161,7 @@ android:padding="5dp"
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/theme_EEEEEE"
+                android:background="@color/theme_D9E6FF"
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>
 
@@ -200,7 +199,7 @@ android:padding="5dp"
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/theme_EEEEEE"
+                android:background="@color/theme_D9E6FF"
                 android:layout_alignParentBottom="true"/>
         </RelativeLayout>
 

@@ -53,7 +53,8 @@
                     android:src="@mipmap/white_black"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="11dp"
-                    android:padding="5dp"/>
+                    android:padding="5dp"
+                    android:visibility="@{viewModel.isShowXy ? View.GONE : View.VISIBLE}"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -213,6 +214,7 @@
                                     android:paddingStart="25dp"
                                     android:layout_marginTop="6dp"
                                     android:layout_marginBottom="6dp"
+                                    android:visibility="gone"
                                     android:text="( 服务期540天 )"/>
 
                                 <LinearLayout
@@ -220,12 +222,13 @@
                                     android:layout_height="30dp"
                                     android:orientation="horizontal"
                                     android:layout_marginStart="26dp"
+                                    android:layout_marginTop="6dp"
                                     android:layout_marginEnd="26dp">
 
                                     <LinearLayout
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"
-                                        android:layout_weight="1.2"
+                                        android:layout_weight="1.4"
                                         android:orientation="horizontal"
                                         android:gravity="center_vertical">
                                         <ImageView
@@ -286,7 +289,7 @@
                                     <LinearLayout
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"
-                                        android:layout_weight="1.2"
+                                        android:layout_weight="1.4"
                                         android:orientation="horizontal"
                                         android:gravity="center_vertical">
                                         <ImageView
@@ -351,7 +354,7 @@
                                     <LinearLayout
                                         android:layout_width="0dp"
                                         android:layout_height="match_parent"
-                                        android:layout_weight="1.2"
+                                        android:layout_weight="1.4"
                                         android:orientation="horizontal"
                                         android:gravity="center_vertical">
                                         <ImageView
@@ -386,6 +389,65 @@
                                         android:layout_height="match_parent"
                                         android:layout_weight="1"
                                         android:orientation="horizontal"
+                                        android:gravity="center_vertical">
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@mipmap/newproduct_mark_b"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/theme_154297"
+                                            android:textSize="@dimen/sp_14"
+                                            android:layout_marginStart="5dp"
+                                            android:text="随时提现"/>
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@mipmap/yinlian_pay_mark"
+                                            android:visibility="gone"/>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="30dp"
+                                    android:orientation="horizontal"
+                                    android:layout_marginStart="26dp"
+                                    android:layout_marginEnd="26dp">
+
+                                    <LinearLayout
+                                        android:id="@+id/showDetails"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.4"
+                                        android:orientation="horizontal"
+                                        android:gravity="center_vertical">
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@mipmap/newproduct_mark_b"/>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textColor="@color/theme_154297"
+                                            android:textSize="@dimen/sp_14"
+                                            android:layout_marginStart="5dp"
+                                            android:text="服务期540天+540天"/>
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="4dp"
+                                            android:src="@mipmap/gray_question_mark"/>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:orientation="horizontal"
+                                        android:visibility="invisible"
                                         android:gravity="center_vertical">
                                         <ImageView
                                             android:layout_width="wrap_content"
@@ -454,12 +516,17 @@
                                                 android:text="-"
                                                 app:onClickCommand="@{viewModel.subNum}"/>
 
-                                            <TextView
-                                                android:layout_width="48dp"
-                                                android:layout_height="wrap_content"
+                                            <EditText
+                                                android:id="@+id/numEt"
+                                                android:layout_width="38dp"
+                                                android:layout_height="23dp"
                                                 android:textColor="@color/theme_333333"
                                                 android:textSize="@dimen/sp_18"
                                                 android:gravity="center"
+                                                android:layout_marginStart="10dp"
+                                                android:layout_marginEnd="10dp"
+                                                android:inputType="number"
+                                                android:background="@drawable/shape_radius5_33919191"
                                                 android:text="@={viewModel.nums}"/>
 
                                             <TextView
@@ -492,7 +559,7 @@
                                     android:id="@+id/imageView"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    app:setIntSubImage="@{viewModel.imgDetail}"/>
+                                    app:setIntSubImage="@{viewModel.entity.detailImgUrl}"/>
 
                             </LinearLayout>
 
@@ -594,7 +661,7 @@
                         android:id="@+id/contra"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:setSubImage="@{viewModel.entity.contractImage}"/>
+                        app:setIntSubImage="@{viewModel.entity.detailXyImgUrl}"/>
 
                 </com.zhongyiguolian.zy.myview.StickyScrollView>
             </FrameLayout>

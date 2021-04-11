@@ -1,8 +1,10 @@
 package com.zhongyiguolian.zy.ui.main.viewmodel;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.RxBus;
@@ -17,6 +19,7 @@ import com.zhongyiguolian.zy.ui.main.beans.CountrysBeans;
 import com.zhongyiguolian.zy.ui.main.beans.ImgCodeBeans;
 import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.HourMeterUtil;
+
 import io.michaelrocks.libphonenumber.android.NumberParseException;
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
 import io.michaelrocks.libphonenumber.android.Phonenumber;
@@ -148,6 +151,7 @@ public class RetrievePasswordViewModel extends CustomViewModel<MyRepository> imp
     public void sendPhneCode(){
         //发送验证码
         clearParams().setParams("account", AndroidDes3Util.encode(phoneNum.get()))
+                .setParams("nationalCode",AndroidDes3Util.encode(countrysId.get().substring(1)))
                 .setParams("type", AndroidDes3Util.encode("1"))//表示找回密码
                 .setParams("imgCode", AndroidDes3Util.encode(inputVcode.get()))
                 .setParams("voice", AndroidDes3Util.encode("0"))
@@ -226,7 +230,7 @@ public class RetrievePasswordViewModel extends CustomViewModel<MyRepository> imp
         mSubscription = RxBus.getDefault().toObservable(CountrysBeans.class)
                 .observeOn(AndroidSchedulers.mainThread()) //回调到主线程更新UI
                 .subscribe(beans -> {
-                    countrysId.set(beans.getCountrysId());
+                    countrysId.set(beans.getCode());
                 });
         //将订阅者加入管理站
         RxSubscriptions.add(mSubscription);

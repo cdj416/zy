@@ -9,6 +9,7 @@ import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
 import com.zhongyiguolian.zy.databinding.ActivityShoppingCartBinding;
 import com.zhongyiguolian.zy.ui.home.viewmodel.ShoppingCartViewModel;
+
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**

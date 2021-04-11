@@ -16,8 +16,6 @@ import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.base.ItemViewModel;
 import com.zhongyiguolian.zy.base.MultiItemViewModel;
 import com.zhongyiguolian.zy.data.MyRepository;
-import com.zhongyiguolian.zy.ui.home.activity.ConfirmOrderActivity;
-import com.zhongyiguolian.zy.ui.home.activity.EncyclopediaActivity;
 import com.zhongyiguolian.zy.ui.home.beans.CartBeans;
 import com.zhongyiguolian.zy.utils.BigDecimalUtils;
 

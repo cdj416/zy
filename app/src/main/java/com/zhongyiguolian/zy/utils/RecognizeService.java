@@ -10,13 +10,6 @@ import com.baidu.ocr.sdk.OnResultListener;
 import com.baidu.ocr.sdk.exception.OCRError;
 import com.baidu.ocr.sdk.model.BankCardParams;
 import com.baidu.ocr.sdk.model.BankCardResult;
-import com.baidu.ocr.sdk.model.GeneralBasicParams;
-import com.baidu.ocr.sdk.model.GeneralParams;
-import com.baidu.ocr.sdk.model.GeneralResult;
-import com.baidu.ocr.sdk.model.OcrRequestParams;
-import com.baidu.ocr.sdk.model.OcrResponseResult;
-import com.baidu.ocr.sdk.model.Word;
-import com.baidu.ocr.sdk.model.WordSimple;
 
 import java.io.File;
 

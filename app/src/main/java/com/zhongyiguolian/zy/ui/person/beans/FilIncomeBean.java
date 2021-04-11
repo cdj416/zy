@@ -220,7 +220,7 @@ public class FilIncomeBean {
         }
 
         public double getUseNum(){
-            if(rType.equals("Static")){
+            if(rType == null || rType.equals("Static")){
                 return profitCount;
             }else{
                 return myamount;

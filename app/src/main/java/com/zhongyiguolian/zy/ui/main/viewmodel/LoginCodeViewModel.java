@@ -1,6 +1,7 @@
 package com.zhongyiguolian.zy.ui.main.viewmodel;
 
 import android.app.Application;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
@@ -17,9 +18,8 @@ import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.data.userbean.MemberLoginBean;
 import com.zhongyiguolian.zy.ui.main.activity.CountrysActivity;
 import com.zhongyiguolian.zy.ui.main.activity.MainActivity;
-import com.zhongyiguolian.zy.ui.main.activity.PrivacyPolicyActivity;
 import com.zhongyiguolian.zy.ui.main.activity.RetrievePasswordActivity;
-import com.zhongyiguolian.zy.ui.main.activity.UserAgreementActivity;
+import com.zhongyiguolian.zy.ui.main.activity.WebActivity;
 import com.zhongyiguolian.zy.ui.main.beans.CountrysBeans;
 import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.HourMeterUtil;
@@ -177,7 +177,10 @@ public class LoginCodeViewModel extends CustomViewModel<MyRepository> implements
     public BindingCommand goUserAgreement = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            startActivity(UserAgreementActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("url","http://app.glydsj.com/appdown/%E7%94%A8%E6%88%B7%E5%8D%8F%E8%AE%AE.html");
+            bundle.putString("title","用户协议");
+            startActivity(WebActivity.class,bundle);
         }
     });
 
@@ -188,7 +191,10 @@ public class LoginCodeViewModel extends CustomViewModel<MyRepository> implements
     public BindingCommand goPrivacyPolicy = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            startActivity(PrivacyPolicyActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("url","http://app.glydsj.com/appdown/%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96.html");
+            bundle.putString("title","隐私政策");
+            startActivity(WebActivity.class,bundle);
         }
     });
 
@@ -208,6 +214,7 @@ public class LoginCodeViewModel extends CustomViewModel<MyRepository> implements
     public void sendPhneCode(){
         //发送验证码
         clearParams().setParams("account", AndroidDes3Util.encode(phoneNum.get()))
+                .setParams("nationalCode",AndroidDes3Util.encode(countrysId.get().substring(1)))
                 .setParams("type", AndroidDes3Util.encode("3"))
                 .setParams("imgCode", AndroidDes3Util.encode("123456"))//暂时写的死的
                 .setParams("voice", AndroidDes3Util.encode("0"))//暂时写的死的
@@ -316,7 +323,7 @@ public class LoginCodeViewModel extends CustomViewModel<MyRepository> implements
         mSubscription = RxBus.getDefault().toObservable(CountrysBeans.class)
                 .observeOn(AndroidSchedulers.mainThread()) //回调到主线程更新UI
                 .subscribe(beans -> {
-                    countrysId.set(beans.getCountrysId());
+                    countrysId.set(beans.getCode());
                 });
         //将订阅者加入管理站
         RxSubscriptions.add(mSubscription);
@@ -350,6 +357,7 @@ public class LoginCodeViewModel extends CustomViewModel<MyRepository> implements
         if(code == Constants.LOGIN){
             MemberLoginBean loginBean = (MemberLoginBean)dataBean;
             loginBean.setUserName(phoneNum.get());
+            loginBean.setNationalCode(countrysId.get().substring(1));
             loginBean.setPassword(password.get());
             loginBean.setAgrees(true);
 

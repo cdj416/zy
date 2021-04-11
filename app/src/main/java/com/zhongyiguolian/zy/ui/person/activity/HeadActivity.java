@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.bumptech.glide.Glide;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -19,8 +21,10 @@ import com.zhongyiguolian.zy.databinding.ActivityHeadBinding;
 import com.zhongyiguolian.zy.ui.person.viewmodel.HeadViewModel;
 import com.zhongyiguolian.zy.utils.CustomDialog;
 import com.zhongyiguolian.zy.utils.GlideEngine;
+
 import java.io.File;
 import java.util.List;
+
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**

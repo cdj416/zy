@@ -7,14 +7,9 @@ import androidx.lifecycle.ViewModelProviders;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
-import com.zhongyiguolian.zy.databinding.ActivityMyWalletBinding;
 import com.zhongyiguolian.zy.databinding.ActivityTotalIncomeBinding;
-import com.zhongyiguolian.zy.ui.person.viewmodel.MyWalletViewModel;
 import com.zhongyiguolian.zy.ui.person.viewmodel.TotalIncomeViewModel;
 import com.zhongyiguolian.zy.utils.StatusBarUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import me.tatarka.bindingcollectionadapter2.BR;
 

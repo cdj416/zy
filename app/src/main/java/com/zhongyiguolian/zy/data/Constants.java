@@ -73,6 +73,15 @@ public class Constants {
         apis.put(ANDROIDVERSION, "androidVersion");
         apis.put(GETMYTEAM, "getMyTeam");
         apis.put(GETCURRENCYRECORDS, "getCurrencyRecords");
+        apis.put(RECHARGETOKEN, "rechargeToken");
+        apis.put(STS, "sts");
+        apis.put(COMPANY, "company");
+        apis.put(MINERDAL, "minerdal");
+        apis.put(CHONGZIYA, "chongziya");
+        apis.put(MINERDALS, "minerdals");
+        apis.put(OPENMINER, "openMiner");
+        apis.put(MYNAME, "myname");
+        apis.put(CUSTODY_FEE_INFO,"custody_fee_info");
     }
 
     /*
@@ -174,5 +183,23 @@ public class Constants {
     public final static int GETMYTEAM = 0x044;
     //交易记录
     public final static int GETCURRENCYRECORDS = 0x045;
+    //测试接口
+    public final static int RECHARGETOKEN = 0x046;
+    //获取钱包地址
+    public final static int STS = 0x047;
+    //充值余额
+    public final static int COMPANY = 0x048;
+    //查询未开机的服务器列表
+    public final static int MINERDAL = 0x049;
+    //充质押
+    public final static int CHONGZIYA = 0x050;
+    //每天消耗的
+    public final static int MINERDALS = 0x051;
+    //已开启的服务器列表
+    public final static int OPENMINER = 0x052;
+    //根据邀请码获取用户信息
+    public final static int MYNAME = 0x053;
+    //获取托管费数据
+    public final static int CUSTODY_FEE_INFO = 0x054;
 
 }

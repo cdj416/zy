@@ -9,6 +9,7 @@ import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
 import com.zhongyiguolian.zy.databinding.ActivityBlockchainDetailsBinding;
 import com.zhongyiguolian.zy.ui.home.viewmodel.BlockchainDetailsViewModel;
+
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**

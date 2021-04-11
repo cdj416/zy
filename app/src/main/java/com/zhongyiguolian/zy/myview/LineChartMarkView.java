@@ -10,23 +10,16 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.util.Log;
 import android.util.TypedValue;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.Chart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.MPPointF;
-import com.github.tifezh.kchartlib.chart.formatter.ValueFormatter;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.ui.person.beans.FilIncomeBean;
-import com.zhongyiguolian.zy.utils.BigDecimalUtils;
 import com.zhongyiguolian.zy.utils.TimeUtil;
 
 import java.text.DecimalFormat;

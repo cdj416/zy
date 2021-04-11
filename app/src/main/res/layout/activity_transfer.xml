@@ -168,7 +168,7 @@ android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/chart_red"
+                android:textColor="@color/theme_EF5B48"
                 android:text="FIL"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -180,7 +180,7 @@ android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/chart_red"
+                android:textColor="@color/theme_EF5B48"
                 android:text="@{viewModel.dtoBean.availableAmount}"/>
         </LinearLayout>
 
@@ -234,7 +234,7 @@ android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/chart_red"
+                android:textColor="@color/theme_EF5B48"
                 android:text="@{viewModel.fee}"/>
         </LinearLayout>
 

@@ -1,8 +1,10 @@
 package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.zhongyiguolian.zy.base.ItemViewModel;

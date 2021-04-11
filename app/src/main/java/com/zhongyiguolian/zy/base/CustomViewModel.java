@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
+
 import com.hongyuan.mvvmhabitx.base.BaseModel;
 import com.hongyuan.mvvmhabitx.base.IBaseViewModel;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
@@ -31,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -391,6 +394,7 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
     public int curPage = 1;//当前页数
     private int pageSize = 10;//一页条目数
     public boolean isLoadMore = false;//是否开启了分页功能
+    public boolean isRefresh = false;//是否开启了单独刷新功能
     public final int FIRST_PAGE = 1;//表示第一页
     public boolean noShowLoading = false;
 
@@ -564,7 +568,7 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
             //初始化刷新使用的参数
             clearParams().getParams().putAll(getRefParams());
 
-            if(code == Constants.PRODUCT_LIST){
+            if(code == Constants.PRODUCT_LIST || code == Constants.DISCOVERCONTENT_INDEX){
                 requestNoData(code);
             }else{
                 requestData(code);
@@ -655,7 +659,7 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
                             //关闭对话框
                             dismissDialog();
 
-                            if(isLoadMore){
+                            if(isLoadMore || isRefresh){
                                 //关闭刷新加载动画
                                 uc.closeRefresh.call();
                             }
@@ -663,7 +667,6 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
                     });
         }catch (Exception e){
             e.printStackTrace();
-            Log.e("cnn","===============反射方法失败！==============");
         }
     }
 
@@ -714,7 +717,7 @@ public class CustomViewModel<M extends BaseModel> extends AndroidViewModel imple
                             //关闭对话框
                             dismissDialog();
 
-                            if(isLoadMore){
+                            if(isLoadMore || isRefresh){
                                 //关闭刷新加载动画
                                 uc.closeRefresh.call();
                             }

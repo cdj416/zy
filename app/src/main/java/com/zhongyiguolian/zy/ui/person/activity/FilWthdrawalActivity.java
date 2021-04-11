@@ -11,7 +11,9 @@ import com.zhongyiguolian.zy.base.CustomActivity;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.databinding.ActivityFilWithdrawalBinding;
 import com.zhongyiguolian.zy.ui.person.viewmodel.FilReflectDetailViewModel;
+import com.zhongyiguolian.zy.utils.BigDecimalUtils;
 import com.zhongyiguolian.zy.utils.CustomDialog;
+import com.zhongyiguolian.zy.utils.StatusBarUtil;
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
@@ -55,6 +57,8 @@ public class FilWthdrawalActivity extends CustomActivity<ActivityFilWithdrawalBi
     @Override
     public void initView() {
         super.initView();
+        StatusBarUtil.setCommonUI(this,true);
+        setOnRefresh(binding.refresh,REFRESH_0X4);
         binding.comBack.setOnClickListener(view -> finish());
 
         //监听地址输入情况
@@ -91,7 +95,7 @@ public class FilWthdrawalActivity extends CustomActivity<ActivityFilWithdrawalBi
         super.initViewObservable();
 
         viewModel.uc.showEnterPassword.observe(this,aVoid -> {
-            CustomDialog.enterPassword(FilWthdrawalActivity.this,viewModel.nums.get(),String.valueOf(viewModel.entity.get().getPoundage()), (v, message) -> {
+            CustomDialog.enterPassword(FilWthdrawalActivity.this,"到账数量",viewModel.nums.get(), BaseUtil.getNoZoon(BigDecimalUtils.sub(viewModel.nums.get(),String.valueOf(viewModel.entity.get().getPoundage()),5)), (v, message) -> {
 
                 //请求提币
                 viewModel.doWithdrawToken(message);

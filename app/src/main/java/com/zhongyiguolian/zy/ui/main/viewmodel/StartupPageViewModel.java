@@ -10,7 +10,6 @@ import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.ui.main.activity.LoginActivity;
 import com.zhongyiguolian.zy.ui.main.activity.MainActivity;
-import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.HourMeterUtil;
 
 /**

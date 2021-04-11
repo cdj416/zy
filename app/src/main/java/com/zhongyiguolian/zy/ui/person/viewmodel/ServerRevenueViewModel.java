@@ -5,20 +5,17 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
-import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
-import com.zhongyiguolian.zy.ui.home.viewmodel.HomeNewViewModel;
 import com.zhongyiguolian.zy.ui.person.activity.RevenueDetailActivity;
-import com.zhongyiguolian.zy.ui.person.activity.SendCodeActivity;
 import com.zhongyiguolian.zy.ui.person.activity.TotalIncomeActivity;
 import com.zhongyiguolian.zy.ui.person.beans.MyAssets;
 import com.zhongyiguolian.zy.ui.person.beans.PersonInfoBeans;
-import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 
 /**
  * 收益页面

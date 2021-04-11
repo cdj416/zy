@@ -11,12 +11,15 @@ import com.zhongyiguolian.zy.ui.home.beans.HomeProductBeans;
 import com.zhongyiguolian.zy.ui.home.beans.NoticeBeans;
 import com.zhongyiguolian.zy.ui.home.beans.NoticeDeatils;
 import com.zhongyiguolian.zy.ui.home.beans.PayPasswordBeans;
+import com.zhongyiguolian.zy.ui.home.beans.STSBean;
 import com.zhongyiguolian.zy.ui.home.beans.ServiceDetailBeans;
 import com.zhongyiguolian.zy.ui.home.beans.SymbolAssetBeans;
 import com.zhongyiguolian.zy.ui.home.beans.TransferBeans;
 import com.zhongyiguolian.zy.ui.main.beans.ImgCodeBeans;
+import com.zhongyiguolian.zy.ui.main.beans.InvitationCodeBeans;
 import com.zhongyiguolian.zy.ui.main.beans.VersionBeans;
 import com.zhongyiguolian.zy.ui.person.beans.AddBlankCardBeans;
+import com.zhongyiguolian.zy.ui.person.beans.CustodyFeeInfo;
 import com.zhongyiguolian.zy.ui.person.beans.DoWithdrawalBeans;
 import com.zhongyiguolian.zy.ui.person.beans.FilIncomeBean;
 import com.zhongyiguolian.zy.ui.person.beans.GoWithdrawalBeans;
@@ -25,13 +28,17 @@ import com.zhongyiguolian.zy.ui.person.beans.MyTeamBeans;
 import com.zhongyiguolian.zy.ui.person.beans.OrderInfoBeans;
 import com.zhongyiguolian.zy.ui.person.beans.PayCodeBeans;
 import com.zhongyiguolian.zy.ui.person.beans.PersonInfoBeans;
+import com.zhongyiguolian.zy.ui.person.beans.PledgBalanceListBean;
+import com.zhongyiguolian.zy.ui.person.beans.PledgeBalanceBean;
 import com.zhongyiguolian.zy.ui.person.beans.PurchaseHistoryBeans;
 import com.zhongyiguolian.zy.ui.person.beans.PurchaseHistoryCancelBeans;
 import com.zhongyiguolian.zy.ui.person.beans.TransactionRecordBeans;
 import com.zhongyiguolian.zy.ui.person.beans.USDTaddressBeans;
+import com.zhongyiguolian.zy.ui.person.beans.UnopenedServiceBeans;
 
 import java.util.List;
 import java.util.Map;
+
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 
@@ -76,6 +83,8 @@ public interface HttpDataSource {
     Observable<MyBaseResponse<AddBlankCardBeans>> addBankcard(String token , Map<String,String> params);
 
     Observable<OrderInfoBeans> detailInfo(String token , Map<String,String> params);
+
+    Observable<CustodyFeeInfo> custody_fee_info(String token , Map<String,String> params);
 
     Observable<ConfirmBeans> confirm(String token , Map<String, RequestBody> params);
 
@@ -124,5 +133,21 @@ public interface HttpDataSource {
     Observable<MyBaseResponse<MyTeamBeans>> getMyTeam(String token , Map<String, String> params);
 
     Observable<MyBaseResponse<List<TransactionRecordBeans>>> getCurrencyRecords(String token , Map<String, String> params);
+
+    Observable<MyBaseResponse<NoDataBean>> rechargeToken(String token , Map<String, String> params);
+
+    Observable<MyBaseResponse<STSBean>> sts(String token , Map<String, String> params);
+
+    Observable<MyBaseResponse<NoDataBean>> company(String token , Map<String, String> params);
+
+    Observable<MyBaseResponse<UnopenedServiceBeans>> minerdal(String token , Map<String, String> params);
+
+    Observable<MyBaseResponse<NoDataBean>> chongziya(String token , Map<String, String> params);
+
+    Observable<MyBaseResponse<PledgeBalanceBean>> minerdals(String token , Map<String, String> params);
+
+    Observable<MyBaseResponse<PledgBalanceListBean>> openMiner(String token , Map<String, String> params);
+
+    Observable<MyBaseResponse<InvitationCodeBeans>> myname(String token , Map<String, String> params);
 
 }

@@ -11,12 +11,15 @@ import com.zhongyiguolian.zy.ui.home.beans.HomeProductBeans;
 import com.zhongyiguolian.zy.ui.home.beans.NoticeBeans;
 import com.zhongyiguolian.zy.ui.home.beans.NoticeDeatils;
 import com.zhongyiguolian.zy.ui.home.beans.PayPasswordBeans;
+import com.zhongyiguolian.zy.ui.home.beans.STSBean;
 import com.zhongyiguolian.zy.ui.home.beans.ServiceDetailBeans;
 import com.zhongyiguolian.zy.ui.home.beans.SymbolAssetBeans;
 import com.zhongyiguolian.zy.ui.home.beans.TransferBeans;
 import com.zhongyiguolian.zy.ui.main.beans.ImgCodeBeans;
+import com.zhongyiguolian.zy.ui.main.beans.InvitationCodeBeans;
 import com.zhongyiguolian.zy.ui.main.beans.VersionBeans;
 import com.zhongyiguolian.zy.ui.person.beans.AddBlankCardBeans;
+import com.zhongyiguolian.zy.ui.person.beans.CustodyFeeInfo;
 import com.zhongyiguolian.zy.ui.person.beans.DoWithdrawalBeans;
 import com.zhongyiguolian.zy.ui.person.beans.FilIncomeBean;
 import com.zhongyiguolian.zy.ui.person.beans.GoWithdrawalBeans;
@@ -25,13 +28,17 @@ import com.zhongyiguolian.zy.ui.person.beans.MyTeamBeans;
 import com.zhongyiguolian.zy.ui.person.beans.OrderInfoBeans;
 import com.zhongyiguolian.zy.ui.person.beans.PayCodeBeans;
 import com.zhongyiguolian.zy.ui.person.beans.PersonInfoBeans;
+import com.zhongyiguolian.zy.ui.person.beans.PledgBalanceListBean;
+import com.zhongyiguolian.zy.ui.person.beans.PledgeBalanceBean;
 import com.zhongyiguolian.zy.ui.person.beans.PurchaseHistoryBeans;
 import com.zhongyiguolian.zy.ui.person.beans.PurchaseHistoryCancelBeans;
 import com.zhongyiguolian.zy.ui.person.beans.TransactionRecordBeans;
 import com.zhongyiguolian.zy.ui.person.beans.USDTaddressBeans;
+import com.zhongyiguolian.zy.ui.person.beans.UnopenedServiceBeans;
 
 import java.util.List;
 import java.util.Map;
+
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.http.FieldMap;
@@ -132,6 +139,10 @@ public interface MyApiService {
     @POST("/mobile/mmm/product/detail/detailInfo")
     Observable<OrderInfoBeans> detailInfo(@Header ("Token") String token , @FieldMap Map<String,String> params);
 
+    @FormUrlEncoded
+    @POST("/mobile/mmm/product/detail/detailInfo")
+    Observable<CustodyFeeInfo> custody_fee_info(@Header ("Token") String token , @FieldMap Map<String,String> params);
+
     @Multipart
     @POST("/mobile/mmm/product/detail/confirm")
     Observable<ConfirmBeans> confirm(@Header ("Token") String token , @PartMap() Map<String, RequestBody> params);
@@ -228,4 +239,35 @@ public interface MyApiService {
     @POST("/mobile/wallet/user/getCurrencyRecords")
     Observable<MyBaseResponse<List<TransactionRecordBeans>>> getCurrencyRecords(@Header ("Token") String token , @FieldMap Map<String,String> params);
 
+    @FormUrlEncoded
+    @POST("/mobile/wallet/user/rechargeToken")
+    Observable<MyBaseResponse<NoDataBean>> rechargeToken(@Header ("Token") String token , @FieldMap Map<String,String> params);
+
+    @FormUrlEncoded
+    @POST("/mobile/mmm/charge/sts")
+    Observable<MyBaseResponse<STSBean>> sts(@Header ("Token") String token , @FieldMap Map<String,String> params);
+
+    @FormUrlEncoded
+    @POST("/mobile/mmm/charge/company")
+    Observable<MyBaseResponse<NoDataBean>> company(@Header ("Token") String token , @FieldMap Map<String,String> params);
+
+    @FormUrlEncoded
+    @POST("/mobile/mmm/charge/minerdal")
+    Observable<MyBaseResponse<UnopenedServiceBeans>> minerdal(@Header ("Token") String token , @FieldMap Map<String,String> params);
+
+    @FormUrlEncoded
+    @POST("/mobile/mmm/charge/chongziya")
+    Observable<MyBaseResponse<NoDataBean>> chongziya(@Header ("Token") String token , @FieldMap Map<String,String> params);
+
+    @FormUrlEncoded
+    @POST("/mobile/mmm/charge/minerdals")
+    Observable<MyBaseResponse<PledgeBalanceBean>> minerdals(@Header ("Token") String token , @FieldMap Map<String,String> params);
+
+    @FormUrlEncoded
+    @POST("/mobile/mmm/charge/openMiner")
+    Observable<MyBaseResponse<PledgBalanceListBean>> openMiner(@Header ("Token") String token , @FieldMap Map<String,String> params);
+
+    @FormUrlEncoded
+    @POST("/mobile//mmm/charge/myname")
+    Observable<MyBaseResponse<InvitationCodeBeans>> myname(@Header ("Token") String token , @FieldMap Map<String,String> params);
 }

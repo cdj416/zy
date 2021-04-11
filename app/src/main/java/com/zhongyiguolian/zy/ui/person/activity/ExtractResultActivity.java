@@ -1,16 +1,11 @@
 package com.zhongyiguolian.zy.ui.person.activity;
 
 import android.os.Bundle;
-import android.view.View;
-
-import androidx.lifecycle.ViewModelProviders;
 
 import com.zhongyiguolian.zy.R;
-import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.databinding.ActivityExtractResultBinding;
-import com.zhongyiguolian.zy.ui.main.activity.MainActivity;
 
 import me.tatarka.bindingcollectionadapter2.BR;
 
@@ -46,8 +41,14 @@ public class ExtractResultActivity extends CustomActivity<ActivityExtractResultB
     @Override
     public void initView() {
         super.initView();
+        setOnRefresh(binding.refresh,REFRESH_0X4);
+
         binding.comBack.setOnClickListener(view -> finish());
-        binding.goMain.setOnClickListener(v -> startActivity(MainActivity.class));
+        binding.goMain.setOnClickListener(v -> finish());
+
+        binding.title.setText(getBundle().getString("title"));
+        binding.proText.setText(getBundle().getString("proText"));
+        binding.proText1.setText(getBundle().getString("proText1"));
     }
 
 }

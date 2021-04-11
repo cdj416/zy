@@ -5,8 +5,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+
 import androidx.viewpager.widget.ViewPager;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 

@@ -12,7 +12,7 @@ import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
- * 我的团队
+ * FIL收益
  * @author cdj
  * @date 2020/12/10
  */
@@ -51,9 +51,9 @@ public class FilReflectActivity extends CustomActivity<ActivityFilReflectBinding
     public void initView() {
         super.initView();
 
-        setOnRefresh(binding.refresh,REFRESH_0X3);
-        setEnableLoadMore(Constants.GETMYINCOME1);
-        setEnableRefresh(Constants.GETMYINCOME1);
+        setOnRefresh(binding.refresh,REFRESH_0X4);
+        //setEnableLoadMore(Constants.GETMYINCOME1);
+        //setEnableRefresh(Constants.GETMYINCOME1);
 
         binding.comBack.setOnClickListener(view -> finish());
     }
@@ -65,13 +65,13 @@ public class FilReflectActivity extends CustomActivity<ActivityFilReflectBinding
     public void initData() {
         super.initData();
 
-        viewModel.setRefParams("type",AndroidDes3Util.encode("Static"))
+        /*viewModel.setRefParams("type",AndroidDes3Util.encode("Static"))
                 .setRefParams("pageIndex",AndroidDes3Util.encode("1"))
-                .setRefParams("pageSize",AndroidDes3Util.encode("10"));
+                .setRefParams("pageSize",AndroidDes3Util.encode("10"));*/
 
         viewModel.setParams("type", AndroidDes3Util.encode("Static"))
                 .setParams("pageIndex",AndroidDes3Util.encode("1"))
-                .setParams("pageSize",AndroidDes3Util.encode("10"))
+                .setParams("pageSize",AndroidDes3Util.encode("1000"))
                 .requestData(Constants.GETMYINCOME1);
 
         //获取可提现FIL币

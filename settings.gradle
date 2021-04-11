@@ -1,6 +1,5 @@
 include ':magicindicator'
 include ':library'
-include ':kchartlib'
 include ':ImagePreview'
 include ':mvvmhabitx'
 include ':ocr_ui'

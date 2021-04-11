@@ -13,7 +13,7 @@ import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
  *
- * 销售体现页面
+ * 我的产品页面
  * @author cdj
  * @date 2020/12/10
  */

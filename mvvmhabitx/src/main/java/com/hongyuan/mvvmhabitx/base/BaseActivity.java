@@ -2,7 +2,6 @@ package com.hongyuan.mvvmhabitx.base;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -10,11 +9,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.hongyuan.mvvmhabitx.bus.Messenger;
 import com.hongyuan.mvvmhabitx.utils.MaterialDialogUtils;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;

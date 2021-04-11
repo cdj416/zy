@@ -4,8 +4,10 @@ package com.zhongyiguolian.zy.ui.advisory.fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
@@ -58,7 +60,9 @@ public class FindsFragment extends CustomFragment<FragmentFindsBinding, FindsVie
     public void initView() {
         super.initView();
 
-        setOnRefresh(binding.refresh,REFRESH_0X4);
+        setOnRefresh(binding.refresh,REFRESH_0X1);
+        viewModel.setRefParams("titleType","xISDwzxIEj0=");
+        setEnableRefresh(Constants.DISCOVERCONTENT_INDEX);
     }
 
     /**

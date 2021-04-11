@@ -10,7 +10,9 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
+
 import androidx.lifecycle.ViewModelProviders;
+
 import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;

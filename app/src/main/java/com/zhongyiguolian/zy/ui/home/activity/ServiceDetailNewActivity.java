@@ -5,8 +5,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
 import androidx.lifecycle.ViewModelProviders;
-import com.davemorrissey.labs.subscaleview.ImageSource;
+
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
@@ -64,7 +65,33 @@ public class ServiceDetailNewActivity extends CustomActivity<ActivityNewproductD
         binding.comBack.setOnClickListener(view -> finish());
 
         //设置合同的显示
-        binding.contra.setImage(ImageSource.resource(R.mipmap.contract_img));
+        //binding.contra.setImage(ImageSource.resource(R.mipmap.contract_img));
+
+        /*//输入监听
+        binding.numEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.toString().isEmpty() ||Integer.parseInt(s.toString()) == 0){
+                    binding.numEt.setText(String.valueOf(2));
+                }
+
+                if(!s.toString().isEmpty() && Integer.parseInt(s.toString()) % 2 != 0){
+                    binding.numEt.setText(String.valueOf(Integer.parseInt(s.toString()) + 1));
+                }
+
+                binding.numEt.setSelection(s.toString().length());
+            }
+        });*/
 
     }
 

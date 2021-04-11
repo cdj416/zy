@@ -1,13 +1,18 @@
 package com.zhongyiguolian.zy.ui.person.activity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import androidx.lifecycle.ViewModelProviders;
+import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.databinding.ActivityMyWalletBinding;
 import com.zhongyiguolian.zy.ui.person.viewmodel.MyWalletViewModel;
-import com.zhongyiguolian.zy.utils.StatusBarUtil;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
@@ -49,12 +54,26 @@ public class MyWalletActivity extends CustomActivity<ActivityMyWalletBinding, My
     @Override
     public void initView() {
         super.initView();
-
-        //设置状态栏为黑色
-        StatusBarUtil.setCommonUI(this,true);
         setOnRefresh(binding.refresh,REFRESH_0X4);
 
         binding.comBack.setOnClickListener(view -> finish());
+    }
+
+    @Override
+    public void initViewObservable() {
+        super.initViewObservable();
+
+        viewModel.uc.copyText.observe(this,s -> {
+            //获取剪贴版
+            ClipboardManager clipboard = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
+            //创建ClipData对象
+            //第一个参数只是一个标记，随便传入。
+            //第二个参数是要复制到剪贴版的内容
+            ClipData clip = ClipData.newPlainText("text", s);
+            //传入clipdata对象.
+            clipboard.setPrimaryClip(clip);
+            ToastUtils.showShort("已复制！");
+        });
     }
 
     /**
@@ -64,18 +83,8 @@ public class MyWalletActivity extends CustomActivity<ActivityMyWalletBinding, My
     public void initData() {
         super.initData();
 
-        /*viewModel.setRefParams("type",AndroidDes3Util.encode("Static"))
-                .setParams("pageIndex",AndroidDes3Util.encode("1"))
-                .setParams("pageSize",AndroidDes3Util.encode("10"));
-
-        viewModel.setParams("type", AndroidDes3Util.encode("Static"))
-                .setParams("pageIndex",AndroidDes3Util.encode("1"))
-                .setParams("pageSize",AndroidDes3Util.encode("10"))
-                .requestData(Constants.GETMYINCOME1);
-
-        //获取可提现FIL币
-        viewModel.setParams("accountType",AndroidDes3Util.encode("base"))
-                .requestData(Constants.GETALLASSETS);*/
+        //请求钱包地址
+        viewModel.setParams("serion",AndroidDes3Util.encode("FIL")).requestData(Constants.STS);
     }
 
 }

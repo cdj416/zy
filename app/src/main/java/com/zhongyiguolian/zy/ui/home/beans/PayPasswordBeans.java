@@ -80,15 +80,15 @@ public class PayPasswordBeans {
          * orderId : 2960
          */
 
-        private int amount;
+        private double amount;
         private String orderNumber;
         private int orderId;
 
-        public int getAmount() {
+        public double getAmount() {
             return amount;
         }
 
-        public void setAmount(int amount) {
+        public void setAmount(double amount) {
             this.amount = amount;
         }
 

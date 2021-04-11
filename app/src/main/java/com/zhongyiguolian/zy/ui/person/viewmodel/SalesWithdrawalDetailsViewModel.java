@@ -1,9 +1,12 @@
 package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
+import com.hongyuan.mvvmhabitx.base.AppManager;
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
@@ -12,6 +15,7 @@ import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
+import com.zhongyiguolian.zy.ui.main.activity.MainActivity;
 import com.zhongyiguolian.zy.ui.person.activity.AddBlankCardActivity;
 import com.zhongyiguolian.zy.ui.person.activity.ExtractResultActivity;
 import com.zhongyiguolian.zy.ui.person.beans.GoWithdrawalBeans;
@@ -30,6 +34,11 @@ public class SalesWithdrawalDetailsViewModel extends CustomViewModel<MyRepositor
      * 数据
      */
     public ObservableField<PayCodeBeans.BankcardDTO> cardNumbers = new ObservableField<>();
+
+    /*
+    * 最低提现金额描述
+    * */
+    public ObservableField<String> thinMoneyText = new ObservableField<>("最小提现金额为100。");
 
     /**
      * @param application
@@ -184,7 +193,7 @@ public class SalesWithdrawalDetailsViewModel extends CustomViewModel<MyRepositor
             }
 
             //获取提币需要的数据
-           setParams("currencyId", AndroidDes3Util.encode("6"))
+           clearFileParams().setParams("currencyId", AndroidDes3Util.encode("6"))
             .requestData(Constants.GOWITHDRAWTOKEN);
 
         }
@@ -193,11 +202,17 @@ public class SalesWithdrawalDetailsViewModel extends CustomViewModel<MyRepositor
         if(code == Constants.GOWITHDRAWTOKEN){
             GoWithdrawalBeans beans = (GoWithdrawalBeans)dataBean;
             goWithdrawal.set(beans);
+
+            thinMoneyText.set("最小提现金额为"+beans.getTheMin()+"。");
         }
 
         if(code == Constants.DOWITHDRAWTOKEN){
-            ToastUtils.showShort("申请成功！");
-            startActivity(ExtractResultActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("title","提取结果");
+            bundle.putString("proText","提取处理中");
+            bundle.putString("proText1","已提交申请，等待处理...");
+            startActivity(ExtractResultActivity.class,bundle);
+            AppManager.getAppManager().goActivity(MainActivity.class);
         }
     }
 }

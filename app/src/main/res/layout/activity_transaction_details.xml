@@ -93,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/also_big_text_mark"
-                    app:intImg="@{viewModel.entity.MarkType}"/>
+                    app:intImg="@{viewModel.entity.showMark}"/>
 
                 <TextView
                     android:layout_width="wrap_content"

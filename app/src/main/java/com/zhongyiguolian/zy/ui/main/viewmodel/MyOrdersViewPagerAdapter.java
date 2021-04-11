@@ -3,11 +3,13 @@ package com.zhongyiguolian.zy.ui.main.viewmodel;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
 import com.zhongyiguolian.zy.TabTitleBean;
 import com.zhongyiguolian.zy.base.CustomFragment;
 import com.zhongyiguolian.zy.myview.dynamicviewpage.CustomViewpager;
 import com.zhongyiguolian.zy.ui.main.fragment.LoginCodeFragment;
 import com.zhongyiguolian.zy.ui.main.fragment.RegisteredFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 

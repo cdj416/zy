@@ -1,6 +1,7 @@
 package com.zhongyiguolian.zy.ui.home.beans;
 
-import com.zhongyiguolian.zy.R;
+import android.util.Log;
+
 import com.zhongyiguolian.zy.data.http.RetrofitClient;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
 
@@ -187,9 +188,53 @@ public class ServiceDetailBeans {
             private String symbol;
             private String buyNum;
             private int machineType;
-
+            private String bili;
+            private double mymesage;
+            private double myGas;
             private String showNewsNums;
             private String showOldNums;
+            private double dayMesage;
+            private double dayGas;
+
+            public double getDayGas() {
+                return dayGas;
+            }
+
+            public void setDayGas(double dayGas) {
+                this.dayGas = dayGas;
+            }
+
+            public double getDayMesage() {
+                return dayMesage;
+            }
+
+            public void setDayMesage(double dayMesage) {
+                this.dayMesage = dayMesage;
+            }
+
+            public String getBili() {
+                return bili;
+            }
+
+            public void setBili(String bili) {
+                this.bili = bili;
+            }
+
+            public double getMymesage() {
+                return mymesage;
+            }
+
+            public void setMymesage(double mymesage) {
+                this.mymesage = mymesage;
+            }
+
+            public double getMygas() {
+                return myGas;
+            }
+
+            public void setMygas(double mygas) {
+                this.myGas = mygas;
+            }
 
             public int getMachineType() {
                 return machineType;
@@ -421,10 +466,144 @@ public class ServiceDetailBeans {
             }
 
             /*
-            * 死的商品详情图
+            * 活的商品详情图
             * */
-            public int getDetailImg(){
-                return R.mipmap.newproduct_c;
+            public String getDetailImgUrl(){
+                if(BaseUtil.isValue(detailsImage)){
+                    return RetrofitClient.baseUrl+"/"+detailsImage;
+                }else{
+                    return "";
+                }
+            }
+
+            /*
+            * 活的协议详情图
+            * */
+            public String getDetailXyImgUrl(){
+                if(BaseUtil.isValue(contractImage)){
+                    return RetrofitClient.baseUrl+"/"+contractImage;
+                }else{
+                    return "";
+                }
+            }
+
+            /*
+            * 第一列数据
+            * */
+            public String getFirstText(){
+                if(machineType == 0){
+                    return "物理空间(T)";
+                }else if(machineType == 1){
+                    return "算力空间(T)";
+                }else{
+                    return "有效算力比例";
+                }
+            }
+
+            /*
+             * 第二列数据
+             * */
+            public String getTwoText(){
+                if(machineType == 0){
+                    return "托管费：";
+                }else if(machineType == 1){
+                    return "免质押、免Gas费";
+                }else{
+                    return "技术服务费";
+                }
+            }
+
+            /*
+             * 第三列数据
+             * */
+            public String getThirdText(){
+                if(machineType == 0){
+                    return "技术服务费：";
+                }else if(machineType == 1){
+                    return "产权类型";
+                }else{
+                    return "托管费";
+                }
+            }
+
+            /*
+             * 第四列数据
+             * */
+            public String getThorthText(){
+                if(machineType == 0){
+                    return "产权类型:";
+                }else if(machineType == 1){
+                    return "技术服务费:";
+                }else{
+                    return "Gas费(预估)";
+                }
+            }
+
+            /*
+             * 第五列数据
+             * */
+            public String getFiveText(){
+                return "质押费(预估)";
+            }
+
+            /*********************************下面是值*************************/
+            /*
+             * 第一列数据
+             * */
+            public String getFirstValueText(){
+                if(machineType == 0){
+                    return BaseUtil.getNoZoon(calculationPower);
+                }else if(machineType == 1){
+                    return BaseUtil.getNoZoon(calculationPower);
+                }else{
+                    return BaseUtil.getNoZoon(bili)+"%";
+                }
+            }
+
+            /*
+             * 第二列数据
+             * */
+            public String getTwoValueText(){
+                if(machineType == 0){
+                    return "免一年";
+                }else if(machineType == 1){
+                    return "";
+                }else{
+                    return serviceFeePercent+"%";
+                }
+            }
+
+            /*
+             * 第三列数据
+             * */
+            public String getThirdValueText(){
+                if(machineType == 0){
+                    return serviceFeePercent+"%";
+                }else if(machineType == 1){
+                    return "云算力租凭";
+                }else{
+                    return "￥"+custodyFee+"/年";
+                }
+            }
+
+            /*
+             * 第四列数据
+             * */
+            public String getThorthValueText(){
+                if(machineType == 0){
+                    return "产权设备";
+                }else if(machineType == 1){
+                    return serviceFeePercent+"%";
+                }else{
+                    return myGas+"FIL";
+                }
+            }
+
+            /*
+             * 第五列数据
+             * */
+            public String getFiveValueText(){
+                return mymesage+"FIL";
             }
         }
     }

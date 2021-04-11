@@ -7,7 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+
 import androidx.lifecycle.ViewModelProviders;
+
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
 import com.baidu.ocr.sdk.exception.OCRError;
@@ -32,8 +34,10 @@ import com.zhongyiguolian.zy.ui.person.viewmodel.VerifiedViewModel;
 import com.zhongyiguolian.zy.utils.CacheUtil;
 import com.zhongyiguolian.zy.utils.FileUtil;
 import com.zhongyiguolian.zy.utils.GlideEngine;
+
 import java.io.File;
 import java.util.List;
+
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
@@ -239,15 +243,17 @@ public class VerifiedActivity extends CustomActivity<ActivityVerifiedBinding, Ve
                 if (result != null) {
                     if(idCardSide.equals(IDCardParams.ID_CARD_SIDE_FRONT)){
 
-                        Log.e("cnn","==============================查看是否有相片============="+filePath);
-
-                        if(result == null || result.getName() == null){
+                        //如果是国外的手机号，不予拦截，只拦截国内的用户
+                        if("86".equals(viewModel.loginBean.getNationalCode()) && (result == null || result.getName() == null)){
                             ToastUtils.showShort("图片不符合，请从选！");
                             return;
                         }
 
-                        viewModel.idCardName.set(result.getName().toString());
-                        viewModel.idCardNum.set(result.getIdNumber().toString());
+                        if("86".equals(viewModel.loginBean.getNationalCode())){
+                            viewModel.idCardName.set(result.getName().toString());
+                            viewModel.idCardNum.set(result.getIdNumber().toString());
+                        }
+
 
                         File cardFront = FileUtil.getFrontSaveFile(VerifiedActivity.this);
 
@@ -261,9 +267,9 @@ public class VerifiedActivity extends CustomActivity<ActivityVerifiedBinding, Ve
                         viewModel.idCardFront.set(fileBean);
                         viewModel.idCardFrontFile.set(fileBean.getmFile());
                     }else{
-                        Log.e("cnn","==============================查看是否有相片============="+result.getExpiryDate());
 
-                        if(result == null || result.getExpiryDate() == null){
+                        //如果是国外的手机号，不予拦截，只拦截国内的用户
+                        if("86".equals(viewModel.loginBean.getNationalCode()) && (result == null || result.getExpiryDate() == null)){
                             ToastUtils.showShort("图片不符合，请从选！");
                             return;
                         }

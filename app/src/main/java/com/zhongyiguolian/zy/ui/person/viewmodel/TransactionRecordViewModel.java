@@ -5,6 +5,10 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
+
+import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
+import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
+import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
 import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomViewModel;
@@ -12,7 +16,6 @@ import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.ui.person.beans.TransactionRecordBeans;
 import java.util.List;
-
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 /**
@@ -31,6 +34,17 @@ public class TransactionRecordViewModel extends CustomViewModel<MyRepository> {
     }
 
     /**
+     * 封装一个界面发生改变的观察者
+     */
+    public UIChangeObservable uc = new UIChangeObservable();
+    public class UIChangeObservable {
+        //选择充值余额记录
+        public SingleLiveEvent<Void> checkBalanceRecord = new SingleLiveEvent<>();
+        //选择质押记录
+        public SingleLiveEvent<Void> checkPledgeRecord = new SingleLiveEvent<>();
+    }
+
+    /**
      * 数据类型
      */
     public ObservableField<Integer> type = new ObservableField<>();
@@ -46,6 +60,26 @@ public class TransactionRecordViewModel extends CustomViewModel<MyRepository> {
      * 给RecyclerView添加ItemBinding
      */
     public ItemBinding<TransactionRecordlItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.item_transaction_record);
+
+    /**
+     * 余额记录
+     */
+    public BindingCommand checkBalanceRecord = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            uc.checkBalanceRecord.call();
+        }
+    });
+
+    /**
+     * 质押记录
+     */
+    public BindingCommand checkPledgeRecord = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            uc.checkPledgeRecord.call();
+        }
+    });
 
 
     /**

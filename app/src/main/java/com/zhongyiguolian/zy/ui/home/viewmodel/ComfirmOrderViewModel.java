@@ -121,9 +121,17 @@ public class ComfirmOrderViewModel extends CustomViewModel<MyRepository> {
             if(viewModel instanceof ComfirmOrderCotentMultiViewModel){
                 ComfirmOrderCotentMultiViewModel orderCotentMultiViewModel = (ComfirmOrderCotentMultiViewModel)viewModel;
 
-                allPrice.set(BigDecimalUtils.add(BigDecimalUtils.mul(orderCotentMultiViewModel.entity.get().getBuyNum(),
-                        String.valueOf(orderCotentMultiViewModel.entity.get().getDiscountPriceCNY()),2),
-                        allPrice.get(),2));
+                if(orderCotentMultiViewModel.entity.get().getMachineType() == 2){
+                    //永久算力需要加上托管费
+                    allPrice.set(BigDecimalUtils.add(BigDecimalUtils.add(BigDecimalUtils.mul(orderCotentMultiViewModel.entity.get().getBuyNum(),
+                            String.valueOf(orderCotentMultiViewModel.entity.get().getDiscountPriceCNY()),2),
+                            allPrice.get(),2),BigDecimalUtils.mul(String.valueOf(orderCotentMultiViewModel.entity.get().getCustodyFee()),String.valueOf(orderCotentMultiViewModel.entity.get().getBuyNum()),2),2));
+                }else{
+                    //运算量及服务器产品
+                    allPrice.set(BigDecimalUtils.add(BigDecimalUtils.mul(orderCotentMultiViewModel.entity.get().getBuyNum(),
+                            String.valueOf(orderCotentMultiViewModel.entity.get().getDiscountPriceCNY()),2),
+                            allPrice.get(),2));
+                }
             }
         }
     }
@@ -197,8 +205,8 @@ public class ComfirmOrderViewModel extends CustomViewModel<MyRepository> {
                 if(detailBeans != null && detailBeans.getResultMap() != null && detailBeans.getResultMap().getVo() != null){
 
                     detailBeans.getResultMap().getVo().setBuyNum(nums.get());
-                    detailBeans.getResultMap().getVo().setShowNewsNums(BigDecimalUtils.div(String.valueOf(detailBeans.getResultMap().getVo().getDiscountPriceCNY()),String.valueOf(detailBeans.getResultMap().getPrice()),4));
-                    detailBeans.getResultMap().getVo().setShowOldNums(BigDecimalUtils.div(String.valueOf(detailBeans.getResultMap().getVo().getPriceCNY()),String.valueOf(detailBeans.getResultMap().getPrice()),4));
+                    //detailBeans.getResultMap().getVo().setShowNewsNums(BigDecimalUtils.div(String.valueOf(detailBeans.getResultMap().getVo().getDiscountPriceCNY()),String.valueOf(detailBeans.getResultMap().getPrice()),4));
+                    //detailBeans.getResultMap().getVo().setShowOldNums(BigDecimalUtils.div(String.valueOf(detailBeans.getResultMap().getVo().getPriceCNY()),String.valueOf(detailBeans.getResultMap().getPrice()),4));
 
                     infoEntity.set(detailBeans.getResultMap().getVo());
 
@@ -236,6 +244,7 @@ public class ComfirmOrderViewModel extends CustomViewModel<MyRepository> {
                     Bundle bundle = new Bundle();
                     bundle.putString("allPrice",allPrice.get());
                     bundle.putString("serviceId",String.valueOf(beans.getResultMap().getOrderId()));
+                    bundle.putString("productType","PRODUCT");
                     startActivity(UploadCertificateActivity.class,bundle);
                 }else{
                     ToastUtils.showShort("传递参数为空！");

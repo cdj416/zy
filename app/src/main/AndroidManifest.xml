@@ -75,11 +75,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             tools:replace="android:configChanges"/>
         <provider
-            android:authorities="com.tencent.sample2.fileprovider"
+            android:authorities="com.tencent.sample2.fileprovide"
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
-            android:grantUriPermissions="true"
-            >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"/>
@@ -118,21 +117,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".myview.video.MyPlayActivity" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.main.activity.MainActivity" android:launchMode="singleTask"/>
         <activity android:name=".ui.main.activity.RetrievePasswordActivity"/>
         <activity android:name=".ui.main.activity.CountrysActivity"/>
         <activity android:name=".ui.main.activity.WebActivity"/>
-        <activity android:name=".ui.main.activity.UserAgreementActivity"/>
-        <activity android:name=".ui.main.activity.PrivacyPolicyActivity"/>
         <activity android:name=".ui.main.activity.LoginActivity" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".ui.home.activity.EncyclopediaActivity"/>
         <activity android:name=".ui.home.activity.BookListActivity"/>
         <activity android:name=".ui.home.activity.BlockchaninActivity"/>
         <activity android:name=".ui.home.activity.UploadCertificateActivity"/>
         <activity android:name=".ui.home.activity.AboutUsActivity"/>
-        <activity android:name=".ui.home.activity.ServiceActivity"/>
-        <activity android:name=".ui.home.activity.ServiceDetailActivity"/>
         <activity android:name=".ui.home.activity.ConfirmOrderActivity" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.home.activity.ShoppingCartActivity"/>
         <activity android:name=".ui.home.activity.SearchActivity"/>
@@ -142,12 +136,9 @@
         <activity android:name=".ui.home.activity.TransferActivity"/>
         <activity android:name=".ui.home.activity.NoticeActivity"/>
         <activity android:name=".ui.home.activity.NoticeDetailsActivity"/>
-        <activity android:name=".ui.home.activity.ServiceDetailNewActivity"/>
-        <activity android:name=".ui.home.activity.CloudPowerDetailNewActivity"/>
-        <activity android:name=".ui.advisory.activity.NewsActivity"/>
-        <activity android:name=".ui.advisory.activity.CircleDetailsActivity"/>
-        <activity android:name=".ui.advisory.activity.EditPostActivity"/>
-        <activity android:name=".ui.advisory.activity.ForwardActivity"/>
+        <activity android:name=".ui.home.activity.ServiceDetailNewActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ui.home.activity.CloudPowerDetailNewActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ui.home.activity.ForeverDetailNewActivity" android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".ui.person.activity.SalesWthdrawalActivity"/>
         <activity android:name=".ui.person.activity.FilWthdrawalActivity"/>
         <activity android:name=".ui.person.activity.ExtractResultActivity"/>
@@ -181,6 +172,10 @@
         <activity android:name=".ui.person.activity.TransactionDetailActivity"/>
         <activity android:name=".ui.person.activity.ChargeFilActivity"/>
         <activity android:name=".ui.person.activity.OperateFilActivity"/>
+        <activity android:name=".ui.person.activity.FilRechargeActivity"/>
+        <activity android:name=".ui.person.activity.PledgeBalanceActivity"/>
+        <activity android:name=".ui.person.activity.FilConersionActivity"/>
+        <activity android:name=".ui.person.activity.MyProductDeatilsActivity"/>
 
     </application>
 

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="188dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@mipmap/dialog_operate_fill_bg"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_15"
+            android:textColor="@color/theme_333333"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:text="温馨提示"/>
+
+        <TextView
+            android:id="@+id/contents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/theme_333333"
+            android:layout_marginStart="21dp"
+            android:layout_marginEnd="21dp"
+            android:layout_marginTop="56dp"
+            android:text="       您的可提FIL账户余额不足以充值质押FIL，请您先去充值到FIL可提余额，再进行充值质押FIL。"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="18dp">
+
+            <TextView
+                android:id="@+id/close"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:background="@drawable/shape_radius18_d4d4d4"
+                android:layout_marginStart="21dp"
+                android:gravity="center"
+                android:textColor="@color/theme_666666"
+                android:textSize="@dimen/sp_15"
+                android:text="再想想"/>
+
+            <TextView
+                android:id="@+id/goCz"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:background="@drawable/shape_radius18_5690ff"
+                android:layout_marginEnd="21dp"
+                android:layout_marginStart="30dp"
+                android:gravity="center"
+                android:textColor="@color/theme_FFFFFF"
+                android:textSize="@dimen/sp_15"
+                android:text="去充值"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

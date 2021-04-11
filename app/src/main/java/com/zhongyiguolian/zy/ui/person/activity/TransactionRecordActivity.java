@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+
 import androidx.viewpager2.widget.ViewPager2;
+
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomActivity;
 import com.zhongyiguolian.zy.base.CustomFragment;
@@ -13,6 +15,7 @@ import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.databinding.ActivityTransactionRecordBinding;
 import com.zhongyiguolian.zy.ui.Page2Adapter;
 import com.zhongyiguolian.zy.ui.person.fragment.TransactionRecordFragment;
+
 import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
@@ -21,6 +24,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 import net.lucode.hackware.magicindicator.titles.ScaleTransitionPagerTitleView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -78,7 +82,7 @@ public class TransactionRecordActivity extends CustomActivity<ActivityTransactio
         //初始化数据
         fragments = new ArrayList<>();
         fragments.add(new TransactionRecordFragment().setPosition("0").setTabTag("2"));
-        fragments.add(new TransactionRecordFragment().setPosition("1").setTabTag("2"));
+        fragments.add(new TransactionRecordFragment().setPosition("2").setTabTag("2"));
         fragments.add(new TransactionRecordFragment().setPosition("2").setTabTag("6"));
 
         //初始化tablayout

@@ -52,6 +52,33 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:setAppChangeDate="@{viewModel.entity}"/>
+
+        <FrameLayout
+            android:id="@+id/guideBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:alpha="0.8"/>
+
+            <ImageView
+                android:id="@+id/desImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="90dp"
+                android:src="@mipmap/des_text_img"/>
+
+        </FrameLayout>
     </FrameLayout>
 
 </layout>

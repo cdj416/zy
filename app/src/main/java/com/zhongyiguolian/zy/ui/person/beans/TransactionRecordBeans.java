@@ -1,8 +1,9 @@
 package com.zhongyiguolian.zy.ui.person.beans;
 
+import android.util.Log;
+
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
-import com.zhongyiguolian.zy.utils.BigDecimalUtils;
 
 import java.io.Serializable;
 import java.util.List;
@@ -155,7 +156,7 @@ public class TransactionRecordBeans implements Serializable {
             }
         }
 
-        public int getMarkType() {
+        /*public int getMarkType() {
             if(markType == 0){
                 return R.mipmap.mention_text_mark;
             }else if(markType == 1){
@@ -165,17 +166,21 @@ public class TransactionRecordBeans implements Serializable {
             }else{
                 return R.mipmap.borrow_text_mark;
             }
-        }
+        }*/
 
         public void setMarkType(int markType) {
             this.markType = markType;
         }
 
         public int showMark(){
-            if(type == 0){
+            if(markType == 0){
                 return R.mipmap.mention_text_mark;
-            }else{
+            }else if(markType == 1){
+                return R.mipmap.charge_text_mark;
+            }else if(markType == 2){
                 return R.mipmap.rmb_text_mark;
+            }else{
+                return R.mipmap.pledge_text_mark;
             }
         }
 
@@ -187,7 +192,7 @@ public class TransactionRecordBeans implements Serializable {
             }else if(markType == 2){
                 return "销售提现";
             }else{
-                return "借FIL";
+                return "充质押";
             }
         }
 

@@ -13,163 +13,194 @@
             type="com.zhongyiguolian.zy.ui.home.viewmodel.HomeNewViewModel" />
     </data>
 
-    <LinearLayout
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/theme_EFF4FF">
+        android:layout_height="match_parent">
 
-        <com.zhongyiguolian.zy.myview.StatusBarHeightView
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/clView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            android:background="@color/theme_D9E6FF">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="44dp">
-            <com.makeramen.roundedimageview.RoundedImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/delelt_head_img"
-                app:defaultImg="@{@drawable/default_head_img}"
-                android:layout_marginStart="16dp"
-                tools:ignore="RtlCompat"/>
-
-            <TextView
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/abl"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:textColor="@color/theme_333333"
-                android:textSize="@dimen/sp_16"
-                android:gravity="center"
-                android:text="首页商城"/>
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="8sp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textColor="@color/theme_FFFFFF"
-                android:drawableLeft="@mipmap/cs_icon_mark"
-                android:gravity="center"
-                android:visibility="gone"
-                android:text="客服"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:visibility="gone"
-            android:background="@drawable/shape_radius24_d8e6fe"
-            tools:ignore="RtlCompat"
-            app:onClickCommand="@{viewModel.goSearch}">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/search_blue_mark"
-                android:layout_marginStart="10dp"
-                android:layout_centerVertical="true"
-                app:onClickCommand="@{viewModel.goSearch}"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="text"
                 android:background="@color/transparent"
-                android:textColorHint="@color/theme_91b7ff"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/sp_11"
-                android:layout_marginStart="40dp"
-                android:hint="请输入您想要的"
-                app:onClickCommand="@{viewModel.goSearch}"/>
-        </RelativeLayout>
+                app:elevation="0dp"
+                tools:ignore="MissingConstraints">
 
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="30dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginTop="5dp"
-                android:background="@mipmap/home_top_sroll_bg"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/speaker_mark"
-                    android:layout_marginRight="4dp"/>
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-                <com.sunfusheng.marqueeview.MarqueeView
-                    android:id="@+id/marqueeView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    app:mvAnimDuration="1000"
-                    app:mvDirection="bottom_to_top"
-                    app:mvInterval="3000"
-                    app:mvTextColor="@color/theme_333333"
-                    app:mvTextSize="12sp"
-                    app:mvSingleLine="true"
-                    android:layout_marginEnd="30dp"
-                    app:setMarqueeViewData="@{viewModel.homeBeans.notices}"/>
+                    <LinearLayout
+                        android:id="@+id/header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@color/theme_EFF4FF"
+                        app:layout_collapseMode="parallax">
 
-            </LinearLayout>
+                        <com.zhongyiguolian.zy.myview.RadiusCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardElevation="0dp"
+                            app:rcv_bottomLeftRadiu="20dp"
+                            app:rcv_bottomRightRadiu="20dp">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:onClickCommand="@{viewModel.goNotice}"/>
-        </FrameLayout>
+                            <com.youth.banner.Banner
+                                android:id="@+id/banner"
+                                android:layout_width="match_parent"
+                                android:layout_height="178dp"
+                                app:bannerList="@{viewModel.banners}"
+                                app:indicator_drawable_selected="@drawable/shape_select_dot" />
 
-        <com.scwang.smartrefresh.layout.SmartRefreshLayout
-            android:id="@+id/refresh"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                        </com.zhongyiguolian.zy.myview.RadiusCardView>
 
-            <com.zhongyiguolian.zy.myview.StickyScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                    </LinearLayout>
+
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        android:layout_width="match_parent"
+                        app:layout_collapseMode="pin"
+                        android:visibility="invisible"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <com.zhongyiguolian.zy.myview.StatusBarHeightView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/colorPrimary"/>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:background="@color/colorPrimary">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:textColor="@color/theme_FFFFFF"
+                                    android:textSize="@dimen/sp_16"
+                                    android:gravity="center"
+                                    android:text="商城首页"/>
+                            </RelativeLayout>
+                        </LinearLayout>
+                    </androidx.appcompat.widget.Toolbar>
+
+                    <LinearLayout
+                        android:id="@+id/topTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_collapseMode="pin">
+
+                        <com.zhongyiguolian.zy.myview.StatusBarHeightView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:textColor="@color/theme_FFFFFF"
+                                android:textSize="@dimen/sp_16"
+                                android:gravity="center"
+                                android:text="商城首页"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true">
-
-                    <androidx.cardview.widget.CardView
+                    android:alpha="1">
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        app:cardCornerRadius="6dp"
-                        app:cardElevation="0dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        app:cardBackgroundColor="@color/transparent">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
-                        <com.youth.banner.Banner
-                            android:id="@+id/banner"
+                        <com.zhongyiguolian.zy.myview.StatusBarHeightView
                             android:layout_width="match_parent"
-                            android:layout_height="134dp"
-                            app:bannerList="@{viewModel.banners}"
-                            app:indicator_drawable_selected="@drawable/shape_select_dot" />
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimary"/>
 
-                    </androidx.cardview.widget.CardView>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@color/colorPrimary">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:textColor="@color/theme_FFFFFF"
+                                android:textSize="@dimen/sp_16"
+                                android:gravity="center"
+                                android:text="商城首页"/>
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:background="@color/theme_EFF4FF">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/speaker_mark"/>
+
+                            <com.sunfusheng.marqueeview.MarqueeView
+                                android:id="@+id/marqueeView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:mvAnimDuration="1000"
+                                app:mvDirection="bottom_to_top"
+                                app:mvInterval="3000"
+                                app:mvTextColor="@color/theme_333333"
+                                app:mvTextSize="12sp"
+                                app:mvSingleLine="true"
+                                app:setMarqueeViewData="@{viewModel.homeBeans.notices}"/>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:onClickCommand="@{viewModel.goNotice}"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/theme_D9E6FF"
+                            android:layout_gravity="bottom"/>
+                    </FrameLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="120dp"
                         android:orientation="horizontal"
-                        android:visibility="visible">
+                        android:background="@color/theme_EFF4FF">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -267,133 +298,1035 @@
 
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"/>
+                </LinearLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/theme_EFF4FF"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <com.zhongyiguolian.zy.myview.StickyScrollView
+                    android:id="@+id/scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="88dp"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="74dp"
+                        android:layout_marginEnd="52dp"
+                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:onClickCommand="@{viewModel.goAboutus}">
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@mipmap/about_us_mark"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/sp_12"
-                                android:textColor="@color/theme_333333"
-                                android:layout_marginTop="8dp"
-                                android:text="关于我们"/>
-                        </LinearLayout>
+                        <RelativeLayout
+                            android:id="@+id/content1"
+                            android:layout_width="match_parent"
+                            android:layout_height="330dp"
+                            android:layout_marginTop="17dp">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:onClickCommand="@{viewModel.goEncyclopedia}">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="300dp"
+                                android:orientation="vertical"
+                                android:background="@drawable/shape_radius18_5690ff"
+                                app:onClickCommand="@{viewModel.goForeverDetail}">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="57dp"
+                                    android:text="国链云·太湖Ⅱ号永久云算力服务"
+                                    android:textColor="@color/theme_FFFFFF"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/sp_12"/>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="147dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:scaleType="centerInside"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:src="@mipmap/new_home_img_e"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:layout_alignParentBottom="true">
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_10"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:text="产品类型"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_12"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:layout_marginTop="5dp"
+                                            android:text="算力"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_10"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:text="物理空间"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_12"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:layout_marginTop="5dp"
+                                            android:text="8T/96T"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.2"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <com.lihang.ShadowLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            app:hl_shadowLimit="3dp"
+                                            app:hl_shadowColor="@color/theme_405690FF"
+                                            app:hl_layoutBackground="@color/transparent"
+                                            app:hl_shadowHiddenTop="true"
+                                            app:onClickCommand="@{viewModel.goForeverDetail}">
+
+                                            <LinearLayout
+                                                android:id="@+id/goBuy1"
+                                                android:layout_width="65dp"
+                                                android:layout_height="26dp"
+                                                android:orientation="horizontal"
+                                                android:gravity="center"
+                                                android:background="@drawable/shape_radius6_ffffff">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:textColor="@color/theme_5690FF"
+                                                    android:gravity="center_vertical"
+                                                    android:textSize="@dimen/sp_12"
+                                                    android:text="去购买"/>
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:src="@mipmap/blue_right_mark"
+                                                    android:layout_marginStart="6dp"/>
+
+                                            </LinearLayout>
+
+
+                                        </com.lihang.ShadowLayout>
+
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+
                             <ImageView
+                                android:id="@+id/goCart"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@mipmap/encyclopedia_mark"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/sp_12"
-                                android:textColor="@color/theme_333333"
-                                android:layout_marginTop="8dp"
-                                android:text="国链百科"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:onClickCommand="@{viewModel.goTransfer}">
+                                android:src="@mipmap/home_cart_mark"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentEnd="true"
+                                android:scaleType="fitXY"
+                                android:layout_marginEnd="8dp"
+                                app:onClickCommand="@{viewModel.goCart}"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/content2"
+                            android:layout_width="match_parent"
+                            android:layout_height="330dp"
+                            android:layout_marginTop="7dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="300dp"
+                                android:orientation="vertical"
+                                android:background="@drawable/shape_radius18_19225b"
+                                app:onClickCommand="@{viewModel.goCloudPowerDetail}">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="57dp"
+                                    android:text="国链云·太湖Ⅱ号云算力服务"
+                                    android:textColor="@color/theme_FFFFFF"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/sp_12"/>
+
+                                <ImageView
+                                    android:layout_width="147dp"
+                                    android:layout_height="147dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:scaleType="centerCrop"
+                                    android:src="@mipmap/new_home_img_a"/>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:layout_alignParentBottom="true">
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_10"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:text="产品类型"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_12"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:layout_marginTop="5dp"
+                                            android:text="云算力"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_10"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:text="价格"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_12"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:layout_marginTop="5dp"
+                                            android:text="@{@string/rmb+viewModel.cloudPowerPrice}"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.2"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <com.lihang.ShadowLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            app:hl_shadowLimit="3dp"
+                                            app:hl_shadowColor="@color/theme_405690FF"
+                                            app:hl_layoutBackground="@color/transparent"
+                                            app:hl_shadowHiddenTop="true"
+                                            app:onClickCommand="@{viewModel.goCloudPowerDetail}">
+
+                                            <LinearLayout
+                                                android:id="@+id/goBuy"
+                                                android:layout_width="65dp"
+                                                android:layout_height="26dp"
+                                                android:orientation="horizontal"
+                                                android:gravity="center"
+                                                android:background="@drawable/shape_radius6_ffffff">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:textColor="@color/theme_5690FF"
+                                                    android:gravity="center_vertical"
+                                                    android:textSize="@dimen/sp_12"
+                                                    android:text="去购买"/>
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginStart="6dp"
+                                                    android:src="@mipmap/blue_right_mark"/>
+
+                                            </LinearLayout>
+
+
+                                        </com.lihang.ShadowLayout>
+
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+
                             <ImageView
+                                android:id="@+id/goCart1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@mipmap/transfer_mark"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/sp_12"
-                                android:textColor="@color/theme_333333"
-                                android:layout_marginTop="8dp"
-                                android:text="转账"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:onClickCommand="@{viewModel.showQrImg}">
+                                android:src="@mipmap/home_cart_mark"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentEnd="true"
+                                android:scaleType="fitXY"
+                                android:layout_marginEnd="8dp"
+                                app:onClickCommand="@{viewModel.goCart}"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/content3"
+                            android:layout_width="match_parent"
+                            android:layout_height="330dp"
+                            android:layout_marginTop="7dp"
+                            android:visibility="@{viewModel.offService ? View.GONE : View.VISIBLE}">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="300dp"
+                                android:orientation="vertical"
+                                android:background="@drawable/shape_radius18_5690ff"
+                                app:onClickCommand="@{viewModel.goServiceDetail}">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="57dp"
+                                    android:text="国链云·太湖Ⅱ号云存储服务器"
+                                    android:textColor="@color/theme_FFFFFF"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/sp_12"/>
+
+                                <ImageView
+                                    android:layout_width="147dp"
+                                    android:layout_height="147dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:scaleType="centerCrop"
+                                    android:src="@mipmap/new_home_img_b"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:layout_alignParentBottom="true">
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_10"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:text="产品类型"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_12"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:layout_marginTop="5dp"
+                                            android:text="产权设备"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_10"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:text="物理空间"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_12"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:layout_marginTop="5dp"
+                                            android:text="80T/8T"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.2"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <com.lihang.ShadowLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            app:hl_shadowLimit="3dp"
+                                            app:hl_shadowColor="@color/theme_405690FF"
+                                            app:hl_layoutBackground="@color/transparent"
+                                            app:hl_shadowHiddenTop="true"
+                                            app:onClickCommand="@{viewModel.goServiceDetail}">
+
+                                            <LinearLayout
+                                                android:id="@+id/goBuy2"
+                                                android:layout_width="65dp"
+                                                android:layout_height="26dp"
+                                                android:orientation="horizontal"
+                                                android:gravity="center"
+                                                android:background="@drawable/shape_radius6_ffffff">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:textColor="@color/theme_5690FF"
+                                                    android:gravity="center_vertical"
+                                                    android:textSize="@dimen/sp_12"
+                                                    android:text="去购买"/>
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:src="@mipmap/blue_right_mark"
+                                                    android:layout_marginStart="6dp"/>
+
+                                            </LinearLayout>
+
+
+                                        </com.lihang.ShadowLayout>
+
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+
                             <ImageView
+                                android:id="@+id/goCart2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@mipmap/customer_service_mark"/>
-                            <TextView
+                                android:src="@mipmap/home_cart_mark"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentEnd="true"
+                                android:scaleType="fitXY"
+                                android:layout_marginEnd="8dp"
+                                app:onClickCommand="@{viewModel.goCart}"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/content4"
+                            android:layout_width="match_parent"
+                            android:layout_height="330dp"
+                            android:layout_marginTop="7dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="300dp"
+                                android:orientation="vertical"
+                                android:background="@drawable/shape_radius18_00266e"
+                                app:onClickCommand="@{viewModel.showQrImg}">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="57dp"
+                                    android:text="国链云·太湖Ⅱ号云算力拼单集群"
+                                    android:textColor="@color/theme_FFFFFF"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/sp_12"/>
+
+                                <ImageView
+                                    android:layout_width="147dp"
+                                    android:layout_height="147dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:scaleType="centerCrop"
+                                    android:src="@mipmap/new_home_img_d"/>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:layout_alignParentBottom="true">
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_10"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:text="产品类型"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_12"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:layout_marginTop="5dp"
+                                            android:text="算力"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_10"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:text="物理空间"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_12"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:layout_marginTop="5dp"
+                                            android:text="1P"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.2"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <com.lihang.ShadowLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            app:hl_shadowLimit="3dp"
+                                            app:hl_shadowColor="@color/theme_405690FF"
+                                            app:hl_layoutBackground="@color/transparent"
+                                            app:hl_shadowHiddenTop="true"
+                                            app:onClickCommand="@{viewModel.showQrImg}">
+
+                                            <LinearLayout
+                                                android:id="@+id/goBuy3"
+                                                android:layout_width="65dp"
+                                                android:layout_height="26dp"
+                                                android:orientation="horizontal"
+                                                android:gravity="center"
+                                                android:background="@drawable/shape_radius6_ffffff">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:textColor="@color/theme_5690FF"
+                                                    android:gravity="center_vertical"
+                                                    android:textSize="@dimen/sp_12"
+                                                    android:text="去购买"/>
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:src="@mipmap/blue_right_mark"
+                                                    android:layout_marginStart="6dp"/>
+
+                                            </LinearLayout>
+
+
+                                        </com.lihang.ShadowLayout>
+
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/goCart3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/sp_12"
-                                android:textColor="@color/theme_333333"
-                                android:layout_marginTop="5dp"
-                                android:text="客服"/>
-                        </LinearLayout>
+                                android:src="@mipmap/home_cart_mark"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentEnd="true"
+                                android:scaleType="fitXY"
+                                android:layout_marginEnd="8dp"
+                                app:onClickCommand="@{viewModel.goCart}"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/content5"
+                            android:layout_width="match_parent"
+                            android:layout_height="330dp"
+                            android:layout_marginTop="7dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="300dp"
+                                android:orientation="vertical"
+                                android:background="@drawable/shape_radius18_3b7cf8"
+                                app:onClickCommand="@{viewModel.showQrImg}">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="57dp"
+                                    android:text="国链云·太湖Ⅱ号云存储服务器集群"
+                                    android:textColor="@color/theme_FFFFFF"
+                                    android:gravity="center"
+                                    android:textSize="@dimen/sp_12"/>
+
+                                <ImageView
+                                    android:id="@+id/productImg"
+                                    android:layout_width="147dp"
+                                    android:layout_height="147dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:scaleType="centerCrop"
+                                    android:src="@mipmap/new_home_img_c"/>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:layout_alignParentBottom="true">
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_10"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:text="产品类型"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_12"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:layout_marginTop="5dp"
+                                            android:text="产权设备"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_10"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:text="价格"/>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:textSize="@dimen/sp_12"
+                                            android:textColor="@color/theme_FFFFFF"
+                                            android:layout_marginTop="5dp"
+                                            android:text="*****"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.2"
+                                        android:orientation="vertical"
+                                        android:gravity="center">
+
+                                        <com.lihang.ShadowLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            app:hl_shadowLimit="3dp"
+                                            app:hl_shadowColor="@color/theme_405690FF"
+                                            app:hl_layoutBackground="@color/transparent"
+                                            app:hl_shadowHiddenTop="true"
+                                            app:onClickCommand="@{viewModel.showQrImg}">
+
+                                            <LinearLayout
+                                                android:id="@+id/goBuy4"
+                                                android:layout_width="65dp"
+                                                android:layout_height="26dp"
+                                                android:orientation="horizontal"
+                                                android:gravity="center"
+                                                android:background="@drawable/shape_radius6_ffffff">
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:textColor="@color/theme_5690FF"
+                                                    android:gravity="center_vertical"
+                                                    android:textSize="@dimen/sp_12"
+                                                    android:text="去购买"/>
+                                                <ImageView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:src="@mipmap/blue_right_mark"
+                                                    android:layout_marginStart="6dp"/>
+
+                                            </LinearLayout>
+
+
+                                        </com.lihang.ShadowLayout>
+
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/goCart4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/home_cart_mark"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentEnd="true"
+                                android:scaleType="fitXY"
+                                android:layout_marginEnd="8dp"
+                                app:onClickCommand="@{viewModel.goCart}"/>
+
+                        </RelativeLayout>
 
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="5dp"
-                        android:background="@color/theme_D8E6FF"/>
+                </com.zhongyiguolian.zy.myview.StickyScrollView>
 
-                    <net.lucode.hackware.magicindicator.MagicIndicator
-                        android:id="@+id/magicIndicator"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"/>
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/tabScroll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:clipChildren="false">
+                    <LinearLayout
+                        android:layout_width="52dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal">
 
-                        <androidx.viewpager.widget.ViewPager
-                            android:id="@+id/viewPage"
+
+                        <FrameLayout
+                            android:id="@+id/tab1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="13dp">
+
+                            <com.lihang.ShadowLayout
+                                android:id="@+id/sha1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:hl_shadowLimit="6dp"
+                                app:hl_shadowColor="@color/theme_405690FF"
+                                app:hl_layoutBackground="@color/transparent"
+                                app:hl_cornerRadius="18dp"
+                                android:gravity="center"
+                                android:layout_gravity="center">
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/shape_radius18_5690ff">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_13"
+                                        android:textColor="@color/transparent"
+                                        android:ems="1"
+                                        android:layout_marginStart="5dp"
+                                        android:layout_marginEnd="5dp"
+                                        android:layout_marginTop="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:gravity="center"
+                                        android:text="永久云算力"/>
+
+                                </FrameLayout>
+
+                            </com.lihang.ShadowLayout>
+
+                            <TextView
+                                android:id="@+id/tabText1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_13"
+                                android:textColor="@color/theme_FFFFFF"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:ems="1"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="永久云算力"/>
+
+                        </FrameLayout>
+
+
+                        <FrameLayout
+                            android:id="@+id/tab2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.lihang.ShadowLayout
+                                android:id="@+id/sha2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:hl_shadowLimit="6dp"
+                                app:hl_shadowColor="@color/theme_405690FF"
+                                app:hl_layoutBackground="@color/transparent"
+                                app:hl_cornerRadius="18dp"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:visibility="invisible">
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/shape_radius18_5690ff">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_13"
+                                        android:textColor="@color/transparent"
+                                        android:ems="1"
+                                        android:layout_marginStart="5dp"
+                                        android:layout_marginEnd="5dp"
+                                        android:layout_marginTop="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:gravity="center"
+                                        android:text="云算力服务"/>
+
+                                </FrameLayout>
+
+                            </com.lihang.ShadowLayout>
+
+                            <TextView
+                                android:id="@+id/tabText2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_13"
+                                android:textColor="@color/theme_999999"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:ems="1"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="云算力服务"/>
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/tab3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{viewModel.offService ? View.GONE : View.VISIBLE}">
+
+                            <com.lihang.ShadowLayout
+                                android:id="@+id/sha3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:hl_shadowLimit="6dp"
+                                app:hl_shadowColor="@color/theme_405690FF"
+                                app:hl_layoutBackground="@color/transparent"
+                                app:hl_cornerRadius="18dp"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:visibility="invisible">
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/shape_radius18_5690ff">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_13"
+                                        android:textColor="@color/transparent"
+                                        android:ems="1"
+                                        android:layout_marginStart="5dp"
+                                        android:layout_marginEnd="5dp"
+                                        android:layout_marginTop="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:gravity="center"
+                                        android:text="服务器"/>
+
+                                </FrameLayout>
+
+                            </com.lihang.ShadowLayout>
+
+                            <TextView
+                                android:id="@+id/tabText3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_13"
+                                android:textColor="@color/theme_999999"
+                                android:ems="1"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:text="服务器"/>
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/tab4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.lihang.ShadowLayout
+                                android:id="@+id/sha4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:hl_shadowLimit="6dp"
+                                app:hl_shadowColor="@color/theme_405690FF"
+                                app:hl_layoutBackground="@color/transparent"
+                                app:hl_cornerRadius="18dp"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:visibility="invisible">
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/shape_radius18_5690ff">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_13"
+                                        android:textColor="@color/transparent"
+                                        android:ems="1"
+                                        android:layout_marginStart="5dp"
+                                        android:layout_marginEnd="5dp"
+                                        android:layout_marginTop="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:gravity="center"
+                                        android:text="云算力拼单集群"/>
+
+                                </FrameLayout>
+
+                            </com.lihang.ShadowLayout>
+
+                            <TextView
+                                android:id="@+id/tabText4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_13"
+                                android:textColor="@color/theme_999999"
+                                android:ems="1"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:text="云算力拼单集群"/>
+
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/tab5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <com.lihang.ShadowLayout
+                                android:id="@+id/sha5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:hl_shadowLimit="6dp"
+                                app:hl_shadowColor="@color/theme_405690FF"
+                                app:hl_layoutBackground="@color/transparent"
+                                app:hl_cornerRadius="18dp"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:visibility="invisible">
+
+                                <FrameLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/shape_radius18_5690ff">
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="@dimen/sp_13"
+                                        android:textColor="@color/transparent"
+                                        android:ems="1"
+                                        android:layout_marginStart="5dp"
+                                        android:layout_marginEnd="5dp"
+                                        android:layout_marginTop="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:gravity="center"
+                                        android:text="独立集群"/>
+
+                                </FrameLayout>
+
+                            </com.lihang.ShadowLayout>
+
+                            <TextView
+                                android:id="@+id/tabText5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_13"
+                                android:textColor="@color/theme_999999"
+                                android:ems="1"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:text="独立集群"/>
+
+                        </FrameLayout>
+
+                        <View
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"/>
-
-                        <com.zhongyiguolian.zy.myview.platview.PileLayout
-                            android:id="@+id/pileLayout"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:paddingBottom="5dp"
-                            android:paddingTop="5dp"
-                            app:displayCount="1.15"
-                            app:interval="7dp"
-                            app:scaleStep="0.1"
-                            app:sizeRatio="1.3"/>
-                    </FrameLayout>
+                            android:layout_height="50dp"/>
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
 
 
-                </LinearLayout>
-            </com.zhongyiguolian.zy.myview.StickyScrollView>
-        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            </FrameLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </LinearLayout>
-
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </layout>

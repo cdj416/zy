@@ -2,6 +2,7 @@ package com.zhongyiguolian.zy.myview.waterfallsflow;
 
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import me.tatarka.bindingcollectionadapter2.LayoutManagers;
 
 public class MyLayoutManagers {

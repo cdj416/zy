@@ -1,10 +1,12 @@
 package com.zhongyiguolian.zy.ui.home.activity;
 
 import android.os.Bundle;
+
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomActivity;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.databinding.ActivityAboutUsBinding;
+
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**

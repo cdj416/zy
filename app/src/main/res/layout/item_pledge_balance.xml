@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.person.viewmodel.PledgeBalancelItemViewModel" />
+
+        <import type="com.zhongyiguolian.zy.data.md5.BaseUtil"/>
+        <import type="com.zhongyiguolian.zy.utils.TimeUtil"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.lihang.ShadowLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hl_shadowLimit="6dp"
+            app:hl_shadowColor="@color/theme_30003AA8"
+            app:hl_layoutBackground="@color/transparent"
+            app:hl_shadowHiddenTop="true"
+            app:hl_shadowHiddenLeft="true"
+            app:hl_shadowHiddenRight="true"
+            app:isLastItem="@{viewModel.entity.last}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="41dp"
+                android:orientation="horizontal"
+                android:background="@drawable/shape_radius10_f5f9ff">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/sp_13"
+                    android:textColor="@color/theme_1A66B2"
+                    android:gravity="center"
+                    android:text="@{TimeUtil.formatData(TimeUtil.dateFormatYMD,viewModel.entity.createTime)}"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/sp_13"
+                    android:textColor="@color/theme_1A66B2"
+                    android:gravity="center"
+                    android:text="@{BaseUtil.getNoZoon(viewModel.entity.mydaymortgage)}"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.2"
+                    android:textSize="@dimen/sp_13"
+                    android:textColor="@color/theme_1A66B2"
+                    android:gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{BaseUtil.getNoZoon(viewModel.entity.mydaygas)}"/>
+            </LinearLayout>
+
+        </com.lihang.ShadowLayout>
+    </LinearLayout>
+
+</layout>

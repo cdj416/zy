@@ -14,8 +14,10 @@ import com.zhongyiguolian.zy.ui.Page2Adapter;
 import com.zhongyiguolian.zy.ui.person.fragment.BrokerageFragment;
 import com.zhongyiguolian.zy.ui.person.fragment.KpiFragment;
 import com.zhongyiguolian.zy.ui.person.viewmodel.SalesViewModel;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**

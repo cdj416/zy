@@ -1,10 +1,8 @@
 package com.zhongyiguolian.zy.ui.main.viewmodel;
 
 import android.app.Application;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
-
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
@@ -28,6 +26,13 @@ public class MainViewModel extends CustomViewModel<MyRepository> {
      */
     public MainViewModel(@NonNull Application application, MyRepository model) {
         super(application, model);
+    }
+
+    /*
+    * 保存更新用户信息
+    * */
+    public void saveMember(){
+        model.saveUser(loginBean);
     }
 
     @Override

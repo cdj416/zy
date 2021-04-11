@@ -2,14 +2,20 @@ package com.zhongyiguolian.zy.ui.main.activity;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
+
 import androidx.viewpager.widget.ViewPager;
+
 import com.hongyuan.mvvmhabitx.base.AppManager;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomActivity;
 import com.zhongyiguolian.zy.base.CustomViewModel;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.databinding.ActivityLoginBinding;
 import com.zhongyiguolian.zy.ui.main.viewmodel.MyOrdersViewPagerAdapter;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.CustomDialog;
+import com.zhongyiguolian.zy.utils.PackageUtils;
+
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**

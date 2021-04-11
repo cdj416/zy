@@ -5,11 +5,13 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 
 import androidx.lifecycle.ViewModelProviders;
+
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
 import com.zhongyiguolian.zy.databinding.ActivityChangePaypasswordBinding;
 import com.zhongyiguolian.zy.ui.person.viewmodel.ChangePayPasswordViewModel;
+
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**

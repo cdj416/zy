@@ -36,9 +36,12 @@ public class RetrofitClient {
     //缓存时间
     private static final int CACHE_TIMEOUT = 10 * 1024 * 1024;
     //线上环境
-    //public static String baseUrl = "http://app.glydsj.com";
+    public static String baseUrl = "http://app.glydsj.com";
     //预发环境
-    public static String baseUrl = "http://61.155.145.137:18088";
+    //public static String baseUrl = "http://61.155.145.137:18088";
+
+    //预发环境
+    //public static String baseUrl = "http://192.168.1.27:18088";
 
     private static Context mContext = Utils.getContext();
 

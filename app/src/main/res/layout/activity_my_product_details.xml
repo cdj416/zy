@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.person.viewmodel.MyProductDetailsViewModel" />
+
+        <import type="android.view.View"/>
+        <import type="com.zhongyiguolian.zy.data.md5.BaseUtil"/>
+        <import type="com.zhongyiguolian.zy.utils.BigDecimalUtils"/>
+        <import type="com.zhongyiguolian.zy.utils.TimeUtil"/>
+
+    </data>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/theme_FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:orientation="vertical"
+            android:background="@drawable/layer_list_bg_arc_6497f9">
+            <com.zhongyiguolian.zy.myview.StatusBarHeightView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="@color/theme_FFFFFF"
+                    android:textSize="@dimen/sp_16"
+                    android:gravity="center"
+                    android:text="我的产品"/>
+
+                <ImageView
+                    android:id="@+id/comBack"
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/white_black"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"/>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp">
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    app:riv_corner_radius="14dp"
+                    android:layout_marginLeft="8dp"
+                    android:src="@mipmap/delelet_home_item_img"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center_vertical"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_FFFFFF"
+                        android:textSize="@dimen/sp_13"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@{viewModel.entity.productName}"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_FFFFFF"
+                        android:textSize="@dimen/sp_10"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:layout_marginTop="7dp"
+                        android:text="@{@string/gmsj_text+TimeUtil.formatData(TimeUtil.dateFormatYMDHMS,viewModel.entity.createTime)}"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_FFFFFF"
+                        android:textSize="@dimen/sp_10"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:layout_marginTop="7dp"
+                        android:text="@{@string/sbbh_text + viewModel.entity.orderNumber}"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_FFFFFF"
+                        android:textSize="@dimen/sp_10"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:layout_marginTop="7dp"
+                        android:text="@{@string/kqzt_text + (viewModel.entity.productStatus.equals(@string/product_not_open) ? @string/product_not_open_text : @string/product_open_text)}"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="90dp">
+            <com.lihang.ShadowLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hl_shadowLimit="6dp"
+                app:hl_cornerRadius="15dp"
+                app:hl_shadowColor="@color/colorPrimary"
+                app:hl_layoutBackground="@color/transparent"
+                app:hl_shadowHiddenTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="120dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/shape_radius10_ffffff">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="87dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_11"
+                                android:textColor="@color/theme_333333"
+                                android:text="算力空间"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/theme_0058FF"
+                                android:textSize="@dimen/sp_11"
+                                android:textStyle="bold"
+                                android:layout_marginTop="14dp"
+                                android:text="@{BaseUtil.getNoZoon(viewModel.entity.calculationPower) + @string/t_text}"/>
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/person_line"
+                            android:layout_gravity="center_vertical"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_11"
+                                android:textColor="@color/theme_333333"
+                                android:text="开启时间"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/theme_0058FF"
+                                android:textSize="@dimen/sp_11"
+                                android:text="@{viewModel.entity.openData}"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/theme_0058FF"
+                                android:textSize="@dimen/sp_11"
+                                android:text="@{viewModel.entity.openTime}"/>
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/person_line"
+                            android:layout_gravity="center_vertical"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_11"
+                                android:textColor="@color/theme_333333"
+                                android:text="到期时间"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/theme_0058FF"
+                                android:textSize="@dimen/sp_11"
+                                android:visibility="@{viewModel.entity.productStatus.equals(@string/product_not_open) ? View.INVISIBLE : View.VISIBLE}"
+                                android:text="@{(viewModel.entity.productStatus.equals(@string/product_not_open) ? @string/product_not_open_text : TimeUtil.formatData(TimeUtil.dateFormatYMD,viewModel.entity.expireDate))}"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/theme_0058FF"
+                                android:textSize="@dimen/sp_11"
+                                android:text="@{(viewModel.entity.productStatus.equals(@string/product_not_open) ? @string/product_not_open_text : TimeUtil.formatData(TimeUtil.dateFormatHMS,viewModel.entity.expireDate))}"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:visibility="@{viewModel.entity.machineType == 1 ? View.GONE : View.VISIBLE}">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_13"
+                            android:textColor="@color/theme_333333"
+                            android:layout_centerVertical="true"
+                            android:text="托管费续费"/>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/theme_3B7CF8"
+                            android:textSize="@dimen/sp_11"
+                            android:paddingStart="4dp"
+                            android:paddingEnd="4dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/shape_radius6_000000_stroke_0058ff"
+                            app:onClickCommand="@{viewModel.goRenew}"
+                            android:text="立即续费"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:visibility="@{viewModel.entity.machineType == 2 ? View.VISIBLE : View.GONE}">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_13"
+                            android:textColor="@color/theme_333333"
+                            android:layout_centerVertical="true"
+                            android:text="质押充值"/>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/theme_3B7CF8"
+                            android:textSize="@dimen/sp_11"
+                            android:paddingStart="4dp"
+                            android:paddingEnd="4dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/shape_radius6_000000_stroke_0058ff"
+                            app:onClickCommand="@{viewModel.goOperateFilActivity}"
+                            android:text="立即充值"/>
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </com.lihang.ShadowLayout>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    </FrameLayout>
+</layout>

@@ -181,6 +181,78 @@ public class OrderInfoBeans {
             private String cardOwner;
             private String bankcardType;
             private Object bankcardTypeString;
+            private int machineType;
+            private String bili;
+            private double mymesage;
+            private double myGas;
+            private String showNewsNums;
+            private String showOldNums;
+            private double dayMesage;
+            private double dayGas;
+
+            public String getBili() {
+                return bili;
+            }
+
+            public void setBili(String bili) {
+                this.bili = bili;
+            }
+
+            public double getMymesage() {
+                return mymesage;
+            }
+
+            public void setMymesage(double mymesage) {
+                this.mymesage = mymesage;
+            }
+
+            public double getMyGas() {
+                return myGas;
+            }
+
+            public void setMyGas(double myGas) {
+                this.myGas = myGas;
+            }
+
+            public String getShowNewsNums() {
+                return showNewsNums;
+            }
+
+            public void setShowNewsNums(String showNewsNums) {
+                this.showNewsNums = showNewsNums;
+            }
+
+            public String getShowOldNums() {
+                return showOldNums;
+            }
+
+            public void setShowOldNums(String showOldNums) {
+                this.showOldNums = showOldNums;
+            }
+
+            public double getDayMesage() {
+                return dayMesage;
+            }
+
+            public void setDayMesage(double dayMesage) {
+                this.dayMesage = dayMesage;
+            }
+
+            public double getDayGas() {
+                return dayGas;
+            }
+
+            public void setDayGas(double dayGas) {
+                this.dayGas = dayGas;
+            }
+
+            public int getMachineType() {
+                return machineType;
+            }
+
+            public void setMachineType(int machineType) {
+                this.machineType = machineType;
+            }
 
             public int getId() {
                 return id;
@@ -535,6 +607,17 @@ public class OrderInfoBeans {
             }
 
             /*
+             * 活的协议详情图
+             * */
+            public String getDetailXyImgUrl(){
+                if(BaseUtil.isValue(contractImage)){
+                    return "http://app.glydsj.com/"+contractImage;
+                }else{
+                    return "";
+                }
+            }
+
+            /*
             * 获取单价
             * */
             public String getDprice(){
@@ -564,6 +647,71 @@ public class OrderInfoBeans {
                     return true;
                 }else{
                     return false;
+                }
+            }
+
+            /*
+            * 产权类型值
+            * */
+            public String getPropertyType(){
+                if(machineType == 0){
+                    return "产权设备";
+                }else if(machineType == 1){
+                    return "云算力租凭";
+                }else if(machineType == 2){
+                    return "云算力租凭";
+                }else{
+                    return "未知类型";
+                }
+            }
+
+            /*
+             * 技术服务费
+             * */
+            public String getTechnicalFee(){
+                if(machineType == 0){
+                    return serviceFeePercent+"%";
+                }else if(machineType == 1){
+                    return serviceFeePercent+"%";
+                }else if(machineType == 2){
+                    return serviceFeePercent+"%";
+                }else{
+                    return "未知类型";
+                }
+            }
+
+            /*
+             * 托管费
+             * */
+            public String getCustodyFeeStr(){
+                if(machineType == 0){
+                    return "免一年";
+                }else if(machineType == 2){
+                    return "￥"+BaseUtil.getNoZoon(custodyFee)+"/年";
+                }else{
+                    return "";
+                }
+            }
+
+            /*
+             * GAS费用
+             * */
+            public String getGasText(){
+                if(machineType == 0 || machineType == 1 || machineType == 2){
+                    return BaseUtil.getNoZoon(myGas)+"FIL";
+                }else{
+                    return "";
+                }
+            }
+
+            /*
+             * 质押费
+             * */
+            public String getZyText(){
+                if(machineType == 0 || machineType == 1 || machineType == 2){
+                    return BaseUtil.getNoZoon(mymesage)+"FIL";
+                }else{
+                    return "";
                 }
             }
         }

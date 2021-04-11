@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.main.viewmodel.CountrysTitleItemViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:background="@color/theme_F2F2FA">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/theme_333333"
+            android:textSize="@dimen/sp_16"
+            android:layout_centerVertical="true"
+            android:text="@{viewModel.entity}"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/theme_DFDFDF"/>
+    </RelativeLayout>
+
+</layout>

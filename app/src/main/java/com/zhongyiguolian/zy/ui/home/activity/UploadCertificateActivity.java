@@ -7,8 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 import com.bumptech.glide.Glide;
@@ -25,12 +23,10 @@ import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.data.userbean.FileBean;
 import com.zhongyiguolian.zy.databinding.ActivityUploadCertificateBinding;
 import com.zhongyiguolian.zy.ui.home.viewmodel.UploadCertificateViewModel;
-import com.zhongyiguolian.zy.ui.person.activity.VerifiedActivity;
 import com.zhongyiguolian.zy.utils.CustomDialog;
 import com.zhongyiguolian.zy.utils.GlideEngine;
 import java.io.File;
 import java.util.List;
-
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
@@ -213,6 +209,9 @@ public class UploadCertificateActivity extends CustomActivity<ActivityUploadCert
     @Override
     public void initData() {
         super.initData();
+
+        //设置上传类型
+        viewModel.productType.set(getBundle().getString("productType"));
 
         //设置总价格
         viewModel.allPrice.set(BaseUtil.getNoZoon(getBundle().getString("allPrice")));

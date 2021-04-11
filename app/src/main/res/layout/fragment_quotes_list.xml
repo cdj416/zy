@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -109,8 +108,7 @@ android:padding="5dp"
                 android:layout_gravity="center"
                 android:drawableTop="@mipmap/promt_empty_img"
                 android:gravity="center"
-                android:visibility="@{viewModel.observableList.size() == 0 ? View.VISIBLE : View.GONE}"
-                />
+                android:visibility="@{viewModel.observableList.size() == 0 ? View.VISIBLE : View.GONE}"/>
 
         </FrameLayout>
 

@@ -1,11 +1,12 @@
 package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
-import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
 import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;

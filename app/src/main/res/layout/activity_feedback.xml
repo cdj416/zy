@@ -13,18 +13,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/shape_gradient_5690ff_ffffff">
 
         <com.zhongyiguolian.zy.myview.StatusBarHeightView
             android:id="@+id/barHeight"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"/>
+            android:layout_height="wrap_content"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/colorPrimary">
+            android:layout_height="40dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -34,7 +33,7 @@
                 android:text="意见反馈"/>
             <ImageView
                 android:id="@+id/comBack"
-android:padding="5dp"
+                android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/white_black"
@@ -46,7 +45,7 @@ android:padding="5dp"
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/theme_333333"
+            android:textColor="@color/theme_FFFFFF"
             android:textSize="@dimen/sp_16"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="30dp"
@@ -59,8 +58,9 @@ android:padding="5dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:textSize="@dimen/sp_12"
-            android:textColor="@color/theme_333333"
-            android:background="@drawable/shape_radius6_000000_stroke_7ea8ff"
+            android:textColor="@color/theme_FFFFFF"
+            android:textColorHint="@color/theme_FFFFFF"
+            android:background="@drawable/shape_radius6_000000_stroke_ffffff"
             android:paddingStart="10dp"
             android:layout_marginTop="6dp"
             android:hint="请输入标题"
@@ -69,7 +69,7 @@ android:padding="5dp"
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/theme_333333"
+            android:textColor="@color/theme_FFFFFF"
             android:textSize="@dimen/sp_16"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="20dp"
@@ -88,8 +88,9 @@ android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/sp_12"
-                android:textColor="@color/theme_333333"
-                android:background="@drawable/shape_radius6_000000_stroke_7ea8ff"
+                android:textColor="@color/theme_FFFFFF"
+                android:textColorHint="@color/theme_FFFFFF"
+                android:background="@drawable/shape_radius6_000000_stroke_ffffff"
                 android:padding="10dp"
                 android:gravity="top"
                 android:hint="请输入您的详情问题"
@@ -106,19 +107,19 @@ android:padding="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@{viewModel.etNums.equals(@string/nums150) ? @color/theme_EF5B48 : @color/theme_999999 }"
+                    android:textColor="@{viewModel.etNums.equals(@string/nums150) ? @color/theme_EF5B48 : @color/theme_FFFFFF }"
                     android:text="@{viewModel.etNums}"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/theme_999999"
+                    android:textColor="@color/theme_FFFFFF"
                     android:text="/"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sp_12"
-                    android:textColor="@color/theme_999999"
+                    android:textColor="@color/theme_FFFFFF"
                     android:text="150"/>
 
             </LinearLayout>

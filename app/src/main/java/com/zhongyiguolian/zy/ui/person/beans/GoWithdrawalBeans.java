@@ -21,6 +21,15 @@ public class GoWithdrawalBeans {
     private String usedAssets;
     private double theMin;
     private Object email;
+    private double addressValibe;
+
+    public double getAddressValibe() {
+        return addressValibe;
+    }
+
+    public void setAddressValibe(double addressValibe) {
+        this.addressValibe = addressValibe;
+    }
 
     public int getPrecision() {
         return precision;

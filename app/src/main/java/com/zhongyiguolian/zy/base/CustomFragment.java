@@ -471,6 +471,7 @@ public abstract class CustomFragment<V extends ViewDataBinding, VM extends Custo
         if(type == REFRESH_0X1){
             refresh.setEnableLoadMore(false);
             refresh.setEnableRefresh(true);
+            viewModel.isRefresh = true;
         }else if(type == REFRESH_0X2){
             refresh.setEnableLoadMore(true);
             refresh.setEnableRefresh(false);

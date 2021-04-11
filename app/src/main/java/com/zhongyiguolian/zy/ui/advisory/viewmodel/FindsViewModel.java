@@ -1,16 +1,20 @@
 package com.zhongyiguolian.zy.ui.advisory.viewmodel;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableList;
+
 import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.ui.advisory.beans.FindsBean;
+
 import java.util.List;
+
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 /**

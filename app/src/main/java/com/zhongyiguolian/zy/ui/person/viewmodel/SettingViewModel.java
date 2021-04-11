@@ -1,8 +1,10 @@
 package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
@@ -14,8 +16,6 @@ import com.zhongyiguolian.zy.ui.person.activity.ChangePasswordActivity;
 import com.zhongyiguolian.zy.ui.person.activity.ChangePayPasswordActivity;
 import com.zhongyiguolian.zy.ui.person.activity.CoinAddressActivity;
 import com.zhongyiguolian.zy.ui.person.activity.FeedBackActivity;
-import com.zhongyiguolian.zy.ui.person.activity.SetEmbodimentAccountActivity;
-import com.zhongyiguolian.zy.ui.person.activity.SetFetchAddressActivity;
 import com.zhongyiguolian.zy.ui.person.activity.SetPayPasswordActivity;
 
 /**

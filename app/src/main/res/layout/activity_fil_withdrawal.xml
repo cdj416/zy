@@ -9,205 +9,298 @@
             type="com.zhongyiguolian.zy.ui.person.viewmodel.FilReflectDetailViewModel" />
 
         <import type="com.zhongyiguolian.zy.data.md5.BaseUtil"/>
+        <import type="com.zhongyiguolian.zy.utils.BigDecimalUtils"/>
 
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="#EFF4FF">
 
         <com.zhongyiguolian.zy.myview.StatusBarHeightView
             android:id="@+id/barHeight"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"/>
+            android:layout_height="wrap_content"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/colorPrimary">
+            android:layout_height="40dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:textColor="@color/theme_FFFFFF"
+                android:textColor="@color/theme_333333"
                 android:textSize="@dimen/sp_16"
                 android:gravity="center"
                 android:text="FIL提取"/>
             <ImageView
                 android:id="@+id/comBack"
-android:padding="5dp"
+                android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/white_black"
+                android:src="@mipmap/black_back_mark"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"/>
         </RelativeLayout>
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/theme_333333"
-            android:textSize="@dimen/sp_16"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="30dp"
-            android:text="提取地址"/>
-
-
-        <RelativeLayout
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
+            android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/coinAddress"
+            <com.zhongyiguolian.zy.myview.StickyScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/theme_333333"
-                android:background="@null"
-                android:hint="请输入或长按粘贴FIL地址"
-                android:text="@={viewModel.address}"/>
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/selectTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/sp_12"
-                android:text="选择"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:padding="5dp"
-                app:onClickCommand="@{viewModel.goAddress}"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/clearAddressImg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/close_white_mark"
-                android:padding="5dp"
-                android:visibility="gone"
-                app:onClickCommand="@{viewModel.clearAddress}"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/theme_EEEEEE"
-                android:layout_alignParentBottom="true"/>
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/theme_333333"
-            android:textSize="@dimen/sp_16"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="20dp"
-            android:text="提现数量"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_333333"
+                        android:textSize="@dimen/sp_16"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="30dp"
+                        android:text="提取地址"/>
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/theme_333333"
-                android:background="@null"
-                android:inputType="numberDecimal"
-                android:hint="0.00"
-                android:text="@={viewModel.nums}"/>
+                        <EditText
+                            android:id="@+id/coinAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="@dimen/sp_12"
+                            android:textColor="@color/theme_333333"
+                            android:background="@null"
+                            android:hint="请输入或长按粘贴FIL地址"
+                            android:text="@={viewModel.address}"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/close_white_mark"
-                android:padding="5dp"
-                app:onClickCommand="@{viewModel.clearNums}"/>
+                        <TextView
+                            android:id="@+id/selectTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/sp_12"
+                            android:text="选择"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:padding="5dp"
+                            app:onClickCommand="@{viewModel.goAddress}"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/theme_EEEEEE"
-                android:layout_alignParentBottom="true"/>
-        </RelativeLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+                        <ImageView
+                            android:id="@+id/clearAddressImg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/close_white_mark"
+                            android:padding="5dp"
+                            android:visibility="gone"
+                            app:onClickCommand="@{viewModel.clearAddress}"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/theme_666666"
-                android:layout_marginLeft="16dp"
-                android:text="当前额度"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/theme_666666"
-                android:layout_marginLeft="16dp"
-                android:text="@{BaseUtil.getString(viewModel.entity.usedAssets)}"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/theme_666666"
-                android:text=","/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/theme_666666"
-                android:text="提取额度不能少于"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/chart_red"
-                android:text="@{BaseUtil.getString(viewModel.entity.theMin)}"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
-                android:textColor="@color/theme_666666"
-                android:text=","/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sp_12"
-                android:textColor="#0153EE"
-                android:padding="5dp"
-                android:text="全部提现"
-                app:onClickCommand="@{viewModel.selectAll}"/>
-        </LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/theme_D9E6FF"
+                            android:layout_alignParentBottom="true"/>
+                    </RelativeLayout>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:gravity="center"
-            android:textColor="@color/theme_FFFFFF"
-            android:textSize="@dimen/sp_15"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/shape_radius5_5690ff"
-            android:layout_marginTop="50dp"
-            android:text="提现"
-            app:onClickCommand="@{viewModel.enterPassword}"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_333333"
+                        android:textSize="@dimen/sp_16"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="20dp"
+                        android:text="提取数量"/>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp">
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="@dimen/sp_12"
+                            android:textColor="@color/theme_333333"
+                            android:background="@null"
+                            android:inputType="numberDecimal"
+                            android:hint="0.0000"
+                            android:text="@={viewModel.nums}"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/close_white_mark"
+                            android:padding="5dp"
+                            app:onClickCommand="@{viewModel.clearNums}"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/theme_D9E6FF"
+                            android:layout_alignParentBottom="true"/>
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_12"
+                            android:textColor="@color/theme_666666"
+                            android:layout_marginLeft="16dp"
+                            android:text="当前额度"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_12"
+                            android:textColor="@color/theme_666666"
+                            android:text="@{BigDecimalUtils.roundDown(viewModel.entity.usedAssets,4)}"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_12"
+                            android:textColor="#0153EE"
+                            android:padding="5dp"
+                            android:text="全部提现"
+                            app:onClickCommand="@{viewModel.selectAll}"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="@dimen/dp_16">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_12"
+                            android:textColor="@color/theme_666666"
+                            android:text="提取额度不能少于"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_12"
+                            android:textColor="@color/theme_EF5B48"
+                            android:text="@{BaseUtil.getString(viewModel.entity.theMin)}"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/theme_333333"
+                        android:textSize="@dimen/sp_16"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="20dp"
+                        android:text="手续费"/>
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:textSize="@dimen/sp_12"
+                            android:textColor="@color/theme_333333"
+                            android:gravity="center_vertical"
+                            android:hint="0.00"
+                            android:text="@{BaseUtil.getNoZoon(viewModel.entity.poundage)}"/>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/theme_D9E6FF"
+                            android:layout_alignParentBottom="true"/>
+                    </RelativeLayout>
+
+
+                    <com.lihang.ShadowLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        app:hl_shadowLimit="16dp"
+                        app:hl_shadowColor="@color/colorPrimary"
+                        app:layout_srlBackgroundColor="#D0DBFE"
+                        app:hl_cornerRadius="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="15dp"
+                            android:paddingBottom="15dp"
+                            android:background="@drawable/shape_radius5_ffffff">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_10"
+                                android:textColor="#41678E"
+                                android:text="注释："/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_10"
+                                    android:textColor="#41678E"
+                                    android:text="@{viewModel.thinFilText}"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_10"
+                                    android:textColor="#41678E"
+                                    android:text="为保障资金安全，当您账户安全策略变更、密码修改、我们会对提FIL进行人工审核，请耐心等待。"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.lihang.ShadowLayout>
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:gravity="center"
+                        android:textColor="@color/theme_FFFFFF"
+                        android:textSize="@dimen/sp_15"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/shape_radius24_5690ff"
+                        android:layout_marginTop="50dp"
+                        android:text="提现"
+                        app:onClickCommand="@{viewModel.enterPassword}"/>
+
+                </LinearLayout>
+            </com.zhongyiguolian.zy.myview.StickyScrollView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     </LinearLayout>
 
 </layout>

@@ -4,9 +4,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
+
 import androidx.lifecycle.ViewModelProviders;
+
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
 import com.baidu.ocr.sdk.exception.OCRError;
@@ -27,7 +28,10 @@ import com.zhongyiguolian.zy.ui.person.viewmodel.AddBlankViewModel;
 import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.BankCardNumUtils;
 import com.zhongyiguolian.zy.utils.FileUtil;
+import com.zhongyiguolian.zy.utils.StatusBarUtil;
+
 import java.io.File;
+
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
 import me.tatarka.bindingcollectionadapter2.BR;
 
@@ -87,6 +91,7 @@ public class AddBlankCardActivity extends CustomActivity<ActivityAddBlankBinding
     @Override
     public void initView() {
         super.initView();
+        StatusBarUtil.setCommonUI(this,true);
         binding.comBack.setOnClickListener(view -> finish());
         //setOnRefresh(binding.refresh,REFRESH_0X4);
 

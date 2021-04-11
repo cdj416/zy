@@ -1,8 +1,10 @@
 package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
@@ -105,7 +107,8 @@ public class InviteViewModel extends CustomViewModel<MyRepository> {
             PersonInfoBeans beans = (PersonInfoBeans)dataBean;
             entity.set(beans.getCustomerVo());
 
-            uc.showQrImg.setValue("http://app.glydsj.com/register/register.html?message="+beans.getCustomerVo().getInviteCode());
+            //uc.showQrImg.setValue("http://app.glydsj.com/register/register.html?message="+beans.getCustomerVo().getInviteCode());
+            uc.showQrImg.setValue(beans.getCustomerVo().getInviteLink());
         }
     }
 }

@@ -17,6 +17,7 @@ import com.zhongyiguolian.zy.ui.home.viewmodel.TransferViewModel;
 import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.BigDecimalUtils;
 import com.zhongyiguolian.zy.utils.CustomDialog;
+
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**

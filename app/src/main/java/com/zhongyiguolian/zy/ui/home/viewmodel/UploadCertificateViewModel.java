@@ -13,14 +13,10 @@ import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
-import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.data.userbean.FileBean;
 import com.zhongyiguolian.zy.ui.home.beans.ConfirmBeans;
 import com.zhongyiguolian.zy.ui.home.beans.HomeBankBeans;
-import com.zhongyiguolian.zy.ui.main.activity.MainActivity;
 import com.zhongyiguolian.zy.ui.person.activity.VerifiedSuccessActivity;
-import com.zhongyiguolian.zy.ui.person.beans.PersonInfoBeans;
-import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 
 /**
  * 上传转账凭证viewmodel
@@ -52,6 +48,11 @@ public class UploadCertificateViewModel extends CustomViewModel<MyRepository> {
         //弹出密码输入框
         public SingleLiveEvent<Void> goUpdate = new SingleLiveEvent<>();
     }
+
+    /**
+     * 上传类型
+     */
+    public ObservableField<String> productType = new ObservableField<>("PRODUCT");
 
     /**
      * 第一张凭证是否已选择
@@ -246,7 +247,7 @@ public class UploadCertificateViewModel extends CustomViewModel<MyRepository> {
 
         clearParams().setParams("orderId",serviceId.get())
                 .setParams("payPassword",passWord)
-                .setParams("productType","PRODUCT");
+                .setParams("productType",productType.get());
 
         if(oneImgFile.get() != null){
             setFileParams(oneImgFile.get());
@@ -273,7 +274,6 @@ public class UploadCertificateViewModel extends CustomViewModel<MyRepository> {
             ConfirmBeans beans = (ConfirmBeans)dataBean;
 
             if(beans.getCode() == 1){
-
                 Bundle bundle = new Bundle();
                 bundle.putString("mTitle","上传结果");
                 bundle.putString("mProText","已上传，请耐心等待审核！");

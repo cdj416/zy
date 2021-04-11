@@ -35,6 +35,11 @@ public class KpiViewModel extends CustomViewModel<MyRepository> {
     public ObservableField<List<String>> banners = new ObservableField<>(new ArrayList<>());
 
     /**
+     * 数据
+     */
+    public ObservableField<List<FilIncomeBean.MyIncomeDTO>> allList = new ObservableField<>(new ArrayList<>());
+
+    /**
      * @param application
      * @param model
      */
@@ -79,6 +84,50 @@ public class KpiViewModel extends CustomViewModel<MyRepository> {
             //清除旧数据
             if(curPage == FIRST_PAGE){
                 observableList.clear();
+                allList.get().clear();
+                allList.notifyChange();
+            }
+
+            if(mList != null && mList.size() > 0){
+
+                allList.get().addAll(mList);
+                allList.notifyChange();
+
+                for(FilIncomeBean.MyIncomeDTO bean : mList){
+
+                    KiplItemViewModel itemViewModel = new KiplItemViewModel(this,bean);
+                    observableList.add(itemViewModel);
+                }
+
+                //处理最后一个item底部阴影显示情况
+                if(curPage != FIRST_PAGE){
+                    for(KiplItemViewModel itemViewModel : observableList){
+                        if(itemViewModel.entity.get().isLast()){
+                            itemViewModel.entity.get().setLast(false);
+                            itemViewModel.entity.notifyChange();
+                        }
+                    }
+                }
+                if(observableList.size() > 10){
+                    observableList.get(observableList.size() - 1).entity.get().setLast(true);
+                    observableList.get(observableList.size() - 1).entity.notifyChange();
+                }
+
+            }
+
+            if(observableList.size() > 0){
+                if(mList == null || mList.size() == 0){
+                    getUC().getFinishLoadMoreData().call();
+                }
+            }
+        }
+
+        /*if(code == Constants.GETMYINCOME1){
+            List<FilIncomeBean.MyIncomeDTO> mList = ((FilIncomeBean)dataBean).getMyIncome();
+
+            //清除旧数据
+            if(curPage == FIRST_PAGE){
+                observableList.clear();
             }
 
             if(mList != null && mList.size() > 0){
@@ -95,6 +144,6 @@ public class KpiViewModel extends CustomViewModel<MyRepository> {
             }else{
 
             }
-        }
+        }*/
     }
 }

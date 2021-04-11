@@ -86,6 +86,10 @@ public class VerifiedSuccessActivity extends CustomActivity<ActivityVerifiedSucc
             //上传凭证时才跳转到订单页面
             if(UPLOAD_CERTIFICATE == type){
                 startActivity(PurchaseHistoryActivity.class);
+
+                if(!isFinishing()){
+                    finish();
+                }
             }
 
         });
@@ -98,6 +102,10 @@ public class VerifiedSuccessActivity extends CustomActivity<ActivityVerifiedSucc
             //上传凭证时才跳转到订单页面
             if(UPLOAD_CERTIFICATE == type){
                 startActivity(PurchaseHistoryActivity.class);
+
+                if(!isFinishing()){
+                    finish();
+                }
             }
         });
 
@@ -148,6 +156,10 @@ public class VerifiedSuccessActivity extends CustomActivity<ActivityVerifiedSucc
             //上传凭证时才跳转到订单页面
             if(UPLOAD_CERTIFICATE == type){
                 startActivity(PurchaseHistoryActivity.class);
+
+                if(!isFinishing()){
+                    finish();
+                }
             }
         }
         return true;

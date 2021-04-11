@@ -12,152 +12,211 @@
         <import type="me.tatarka.bindingcollectionadapter2.LayoutManagers" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/theme_FFFFFF">
+        android:layout_height="match_parent">
 
-        <com.zhongyiguolian.zy.myview.StatusBarHeightView
-            android:id="@+id/barHeight"
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"/>
+            android:src="@mipmap/myteam_top_bg"
+            android:scaleType="fitXY"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/colorPrimary">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:textColor="@color/theme_FFFFFF"
-                android:textSize="@dimen/sp_16"
-                android:gravity="center"
-                android:text="我的部门"/>
-            <ImageView
-                android:id="@+id/comBack"
-android:padding="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/white_black"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="16dp"/>
-        </RelativeLayout>
-
-        <com.scwang.smartrefresh.layout.SmartRefreshLayout
-            android:id="@+id/refresh"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/clView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.zhongyiguolian.zy.myview.StickyScrollView
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/abl"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                app:elevation="0dp">
 
-                <LinearLayout
+                <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:src="@mipmap/myteam_top_bg"
-                            android:scaleType="fitXY"/>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:layout_centerInParent="true">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/sp_16"
-                                android:textColor="@color/theme_FFFFFF"
-                                android:text="部门总算力(T)"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/sp_14"
-                                android:textColor="@color/theme_FFFFFF"
-                                android:text="@{viewModel.allEntity}"/>
-
-                        </LinearLayout>
-
-                    </RelativeLayout>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:src="@mipmap/myteam_username"/>
-
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="35dp"
+                        android:layout_height="80dp"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="invisible">
+
+                        <com.zhongyiguolian.zy.myview.StatusBarHeightView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:textColor="@color/theme_FFFFFF"
+                                android:textSize="@dimen/sp_16"
+                                android:gravity="center"
+                                android:text="我的部门"/>
+                            <ImageView
+                                android:padding="5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/white_black"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="16dp"/>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginTop="20dp">
+                        android:gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:layout_centerInParent="true">
+
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1.5"
-                            android:textSize="@dimen/sp_12"
-                            android:textColor="@color/black"
-                            android:gravity="center"
-                            android:background="#F2F2F2"
-                            android:text="姓名"/>
-                        <View
-                            android:layout_width="2dp"
-                            android:layout_height="match_parent"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_16"
+                            android:textColor="@color/theme_FFFFFF"
+                            android:text="部门总算力"/>
+
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1.5"
-                            android:textSize="@dimen/sp_12"
-                            android:textColor="@color/black"
-                            android:gravity="center"
-                            android:background="#F2F2F2"
-                            android:text="手机号"/>
-                        <View
-                            android:layout_width="2dp"
-                            android:layout_height="match_parent"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_14"
+                            android:textColor="@color/theme_FFFFFF"
+                            android:text="@{viewModel.allEntity}"/>
+
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:textSize="@dimen/sp_12"
-                            android:textColor="@color/black"
-                            android:gravity="center"
-                            android:background="#F2F2F2"
-                            android:text="自购算力(T)"/>
-                        <View
-                            android:layout_width="2dp"
-                            android:layout_height="match_parent"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:textSize="@dimen/sp_12"
-                            android:textColor="@color/black"
-                            android:gravity="center"
-                            android:background="#F2F2F2"
-                            android:text="部门算力(T)"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_16"
+                            android:textColor="@color/theme_FFFFFF"
+                            android:text="(T)"/>
+
                     </LinearLayout>
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content">
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:background="@color/theme_FFFFFF"
+                            android:layout_gravity="bottom"/>
+                        <com.lihang.ShadowLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:hl_shadowLimit="8dp"
+                            app:hl_cornerRadius="15dp"
+                            app:hl_shadowColor="@color/colorPrimary"
+                            app:hl_layoutBackground="@color/transparent"
+                            app:hl_shadowHiddenLeft="true"
+                            app:hl_shadowHiddenRight="true">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="44dp"
+                                    android:background="@drawable/shape_radius15_top_f5f9ff">
+                                    <ImageView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:src="@mipmap/myteam_username"/>
+                                </RelativeLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/theme_D9E6FF"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="39dp"
+                                    android:orientation="horizontal"
+                                    android:background="@drawable/shape_radius15_bottom_f5f9ff">
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.5"
+                                        android:textSize="@dimen/sp_12"
+                                        android:textColor="@color/black"
+                                        android:gravity="center"
+                                        android:text="姓名"/>
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.5"
+                                        android:textSize="@dimen/sp_12"
+                                        android:textColor="@color/black"
+                                        android:gravity="center"
+                                        android:text="手机号"/>
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.1"
+                                        android:textSize="@dimen/sp_12"
+                                        android:textColor="@color/black"
+                                        android:gravity="center"
+                                        android:text="自购算力(T)"/>
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.1"
+                                        android:textSize="@dimen/sp_12"
+                                        android:textColor="@color/black"
+                                        android:gravity="center"
+                                        android:text="部门算力(T)"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </com.lihang.ShadowLayout>
+                    </FrameLayout>
+                </LinearLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                <com.lihang.ShadowLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hl_shadowLimit="8dp"
+                    app:hl_cornerRadius="15dp"
+                    app:hl_shadowColor="@color/colorPrimary"
+                    app:hl_layoutBackground="@color/transparent"
+                    app:hl_shadowHiddenLeft="true"
+                    app:hl_shadowHiddenRight="true"
+                    app:hl_shadowHiddenTop="true">
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shape_radius15_bottom_ffffff">
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/mRec"
                             android:layout_width="match_parent"
@@ -165,7 +224,6 @@ android:padding="5dp"
                             app:itemBinding="@{viewModel.itemBinding}"
                             app:items="@{viewModel.observableList}"
                             app:layoutManager="@{LayoutManagers.linear(1,false)}"/>
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -175,16 +233,44 @@ android:padding="5dp"
                             android:drawableTop="@mipmap/promt_empty_img"
                             android:layout_marginTop="50dp"
                             android:gravity="center"
-                            android:visibility="@{viewModel.observableList.size() == 0 ? View.VISIBLE : View.GONE}"
-                            />
-
+                            android:visibility="@{viewModel.observableList.size() == 0 ? View.VISIBLE : View.GONE}"/>
                     </FrameLayout>
+                </com.lihang.ShadowLayout>
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-                </LinearLayout>
 
-            </com.zhongyiguolian.zy.myview.StickyScrollView>
-        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.zhongyiguolian.zy.myview.StatusBarHeightView
+                android:id="@+id/barHeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:textColor="@color/theme_FFFFFF"
+                    android:textSize="@dimen/sp_16"
+                    android:gravity="center"
+                    android:text="我的部门"/>
+                <ImageView
+                    android:id="@+id/comBack"
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/white_black"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="16dp"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </FrameLayout>
 
 </layout>

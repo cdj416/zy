@@ -64,6 +64,7 @@ public class PurchaseHistoryItemViewModel extends ItemViewModel<PuchaseHistoryVi
                 Bundle bundle = new Bundle();
                 bundle.putString("allPrice", BigDecimalUtils.mul(String.valueOf(entity.get().getAmount()),String.valueOf(entity.get().getCount()),2));
                 bundle.putString("serviceId",String.valueOf(entity.get().getId()));
+                bundle.putString("productType","PRODUCT");
                 viewModel.startActivity(UploadCertificateActivity.class,bundle);
             }else{
                 ToastUtils.showShort("传递参数为空！");
@@ -72,7 +73,7 @@ public class PurchaseHistoryItemViewModel extends ItemViewModel<PuchaseHistoryVi
     });
 
     /**
-     * 点击取消订单
+     * 进入订单详情页面
      */
     public BindingCommand goDetail = new BindingCommand(() -> {
         Bundle bundle = new Bundle();

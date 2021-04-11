@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
@@ -20,6 +21,7 @@ import com.zhongyiguolian.zy.ui.home.beans.ServiceDetailBeans;
 import com.zhongyiguolian.zy.ui.main.activity.LoginActivity;
 import com.zhongyiguolian.zy.ui.person.activity.PurchaseHistoryActivity;
 import com.zhongyiguolian.zy.utils.AndroidDes3Util;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -274,6 +276,11 @@ public class ServiceDetailNewViewModel extends CustomViewModel<MyRepository> {
 
         if(code == Constants.GETPRODUCTINFO){
             ServiceDetailBeans detailBeans = (ServiceDetailBeans)dataBean;
+
+            if(detailBeans.getState() == -1){
+                startActivity(LoginActivity.class);
+                return;
+            }
 
             if("EX_ORDER_STATUS_SOLD_OUT".equals(detailBeans.getResultMap().getVo().getProductStatus())){
                 statusText.set("已售罄");

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View"/>
+        <import type="com.zhongyiguolian.zy.data.md5.BaseUtil"/>
+        <import type="com.zhongyiguolian.zy.utils.BigDecimalUtils"/>
+
+        <variable
+            name="viewModel"
+            type="com.zhongyiguolian.zy.ui.person.viewmodel.FilRechargeViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/shape_gradient_5690ff_ffffff"
+        android:id="@+id/rootView">
+
+        <com.zhongyiguolian.zy.myview.StatusBarHeightView
+            android:id="@+id/barHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="@color/theme_FFFFFF"
+                android:textSize="@dimen/sp_16"
+                android:gravity="center"
+                android:text="FIL充值"/>
+            <ImageView
+                android:id="@+id/comBack"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/white_black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"/>
+        </RelativeLayout>
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/qrImg"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="32dp"
+                    app:riv_corner_radius="3dp"/>
+
+
+                <com.lihang.ShadowLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_gravity="center_horizontal"
+                    app:hl_shadowLimit="6dp"
+                    app:hl_shadowColor="@color/theme_003AA8"
+                    app:hl_layoutBackground="@color/transparent"
+                    app:hl_cornerRadius="10dp">
+
+                    <TextView
+                        android:layout_width="148dp"
+                        android:layout_height="41dp"
+                        android:textSize="@dimen/sp_15"
+                        android:textColor="@color/theme_3B7CF8"
+                        android:background="@drawable/shape_radius10_55f9fbff"
+                        android:gravity="center"
+                        android:text="保存二维码至相册"
+                        app:onClickCommand="@{viewModel.goSave}"/>
+
+                </com.lihang.ShadowLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="40dp"
+                    android:textSize="@dimen/sp_15"
+                    android:text="充值地址"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:textSize="@dimen/sp_12"
+                    android:gravity="center"
+                    android:text="@{viewModel.stsBean.address}"/>
+
+
+                <com.lihang.ShadowLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:layout_gravity="center_horizontal"
+                    app:hl_shadowLimit="6dp"
+                    app:hl_shadowColor="@color/theme_003AA8"
+                    app:hl_layoutBackground="@color/transparent"
+                    app:hl_cornerRadius="10dp">
+
+                    <LinearLayout
+                        android:layout_width="148dp"
+                        android:layout_height="41dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/shape_radius10_55f9fbff"
+                        android:gravity="center"
+                        app:onClickCommand="@{viewModel.copyLink}">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/copy_fil_link"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_15"
+                            android:textColor="@color/theme_3B7CF8"
+                            android:gravity="center"
+                            android:layout_marginStart="4dp"
+                            android:text="一键复制"/>
+
+                    </LinearLayout>
+
+
+
+                </com.lihang.ShadowLayout>
+
+
+                <com.lihang.ShadowLayout
+                    android:id="@+id/protBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:hl_shadowLimit="16dp"
+                    app:hl_shadowColor="@color/colorPrimary"
+                    app:layout_srlBackgroundColor="#D0DBFE"
+                    app:hl_cornerRadius="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:background="@drawable/shape_radius5_ffffff">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_16"
+                            android:textColor="#FF41678E"
+                            android:text="注："/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/proTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_16"
+                                android:textColor="#FF41678E"
+                                android:text="注："/>
+
+                            <TextView
+                                android:id="@+id/botText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_12"
+                                android:textColor="#FF41678E"
+                                android:text="(最小充值数量=需质押数量+Gas费)"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.lihang.ShadowLayout>
+            </LinearLayout>
+
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </LinearLayout>
+
+
+</layout>

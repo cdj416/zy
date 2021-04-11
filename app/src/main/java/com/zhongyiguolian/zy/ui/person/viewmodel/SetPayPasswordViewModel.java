@@ -1,23 +1,20 @@
 package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
-import com.hongyuan.mvvmhabitx.bus.RxBus;
-import com.hongyuan.mvvmhabitx.bus.RxSubscriptions;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
 import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
-import com.zhongyiguolian.zy.ui.main.beans.CountrysBeans;
 import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.HourMeterUtil;
-
-import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * 修改交易密码
@@ -136,7 +133,8 @@ public class SetPayPasswordViewModel extends CustomViewModel<MyRepository> imple
         @Override
         public void call() {
             setParams("account", AndroidDes3Util.encode(loginBean.getUserName()))
-                    .setParams("type",AndroidDes3Util.encode("1"))
+                    .setParams("nationalCode",AndroidDes3Util.encode(loginBean.getNationalCode()))
+                    .setParams("type",AndroidDes3Util.encode("2"))
                     .setParams("imgCode",AndroidDes3Util.encode("123456"))
                     .setParams("voice",AndroidDes3Util.encode("0"))
                     .setParams("oTime",AndroidDes3Util.encode("1"))

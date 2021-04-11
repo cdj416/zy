@@ -63,6 +63,55 @@ public class TransactionRecordFragment extends CustomFragment<FragmentTransactio
         setEnableRefresh(Constants.GETCURRENCYRECORDS);
     }
 
+    /*
+    * 更改UI显示
+    * */
+    @Override
+    public void initViewObservable() {
+        super.initViewObservable();
+
+        viewModel.uc.checkBalanceRecord.observe(this,aVoid -> {
+            viewModel.type.set(1);
+
+            binding.checkImg1.setImageResource(R.mipmap.blue_yqq_check);
+            binding.checkImg2.setImageResource(R.mipmap.white_yqq_mark);
+
+            binding.checkText1.setTextColor(getContext().getResources().getColor(R.color.theme_FFFFFF));
+            binding.checkText2.setTextColor(getContext().getResources().getColor(R.color.theme_EEEEEE));
+
+            //刷新请求需要的参数
+            viewModel.setRefParams("currId", AndroidDes3Util.encode("2"))
+                    .setRefParams("type",AndroidDes3Util.encode("2"));
+
+            viewModel.setParams("currId", AndroidDes3Util.encode("2"))
+                    .setParams("type",AndroidDes3Util.encode("2"))
+                    .setParams("pageIndex",AndroidDes3Util.encode("1"))
+                    .setParams("pageSize",AndroidDes3Util.encode("10"))
+                    .requestData(Constants.GETCURRENCYRECORDS);
+        });
+
+        viewModel.uc.checkPledgeRecord.observe(this,aVoid -> {
+            viewModel.type.set(3);
+
+            binding.checkImg1.setImageResource(R.mipmap.white_yqq_mark);
+            binding.checkImg2.setImageResource(R.mipmap.blue_yqq_check);
+
+            binding.checkText1.setTextColor(getContext().getResources().getColor(R.color.theme_EEEEEE));
+            binding.checkText2.setTextColor(getContext().getResources().getColor(R.color.theme_FFFFFF));
+
+            //刷新请求需要的参数
+            viewModel.setRefParams("currId", AndroidDes3Util.encode("3"))
+                    .setRefParams("type",AndroidDes3Util.encode("3"));
+
+            viewModel.setParams("currId", AndroidDes3Util.encode("3"))
+                    .setParams("type",AndroidDes3Util.encode("3"))
+                    .setParams("pageIndex",AndroidDes3Util.encode("1"))
+                    .setParams("pageSize",AndroidDes3Util.encode("10"))
+                    .requestData(Constants.GETCURRENCYRECORDS);
+        });
+
+    }
+
     /**
      * 加载数据
      */
@@ -70,7 +119,14 @@ public class TransactionRecordFragment extends CustomFragment<FragmentTransactio
     public void initData() {
         super.initData();
 
-        viewModel.type.set(Integer.valueOf(getPosition()));
+        if(getPosition().equals("0") && getTabTag().equals("2")){
+            viewModel.type.set(0);
+        }else if(getPosition().equals("2") && getTabTag().equals("2")){
+            viewModel.type.set(1);
+        }else{
+            viewModel.type.set(2);
+        }
+
 
         //刷新请求需要的参数
         viewModel.setRefParams("currId", AndroidDes3Util.encode(getTabTag()))

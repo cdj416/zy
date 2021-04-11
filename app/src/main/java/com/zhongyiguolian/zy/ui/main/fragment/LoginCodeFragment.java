@@ -2,10 +2,11 @@ package com.zhongyiguolian.zy.ui.main.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
@@ -237,11 +238,13 @@ public class LoginCodeFragment extends CustomFragment<FragmentCodeLoginBinding, 
                 if(viewModel.isPassword.get()){
                     //密码登录参数组合
                     viewModel.setParams("account", AndroidDes3Util.encode(viewModel.phoneNum.get()))
+                            .setParams("nationalCode",AndroidDes3Util.encode(viewModel.countrysId.get().substring(1)))
                             .setParams("type", AndroidDes3Util.encode("LOGIN"))
                             .setParams("password", AndroidDes3Util.encode(viewModel.password.get()));
                 }else{
                     //验证码登录参数组合
                     viewModel.setParams("account", AndroidDes3Util.encode(viewModel.phoneNum.get()))
+                            .setParams("nationalCode",AndroidDes3Util.encode(viewModel.countrysId.get().substring(1)))
                             .setParams("type", AndroidDes3Util.encode("SMSLOGIN"))
                             .setParams("password", AndroidDes3Util.encode(viewModel.messageCode.get()));
                 }

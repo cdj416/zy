@@ -37,7 +37,7 @@
                 android:text="凭证上传"/>
             <ImageView
                 android:id="@+id/comBack"
-android:padding="5dp"
+                android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/white_black"

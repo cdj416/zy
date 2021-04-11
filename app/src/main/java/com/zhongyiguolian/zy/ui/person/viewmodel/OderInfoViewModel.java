@@ -2,10 +2,8 @@ package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
-
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
@@ -87,6 +85,7 @@ public class OderInfoViewModel extends CustomViewModel<MyRepository> {
             Bundle bundle = new Bundle();
             bundle.putString("allPrice", String.valueOf(entity.get().getAmount()));
             bundle.putString("serviceId",String.valueOf(entity.get().getId()));
+            bundle.putString("productType","PRODUCT");
             startActivity(UploadCertificateActivity.class,bundle);
         }else{
             ToastUtils.showShort("传递参数为空！");

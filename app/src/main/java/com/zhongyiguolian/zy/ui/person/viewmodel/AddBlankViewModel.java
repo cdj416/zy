@@ -2,10 +2,10 @@ package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.RxBus;
@@ -18,7 +18,6 @@ import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.ui.main.activity.CountrysActivity;
 import com.zhongyiguolian.zy.ui.main.beans.CountrysBeans;
-import com.zhongyiguolian.zy.ui.person.activity.SendCodeActivity;
 import com.zhongyiguolian.zy.ui.person.activity.VerifiedSuccessActivity;
 import com.zhongyiguolian.zy.ui.person.beans.PayCodeBeans;
 
@@ -159,7 +158,7 @@ public class AddBlankViewModel extends CustomViewModel<MyRepository> {
         mSubscription = RxBus.getDefault().toObservable(CountrysBeans.class)
                 .observeOn(AndroidSchedulers.mainThread()) //回调到主线程更新UI
                 .subscribe(beans -> {
-                    countrysId.set(beans.getCountrysId());
+                    countrysId.set(beans.getCode());
                 });
         //将订阅者加入管理站
         RxSubscriptions.add(mSubscription);

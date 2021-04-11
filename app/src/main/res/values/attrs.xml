@@ -202,4 +202,26 @@
         <attr name="scaleStep" format="float" />
         <attr name="displayCount" format="float" />
     </declare-styleable>
+
+    <!--自定义滑动筛选列表-->
+    <declare-styleable name="WaveSideBarView">
+        <attr name="sidebarTextColor" format="color|reference"/>
+        <attr name="sidebarBackgroundColor" format="color|reference"/>
+        <attr name="sidebarChooseTextColor" format="color|reference"/>
+        <attr name="sidebarTextSize" format="dimension"/>
+        <attr name="sidebarLargeTextSize" format="dimension"/>
+        <attr name="sidebarRadius" format="dimension"/>
+        <attr name="sidebarBallRadius" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="RadiusCardView">
+        <!--        左上圆角大小-->
+        <attr name="rcv_topLeftRadiu" format="dimension" />
+        <!--        右上圆角大小-->
+        <attr name="rcv_topRightRadiu" format="dimension" />
+        <!--        右下圆角大小-->
+        <attr name="rcv_bottomRightRadiu" format="dimension" />
+        <!--        左下圆角大小-->
+        <attr name="rcv_bottomLeftRadiu" format="dimension" />
+    </declare-styleable>
 </resources>

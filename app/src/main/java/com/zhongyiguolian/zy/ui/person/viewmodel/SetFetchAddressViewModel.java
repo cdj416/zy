@@ -1,8 +1,10 @@
 package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.utils.ToastUtils;
@@ -10,9 +12,9 @@ import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
-import com.zhongyiguolian.zy.ui.person.activity.SetFetchAddressActivity;
 import com.zhongyiguolian.zy.ui.person.beans.USDTaddressBeans;
 import com.zhongyiguolian.zy.utils.AndroidDes3Util;
+
 import java.util.List;
 
 /**

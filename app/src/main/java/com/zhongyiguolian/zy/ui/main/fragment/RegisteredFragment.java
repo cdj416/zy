@@ -2,11 +2,10 @@ package com.zhongyiguolian.zy.ui.main.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
@@ -19,7 +18,6 @@ import com.zhongyiguolian.zy.myview.dynamicviewpage.CustomViewpager;
 import com.zhongyiguolian.zy.ui.main.viewmodel.RegisteredViewModel;
 import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.CustomDialog;
-
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
 
 /**
@@ -112,9 +110,8 @@ public class RegisteredFragment extends CustomFragment<FragmentRegisteredBinding
             }
         });
 
-        //验证输入内容
-        viewModel.uc.check.observe(this,aBoolean -> {
-
+        //请求推荐人信息
+        viewModel.uc.confirm.observe(this,aBoolean -> {
             //是否输入手机号
             if(!BaseUtil.isValue(viewModel.phoneNum.get())){
                 ToastUtils.showShort("请输入手机号！");
@@ -183,13 +180,15 @@ public class RegisteredFragment extends CustomFragment<FragmentRegisteredBinding
                 return;
             }
 
-            //注册
-            viewModel.setParams("account", AndroidDes3Util.encode(viewModel.phoneNum.get()))
-                    .setParams("password", AndroidDes3Util.encode(viewModel.password.get()))
-                    .setParams("code", AndroidDes3Util.encode(viewModel.messageCode.get()))
-                    .setParams("inviteCode", AndroidDes3Util.encode(viewModel.invitationCode.get()));
-            viewModel.requestData(Constants.REGISTER);
-
+            CustomDialog.showConfirmUser(getContext(),aBoolean, v -> {
+                //注册
+                viewModel.setParams("account", AndroidDes3Util.encode(viewModel.phoneNum.get()))
+                        .setParams("nationalCode",AndroidDes3Util.encode(viewModel.countrysId.get().substring(1)))
+                        .setParams("password", AndroidDes3Util.encode(viewModel.password.get()))
+                        .setParams("code", AndroidDes3Util.encode(viewModel.messageCode.get()))
+                        .setParams("inviteCode", AndroidDes3Util.encode(viewModel.invitationCode.get()));
+                viewModel.requestData(Constants.REGISTER);
+            });
         });
 
         //检验并发送验证码
@@ -220,10 +219,13 @@ public class RegisteredFragment extends CustomFragment<FragmentRegisteredBinding
         });
 
         viewModel.uc.registerSuccess.observe(this,aVoid -> {
+            ToastUtils.showShort("注册成功！");
+            customViewpager.setCurrentItem(0);
+
             //请求注册接口数据
-            CustomDialog.promptDialog(getContext(),"注册成功，前往登录！","确定",false, v -> {
-                customViewpager.setCurrentItem(0);
-            });
+            /*CustomDialog.promptDialog(getContext(),"注册成功，前往登录！","确定",false, v -> {
+
+            });*/
         });
 
         //可以再次点击发送验证码

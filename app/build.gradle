@@ -10,8 +10,8 @@ android {
         applicationId "com.zhongyiguolian.zy"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 14
-        versionName "3.1.1"
+        versionCode 24
+        versionName "3.2.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -29,13 +29,13 @@ android {
         debug{
             keyAlias 'zygl'
             keyPassword '123456'
-            storeFile file('C:/Users/admin/Desktop/androidWork/computerFile/zygl.jks')
+            storeFile file('E:/Android/computerFile/zygl.jks')
             storePassword '123456'
         }
         release {
             keyAlias 'zygl'
             keyPassword '123456'
-            storeFile file('C:/Users/admin/Desktop/androidWork/computerFile/zygl.jks')
+            storeFile file('E:/Android/computerFile/zygl.jks')
             storePassword '123456'
         }
     }
@@ -68,11 +68,7 @@ dependencies {
     implementation project(path: ':ocr_ui')
     implementation project(path: ':mvvmhabitx')
     implementation project(path: ':ImagePreview')
-    implementation project(path: ':kchartlib')
     implementation project(path: ':magicindicator')
-
-    //百分比布局
-    implementation 'com.zhy:percent-support-extends:1.1.1'
 
     //viewpager2废弃预加载以实现懒加载
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
@@ -98,34 +94,29 @@ dependencies {
     implementation 'com.umeng.umsdk:common:9.3.2' //（必选）
     implementation 'com.umeng.umsdk:asms:1.1.3' // asms包依赖(必选)
     implementation 'com.umeng.umsdk:crash:0.0.4' // native crash包依赖(必选)
-    implementation 'com.umeng.umsdk:oaid_lenovo:1.0.0' // (可选)
-    implementation 'com.umeng.umsdk:oaid_mi:1.0.0' // (可选)
-    implementation 'com.umeng.umsdk:oaid_oppo:1.0.4' // (可选)
-    implementation 'com.umeng.umsdk:oaid_vivo:1.0.0.1' // (可选)
+    //implementation 'com.umeng.umsdk:oaid_lenovo:1.0.0' // (可选)
+    //implementation 'com.umeng.umsdk:oaid_mi:1.0.0' // (可选)
+    //implementation 'com.umeng.umsdk:oaid_oppo:1.0.4' // (可选)
+    //implementation 'com.umeng.umsdk:oaid_vivo:1.0.0.1' // (可选)
 
     implementation 'com.umeng.umsdk:common:9.3.2'
     implementation 'com.umeng.umsdk:share-core:7.1.3'
     implementation 'com.umeng.umsdk:share-board:7.1.3'
     implementation 'com.umeng.umsdk:share-qq:7.1.3'
     implementation 'com.umeng.umsdk:share-wx:7.1.3'
-    implementation 'com.umeng.umsdk:share-sina:7.1.3'
-    implementation 'com.umeng.umsdk:share-alipay:7.1.3'
-    implementation 'com.umeng.umsdk:share-dingding:7.1.3'
+    //implementation 'com.umeng.umsdk:share-sina:7.1.3'
+    //implementation 'com.umeng.umsdk:share-alipay:7.1.3'
+    //implementation 'com.umeng.umsdk:share-dingding:7.1.3'
 
     //webView优化库
     implementation 'com.just.agentweb:agentweb:4.1.2'
     implementation 'com.just.agentweb:filechooser:4.1.2'// (可选)
     implementation 'com.download.library:Downloader:4.1.2'// (可选)
 
-    //视频播放库
-    implementation 'com.shuyu:GSYVideoPlayer:7.0.1'
     //超长大图显示
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view-androidx:3.10.0'
     //版本更新使用的库
     implementation 'com.azhon:appupdateX:3.0.3'
-    //视频下载库
-    implementation 'com.arialyy.aria:core:3.8.15'
-    annotationProcessor 'com.arialyy.aria:compiler:3.8.15'
     //网络爬虫技术sdk(用于适配h5标签)
     implementation 'org.jsoup:jsoup:1.12.1'
     //二维码生成库

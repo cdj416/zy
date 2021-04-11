@@ -1,8 +1,12 @@
 package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
+import com.hongyuan.mvvmhabitx.base.AppManager;
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.RxBus;
@@ -12,13 +16,15 @@ import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
-import com.zhongyiguolian.zy.data.http.RetrofitClient;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
+import com.zhongyiguolian.zy.ui.main.activity.MainActivity;
 import com.zhongyiguolian.zy.ui.person.activity.CoinAddressActivity;
 import com.zhongyiguolian.zy.ui.person.activity.ExtractResultActivity;
 import com.zhongyiguolian.zy.ui.person.beans.GoWithdrawalBeans;
 import com.zhongyiguolian.zy.ui.person.beans.USDTaddressBeans;
 import com.zhongyiguolian.zy.utils.AndroidDes3Util;
+import com.zhongyiguolian.zy.utils.BigDecimalUtils;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
@@ -61,6 +67,11 @@ public class FilReflectDetailViewModel extends CustomViewModel<MyRepository> {
      */
     public ObservableField<GoWithdrawalBeans> entity = new ObservableField<>();
 
+    /*
+     * 最低提现金额描述
+     * */
+    public ObservableField<String> thinFilText = new ObservableField<>("最小提币数量为1.0FIL。");
+
     /**
      * 提币地址
      */
@@ -77,7 +88,12 @@ public class FilReflectDetailViewModel extends CustomViewModel<MyRepository> {
     public BindingCommand selectAll = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            nums.set(entity.get().getUsedAssets());
+            if(entity.get() == null){
+                ToastUtils.showShort("接口请求失败");
+                return;
+            }
+
+            nums.set(BigDecimalUtils.roundDown(entity.get().getUsedAssets(),4));
         }
     });
 
@@ -212,11 +228,17 @@ public class FilReflectDetailViewModel extends CustomViewModel<MyRepository> {
         if(code == Constants.GOWITHDRAWTOKEN){
             GoWithdrawalBeans beans = (GoWithdrawalBeans)dataBean;
             entity.set(beans);
+
+            thinFilText.set("最小提币数量为"+beans.getTheMin()+"FIL。");
         }
 
         if(code == Constants.DOWITHDRAWTOKEN){
-            ToastUtils.showShort("申请成功！");
-            startActivity(ExtractResultActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("title","提取结果");
+            bundle.putString("proText","提取处理中");
+            bundle.putString("proText1","已提交申请，等待处理...");
+            startActivity(ExtractResultActivity.class,bundle);
+            AppManager.getAppManager().goActivity(MainActivity.class);
         }
     }
 }

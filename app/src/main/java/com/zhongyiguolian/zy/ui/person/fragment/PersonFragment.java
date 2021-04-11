@@ -11,9 +11,10 @@ import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomFragment;
+import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.databinding.FragmentPersonBinding;
-import com.zhongyiguolian.zy.ui.person.activity.VerifiedActivity;
 import com.zhongyiguolian.zy.ui.person.viewmodel.PersonViewModel;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.CustomDialog;
 
 /**
@@ -60,7 +61,9 @@ public class PersonFragment extends CustomFragment<FragmentPersonBinding, Person
     public void initView() {
         super.initView();
 
-        setOnRefresh(binding.refresh,REFRESH_0X4);
+        setOnRefresh(binding.refresh,REFRESH_0X1);
+        viewModel.setRefParams("accountType", AndroidDes3Util.encode("base"));
+        setEnableRefresh(Constants.GETALLASSETS);
     }
 
 
@@ -78,6 +81,15 @@ public class PersonFragment extends CustomFragment<FragmentPersonBinding, Person
                     }
                 });
             }
+        });
+
+        viewModel.uc.showInvitePromt.observe(this, aVoid -> {
+            CustomDialog.promptDialog(getContext(), "未购买产品，无邀请码可分享！", "确定", false, new CustomDialog.DialogClick() {
+                @Override
+                public void dialogClick(View v) {
+
+                }
+            });
         });
     }
 

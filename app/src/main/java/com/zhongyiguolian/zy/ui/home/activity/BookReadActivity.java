@@ -7,6 +7,7 @@ import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
 import com.zhongyiguolian.zy.databinding.ActivityBookReadBinding;
 import com.zhongyiguolian.zy.ui.home.viewmodel.BookReadViewModel;
+
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**

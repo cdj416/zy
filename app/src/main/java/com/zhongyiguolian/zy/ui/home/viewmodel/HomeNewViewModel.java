@@ -1,36 +1,32 @@
 package com.zhongyiguolian.zy.ui.home.viewmodel;
 
 import android.app.Application;
-
+import android.util.Log;
 import androidx.annotation.NonNull;
-import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
-import androidx.databinding.ObservableList;
-
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
 import com.hongyuan.mvvmhabitx.utils.ToastUtils;
-import com.zhongyiguolian.zy.BR;
-import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
+import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.ui.home.activity.AboutUsActivity;
-import com.zhongyiguolian.zy.ui.home.activity.BlockchaninActivity;
 import com.zhongyiguolian.zy.ui.home.activity.BookListActivity;
+import com.zhongyiguolian.zy.ui.home.activity.CloudPowerDetailNewActivity;
 import com.zhongyiguolian.zy.ui.home.activity.EncyclopediaActivity;
+import com.zhongyiguolian.zy.ui.home.activity.ForeverDetailNewActivity;
 import com.zhongyiguolian.zy.ui.home.activity.NoticeActivity;
 import com.zhongyiguolian.zy.ui.home.activity.SearchActivity;
-import com.zhongyiguolian.zy.ui.home.activity.ServiceActivity;
+import com.zhongyiguolian.zy.ui.home.activity.ServiceDetailNewActivity;
 import com.zhongyiguolian.zy.ui.home.activity.TransferActivity;
 import com.zhongyiguolian.zy.ui.home.beans.HomeBeans;
 import com.zhongyiguolian.zy.ui.home.beans.HomeProductBeans;
-
+import com.zhongyiguolian.zy.ui.home.beans.ServiceDetailBeans;
+import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import java.util.ArrayList;
 import java.util.List;
-
-import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 /**
  * 首页viewmodel
@@ -48,6 +44,16 @@ public class HomeNewViewModel extends CustomViewModel<MyRepository> {
      * banner图片数据
      */
     public ObservableField<List<String>> banners = new ObservableField<>();
+
+    /**
+     * 算力价格
+     */
+    public ObservableField<String> cloudPowerPrice = new ObservableField<>();
+
+    /**
+     * 是否下架服务器
+     */
+    public ObservableField<Boolean> offService = new ObservableField<>(false);
 
     /**
      * @param application
@@ -69,18 +75,6 @@ public class HomeNewViewModel extends CustomViewModel<MyRepository> {
         //显示二维码
         public SingleLiveEvent<Boolean> showQrImg = new SingleLiveEvent<>();
     }
-
-
-    /**
-     * 给RecyclerView添加ObservableList
-     */
-    public ObservableList<HomeItemViewModel> observableList = new ObservableArrayList<>();
-
-
-    /**
-     * 给RecyclerView添加ItemBinding
-     */
-    public ItemBinding<HomeItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.item_home);
 
     /**
      * 系统公告
@@ -155,16 +149,6 @@ public class HomeNewViewModel extends CustomViewModel<MyRepository> {
     });
 
     /**
-     * 更多服务器
-     */
-    public BindingCommand goServices = new BindingCommand(new BindingAction() {
-        @Override
-        public void call() {
-            startActivity(ServiceActivity.class);
-        }
-    });
-
-    /**
      * 去搜索页面
      */
     public BindingCommand goSearch = new BindingCommand(new BindingAction() {
@@ -173,6 +157,55 @@ public class HomeNewViewModel extends CustomViewModel<MyRepository> {
             startActivity(SearchActivity.class);
         }
     });
+
+    /**
+     * 去算力详情页面
+     */
+    public BindingCommand goCloudPowerDetail = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            startActivity(CloudPowerDetailNewActivity.class);
+        }
+    });
+
+    /**
+     * 去产品详情页面
+     */
+    public BindingCommand goServiceDetail = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            startActivity(ServiceDetailNewActivity.class);
+        }
+    });
+
+    /**
+     * 去永久算力详情页面
+     */
+    public BindingCommand goForeverDetail = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            startActivity(ForeverDetailNewActivity.class);
+        }
+    });
+
+    /**
+     * 点击购物车
+     */
+    public BindingCommand goCart = new BindingCommand(new BindingAction() {
+        @Override
+        public void call() {
+            ToastUtils.showShort("暂未开放！");
+        }
+    });
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //请求算力单价
+        setParams("productId", AndroidDes3Util.encode("8"))
+                .requestNoData(Constants.GETPRODUCTINFO);
+    }
 
     /**
      * @param code
@@ -200,6 +233,23 @@ public class HomeNewViewModel extends CustomViewModel<MyRepository> {
         if(code == Constants.PRODUCT_LIST){
             List<HomeProductBeans.RowsDTO> rowsDTO = ((HomeProductBeans)dataBean).getRows();
 
+            boolean isLower = true;
+
+            for(int i = 0 ; i < rowsDTO.size() ; i++){
+                if("EX_ORDER_STATUS_UPPER_SHELF".equals(rowsDTO.get(i).getProductStatus()) || "EX_ORDER_STATUS_SOLD_OUT".equals(rowsDTO.get(i).getProductStatus())){
+                    isLower = false;
+                    break;
+                }
+            }
+
+            Log.e("cnn","==============嗯？=========="+isLower);
+            offService.set(isLower);
+        }
+
+        //算力详情
+        if(code == Constants.GETPRODUCTINFO){
+            ServiceDetailBeans detailBeans = (ServiceDetailBeans)dataBean;
+            cloudPowerPrice.set(BaseUtil.getNoZoon(detailBeans.getResultMap().getVo().getDiscountPriceCNY()));
         }
     }
 }

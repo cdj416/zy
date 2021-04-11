@@ -52,7 +52,7 @@
                         android:drawableRight="@mipmap/down_black_mark"
                         android:gravity="center_vertical"
                         android:drawablePadding="6dp"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:text="@{viewModel.countrysId}"
                         app:onClickCommand="@{viewModel.goCountrys}"/>
                     <EditText

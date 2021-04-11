@@ -1,7 +1,6 @@
 package com.zhongyiguolian.zy.ui.person.beans;
 
 import android.graphics.Color;
-import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
 import com.zhongyiguolian.zy.R;

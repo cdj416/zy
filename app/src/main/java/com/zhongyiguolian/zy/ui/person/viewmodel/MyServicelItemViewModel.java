@@ -8,7 +8,7 @@ import androidx.databinding.ObservableField;
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.zhongyiguolian.zy.base.ItemViewModel;
-import com.zhongyiguolian.zy.ui.home.viewmodel.ServiceViewModel;
+import com.zhongyiguolian.zy.ui.person.activity.MyProductDeatilsActivity;
 import com.zhongyiguolian.zy.ui.person.beans.PurchaseHistoryBeans;
 
 /**
@@ -47,9 +47,8 @@ public class MyServicelItemViewModel extends ItemViewModel<MyServiceViewModel> {
         @Override
         public void call() {
             Bundle bundle = new Bundle();
-            //bundle.putString("user_id", String.valueOf(entity.get().getM_id()));
-            //bundle.putString("userPhone",entity.get().getM_mobile());
-            //viewModel.startActivity(UserInfoActivity.class,bundle);
+            bundle.putSerializable("entity", entity.get());
+            viewModel.startActivity(MyProductDeatilsActivity.class,bundle);
         }
     });
 }

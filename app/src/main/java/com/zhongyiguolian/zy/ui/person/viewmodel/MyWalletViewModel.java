@@ -1,10 +1,8 @@
 package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
-
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
@@ -12,14 +10,14 @@ import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
-import com.zhongyiguolian.zy.ui.person.activity.ChargeFilActivity;
+import com.zhongyiguolian.zy.data.md5.BaseUtil;
+import com.zhongyiguolian.zy.ui.home.beans.STSBean;
 import com.zhongyiguolian.zy.ui.person.activity.FilReflectActivity;
+import com.zhongyiguolian.zy.ui.person.activity.OperateFilActivity;
+import com.zhongyiguolian.zy.ui.person.activity.PledgeBalanceActivity;
 import com.zhongyiguolian.zy.ui.person.activity.SalesActivity;
-import com.zhongyiguolian.zy.ui.person.activity.SalesWthdrawalActivity;
 import com.zhongyiguolian.zy.ui.person.activity.TransactionRecordActivity;
 import com.zhongyiguolian.zy.ui.person.beans.MyAssets;
-import com.zhongyiguolian.zy.ui.person.beans.PersonInfoBeans;
-import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 
 /**
  * 我的钱包viewmode
@@ -43,19 +41,18 @@ public class MyWalletViewModel extends CustomViewModel<MyRepository>{
     }
 
     /**
-     * 机器数据
+     * 封装一个界面发生改变的观察者
      */
-    public ObservableField<PersonInfoBeans.CountDTO> countDate = new ObservableField<>();
+    public UIChangeObservable uc = new UIChangeObservable();
+    public class UIChangeObservable {
+        //复制文本到剪切板
+        public SingleLiveEvent<String> copyText = new SingleLiveEvent<>();
+    }
 
     /**
-     * 销售提成数据
+     * 钱包地址
      */
-    public ObservableField<String> sellDatas = new ObservableField<>("0");
-
-    /**
-     * 可用资产
-     */
-    public ObservableField<String> usdtDatas = new ObservableField<>();
+    public ObservableField<STSBean> stsBean = new ObservableField<>();
 
     /**
      * 体现记录
@@ -68,14 +65,19 @@ public class MyWalletViewModel extends CustomViewModel<MyRepository>{
     });
 
     /**
-     * 还FIL
+     * 复制钱包地址
      */
-    public BindingCommand goAlsoFil = new BindingCommand(new BindingAction() {
+    public BindingCommand copyUrl = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            ToastUtils.showShort("开发中，敬请期待！");
+            if(stsBean.get() != null && BaseUtil.isValue(stsBean.get().getAddress())){
+                uc.copyText.setValue(stsBean.get().getAddress());
+            }else{
+                ToastUtils.showShort("无钱包地址。");
+            }
         }
     });
+
 
     /**
      * 充FIL
@@ -83,9 +85,7 @@ public class MyWalletViewModel extends CustomViewModel<MyRepository>{
     public BindingCommand goChargeFil = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            //startActivity(ChargeFilActivity.class);
-
-            ToastUtils.showShort("开发中，敬请期待！");
+            startActivity(OperateFilActivity.class);
         }
     });
 
@@ -110,43 +110,14 @@ public class MyWalletViewModel extends CustomViewModel<MyRepository>{
     });
 
     /**
-     * 充值余额
+     * 质押余额
      */
-    public BindingCommand rechargeBalance = new BindingCommand(new BindingAction() {
+    public BindingCommand goPledgeBalance = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
-            ToastUtils.showShort("开发中，敬请期待！");
+            startActivity(PledgeBalanceActivity.class);
         }
     });
-
-    /**
-     * 赚取利息
-     */
-    public BindingCommand earnInterest = new BindingCommand(new BindingAction() {
-        @Override
-        public void call() {
-            //startActivity(ChargeFilActivity.class);
-
-            ToastUtils.showShort("开发中，敬请期待！");
-        }
-    });
-    /**
-     * 获取数据
-     */
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        //刷新下用户数据
-        loginBean = model.getUser();
-
-        //获取用户个人数据
-        setParams("token", AndroidDes3Util.encode(loginBean.getToken()))
-                .requestData(Constants.GETUSER);
-
-        setParams("accountType",AndroidDes3Util.encode("base"))
-                .requestData(Constants.GETALLASSETS);
-    }
 
     /**
      * @param code
@@ -156,22 +127,10 @@ public class MyWalletViewModel extends CustomViewModel<MyRepository>{
     protected void returnData(int code, Object dataBean) {
         super.returnData(code, dataBean);
 
-        if(code == Constants.GETUSER){
-            PersonInfoBeans beans = (PersonInfoBeans)dataBean;
-            countDate.set(beans.getCount());
-        }
+        if(code == Constants.STS){
+            STSBean bean = (STSBean) dataBean;
 
-        if(code == Constants.GETALLASSETS){
-            MyAssets beans = (MyAssets)dataBean;
-
-            usdtDatas.set(beans.getAssetConvert().getUSDT().getAvailableString());
-
-            for(MyAssets.AssetsListDTO dto : beans.getAssetsList()){
-
-                if("CNY".equals(dto.getSymbol())){
-                    sellDatas.set(dto.getFrozenAssets());
-                }
-            }
+            stsBean.set(bean);
         }
     }
 }

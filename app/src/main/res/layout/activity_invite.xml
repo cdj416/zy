@@ -104,183 +104,189 @@
                 android:id="@+id/refresh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <LinearLayout
+                <com.zhongyiguolian.zy.myview.StickyScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
+                    android:layout_height="match_parent">
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:orientation="horizontal"
-                        android:gravity="center"
-                        android:layout_marginTop="6dp"
-                        android:background="@mipmap/home_top_sroll_bg">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@mipmap/speaker_mark"
-                            android:layout_marginRight="4dp"/>
-
-                        <com.sunfusheng.marqueeview.MarqueeView
-                            android:id="@+id/marqueeView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:mvAnimDuration="1000"
-                            app:mvDirection="bottom_to_top"
-                            app:mvInterval="3000"
-                            app:mvTextColor="@color/theme_333333"
-                            app:mvTextSize="9sp"
-                            app:mvSingleLine="true"/>
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/theme_FFFFFF"
-                        android:textSize="20sp"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
-                        android:text="数字房产，未来已来"/>
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginTop="32dp"
-                        android:orientation="horizontal">
-
-                        <View
-                            android:layout_width="18dp"
-                            android:layout_height="2dp"
-                            android:background="@color/theme_FFFFFF"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/theme_FFFFFF"
-                            android:textSize="@dimen/sp_15"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginStart="7dp"
-                            android:layout_marginEnd="7dp"
-                            android:text="错过了阿里云，不要错过国链云"/>
-
-                        <View
-                            android:layout_width="18dp"
-                            android:layout_height="2dp"
-                            android:background="@color/theme_FFFFFF"/>
-                    </LinearLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginEnd="51dp"
-                        android:layout_marginStart="51dp">
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/shape_radius6_ffffff"
-                            android:alpha="0.6"/>
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="8dp"
-                            android:orientation="horizontal">
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:layout_marginTop="6dp"
+                            android:background="@mipmap/home_top_sroll_bg">
 
-                            <TextView
+                            <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/sp_11"
-                                android:textColor="@color/theme_333333"
-                                android:text="我的邀请码："/>
-                            <TextView
+                                android:src="@mipmap/speaker_mark"
+                                android:layout_marginRight="4dp"/>
+
+                            <com.sunfusheng.marqueeview.MarqueeView
+                                android:id="@+id/marqueeView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/sp_15"
-                                android:textColor="#2F5EFB"
-                                android:ellipsize="end"
-                                android:maxLines="1"
-                                android:layout_marginEnd="80dp"
-                                android:text="@{viewModel.entity.inviteCode}"/>
+                                app:mvAnimDuration="1000"
+                                app:mvDirection="bottom_to_top"
+                                app:mvInterval="3000"
+                                app:mvTextColor="@color/theme_333333"
+                                app:mvTextSize="9sp"
+                                app:mvSingleLine="true"/>
 
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_15"
-                            android:textColor="#003BFF"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="8dp"
-                            android:text="复制邀请码"
-                            app:onClickCommand="@{viewModel.copyCode}"/>
+                            android:textColor="@color/theme_FFFFFF"
+                            android:textSize="20sp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="16dp"
+                            android:text="数字房产，未来已来"/>
 
-                    </RelativeLayout>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginEnd="51dp"
-                        android:layout_marginStart="51dp">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginTop="32dp"
+                            android:orientation="horizontal">
 
-                        <View
+                            <View
+                                android:layout_width="18dp"
+                                android:layout_height="2dp"
+                                android:background="@color/theme_FFFFFF"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/theme_FFFFFF"
+                                android:textSize="@dimen/sp_15"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginStart="7dp"
+                                android:layout_marginEnd="7dp"
+                                android:text="错过了阿里云，不要错过国链云"/>
+
+                            <View
+                                android:layout_width="18dp"
+                                android:layout_height="2dp"
+                                android:background="@color/theme_FFFFFF"/>
+                        </LinearLayout>
+
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/shape_radius6_ffffff"
-                            android:alpha="0.6"/>
+                            android:layout_height="30dp"
+                            android:layout_marginTop="32dp"
+                            android:layout_marginEnd="51dp"
+                            android:layout_marginStart="51dp">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/shape_radius6_ffffff"
+                                android:alpha="0.6"/>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="8dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_11"
+                                    android:textColor="@color/theme_333333"
+                                    android:text="我的邀请码："/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="@dimen/sp_15"
+                                    android:textColor="#2F5EFB"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:layout_marginEnd="80dp"
+                                    android:text="@{viewModel.entity.inviteCode}"/>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_15"
+                                android:textColor="#003BFF"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="8dp"
+                                android:text="复制邀请码"
+                                app:onClickCommand="@{viewModel.copyCode}"/>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="32dp"
+                            android:layout_marginEnd="51dp"
+                            android:layout_marginStart="51dp">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/shape_radius6_ffffff"
+                                android:alpha="0.6"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_11"
+                                android:textColor="@color/theme_333333"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="8dp"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:layout_marginEnd="80dp"
+                                android:text="@{viewModel.entity.inviteLink}"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_15"
+                                android:textColor="#003BFF"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="8dp"
+                                android:text="复制链接"
+                                app:onClickCommand="@{viewModel.copyLink}"/>
+
+                        </RelativeLayout>
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/qrImg"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:scaleType="fitXY"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="32dp"
+                            app:riv_corner_radius="3dp"/>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/theme_FFFFFF"
                             android:textSize="@dimen/sp_11"
-                            android:textColor="@color/theme_333333"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="8dp"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:layout_marginEnd="80dp"
-                            android:text="@{viewModel.entity.inviteLink}"/>
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="12dp"
+                            android:text="二维码注册下载"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sp_15"
-                            android:textColor="#003BFF"
-                            android:layout_centerVertical="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="8dp"
-                            android:text="复制链接"
-                            app:onClickCommand="@{viewModel.copyLink}"/>
+                    </LinearLayout>
 
-                    </RelativeLayout>
+                </com.zhongyiguolian.zy.myview.StickyScrollView>
 
-                    <com.makeramen.roundedimageview.RoundedImageView
-                        android:id="@+id/qrImg"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        android:scaleType="fitXY"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="32dp"
-                        app:riv_corner_radius="3dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/theme_FFFFFF"
-                        android:textSize="@dimen/sp_11"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="12dp"
-                        android:text="二维码注册下载"/>
-
-                </LinearLayout>
 
             </com.scwang.smartrefresh.layout.SmartRefreshLayout>
         </LinearLayout>

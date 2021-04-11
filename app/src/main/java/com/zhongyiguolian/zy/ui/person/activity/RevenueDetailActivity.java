@@ -1,9 +1,7 @@
 package com.zhongyiguolian.zy.ui.person.activity;
 
 import android.os.Bundle;
-
 import androidx.lifecycle.ViewModelProviders;
-
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
@@ -11,7 +9,6 @@ import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.databinding.ActivityRevenueDetailBinding;
 import com.zhongyiguolian.zy.ui.person.viewmodel.RevenueViewModel;
 import com.zhongyiguolian.zy.utils.AndroidDes3Util;
-
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**

@@ -2,6 +2,7 @@ package com.zhongyiguolian.zy.data;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
+
 import com.hongyuan.mvvmhabitx.base.BaseModel;
 import com.zhongyiguolian.zy.data.http.HttpDataSource;
 import com.zhongyiguolian.zy.data.http.MyBaseResponse;
@@ -18,12 +19,15 @@ import com.zhongyiguolian.zy.ui.home.beans.HomeProductBeans;
 import com.zhongyiguolian.zy.ui.home.beans.NoticeBeans;
 import com.zhongyiguolian.zy.ui.home.beans.NoticeDeatils;
 import com.zhongyiguolian.zy.ui.home.beans.PayPasswordBeans;
+import com.zhongyiguolian.zy.ui.home.beans.STSBean;
 import com.zhongyiguolian.zy.ui.home.beans.ServiceDetailBeans;
 import com.zhongyiguolian.zy.ui.home.beans.SymbolAssetBeans;
 import com.zhongyiguolian.zy.ui.home.beans.TransferBeans;
 import com.zhongyiguolian.zy.ui.main.beans.ImgCodeBeans;
+import com.zhongyiguolian.zy.ui.main.beans.InvitationCodeBeans;
 import com.zhongyiguolian.zy.ui.main.beans.VersionBeans;
 import com.zhongyiguolian.zy.ui.person.beans.AddBlankCardBeans;
+import com.zhongyiguolian.zy.ui.person.beans.CustodyFeeInfo;
 import com.zhongyiguolian.zy.ui.person.beans.DoWithdrawalBeans;
 import com.zhongyiguolian.zy.ui.person.beans.FilIncomeBean;
 import com.zhongyiguolian.zy.ui.person.beans.GoWithdrawalBeans;
@@ -32,13 +36,17 @@ import com.zhongyiguolian.zy.ui.person.beans.MyTeamBeans;
 import com.zhongyiguolian.zy.ui.person.beans.OrderInfoBeans;
 import com.zhongyiguolian.zy.ui.person.beans.PayCodeBeans;
 import com.zhongyiguolian.zy.ui.person.beans.PersonInfoBeans;
+import com.zhongyiguolian.zy.ui.person.beans.PledgBalanceListBean;
+import com.zhongyiguolian.zy.ui.person.beans.PledgeBalanceBean;
 import com.zhongyiguolian.zy.ui.person.beans.PurchaseHistoryBeans;
 import com.zhongyiguolian.zy.ui.person.beans.PurchaseHistoryCancelBeans;
 import com.zhongyiguolian.zy.ui.person.beans.TransactionRecordBeans;
 import com.zhongyiguolian.zy.ui.person.beans.USDTaddressBeans;
+import com.zhongyiguolian.zy.ui.person.beans.UnopenedServiceBeans;
 
 import java.util.List;
 import java.util.Map;
+
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 
@@ -169,6 +177,11 @@ public class MyRepository extends BaseModel implements HttpDataSource, LocalData
     }
 
     @Override
+    public Observable<CustodyFeeInfo> custody_fee_info(String token, Map<String, String> params) {
+        return mHttpDataSource.custody_fee_info(token,params);
+    }
+
+    @Override
     public Observable<ConfirmBeans> confirm(String token, Map<String, RequestBody> params) {
         return mHttpDataSource.confirm(token,params);
     }
@@ -286,6 +299,46 @@ public class MyRepository extends BaseModel implements HttpDataSource, LocalData
     @Override
     public Observable<MyBaseResponse<List<TransactionRecordBeans>>> getCurrencyRecords(String token, Map<String, String> params) {
         return mHttpDataSource.getCurrencyRecords(token,params);
+    }
+
+    @Override
+    public Observable<MyBaseResponse<NoDataBean>> rechargeToken(String token, Map<String, String> params) {
+        return mHttpDataSource.rechargeToken(token,params);
+    }
+
+    @Override
+    public Observable<MyBaseResponse<STSBean>> sts(String token, Map<String, String> params) {
+        return mHttpDataSource.sts(token,params);
+    }
+
+    @Override
+    public Observable<MyBaseResponse<NoDataBean>> company(String token, Map<String, String> params) {
+        return mHttpDataSource.company(token,params);
+    }
+
+    @Override
+    public Observable<MyBaseResponse<UnopenedServiceBeans>> minerdal(String token, Map<String, String> params) {
+        return mHttpDataSource.minerdal(token,params);
+    }
+
+    @Override
+    public Observable<MyBaseResponse<NoDataBean>> chongziya(String token, Map<String, String> params) {
+        return mHttpDataSource.chongziya(token,params);
+    }
+
+    @Override
+    public Observable<MyBaseResponse<PledgeBalanceBean>> minerdals(String token, Map<String, String> params) {
+        return mHttpDataSource.minerdals(token,params);
+    }
+
+    @Override
+    public Observable<MyBaseResponse<PledgBalanceListBean>> openMiner(String token, Map<String, String> params) {
+        return mHttpDataSource.openMiner(token,params);
+    }
+
+    @Override
+    public Observable<MyBaseResponse<InvitationCodeBeans>> myname(String token, Map<String, String> params) {
+        return mHttpDataSource.myname(token,params);
     }
 
     /************************************数据存储操作***********************************************/

@@ -1,12 +1,15 @@
 package com.zhongyiguolian.zy.ui.main.activity;
 
 import android.os.Bundle;
+
 import androidx.lifecycle.ViewModelProviders;
+
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
 import com.zhongyiguolian.zy.databinding.ActivityStartupPageBinding;
 import com.zhongyiguolian.zy.ui.main.viewmodel.StartupPageViewModel;
+
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**

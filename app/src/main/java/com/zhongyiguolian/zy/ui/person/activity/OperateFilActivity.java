@@ -2,13 +2,14 @@ package com.zhongyiguolian.zy.ui.person.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import androidx.lifecycle.ViewModelProviders;
 import com.zhongyiguolian.zy.R;
+import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
-import com.zhongyiguolian.zy.base.CustomViewModel;
+import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.databinding.ActivityOperateFilBinding;
+import com.zhongyiguolian.zy.ui.person.viewmodel.OperateFillViewModel;
 import com.zhongyiguolian.zy.utils.CustomDialog;
-import com.zhongyiguolian.zy.utils.HiddenAnimUtils;
-
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
@@ -17,12 +18,7 @@ import me.tatarka.bindingcollectionadapter2.BR;
  * @author cdj
  * @date 2020/12/10
  */
-public class OperateFilActivity extends CustomActivity<ActivityOperateFilBinding, CustomViewModel> {
-
-    /**
-     * 动画工具类
-     */
-    private HiddenAnimUtils animUtils;
+public class OperateFilActivity extends CustomActivity<ActivityOperateFilBinding, OperateFillViewModel> {
 
     /**
      * @param savedInstanceState
@@ -42,6 +38,15 @@ public class OperateFilActivity extends CustomActivity<ActivityOperateFilBinding
     }
 
     /**
+     * @return
+     */
+    @Override
+    public OperateFillViewModel initViewModel() {
+        AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
+        return ViewModelProviders.of(this, factory).get(OperateFillViewModel.class);
+    }
+
+    /**
      * ui初始化
      */
     @Override
@@ -49,64 +54,86 @@ public class OperateFilActivity extends CustomActivity<ActivityOperateFilBinding
         super.initView();
         setOnRefresh(binding.refresh,REFRESH_0X4);
         binding.comBack.setOnClickListener(view -> finish());
+    }
 
-        animUtils = HiddenAnimUtils.newInstance(this,binding.hidView,binding.dwonImg,31,true);
+    /*
+    * 改变UI变化
+    * */
+    @Override
+    public void initViewObservable() {
+        super.initViewObservable();
 
-        binding.clickView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                animUtils.toggle();
+       /* //多通道充值质押选择
+        viewModel.uc.showchannel.observe(this,aVoid -> {
+            if(viewModel.entity.get() == null){
+                ToastUtils.showShort("接口请求失败！");
+                return;
             }
-        });
 
-        binding.moText1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                binding.moText1.setBackgroundResource(R.drawable.shape_radius24_5690ff);
-                binding.moText2.setBackgroundResource(R.drawable.shape_radius24_adc7ff);
-                binding.moText3.setBackgroundResource(R.drawable.shape_radius24_adc7ff);
+            CustomDialog.showChangePay(this,viewModel.entity.get(), (v, message) -> {
 
-                binding.showText.setText(binding.moText1.getText().toString());
-
-                animUtils.toggle();
-            }
-        });
-
-        binding.moText2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                binding.moText1.setBackgroundResource(R.drawable.shape_radius24_adc7ff);
-                binding.moText2.setBackgroundResource(R.drawable.shape_radius24_5690ff);
-                binding.moText3.setBackgroundResource(R.drawable.shape_radius24_adc7ff);
-
-                binding.showText.setText(binding.moText2.getText().toString());
-
-                animUtils.toggle();
-            }
-        });
-
-        binding.moText3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                binding.moText1.setBackgroundResource(R.drawable.shape_radius24_adc7ff);
-                binding.moText2.setBackgroundResource(R.drawable.shape_radius24_adc7ff);
-                binding.moText3.setBackgroundResource(R.drawable.shape_radius24_5690ff);
-
-                binding.showText.setText(binding.moText3.getText().toString());
-
-                animUtils.toggle();
-            }
-        });
-
-        binding.openDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CustomDialog.showFilCharge(OperateFilActivity.this, new CustomDialog.DialogClick() {
-                    @Override
-                    public void dialogClick(View v) {
-
+                if("0".equals(message)){
+                    if(viewModel.isAdequate.get()){
+                        CustomDialog.enterOperateFillPassword(this,viewModel.allNums.get()+"FIL" ,new CustomDialog.DialogClickMessage() {
+                            @Override
+                            public void dialogClick(View v, String password) {
+                                viewModel.goPledge(password,message);
+                            }
+                        });
+                    }else{
+                        CustomDialog.showDialogOperateFill(this, "       可提余额不足，是否前往充值？", a -> {
+                            startActivity(FilConersionActivity.class);
+                        });
                     }
-                });
+                }
+
+                if("1".equals(message)){
+                    if(viewModel.isAddress.get()){
+                        CustomDialog.enterOperateFillPassword(this,viewModel.allNums.get()+"FIL" ,new CustomDialog.DialogClickMessage() {
+                            @Override
+                            public void dialogClick(View v, String password) {
+                                viewModel.goPledge(password,message);
+                            }
+                        });
+                    }else{
+
+                        CustomDialog.showDialogOperateFill(this, "       钱包地址余额不足，是否前往充值？", a -> {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("showText","最小充值数量为"+ BaseUtil.getNoZoon(BigDecimalUtils.sub(viewModel.allNums.get(),String.valueOf(viewModel.entity.get().getAddressValibe()),5))+"FIL。");
+                            bundle.putInt("Type",1);
+                            startActivity(FilRechargeActivity.class,bundle);
+                        });
+                    }
+                }
+            });
+        });*/
+
+        //余额不足以充值质押
+        viewModel.uc.showbalance.observe(this,aVoid -> {
+            CustomDialog.showDialogOperateFill(this, "       钱包地址余额不足，是否前往充值？", a -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("showText","最小充值数量为"+ BaseUtil.getNoZoon(viewModel.allNums.get())+"FIL。");
+                bundle.putInt("Type",1);
+                startActivity(FilRechargeActivity.class,bundle);
+            });
+        });
+
+        //输入密码进行充值质押
+        viewModel.uc.enterPassword.observe(this, aVoid -> {
+            CustomDialog.enterOperateFillPassword(this,viewModel.allNums.get()+"FIL" ,new CustomDialog.DialogClickMessage() {
+                @Override
+                public void dialogClick(View v, String password) {
+                    viewModel.goPledge(password,"1");
+                }
+            });
+        });
+
+        //选种状态改变
+        viewModel.uc.changeAll.observe(this, aBoolean -> {
+            if(aBoolean){
+                binding.checkImg.setImageResource(R.mipmap.blue_yqq_check);
+            }else{
+                binding.checkImg.setImageResource(R.mipmap.white_yqq_mark);
             }
         });
     }

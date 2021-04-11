@@ -1,9 +1,7 @@
 package com.zhongyiguolian.zy.ui.home.activity;
 
 import android.os.Bundle;
-
 import androidx.lifecycle.ViewModelProviders;
-
 import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;

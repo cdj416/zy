@@ -3,8 +3,10 @@ package com.zhongyiguolian.zy.ui.person.fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.zhongyiguolian.zy.BR;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
@@ -58,7 +60,9 @@ public class BrokerageFragment extends CustomFragment<FragmentBrokerageBinding, 
     public void initView() {
         super.initView();
 
-        setOnRefresh(binding.refresh,REFRESH_0X4);
+        setOnRefresh(binding.refresh,REFRESH_0X3);
+        setEnableLoadMore(Constants.GETMYINCOME1);
+        setEnableRefresh(Constants.GETMYINCOME1);
     }
 
     /**
@@ -68,9 +72,16 @@ public class BrokerageFragment extends CustomFragment<FragmentBrokerageBinding, 
     public void initData() {
         super.initData();
 
+        viewModel.setRefParams("type",AndroidDes3Util.encode("SalesCommission"))
+                .setRefParams("pageIndex",AndroidDes3Util.encode("1"))
+                .setRefParams("pageSize",AndroidDes3Util.encode("10"))
+                .setRefParams("subLevel",AndroidDes3Util.encode(""))
+                .setRefParams("level",AndroidDes3Util.encode("0"))
+                .setRefParams("profitType",AndroidDes3Util.encode("SALES_COMMISSION"));
+
         viewModel.setParams("type", AndroidDes3Util.encode("SalesCommission"))
                 .setParams("pageIndex",AndroidDes3Util.encode("1"))
-                .setParams("pageSize",AndroidDes3Util.encode("1000"))
+                .setParams("pageSize",AndroidDes3Util.encode("10"))
                 .setParams("subLevel",AndroidDes3Util.encode(""))
                 .setParams("level",AndroidDes3Util.encode("0"))
                 .setParams("profitType",AndroidDes3Util.encode("SALES_COMMISSION"))

@@ -2,13 +2,14 @@ package com.zhongyiguolian.zy.ui.home.viewmodel;
 
 import android.app.Application;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.hongyuan.mvvmhabitx.bus.event.SingleLiveEvent;
 import com.hongyuan.mvvmhabitx.utils.ToastUtils;
-import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.MyRepository;
@@ -66,11 +67,6 @@ public class CloudPowerDetailViewModel extends CustomViewModel<MyRepository> {
      * 数据
      */
     public ObservableField<List<HomeProductBeans.RowsDTO>> mList = new ObservableField<>();
-
-    /**
-     * 数据
-     */
-    public ObservableField<Integer> imgDetail = new ObservableField<>(R.mipmap.cloudpower_img_a);
 
     /**
      * 页面title
@@ -159,11 +155,15 @@ public class CloudPowerDetailViewModel extends CustomViewModel<MyRepository> {
     public BindingCommand goConfirm = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
+            if(!BaseUtil.isValue(nums.get()) || Integer.parseInt(nums.get()) == 0){
+                nums.set("2");
+            }
+
             if(!isCheck.get()){
                 ToastUtils.showShort("请同意协议！");
                 return;
             }else{
-                if("EX_ORDER_STATUS_UPPER_SHELF".equals(entity.get().getProductStatus())) {
+                if(entity.get() != null && entity.get().getProductStatus() != null && "EX_ORDER_STATUS_UPPER_SHELF".equals(entity.get().getProductStatus())) {
                     Bundle bundle = new Bundle();
                     bundle.putString("productId", productId.get());
                     bundle.putString("productNums", nums.get());
@@ -181,6 +181,10 @@ public class CloudPowerDetailViewModel extends CustomViewModel<MyRepository> {
     public BindingCommand subNum = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
+            if(!BaseUtil.isValue(nums.get())){
+                nums.set("2");
+            }
+
             int num = Integer.parseInt(nums.get());
             num-=2;
             if(num < 2){
@@ -197,6 +201,10 @@ public class CloudPowerDetailViewModel extends CustomViewModel<MyRepository> {
     public BindingCommand addNum = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
+            if(!BaseUtil.isValue(nums.get())){
+                nums.set("2");
+            }
+
             int num = Integer.parseInt(nums.get());
             num+=2;
             nums.set(String.valueOf(num));
@@ -224,26 +232,6 @@ public class CloudPowerDetailViewModel extends CustomViewModel<MyRepository> {
     });
 
     /**
-     * 假数据
-     */
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-        List<String> bannerList = new ArrayList<>();
-        int a = R.mipmap.del_img_d;
-        bannerList.add("R_"+a);
-        a = R.mipmap.del_img_b;
-        bannerList.add("R_"+a);
-        a = R.mipmap.del_img_c;
-        bannerList.add("R_"+a);
-        a = R.mipmap.del_img_a;
-        bannerList.add("R_"+a);
-
-        banners.set(bannerList);
-    }
-
-    /**
      * @param code
      * @param dataBean
      */
@@ -254,6 +242,11 @@ public class CloudPowerDetailViewModel extends CustomViewModel<MyRepository> {
 
         if(code == Constants.GETPRODUCTINFO){
             ServiceDetailBeans detailBeans = (ServiceDetailBeans)dataBean;
+
+            if(detailBeans.getState() == -1){
+                startActivity(LoginActivity.class);
+                return;
+            }
 
 
             if("EX_ORDER_STATUS_SOLD_OUT".equals(detailBeans.getResultMap().getVo().getProductStatus())){
@@ -283,7 +276,7 @@ public class CloudPowerDetailViewModel extends CustomViewModel<MyRepository> {
                             imgList.add(RetrofitClient.baseUrl+"/"+imgs[i]);
                         }
 
-                        //banners.set(imgList);
+                        banners.set(imgList);
                     }
                 }
 

@@ -2,6 +2,7 @@ package com.zhongyiguolian.zy.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -18,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
@@ -30,7 +33,9 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -38,10 +43,15 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IFillFormatter;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.MPPointF;
 import com.lihang.ShadowLayout;
 import com.luck.picture.lib.tools.ScreenUtils;
 import com.previewlibrary.GPreviewBuilder;
@@ -53,6 +63,7 @@ import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.data.http.RetrofitClient;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.myview.LineChartMarkView;
+import com.zhongyiguolian.zy.myview.MyFilLineChartMarkView;
 import com.zhongyiguolian.zy.myview.UMExpandLayout;
 import com.zhongyiguolian.zy.myview.VersionChangeView;
 import com.zhongyiguolian.zy.myview.nine_gridimg.NineGridImageView;
@@ -61,14 +72,18 @@ import com.zhongyiguolian.zy.ui.home.beans.HomeBeans;
 import com.zhongyiguolian.zy.ui.home.viewmodel.ComfirmOrderBottomMultiViewModel;
 import com.zhongyiguolian.zy.ui.main.beans.VersionBeans;
 import com.zhongyiguolian.zy.ui.person.beans.FilIncomeBean;
+import com.zhongyiguolian.zy.ui.person.beans.PledgeBalanceBean;
+import com.zhongyiguolian.zy.utils.BigDecimalUtils;
 import com.zhongyiguolian.zy.utils.DensityUtil;
 import com.zhongyiguolian.zy.utils.GlideRoundTransform;
 import com.zhongyiguolian.zy.utils.TimeUtil;
 import com.zhongyiguolian.zy.utils.UseGlideImageLoader;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -231,8 +246,16 @@ public class MyBindingAdapter {
      * @param
      */
     @BindingAdapter("setIntSubImage")
-    public static void bindIntSubsamplingScaleImageView(SubsamplingScaleImageView view, int imgUrl){
-        view.setImage(ImageSource.resource(imgUrl));
+    public static void bindIntSubsamplingScaleImageView(SubsamplingScaleImageView view, String imgUrl){
+
+        if(!BaseUtil.isValue(imgUrl) || view.isImageLoaded()) return;
+
+        Glide.with(view.getContext()).asBitmap().load(imgUrl).into(new SimpleTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                view.setImage(ImageSource.bitmap(resource));
+            }
+        });
     }
 
 
@@ -407,6 +430,380 @@ public class MyBindingAdapter {
             imgElement.attr("style", "max-width:100%;height:auto");
         }
         return document.toString();
+    }
+
+    /*
+    * FIL收益
+    * */
+    @BindingAdapter("setPieChart")
+    public static void bindPieChart(PieChart chart, PledgeBalanceBean dataBean){
+
+        if(dataBean == null){
+            return;
+        }else{
+            double allFil = dataBean.getMyGas() + dataBean.getZongmesg() + dataBean.getMyYue();
+            if(allFil <= 0){
+                return;
+            }
+        }
+
+        chart.setUsePercentValues(true);
+        chart.getDescription().setEnabled(false);
+        chart.setExtraOffsets(5, 10, 5, 5);
+
+        chart.setDragDecelerationFrictionCoef(0.95f);
+
+        //chart.setCenterTextTypeface(tfLight);
+        //chart.setCenterText("70%\n已质押");
+
+        chart.setDrawHoleEnabled(true);
+        chart.setHoleColor(Color.WHITE);
+
+        chart.setTransparentCircleColor(Color.WHITE);
+        chart.setTransparentCircleAlpha(110);
+
+        //设置内圆半径
+        chart.setHoleRadius(38f);
+        //设置半透明圆环的半径, 0为透明
+        chart.setTransparentCircleRadius(41f);
+
+        chart.setDrawCenterText(true);
+
+        //设置初始旋转角度
+        chart.setRotationAngle(0);
+        // 设置pieChart图表是否可以手动旋转
+        chart.setRotationEnabled(false);
+        //设置piecahrt图表点击Item高亮是否可用
+        chart.setHighlightPerTapEnabled(true);
+        //设置pieChart图表展示动画效果，动画运行1.4秒结束
+        chart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
+        // chart.spin(2000, 0, 360);
+
+        // 不显示图例
+        Legend legend = chart.getLegend();
+        legend.setEnabled(false);
+
+        /*Legend l = chart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(false);
+        l.setXEntrySpace(7f);
+        l.setYEntrySpace(0f);
+        l.setYOffset(0f);*/
+
+        // entry label styling
+        chart.setEntryLabelColor(Color.WHITE);
+        //chart.setEntryLabelTypeface(tfRegular);
+        chart.setEntryLabelTextSize(12f);
+
+
+        //********************************************设置数据**************************************
+        ArrayList<PieEntry> entries = new ArrayList<>();
+
+        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
+        // the chart.
+        double allFil = dataBean.getMyGas() + dataBean.getZongmesg() + dataBean.getMyYue();
+        String zyF = BigDecimalUtils.div(String.valueOf(dataBean.getMyGas()),String.valueOf(allFil),3);
+        String gasF = BigDecimalUtils.div(String.valueOf(dataBean.getZongmesg()),String.valueOf(allFil),3);
+        String yeF = BigDecimalUtils.div(String.valueOf(dataBean.getMyYue()),String.valueOf(allFil),3);
+
+        if(Double.parseDouble(gasF) > 0){
+            entries.add(new PieEntry(Float.parseFloat(gasF)));
+        }
+
+        if(Double.parseDouble(zyF) <= 0){
+            chart.setCenterText("0%\n已质押");
+        }else{
+            chart.setCenterText(BigDecimalUtils.round(Double.parseDouble(gasF)*100,1)+"%\n已质押");
+            entries.add(new PieEntry(Float.parseFloat(zyF)));
+        }
+
+        if(Double.parseDouble(yeF) > 0){
+            entries.add(new PieEntry(Float.parseFloat(yeF)));
+        }
+
+        PieDataSet dataSet = new PieDataSet(entries, "");
+
+        dataSet.setDrawIcons(false);
+        // 设置饼块之间的间隔
+        dataSet.setSliceSpace(3f);
+        dataSet.setIconsOffset(new MPPointF(0, 40));
+        dataSet.setSelectionShift(5f);
+
+        //设置连接线的颜色
+        //dataSet.setValueLineColor(Color.BLUE);
+        // 连接线在饼状图外面
+        //dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+
+        // add a lot of colors
+
+        ArrayList<Integer> colors = new ArrayList<>();
+        if(Double.parseDouble(zyF) <= 0){
+            colors.add(0xff91B7FF);
+            colors.add(0xff0054F9);
+            colors.add(0xff77CDFF);
+        }else{
+            colors.add(0xff0054F9);
+            colors.add(0xff77CDFF);
+            colors.add(0xff91B7FF);
+        }
+
+
+        dataSet.setColors(colors);
+        //dataSet.setSelectionShift(0f);
+
+        PieData data = new PieData(dataSet);
+        data.setValueFormatter(new PercentFormatter());
+        data.setValueTextSize(11f);
+        data.setValueTextColor(Color.WHITE);
+        //data.setValueTypeface(tfLight);
+        chart.setData(data);
+
+        // undo all highlights
+        chart.highlightValues(null);
+
+        chart.invalidate();
+
+
+
+
+        /*PieDataSet dataSet = new PieDataSet(pieList,"Label");
+
+        // 设置颜色list，让不同的块显示不同颜色，下面是我觉得不错的颜色集合，比较亮
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+        int[] MATERIAL_COLORS = {
+                Color.rgb(200, 172, 255)
+        };
+        for (int c : MATERIAL_COLORS) {
+            colors.add(c);
+        }
+        for (int c : ColorTemplate.VORDIPLOM_COLORS) {
+            colors.add(c);
+        }
+        dataSet.setColors(colors);
+        PieData pieData = new PieData(dataSet);
+
+        // 设置描述，我设置了不显示，因为不好看，你也可以试试让它显示，真的不好看
+        Description description = new Description();
+        description.setEnabled(false);
+        pieChart.setDescription(description);
+        //设置半透明圆环的半径, 0为透明
+        pieChart.setTransparentCircleRadius(0f);
+
+        //设置初始旋转角度
+        pieChart.setRotationAngle(-15);
+
+        //数据连接线距图形片内部边界的距离，为百分数
+        dataSet.setValueLinePart1OffsetPercentage(80f);
+
+        //设置连接线的颜色
+        dataSet.setValueLineColor(Color.LTGRAY);
+        // 连接线在饼状图外面
+        dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+
+        // 设置饼块之间的间隔
+        dataSet.setSliceSpace(1f);
+        dataSet.setHighlightEnabled(true);
+        // 不显示图例
+        Legend legend = pieChart.getLegend();
+        legend.setEnabled(false);
+
+        // 和四周相隔一段距离,显示数据
+        pieChart.setExtraOffsets(26, 5, 26, 5);
+
+        // 设置pieChart图表是否可以手动旋转
+        pieChart.setRotationEnabled(false);
+        // 设置piecahrt图表点击Item高亮是否可用
+        pieChart.setHighlightPerTapEnabled(true);
+        // 设置pieChart图表展示动画效果，动画运行1.4秒结束
+        pieChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
+        //设置pieChart是否只显示饼图上百分比不显示文字
+        pieChart.setDrawEntryLabels(true);
+        //是否绘制PieChart内部中心文本
+        pieChart.setDrawCenterText(false);
+        // 绘制内容value，设置字体颜色大小
+        pieData.setDrawValues(true);
+        pieData.setValueFormatter(new PercentFormatter());
+        pieData.setValueTextSize(10f);
+        pieData.setValueTextColor(Color.DKGRAY);
+
+        pieChart.setData(pieData);
+        // 更新 piechart 视图
+        pieChart.postInvalidate();*/
+    }
+
+    /*
+    * FIL收益
+    * */
+    @BindingAdapter("setFilLineChart")
+    public static void bindFilLineChart(LineChart view, List<FilIncomeBean.MyIncomeDTO> mList){
+        if(mList == null || mList.size() <= 0)return;
+        //清空下
+        view.clear();
+
+        //重置上面的偏移量设置。
+        view.setViewPortOffsets(0, 0, 0, 60);
+        // 整个图标的背景色
+        view.setBackgroundColor(Color.TRANSPARENT);
+        //不显示描述文字
+        view.getDescription().setEnabled(false);
+        // 所有触摸事件,默认true
+        view.setTouchEnabled(true);
+        // 可拖动,默认true
+        view.setDragEnabled(true);
+        // 设置Y轴不可缩放
+        view.setScaleYEnabled(false);
+        // 设置X轴不可缩放
+        view.setScaleXEnabled(false);
+        // X,Y轴同时缩放，false则X,Y轴单独缩放,默认false
+        view.setPinchZoom(false);
+        // 绘制区域的背景（默认是一个灰色矩形背景）将绘制，默认false
+        view.setDrawGridBackground(false);
+        // 最大高亮距离（dp）,点击位置距离数据点的距离超过这个距离不会高亮，默认500dp
+        view.setMaxHighlightDistance(300);
+
+        // 不绘制右侧的轴线
+        view.getAxisRight().setEnabled(false);
+        // 不绘制左侧的轴线
+        view.getAxisLeft().setEnabled(false);
+
+        //获取y线
+        YAxis yAxis = view.getAxisLeft();
+        // 设置最大值到图标顶部的距离占所有数据范围的比例。默认10，y轴独有
+        yAxis.setSpaceTop(20);
+        //设置Y轴最小可见范围
+        //yAxis.setAxisMinimum(7);
+
+        // 获取x线
+        XAxis xAxis = view.getXAxis();
+        // 是否绘制坐标轴,默认true
+        xAxis.setDrawAxisLine(false);
+        // 是否绘制标签,默认true
+        //xAxis.setDrawLabels(true);
+        // X轴绘制位置，默认是顶部
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        // 是否绘制网格线，默认true
+        xAxis.setDrawGridLines(false);
+        // 设置X轴值之间最小距离。正常放大到一定地步，标签变为小数值，到一定地步，相邻标签都是一样的。这里是指定相邻标签间最小差，防止重复。
+        xAxis.setGranularity(1f);
+        //最小值
+        xAxis.setAxisMinimum(0f);
+        //设置最大值
+        xAxis.setAxisMaximum(mList.size()-1);
+        // 将值转换为想要显示的形式
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+
+                if(value < mList.size() && value >=0 ){
+                    return TimeUtil.formatData(TimeUtil.dateFormatMD,mList.get((mList.size()-1) - (int) value).getCreateTime());
+                }else{
+                    return "";
+                }
+            }
+        });
+
+        //设置缩放比例
+        //Matrix m=new Matrix();
+        //两个参数分别是x,y轴的缩放比例。例如：将x轴的数据放大为之前的4.5倍
+        //m.postScale((mList.size()/7)+0.6f, 1f);
+        //将图表动画显示之前进行缩放
+        //view.getViewPortHandler().refresh(m, view, true);
+        //设置可见范围
+        view.setVisibleXRange(0,6);
+        // X轴放大最低可见范围，最小意思是，再怎么放大范围也至少要有7，但是一开始显示的时候范围可能很大。
+        //view.setVisibleXRangeMinimum(7);
+        // xy轴动画
+        view.animateXY(1000, 1000);
+        //view.animateX(2000);
+        //view.animateY(2000);
+        //设置mark
+        MyFilLineChartMarkView mv = new MyFilLineChartMarkView(view.getContext(),mList);
+        //view.setMarker(mv);
+
+        mv.setChartView(view);
+        view.setMarker(mv);
+
+        /***折线图例 标签 设置***/
+        Legend legend = view.getLegend();
+        //设置显示类型，LINE CIRCLE SQUARE EMPTY 等等 多种方式，查看LegendForm 即可
+        legend.setForm(Legend.LegendForm.LINE);
+        legend.setTextSize(12f);
+        legend.setTextColor(Color.parseColor("#FC4E5A"));
+        //显示位置 左下方
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        //是否绘制在图表里面
+        legend.setDrawInside(false);
+        //是否显示
+        legend.setEnabled(false);
+
+        //设置数据
+        ArrayList<Entry> values = new ArrayList<>();
+        for (int i = (mList.size() - 1); i >= 0; i--) {
+            values.add(new Entry((mList.size()-1) - i, (float) mList.get(i).getUseNum()));
+        }
+
+        LineDataSet set1;
+
+        if (view.getData() != null &&
+                view.getData().getDataSetCount() > 0) {
+            set1 = (LineDataSet) view.getData().getDataSetByIndex(0);
+            set1.setValues(values);
+
+            view.getData().notifyDataChanged();
+            view.notifyDataSetChanged();
+        } else {
+            // create a dataset and give it a type
+            set1 = new LineDataSet(values, "DataSet 1");
+
+            //设置曲线值的圆点是实心还是空心
+            set1.setDrawCircleHole(false);
+            set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+            set1.setCubicIntensity(0.2f);
+            set1.setDrawFilled(true);
+            set1.setDrawCircles(false);
+            set1.setLineWidth(1f);
+            set1.setCircleRadius(2f);
+            set1.setCircleColor(view.getResources().getColor(R.color.theme_5690FF));
+            set1.setHighLightColor(Color.rgb(244, 117, 117));
+            set1.setColor(view.getResources().getColor(R.color.theme_5690FF));
+            set1.setFillDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.shape_gradient_c2d6fe_f5f8fe));
+            set1.setFillAlpha(100);
+            //关闭指示器
+            set1.setDrawHorizontalHighlightIndicator(false);
+            set1.setDrawVerticalHighlightIndicator(false);
+
+            set1.setFillFormatter(new IFillFormatter() {
+                @Override
+                public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
+                    return view.getAxisLeft().getAxisMinimum();
+                }
+            });
+
+            //===================================================================================
+
+            //初始化一个LineDataSet集合来装每个线的数据
+            List<ILineDataSet> lineDataSetList = new ArrayList<>();
+            lineDataSetList.add(set1);
+            // create a data object with the data sets
+            LineData data = new LineData(lineDataSetList);
+            //data.setValueTypeface(tfLight);
+            data.setValueTextSize(9f);
+            data.setDrawValues(false);
+
+
+            // set data
+            view.setData(data);
+        }
+
+        //从最后一个位置查看
+        view.moveViewToX(values.size() - 1);
+        // 重绘
+        view.invalidate();
+
     }
 
         /**

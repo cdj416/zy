@@ -371,24 +371,6 @@ public abstract class CustomActivity<V extends ViewDataBinding, VM extends Custo
         startActivity(intent);
     }
 
-    /**
-     * 缩放动画跳转
-     * @param view
-     */
-    public void startAnimActivity(View view, Bundle bundle) {
-        /*Intent intent = new Intent(this, MyPlayActivity.class);
-        intent.putExtra(MyPlayActivity.TRANSITION, true);
-        intent.putExtras(bundle);
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            Pair pair = new Pair<>(view, MyPlayActivity.IMG_TRANSITION);
-            ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    this, pair);
-            ActivityCompat.startActivity(this, intent, activityOptions.toBundle());
-        } else {
-            startActivity(intent);
-            overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
-        }*/
-    }
 
     /**
      * 跳转容器页面

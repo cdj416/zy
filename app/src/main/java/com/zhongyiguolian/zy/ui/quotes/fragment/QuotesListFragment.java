@@ -57,7 +57,8 @@ public class QuotesListFragment extends CustomFragment<FragmentQuotesListBinding
     public void initView() {
         super.initView();
 
-        setOnRefresh(binding.refresh,REFRESH_0X4);
+        setOnRefresh(binding.refresh,REFRESH_0X1);
+        setEnableRefresh(Constants.HOMEMARKETS);
     }
 
     @Override

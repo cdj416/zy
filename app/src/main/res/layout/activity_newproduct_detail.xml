@@ -442,11 +442,16 @@
                                                     app:onClickCommand="@{viewModel.subNum}"/>
 
                                                 <TextView
-                                                    android:layout_width="48dp"
-                                                    android:layout_height="wrap_content"
+                                                    android:id="@+id/numEt"
+                                                    android:layout_width="38dp"
+                                                    android:layout_height="23dp"
                                                     android:textColor="@color/theme_333333"
                                                     android:textSize="@dimen/sp_18"
                                                     android:gravity="center"
+                                                    android:layout_marginStart="10dp"
+                                                    android:layout_marginEnd="10dp"
+                                                    android:inputType="number"
+                                                    android:background="@drawable/shape_radius5_33919191"
                                                     android:text="@={viewModel.nums}"/>
 
                                                 <TextView
@@ -480,7 +485,7 @@
                                     android:id="@+id/imageView"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    app:setIntSubImage="@{viewModel.entity.detailImg}"/>
+                                    app:setIntSubImage="@{viewModel.entity.detailImgUrl}"/>
 
                             </LinearLayout>
 
@@ -580,7 +585,8 @@
                     <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
                         android:id="@+id/contra"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        app:setIntSubImage="@{viewModel.entity.detailXyImgUrl}"/>
 
                 </com.zhongyiguolian.zy.myview.StickyScrollView>
 

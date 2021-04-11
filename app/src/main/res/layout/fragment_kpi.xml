@@ -20,45 +20,67 @@
         android:background="@color/theme_F5F6FB"
         android:id="@+id/rootView">
 
-        <LinearLayout
+        <com.lihang.ShadowLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="@dimen/sp_15"
-                android:textColor="@color/theme_333333"
-                android:gravity="center"
-                android:background="#e3e7ed"
-                android:text="手机号"/>
-            <View
-                android:layout_width="2dp"
-                android:layout_height="match_parent"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="@dimen/sp_15"
-                android:textColor="@color/theme_333333"
-                android:gravity="center"
-                android:background="#e3e7ed"
-                android:text="时间"/>
-            <View
-                android:layout_width="2dp"
-                android:layout_height="match_parent"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="@dimen/sp_15"
-                android:textColor="@color/theme_333333"
-                android:gravity="center"
-                android:background="#e3e7ed"
-                android:text="提成"/>
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            app:hl_shadowLimit="6dp"
+            app:hl_shadowColor="@color/theme_30003AA8"
+            app:hl_layoutBackground="@color/transparent"
+            app:hl_shadowHiddenTop="true"
+            app:hl_shadowHiddenLeft="true"
+            app:hl_shadowHiddenRight="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:orientation="horizontal"
+                android:background="@drawable/shape_radius10_bottom_f5f9ff">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:textSize="@dimen/sp_15"
+                    android:textColor="@color/theme_666666"
+                    android:gravity="center"
+                    android:text="手机号"/>
+                <View
+                    android:layout_width="2dp"
+                    android:visibility="gone"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.2"
+                    android:textSize="@dimen/sp_15"
+                    android:textColor="@color/theme_666666"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="金额"/>
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/sp_15"
+                    android:textColor="@color/theme_666666"
+                    android:gravity="center"
+                    android:text="时间"/>
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.2"
+                    android:textSize="@dimen/sp_15"
+                    android:textColor="@color/theme_666666"
+                    android:gravity="center"
+                    android:text="提成"/>
+            </LinearLayout>
+
+        </com.lihang.ShadowLayout>
 
         <FrameLayout
             android:layout_width="match_parent"

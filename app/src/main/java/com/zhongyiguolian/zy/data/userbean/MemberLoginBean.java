@@ -21,6 +21,15 @@ public class MemberLoginBean {
     private String token;
     private boolean googleAuthIsOpen;
     private boolean isAgrees;//是否同意协议
+    private boolean showGuide;
+
+    public boolean isShowGuide() {
+        return showGuide;
+    }
+
+    public void setShowGuide(boolean showGuide) {
+        this.showGuide = showGuide;
+    }
 
     public boolean isAgrees() {
         return isAgrees;
@@ -31,6 +40,7 @@ public class MemberLoginBean {
     }
 
     private String userName;
+    private String nationalCode;
 
     public String getUserName() {
         return userName;
@@ -38,6 +48,14 @@ public class MemberLoginBean {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getNationalCode() {
+        return nationalCode;
+    }
+
+    public void setNationalCode(String nationalCode) {
+        this.nationalCode = nationalCode;
     }
 
     public boolean isGestureEnable() {

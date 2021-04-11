@@ -1,11 +1,15 @@
 package com.zhongyiguolian.zy.ui.home.activity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
 import androidx.lifecycle.ViewModelProviders;
+
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
@@ -13,6 +17,7 @@ import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.databinding.ActivityCloudpowerDetailBinding;
 import com.zhongyiguolian.zy.ui.home.viewmodel.CloudPowerDetailViewModel;
 import com.zhongyiguolian.zy.utils.AndroidDes3Util;
+import com.zhongyiguolian.zy.utils.CustomDialog;
 
 import me.tatarka.bindingcollectionadapter2.BR;
 
@@ -63,7 +68,35 @@ public class CloudPowerDetailNewActivity extends CustomActivity<ActivityCloudpow
         binding.comBack.setOnClickListener(view -> finish());
 
         //设置合同的显示
-        //binding.contra.setImage(ImageSource.resource(R.mipmap.contract_img));
+        //binding.contra.setImage(ImageSource.resource(R.mipmap.computing_power));
+
+        binding.showDetails.setOnClickListener(v -> CustomDialog.showCloudpower(this));
+
+        //输入监听
+        binding.numEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                /*if(s.toString().isEmpty() ||Integer.parseInt(s.toString()) == 0){
+                    binding.numEt.setText(String.valueOf(2));
+                }*/
+
+                if(!s.toString().isEmpty() && Integer.parseInt(s.toString()) % 2 != 0){
+                    binding.numEt.setText(String.valueOf(Integer.parseInt(s.toString()) + 1));
+                }
+
+                binding.numEt.setSelection(s.toString().length());
+            }
+        });
 
     }
 
@@ -113,7 +146,7 @@ public class CloudPowerDetailNewActivity extends CustomActivity<ActivityCloudpow
      * @param event
      * @return
      */
-    @Override
+   /* @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode== KeyEvent.KEYCODE_BACK){
             if(viewModel.isShowXy.get()){
@@ -125,7 +158,7 @@ public class CloudPowerDetailNewActivity extends CustomActivity<ActivityCloudpow
             finish();
         }
         return true;
-    }
+    }*/
 
     /**
      * 数据

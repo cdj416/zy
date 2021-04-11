@@ -1,8 +1,13 @@
 package com.zhongyiguolian.zy.ui.person.beans;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.zhongyiguolian.zy.data.http.RetrofitClient;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
+import com.zhongyiguolian.zy.utils.TimeUtil;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -136,6 +141,15 @@ public class PurchaseHistoryBeans {
         private String bankcardType;
         private Object bankcardTypeString;
         private double totalCount;
+        private int machineType;
+
+        public int getMachineType() {
+            return machineType;
+        }
+
+        public void setMachineType(int machineType) {
+            this.machineType = machineType;
+        }
 
         public double getTotalCount() {
             return totalCount;
@@ -525,7 +539,7 @@ public class PurchaseHistoryBeans {
         }
     }
 
-    public static class MinerDetailVoDTO {
+    public static class MinerDetailVoDTO implements Serializable {
         /**
          * id : 5295
          * customerId : 1283
@@ -562,6 +576,15 @@ public class PurchaseHistoryBeans {
         private long expireDate;
         private long createTime;
         private int machineType;
+        private Long machineTime;
+
+        public long getMachineTime() {
+            return machineTime;
+        }
+
+        public void setMachineTime(long machineTime) {
+            this.machineTime = machineTime;
+        }
 
         public int getMachineType() {
             return machineType;
@@ -697,6 +720,28 @@ public class PurchaseHistoryBeans {
 
         public void setCreateTime(long createTime) {
             this.createTime = createTime;
+        }
+
+        /*
+        * 获取开启日期
+        * */
+        public String getOpenData(){
+            if(machineTime == null){
+                return "";
+            }else{
+                return TimeUtil.formatData(TimeUtil.dateFormatYMD,machineTime);
+            }
+        }
+
+        /*
+         * 获取开启日期
+         * */
+        public String getOpenTime(){
+            if(machineTime == null){
+                return "未记录";
+            }else{
+                return TimeUtil.formatData(TimeUtil.dateFormatHMS,machineTime);
+            }
         }
     }
 }

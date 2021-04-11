@@ -1,7 +1,11 @@
 package com.zhongyiguolian.zy.ui.person.activity;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+
 import androidx.lifecycle.ViewModelProviders;
+
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
@@ -9,9 +13,10 @@ import com.zhongyiguolian.zy.data.Constants;
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.databinding.ActivitySalesWithdrawalBinding;
 import com.zhongyiguolian.zy.ui.person.viewmodel.SalesWithdrawalDetailsViewModel;
-import com.zhongyiguolian.zy.utils.AndroidDes3Util;
 import com.zhongyiguolian.zy.utils.BigDecimalUtils;
 import com.zhongyiguolian.zy.utils.CustomDialog;
+import com.zhongyiguolian.zy.utils.StatusBarUtil;
+
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**
@@ -54,7 +59,32 @@ public class SalesWthdrawalActivity extends CustomActivity<ActivitySalesWithdraw
     @Override
     public void initView() {
         super.initView();
+        StatusBarUtil.setCommonUI(this,true);
+        setOnRefresh(binding.refresh,REFRESH_0X4);
         binding.comBack.setOnClickListener(view -> finish());
+
+
+        binding.numEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(BaseUtil.isValue(viewModel.nums.get())){
+                    String sxf = BigDecimalUtils.mul(viewModel.nums.get(),BigDecimalUtils.div(String.valueOf(viewModel.goWithdrawal.get().getPoundage()),"100",4),2);
+                    binding.nums.setText(BaseUtil.getNoZoon(BaseUtil.getNoZoon(sxf)));
+                }else {
+                    binding.nums.setText("0.00");
+                }
+            }
+        });
     }
 
     /**
@@ -69,7 +99,7 @@ public class SalesWthdrawalActivity extends CustomActivity<ActivitySalesWithdraw
 
                 String sxf = BigDecimalUtils.mul(viewModel.nums.get(),BigDecimalUtils.div(String.valueOf(viewModel.goWithdrawal.get().getPoundage()),"100",4),2);
 
-                CustomDialog.enterPassword(SalesWthdrawalActivity.this,viewModel.nums.get(), "￥"+sxf, (v, message) -> {
+                CustomDialog.enterPassword(SalesWthdrawalActivity.this,"到账金额",viewModel.nums.get(), "￥"+BigDecimalUtils.sub(viewModel.nums.get(),sxf,2), (v, message) -> {
                     //请求提币
                     viewModel.doWithdrawToken(message);
                 });

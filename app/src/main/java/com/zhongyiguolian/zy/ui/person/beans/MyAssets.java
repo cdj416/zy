@@ -1,7 +1,5 @@
 package com.zhongyiguolian.zy.ui.person.beans;
 
-import android.util.Log;
-
 import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.utils.BigDecimalUtils;
 

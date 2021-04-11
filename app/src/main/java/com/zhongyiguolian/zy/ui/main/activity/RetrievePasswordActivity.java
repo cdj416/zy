@@ -1,7 +1,9 @@
 package com.zhongyiguolian.zy.ui.main.activity;
 
 import android.os.Bundle;
+
 import androidx.lifecycle.ViewModelProviders;
+
 import com.hongyuan.mvvmhabitx.utils.ToastUtils;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
@@ -11,7 +13,7 @@ import com.zhongyiguolian.zy.data.md5.BaseUtil;
 import com.zhongyiguolian.zy.databinding.ActivityRetrievePasswordBinding;
 import com.zhongyiguolian.zy.ui.main.viewmodel.RetrievePasswordViewModel;
 import com.zhongyiguolian.zy.utils.AndroidDes3Util;
-import com.zhongyiguolian.zy.utils.CustomDialog;
+
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
 import me.tatarka.bindingcollectionadapter2.BR;
 

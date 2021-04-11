@@ -1,7 +1,9 @@
 package com.zhongyiguolian.zy.ui.home.activity;
 
 import android.os.Bundle;
+
 import androidx.lifecycle.ViewModelProviders;
+
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;

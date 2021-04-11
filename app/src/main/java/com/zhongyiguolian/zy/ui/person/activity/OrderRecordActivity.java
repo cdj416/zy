@@ -1,6 +1,7 @@
 package com.zhongyiguolian.zy.ui.person.activity;
 
 import android.os.Bundle;
+
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomActivity;
@@ -9,8 +10,10 @@ import com.zhongyiguolian.zy.base.CustomViewModel;
 import com.zhongyiguolian.zy.databinding.ActivityOrderRecordBinding;
 import com.zhongyiguolian.zy.ui.Page2Adapter;
 import com.zhongyiguolian.zy.ui.person.fragment.MyServiceRecordFragment;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import me.tatarka.bindingcollectionadapter2.BR;
 
 /**

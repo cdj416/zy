@@ -1,10 +1,12 @@
 package com.zhongyiguolian.zy.ui.person.viewmodel;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
+
 import com.hongyuan.mvvmhabitx.binding.command.BindingAction;
 import com.hongyuan.mvvmhabitx.binding.command.BindingCommand;
 import com.zhongyiguolian.zy.BR;
@@ -17,7 +19,9 @@ import com.zhongyiguolian.zy.ui.person.activity.FilWthdrawalActivity;
 import com.zhongyiguolian.zy.ui.person.beans.MyAssets;
 import com.zhongyiguolian.zy.ui.person.beans.MyTeamBeans;
 import com.zhongyiguolian.zy.utils.BigDecimalUtils;
+
 import java.util.List;
+
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 /**

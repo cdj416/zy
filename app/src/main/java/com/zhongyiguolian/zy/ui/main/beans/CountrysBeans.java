@@ -7,48 +7,45 @@ package com.zhongyiguolian.zy.ui.main.beans;
 public class CountrysBeans {
 
     /**
-     *
+     * en : Angola
+     * cn : 安哥拉
+     * code : +0244
      */
-    private String countrysName;
-    /**
-     *
-     */
-    private String countrysId;
 
-    /**
-     * @return
-     */
-    public String getCountrysName() {
-        return countrysName;
+    private String en;
+    private String cn;
+    private String code;
+
+    public CountrysBeans() {
     }
 
-    /**
-     * @param countrysName
-     */
-    public void setCountrysName(String countrysName) {
-        this.countrysName = countrysName;
+    public CountrysBeans(String en, String cn, String code) {
+        this.en = en;
+        this.cn = cn;
+        this.code = code;
     }
 
-    /**
-     * @return
-     */
-    public String getCountrysId() {
-        return countrysId;
+    public String getEn() {
+        return en;
     }
 
-    /**
-     * @param countrysId
-     */
-    public void setCountrysId(String countrysId) {
-        this.countrysId = countrysId;
+    public void setEn(String en) {
+        this.en = en;
     }
 
-    /**
-     * @param countrysName
-     * @param countrysId
-     */
-    public CountrysBeans(String countrysName, String countrysId) {
-        this.countrysName = countrysName;
-        this.countrysId = countrysId;
+    public String getCn() {
+        return cn;
+    }
+
+    public void setCn(String cn) {
+        this.cn = cn;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

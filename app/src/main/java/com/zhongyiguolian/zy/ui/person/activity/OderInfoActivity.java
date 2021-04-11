@@ -7,7 +7,6 @@ import android.view.animation.AnimationUtils;
 
 import androidx.lifecycle.ViewModelProviders;
 
-import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
@@ -62,8 +61,6 @@ public class OderInfoActivity extends CustomActivity<ActivityOrderInfoBinding, O
         binding.comBack.setOnClickListener(view -> finish());
 
         setOnRefresh(binding.refresh,REFRESH_0X4);
-
-        binding.contra.setImage(ImageSource.resource(R.mipmap.contract_img));
     }
 
     /**
@@ -101,6 +98,12 @@ public class OderInfoActivity extends CustomActivity<ActivityOrderInfoBinding, O
 
                 viewModel.isShowXy.set(true);
 
+                /*if(viewModel.entity.get().getMachineType() == 0){
+                    binding.contra.setImage(ImageSource.resource(R.mipmap.contract_img));
+                }else{
+                    binding.contra.setImage(ImageSource.resource(R.mipmap.computing_power));
+                }*/
+
                 Animation animation = AnimationUtils.loadAnimation(this, R.anim.dialog_in_anim);
                 binding.xyView.setAnimation(animation);
                 binding.xyView.setVisibility(View.VISIBLE);
@@ -110,7 +113,7 @@ public class OderInfoActivity extends CustomActivity<ActivityOrderInfoBinding, O
         //关闭协议弹框
         viewModel.uc.closeXy.observe(this,aVoid -> {
             if(binding.xyView.getVisibility() == View.VISIBLE) {
-                viewModel.titleName.set("购买商品");
+                viewModel.titleName.set("订单详情");
                 viewModel.isShowXy.set(false);
 
                 Animation animation = AnimationUtils.loadAnimation(this, R.anim.dialog_out_anim);

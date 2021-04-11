@@ -2,8 +2,10 @@ package com.zhongyiguolian.zy.ui.person.activity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.xujiaji.happybubble.BubbleDialog;
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
