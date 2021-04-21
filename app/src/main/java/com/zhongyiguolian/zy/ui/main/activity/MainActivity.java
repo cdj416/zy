@@ -174,6 +174,8 @@ public class MainActivity extends CustomActivity<ActivityMainBinding, MainViewMo
             CustomDialog.promptDialog(this, "确定要退出程序？", "确定", "取消", false, v -> {
                 if(v.getId() == R.id.isOk){
                     AppManager.getAppManager().finishAllActivity();
+                    //System.exit(0);
+                    android.os.Process.killProcess(android.os.Process.myPid());
                 }
             });
             return false;

@@ -31,6 +31,7 @@ import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.taobao.sophix.SophixManager;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.umeng.analytics.MobclickAgent;
 import com.zhongyiguolian.zy.R;
@@ -69,6 +70,9 @@ public abstract class CustomActivity<V extends ViewDataBinding, VM extends Custo
         super.onCreate(savedInstanceState);
 
         setRequestedOrientation(SCREEN_ORIENTATION_PORTRAIT);//竖屏
+
+        //热修复，加载获取新补丁
+        SophixManager.getInstance().queryAndLoadNewPatch();
 
         //加入管理暂中
         AppManager.getAppManager().addActivity(this);

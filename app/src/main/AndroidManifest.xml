@@ -39,7 +39,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
-        android:name=".base.MyAppApplication"
+        android:name=".base.SophixStubApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -56,6 +56,16 @@
         <meta-data
             android:name="design_height_in_dp"
             android:value="740"/>
+        <!--********************************************阿里热修复********************************-->
+        <meta-data
+            android:name="com.taobao.android.hotfix.IDSECRET"
+            android:value="333420501" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.APPSECRET"
+            android:value="780c3b6b72414bd1b35ff5970f2d8283" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.RSASECRET"
+            android:value="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCQHxeXDlmju+ZqfccewHiONn9qznG805soW1c9DDSRCW35EbGXLrFaUrPCUQ/mERj2Xw/9OQK21LM39824K1sh+JUqS5oJKQMy9nSPnHOX2xdUbvqvt9ucH8DnURMdAtHs9xBh5Kb/VwS2HXlcp434g7qZ9Q3UxvzkNLAkZ9Rtklna7cxoP77SGCEQiPJmWhYJaepw4M6gZ4B9PlIMXdGANB1ycZ3B3K1WLFWrKSR69WDcV+kjpMlDXDbcXQLkYwew9u//EPbz6QevF71ElomclXEIFyq3efMMVyOdyRKjkEAVOvGFvEtUIOhqJ4CQyyJa4hxJmbO0gQsf8fV/r5JjAgMBAAECggEAN7EcH443C3N3tZ0HDhYYP/RFRpOiFfK7WVv6mSeXRJidO4sf0ikD9cBRoHxMpX3j5IiVmCeoqdgFrVH/1/RBEh6KHb77NiD4EIB2SGyPqpXKLSF5k997aJhIpdqJhUNqtaQ/W2TNN4x70JgRJsHEtczJlebBQoDmhpTpoBfTWceH650No4eq6ssQMue7NQ6XVCeHvp/hNbfeZLJRLIwJjV8E5FYcxUAQ27wvHdgX3OGovDeed04diUeLX+9VQuUeiiYkgSr5DAWyb9IOgCkHIKPeKhSTHGk049PxMBptVaBe3c64T2kc/Y+l8dEHdDj1lFKWueP/ijb1dFkt4yOKiQKBgQDULek5dxh4EB8wwXg2xdPMGdFdWqXEndjyowJwuGVH6ebqrLS8Z03pMZCNTuht3UdrUwjgZayE1QpFGmZTdi2lJJU6lLvp79+nUB2he9fuF1+N4rC7cW3DzsveL4iVwtReYvOmAHbzLFpNr2dosmZBaKpDXSIiXU3T96diMlxRzQKBgQCt4ugyVqP7RbABXMNhgEKOr99u/fQecYnKtegUz/saoZEdgq1pvsk2g3opudsvhmd+++0qftNfYF6S0B5cCEegZm1Y3juDrjeg8xVBx7ffTUJvHDGgHlPm5JR9dk1fMDsX3dSaDYpcmz/2h+9MMDBGjgpT8LxVBUE6s9BR2xgE7wKBgAXiyCd58EnUWKknlMggMMHmrXIjg5myr0P71aN+2gBmsqsr40+epgCkCViCKdxyWPrXMNXYvDJrHn/QPapvCtEb9K/NVHEm4FNp24iRQOov58ytzy1D9kGKSQl+1BEjeHSt1ghy1tnkDxU8mmfDGycRWjfIK5w8bl5E7nXA4+K5AoGAAcfD9tf6P9Vb0ve/LF1i0REt6XYCLNmevouUP7pNaN1knfe7jMyeRMed1ZWIj/kBUESGDhxUT7Kt5TTqSqjvCs5hqjpEQ7nh6ezzN8Qytr+UwYx5WZlV5JRMjOhMLIBS6pCj35vp4b7ZLc4Afjg0FlTX+DoLw5cVLuOua1gh69MCgYEAvNL6kyNy/7AZ4h+Vq793D9c37kA5PMjxdSIPakXVSZkeMjYRjFjU6uOSV6L9rjp1NaWm7cDxUD0t3swDi2VDu7xrzZMiidzpzzw0KD/m6T+y5ILnflrM5kMWlwepPhta5bDzU9jIFuDldFvwKqzs2E5/t2nXhzcCR2em+i8qP6o=" />
 
         <!--********************************************qq分享配置********************************-->
         <activity

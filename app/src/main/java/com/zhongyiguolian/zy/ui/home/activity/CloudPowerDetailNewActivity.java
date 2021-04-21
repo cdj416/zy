@@ -3,13 +3,10 @@ package com.zhongyiguolian.zy.ui.home.activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-
 import androidx.lifecycle.ViewModelProviders;
-
 import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.AppViewModelFactory;
 import com.zhongyiguolian.zy.base.CustomActivity;
@@ -72,7 +69,7 @@ public class CloudPowerDetailNewActivity extends CustomActivity<ActivityCloudpow
 
         binding.showDetails.setOnClickListener(v -> CustomDialog.showCloudpower(this));
 
-        //输入监听
+        /*//输入监听
         binding.numEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -86,17 +83,17 @@ public class CloudPowerDetailNewActivity extends CustomActivity<ActivityCloudpow
 
             @Override
             public void afterTextChanged(Editable s) {
-                /*if(s.toString().isEmpty() ||Integer.parseInt(s.toString()) == 0){
-                    binding.numEt.setText(String.valueOf(2));
-                }*/
-
-                if(!s.toString().isEmpty() && Integer.parseInt(s.toString()) % 2 != 0){
-                    binding.numEt.setText(String.valueOf(Integer.parseInt(s.toString()) + 1));
+                if(s.toString().isEmpty() ||Integer.parseInt(s.toString()) == 0){
+                    binding.numEt.setText(String.valueOf(1));
                 }
+
+                *//*if(!s.toString().isEmpty() && Integer.parseInt(s.toString()) % 2 != 0){
+                    binding.numEt.setText(String.valueOf(Integer.parseInt(s.toString()) + 1));
+                }*//*
 
                 binding.numEt.setSelection(s.toString().length());
             }
-        });
+        });*/
 
     }
 

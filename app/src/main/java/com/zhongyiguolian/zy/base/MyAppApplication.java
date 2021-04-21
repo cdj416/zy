@@ -4,6 +4,7 @@ import com.hongyuan.mvvmhabitx.base.BaseApplication;
 import com.hongyuan.mvvmhabitx.crash.CaocConfig;
 import com.hongyuan.mvvmhabitx.utils.KLog;
 import com.previewlibrary.ZoomMediaLoader;
+import com.taobao.sophix.SophixManager;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
@@ -60,5 +61,8 @@ public class MyAppApplication extends BaseApplication {
         // QQ设置
         PlatformConfig.setQQZone("101830139", "5d63ae8858f1caab67715ccd6c18d7a5");
         PlatformConfig.setQQFileProvider("com.tencent.sample2.fileprovider");
+
+        //热修复，加载获取新补丁
+        SophixManager.getInstance().queryAndLoadNewPatch();
     }
 }

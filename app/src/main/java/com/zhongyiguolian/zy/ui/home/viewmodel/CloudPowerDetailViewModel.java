@@ -86,7 +86,7 @@ public class CloudPowerDetailViewModel extends CustomViewModel<MyRepository> {
     /**
      * 数量
      */
-    public ObservableField<String> nums = new ObservableField<>("2");
+    public ObservableField<String> nums = new ObservableField<>("1");
 
     /**
      * 状态显示
@@ -156,7 +156,7 @@ public class CloudPowerDetailViewModel extends CustomViewModel<MyRepository> {
         @Override
         public void call() {
             if(!BaseUtil.isValue(nums.get()) || Integer.parseInt(nums.get()) == 0){
-                nums.set("2");
+                nums.set("1");
             }
 
             if(!isCheck.get()){
@@ -182,13 +182,13 @@ public class CloudPowerDetailViewModel extends CustomViewModel<MyRepository> {
         @Override
         public void call() {
             if(!BaseUtil.isValue(nums.get())){
-                nums.set("2");
+                nums.set("1");
             }
 
             int num = Integer.parseInt(nums.get());
-            num-=2;
-            if(num < 2){
-                num = 2;
+            num--;
+            if(num < 1){
+                num = 1;
             }
 
             nums.set(String.valueOf(num));
@@ -202,11 +202,11 @@ public class CloudPowerDetailViewModel extends CustomViewModel<MyRepository> {
         @Override
         public void call() {
             if(!BaseUtil.isValue(nums.get())){
-                nums.set("2");
+                nums.set("1");
             }
 
             int num = Integer.parseInt(nums.get());
-            num+=2;
+            num++;
             nums.set(String.valueOf(num));
         }
     });

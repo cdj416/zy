@@ -62,7 +62,7 @@ public class FilIncomeBean {
         private int subTeamLevel;
         private int calculationPower;
         private double amount;
-        private int teamProfitRate;
+        private double teamProfitRate;
         private boolean isLast;
         private String rType;
         private double myamount;
@@ -131,11 +131,11 @@ public class FilIncomeBean {
             this.amount = amount;
         }
 
-        public int getTeamProfitRate() {
+        public double getTeamProfitRate() {
             return teamProfitRate;
         }
 
-        public void setTeamProfitRate(int teamProfitRate) {
+        public void setTeamProfitRate(double teamProfitRate) {
             this.teamProfitRate = teamProfitRate;
         }
 

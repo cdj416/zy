@@ -334,7 +334,7 @@
                                             android:textColor="@color/theme_154297"
                                             android:textSize="@dimen/sp_14"
                                             android:layout_marginStart="5dp"
-                                            android:text="2T起售"/>
+                                            android:text="1T起售"/>
                                         <ImageView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"

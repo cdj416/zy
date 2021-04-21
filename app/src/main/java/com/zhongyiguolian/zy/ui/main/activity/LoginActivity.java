@@ -81,6 +81,7 @@ public class LoginActivity extends CustomActivity<ActivityLoginBinding, CustomVi
             CustomDialog.promptDialog(this, "确定要退出程序？", "确定", "取消", false, v -> {
                 if(v.getId() == R.id.isOk){
                     AppManager.getAppManager().finishAllActivity();
+                    android.os.Process.killProcess(android.os.Process.myPid());
                 }
             });
             return false;
