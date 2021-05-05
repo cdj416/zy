@@ -241,8 +241,6 @@ public class HomeNewViewModel extends CustomViewModel<MyRepository> {
                     break;
                 }
             }
-
-            Log.e("cnn","==============嗯？=========="+isLower);
             offService.set(isLower);
         }
 

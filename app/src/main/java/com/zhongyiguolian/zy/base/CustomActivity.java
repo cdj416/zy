@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
-
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -20,7 +19,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.hongyuan.mvvmhabitx.base.AppManager;
 import com.hongyuan.mvvmhabitx.base.ContainerActivity;
 import com.hongyuan.mvvmhabitx.base.IBaseView;
@@ -38,7 +36,6 @@ import com.zhongyiguolian.zy.R;
 import com.zhongyiguolian.zy.base.CustomViewModel.ParameterField;
 import com.zhongyiguolian.zy.utils.CustomDialog;
 import com.zhongyiguolian.zy.utils.StatusBarUtil;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;

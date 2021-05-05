@@ -254,7 +254,7 @@
                                             android:textColor="@color/theme_154297"
                                             android:textSize="@dimen/sp_14"
                                             android:layout_marginStart="5dp"
-                                            android:text="永久使用权"/>
+                                            android:text="算力"/>
                                     </LinearLayout>
 
                                 </LinearLayout>
@@ -282,7 +282,7 @@
                                             android:textColor="@color/theme_154297"
                                             android:textSize="@dimen/sp_14"
                                             android:layout_marginStart="5dp"
-                                            android:text="服务期三年（可续）"/>
+                                            android:text="服务期1080天"/>
                                     </LinearLayout>
 
                                     <LinearLayout
@@ -361,7 +361,7 @@
                                             android:textColor="@color/theme_154297"
                                             android:textSize="@dimen/sp_14"
                                             android:layout_marginStart="5dp"
-                                            android:text="托管费自理 "/>
+                                            android:text="约40天封装满 "/>
 
                                     </LinearLayout>
 
@@ -372,7 +372,8 @@
                                     android:layout_height="30dp"
                                     android:orientation="horizontal"
                                     android:layout_marginStart="26dp"
-                                    android:layout_marginEnd="26dp">
+                                    android:layout_marginEnd="26dp"
+                                    android:visibility="gone">
 
                                     <LinearLayout
                                         android:layout_width="0dp"
@@ -438,7 +439,7 @@
                                             android:textColor="@color/theme_154297"
                                             android:textSize="@dimen/sp_14"
                                             android:layout_marginStart="5dp"
-                                            android:text="Gas费、质押费自理"/>
+                                            android:text="托管费、Gas费、质押费自理"/>
                                     </LinearLayout>
 
                                     <LinearLayout
@@ -446,7 +447,7 @@
                                         android:layout_height="match_parent"
                                         android:layout_weight="1"
                                         android:orientation="horizontal"
-                                        android:visibility="invisible"
+                                        android:visibility="gone"
                                         android:gravity="center_vertical">
                                         <ImageView
                                             android:layout_width="wrap_content"

@@ -117,7 +117,7 @@ public class ForeverDetailNewViewModel extends CustomViewModel<MyRepository> {
     /**
      * 算力，送服务器的文字显示
      */
-    public ObservableField<String> powText = new ObservableField<>("预计质押费10FIL/T，Gas费5FIL/T，一次性预存，多退少补。");
+    public ObservableField<String> powText = new ObservableField<>("充质押立即开机！预计质押费10FIL/T，Gas费5FIL/T，一次性预存，多退少补。");
 
 
     /**
@@ -284,7 +284,7 @@ public class ForeverDetailNewViewModel extends CustomViewModel<MyRepository> {
                 return;
             }
 
-            powText.set("预计质押费"+detailBeans.getResultMap().getVo().getDayMesage()+"FIL/T,Gas费"+detailBeans.getResultMap().getVo().getDayGas()+"FIL/T，一次性预存，多退少补。");
+            powText.set("充质押立即开机！预计质押费"+detailBeans.getResultMap().getVo().getDayMesage()+"FIL/T,Gas费"+detailBeans.getResultMap().getVo().getDayGas()+"FIL/T，一次性预存，多退少补。");
 
             if("EX_ORDER_STATUS_SOLD_OUT".equals(detailBeans.getResultMap().getVo().getProductStatus())){
                 statusText.set("已售罄");

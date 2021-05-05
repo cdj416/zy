@@ -5,6 +5,8 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.hongyuan.mvvmhabitx.base.AppManager;
+
 /**
  * 常用工具类
  * demo
@@ -39,5 +41,16 @@ public final class Utils {
             return context;
         }
         throw new NullPointerException("should be initialized in application");
+    }
+
+    /*
+    * 获取正在运行的activity的context
+    * */
+    public static Context getRunningContext(){
+        if(AppManager.getAppManager().getRunningActivity() != null){
+            return AppManager.getAppManager().getRunningActivity();
+        }else{
+            return context;
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.hongyuan.mvvmhabitx.base;
 
 import android.app.Activity;
+import android.content.Context;
 
 import androidx.fragment.app.Fragment;
 
@@ -193,6 +194,18 @@ public class AppManager {
                 }
             }
         }
+    }
+
+    /*
+    * 获取一个正在运行的activity
+    * */
+    public Context getRunningActivity(){
+        for(int i = activityStack.size() - 1 ; i > 0 ; i--){
+            if(!activityStack.get(i).isFinishing()){
+                return activityStack.get(i);
+            }
+        }
+        return null;
     }
 
     /**

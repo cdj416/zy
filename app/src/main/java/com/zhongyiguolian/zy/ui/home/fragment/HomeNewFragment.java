@@ -229,7 +229,7 @@ public class HomeNewFragment extends CustomFragment<FragmentNewHomeBinding, Home
             CustomDialog.showQrImg(getContext(), v -> {
 
                 if(v.getId() == R.id.call){
-                    callTel("13952404134");
+                    callTel("18121567687");
                 }
 
                 if(v.getId() == R.id.saveImg){
